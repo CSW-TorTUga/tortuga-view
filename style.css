@@ -19,7 +19,7 @@
   width: 100%;
 }
 
-.sidenav li a {
+.nav-link {
   padding: 8px;
   padding-left: 15px;
   width: 100%;
@@ -41,6 +41,10 @@
 .sidenav md-content {
   background-color: inherit;
   color: inherit;
+}
+
+.main-content {
+  padding: 45px;
 }
 
 @font-face {

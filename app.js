@@ -11,7 +11,9 @@
     .config(['$mdThemingProvider', function($mdThemingProvider) {
       $mdThemingProvider.theme('default')
         .primaryPalette(PRIMARY)
-        .accentPalette(ACCENT);
+        .accentPalette(ACCENT, {
+          default: 'A100'
+        });
     }])
     .run(['$rootScope', '$mdColorPalette', function($rootScope, $mdColorPalette) {
       var primaryPalette = $mdColorPalette[PRIMARY];

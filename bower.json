@@ -1,0 +1,15 @@
+{
+  "name": "rms4csw",
+  "homepage": "https://github.com/LionC/rms4csw",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
