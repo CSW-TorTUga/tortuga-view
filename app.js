@@ -7,13 +7,32 @@
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   }
 
-  angular.module('rms', ['ngMaterial'])
-    .config(['$mdThemingProvider', function($mdThemingProvider) {
+  angular.module('rms', ['ngMaterial', 'ui.router', 'ngRoute'])
+    .config(['$mdThemingProvider', '$stateProvider', '$routeProvider', function($mdThemingProvider, $stateProvider, $routeProvider) {
       $mdThemingProvider.theme('default')
         .primaryPalette(PRIMARY)
         .accentPalette(ACCENT, {
           default: 'A100'
         });
+
+      $stateProvider
+        .state('home', {
+          url: '/home',
+          templateUrl: 'templates/home.html'
+        })
+        .state('booking', {
+          url: '/booking',
+          templateUrl: 'templates/booking.html'
+        })
+        .state('management', {
+          url: '/managment',
+          templateUrl: 'templates/management/management.html'
+        })
+        
+        ;
+
+      $routeProvider.otherwise('/home');
+
     }])
     .run(['$rootScope', '$mdColorPalette', function($rootScope, $mdColorPalette) {
       var primaryPalette = $mdColorPalette[PRIMARY];
