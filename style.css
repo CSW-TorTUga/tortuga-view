@@ -46,6 +46,7 @@
 
 .main-content {
   padding: 45px;
+  padding-bottom: 0;
 }
 
 form {
