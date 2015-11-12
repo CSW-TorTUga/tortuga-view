@@ -1,7 +1,7 @@
 (function() {
 
   var PRIMARY = 'blue-grey';
-  var ACCENT = 'deep-orange';
+  var ACCENT = 'orange';
 
   function rgbToHex(r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
@@ -13,7 +13,8 @@
     'ngRoute',
     'home',
     'management',
-    'devices'
+    'devices',
+    'bookings'
   ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function($mdThemingProvider, $stateProvider, $urlRouterProvider) {
       $mdThemingProvider.theme('default')
         .primaryPalette(PRIMARY)
@@ -21,10 +22,10 @@
           default: 'A100'
         });
 
-      $stateProvider.state('booking', {
-          url: '/booking',
-          templateUrl: 'templates/booking.html'
-        });
+      $stateProvider.state('profile', {
+        url: '/profile',
+        templateUrl: 'src/profile/profile.html'
+      });
 
       $urlRouterProvider.otherwise('/home');
 
