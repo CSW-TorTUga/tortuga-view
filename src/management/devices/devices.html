@@ -1,18 +1,20 @@
 <div>
-  <h2 class="md-display-1" style="color: {{primaryColor}}; margin-top: 0;">Benutzerverwaltung</h2>
+  <h2 class="md-display-1" style="color: {{primaryColor}}; margin-top: 0;">Geräteverwaltung</h2>
   <table style="width: 100%;">
     <tr class="md-body-2">
+      <td>Inventarnummer</td>
       <td>Name</td>
-      <td>Rolle</td>
-      <td>Benutzername</td>
-      <td>Gültig bis</td>
+      <td>Art</td>
+      <td>Schrank</td>
+      <td>Beschaffungsdatum</td>
       <td>Aktionen</td>
     </tr>
-    <tr ng-repeat="user in userList.getUsers() track by $index">
-      <td>{{user.firstName + " " + user.lastName}}</td>
-      <td>{{user.role}}</td>
-      <td>{{user.userName}}</td>
-      <td>{{user.expires | date}}</td>
+    <tr ng-repeat="device in deviceList.getDevices() track by $index">
+      <td>{{device.inventoryNumber}}</td>
+      <td>{{device.name}}</td>
+      <td>{{device.type}}</td>
+      <td>{{device.storage}}</td>
+      <td>{{device.acquired | date}}</td>
       <td>
         <md-menu md-position-mode="target-right target">
           <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
@@ -21,20 +23,8 @@
           <md-menu-content>
             <md-menu-item>
               <md-button>
-                <md-icon>info_outline</md-icon>
-                Details
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button>
                 <md-icon>edit</md-icon>
                 Bearbeiten
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button>
-                <md-icon>vpn_key</md-icon>
-                Passwort zurücksetzen
               </md-button>
             </md-menu-item>
             <md-menu-divider></md-menu-divider>

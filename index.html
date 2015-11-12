@@ -15,7 +15,7 @@
 
   <md-sidenav
     layout="column"
-    class="sidenav md-sidenav-left md-locked-open md-whiteframe-z2"
+    class="sidenav md-sidenav-left md-locked-open md-whiteframe-z3"
     md-is-locked-open="$mdMedia('gt-md')"
     style="background-color: {{primaryColor}};">
     <header>
@@ -27,16 +27,16 @@
           <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('home')}" ui-sref="home">Home</md-button>
         </li>
         <li>
-          <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('booking')}" ui-sref="booking">Reservierungen</md-button>
+          <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('bookings')}" ui-sref="bookings">Reservierungen</md-button>
         </li>
         <li>
           <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('devices')}" ui-sref="devices">Geräte</md-button>
         </li>
         <li>
-          <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('management')}" ui-sref="management">Verwaltung</md-button>
+          <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('management')}" ui-sref="management.devices">Verwaltung</md-button>
         </li>
         <li>
-          <md-button class="nav-link-side">Profil</md-button>
+          <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('profile')}" ui-sref="profile">Profil</md-button>
         </li>
       </ul>
     </md-content>
@@ -59,6 +59,9 @@
   <script src="src/devices/devices.js"></script>
   <script src="src/NavController.js"></script>
   <script src="src/management/users/UserListController.js"></script>
+  <script src="src/bookings/bookings.js"></script>
+
+  <script src="src/management/devices/DeviceListController.js"></script>
 </body>
 
 </html>

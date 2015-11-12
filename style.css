@@ -84,9 +84,9 @@ table tr td {
   padding: 16px 0px;
 }
 
-md-button.full-width-button {
+.full-width-button {
   width: 100%;
-  margin-left: 0;
+  margin: 0;
 }
 
 .card-container > div {
@@ -95,11 +95,34 @@ md-button.full-width-button {
   background-color: white;
 }
 
-.card-container {
-  background-color: rgba(0,0,0,.12)
+.card-content {
+  padding: 13px;
 }
 
-/*
-.card-container div {
-  background-color: white;
-}*/
+.big-content {
+  font-size: 1.8em;
+}
+
+div.time-panel:first-child {
+  border-right: 1px solid rgba(0,0,0,.2);
+}
+
+.card-container {
+  /*background-color: rgba(0,0,0,.12)*/
+}
+
+[ui-view] {
+  transition: opacity .4s linear;
+}
+
+[ui-view].ng-enter {
+  opacity: 0;
+}
+
+[ui-view].ng-enter-active {
+  opacity: 1;
+}
+
+[ui-view].ng-leave {
+  display: none;
+}
