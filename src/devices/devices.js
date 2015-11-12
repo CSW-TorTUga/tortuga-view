@@ -6,7 +6,7 @@
     $stateProvider
       .state('devices', {
         url: '/devices',
-        templateUrl: 'templates/devices/devices.html'
+        templateUrl: 'src/devices/devices.html'
       });
   }]);
 

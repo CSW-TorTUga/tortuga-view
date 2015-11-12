@@ -7,7 +7,7 @@
     $stateProvider
       .state('management', {
         url: '/management',
-        templateUrl: 'templates/management/management.html'
+        templateUrl: 'src/management/management.html'
       });
   }]);
 

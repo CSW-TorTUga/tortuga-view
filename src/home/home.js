@@ -6,7 +6,7 @@
     $stateProvider
       .state('home', {
         url: '/home',
-        templateUrl: 'templates/home.html'
+        templateUrl: 'src/home/home.html'
       });
   }]);
 
