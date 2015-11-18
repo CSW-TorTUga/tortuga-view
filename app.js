@@ -14,7 +14,7 @@
     'home',
     'management',
     'devices',
-    'bookings'
+    'bookings', 'ngResource'
   ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function($mdThemingProvider, $stateProvider, $urlRouterProvider) {
       $mdThemingProvider.theme('default')
         .primaryPalette(PRIMARY)
