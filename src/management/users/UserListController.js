@@ -1,51 +1,89 @@
-(function() {
+(function () {
 
-  angular.module('management.users')
-  .controller('UserListController', [
-    UserListController
-  ]);
+    angular.module('management.users')
+        .controller('UserListController', [
+            'UserService',
+            '$mdDialog',
+            UserListController
+        ]);
 
-  function UserListController() {
-    var self = this;
+    function UserListController(UserService, $mdDialog) {
+        var self = this;
 
-    var users = [
-      {
-        firstName: 'Leon',
-        lastName: 'Strauss',
-        role: 'Dozent',
-        userName: 'LionC',
-        expires: 1447259704480
-      },
-      {
-        firstName: 'Mischa',
-        lastName: 'Holz',
-        role: 'Admin',
-        userName: 'Fohl',
-        expires: 1447267704480
-      },
-      {
-        firstName: 'Hannes',
-        lastName: 'Güdelhöfer',
-        role: 'CSW-Team',
-        userName: 'reckter',
-        expires: 1447257704480
-      },
-      {
-        firstName: 'Dennis',
-        lastName: 'Schirmer',
-        role: 'Benutzer',
-        userName: 'LordCola',
-        expires: 1447257704480
-      }
-    ];
+        self.users = UserService.query();
 
-    users = users.concat(users).concat(users).concat(users);
+        self.editUser = editUser;
+        self.createUser = createUser;
 
-    self.getUsers = getUsers;
+        //public
+        function createUser(event) {
+            editUser(self.users.length, event, true);
+        }
 
-    function getUsers() {
-      return users;
+        //public
+        function editUser(index, event, createNewUser) {
+            if (createNewUser === undefined) {
+                createNewUser = false;
+            }
+            $mdDialog.show({
+                clickOutsideToClose: true,
+                templateUrl: 'src/management/users/create.html',
+                controller: ['$mdDialog', 'RoleService', EditUserModalController],
+                controllerAs: 'userModal',
+                targetEvent: event,
+                bindToController: true,
+                locals: {
+                    user: self.users[index]
+                }
+            }).then(function (user) {
+                return UserService.save(user);
+            }).then(function (user) {
+                self.users[index] = user;
+            }).catch(function (reason) {
+                if (reason != undefined) {
+                    console.warn(reason);
+                }
+            });
+
+
+            function EditUserModalController($mdDialog, RoleService) {
+                var self = this;
+
+                //self.user argument
+                self.newUser = createNewUser;
+
+                self.roles = RoleService.query();
+
+                self.submit = submit;
+                self.cancel = cancel;
+
+                self.header = "";
+
+                init();
+                function init() {
+                    if(self.newUser) {
+                        self.header = 'Neuen Benutzer anlegen';
+                    } else {
+                        self.header = "Den Benutzer '" + self.user.loginName + "' bearbeiten";
+                    }
+                }
+
+                //public
+                function cancel() {
+                    $mdDialog.cancel();
+                }
+
+                //public
+                function submit() {
+                    if(self.user.gender = "NONE") {
+                        self.user.gender = undefined;
+                    }
+                    $mdDialog.hide(self.user);
+                }
+
+            }
+
+        }
     }
-  }
 
 })();
