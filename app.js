@@ -13,7 +13,6 @@
     'ngRoute',
     'home',
     'management',
-    'devices',
     'bookings'
   ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function($mdThemingProvider, $stateProvider, $urlRouterProvider) {
       $mdThemingProvider.theme('default')
@@ -25,6 +24,9 @@
       $stateProvider.state('profile', {
         url: '/profile',
         templateUrl: 'src/profile/profile.html'
+      }).state('login', {
+        url: '/login',
+        templateUrl: 'src/login/login.html'
       });
 
       $urlRouterProvider.otherwise('/home');

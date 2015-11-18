@@ -1,0 +1,20 @@
+<div flex class="card-container" layout="column" layout-align="center center">
+  <div class="md-whiteframe-z2">
+    <md-toolbar class="md-primary">
+      <div class="md-toolbar-tools">
+        Login
+      </div>
+    </md-toolbar>
+    <form name="loginForm" class="card-content">
+      <md-input-container>
+        <label>Benutzername</label>
+        <input name="username" ng-model="username" type="text" required>
+      </md-input-container>
+      <md-input-container>
+        <label>Passwort</label>
+        <input name="password" ng-model="password" type="password" required>
+      </md-input-container>
+      <md-button ng-disabled="loginForm.$invalid" type="submit" class="full-width-button md-accent md-raised">Login</md-button>
+    </form>
+  </dvi>
+</div>
