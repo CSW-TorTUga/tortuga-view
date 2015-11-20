@@ -2,18 +2,47 @@
 
     angular.module('management.users')
         .controller('UserListController', [
-            'UserService',
+            'User',
             '$mdDialog',
             UserListController
         ]);
 
-    function UserListController(UserService, $mdDialog) {
+    function UserListController(User, $mdDialog) {
         var self = this;
 
-        self.users = UserService.query();
+        self.users = User.query(function(usersres) {
+            console.log(usersres);
+        });
 
+        self.showDetails = showDetails;
         self.editUser = editUser;
         self.createUser = createUser;
+
+        function showDetails(user, event) {
+            $mdDialog.show({
+                clickOutsideToClose: true,
+                templateUrl: 'src/management/users/details.html',
+                controller: ['$mdDialog', UserDetailsModalController],
+                controllerAs: 'userDetails',
+                targetEvent: event,
+                bindToController: true,
+                locals: {
+                    user: user
+                }
+            });
+
+            function UserDetailsModalController($mdDialog) {
+                var self = this;
+
+                //self.user local
+
+                self.close = close;
+
+                function close() {
+                    $mdDialog.cancel();
+                }
+            }
+        }
 
         //public
         function createUser(event) {
@@ -40,9 +69,8 @@
             }).then(function (user) {
                 self.users[index] = user;
             }).catch(function (reason) {
-                if (reason != undefined) {
+                if (reason != undefined)
                     console.warn(reason);
-                }
             });
 
 

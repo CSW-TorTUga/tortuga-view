@@ -7,12 +7,12 @@
     NavController
   ]);
 
-  function NavController($state, UserService) {
+  function NavController($state, AuthenticationService) {
     var self = this;
 
     self.isInState = isInState;
 
-    self.isLoggedIn = UserService.isLoggedIn;
+    self.isLoggedIn = AuthenticationService.isLoggedIn;
 
     function isInState(state) {
       return $state.includes(state);

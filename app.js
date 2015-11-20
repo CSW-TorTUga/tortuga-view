@@ -13,7 +13,7 @@
     'ngRoute',
     'home',
     'management',
-    'bookings'
+    'bookings',
     'ngResource'
   ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function($mdThemingProvider, $stateProvider, $urlRouterProvider) {
       $mdThemingProvider.theme('default')
@@ -35,21 +35,17 @@
   }]).run(['$rootScope', '$mdColorPalette', function($rootScope, $mdColorPalette) {
       var primaryPalette = $mdColorPalette[PRIMARY];
 
-      var primaryColor = rgbToHex(
-        primaryPalette['500'].value[0],
-        primaryPalette['500'].value[1],
-        primaryPalette['500'].value[2]);
-
-      $rootScope.primaryColor = primaryColor;
+      $rootScope.primaryColor = rgbToHex(
+          primaryPalette['500'].value[0],
+          primaryPalette['500'].value[1],
+          primaryPalette['500'].value[2]);
 
       var accentPalette = $mdColorPalette[ACCENT];
 
-      var accentColor = rgbToHex(
-        accentPalette['A100'].value[0],
-        accentPalette['A100'].value[1],
-        accentPalette['A100'].value[2]);
-
-      $rootScope.accentColor = accentColor;
+      $rootScope.accentColor = rgbToHex(
+          accentPalette['A100'].value[0],
+          accentPalette['A100'].value[1],
+          accentPalette['A100'].value[2]);
     }]);
 
 })();

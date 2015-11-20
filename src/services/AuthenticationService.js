@@ -3,15 +3,15 @@
   angular.module('rms')
   .service('AuthenticationService', [
     '$timeout',
-    UserService
+    AuthenticationService
   ]);
 
-  function UserService($timeout) {
+  function AuthenticationService($timeout) {
     var self = this;
 
     var loggedIn = false;
 
-    $timeout(function() {
+    $timeout(function fakeLogin() {
       loggedIn = true;
     }, 3000)
 
