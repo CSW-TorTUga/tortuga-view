@@ -106,6 +106,7 @@
                     if(self.user.gender = "NONE") {
                         self.user.gender = undefined;
                     }
+                    self.user.password = self.password1;
                     $mdDialog.hide(self.user);
                 }
 

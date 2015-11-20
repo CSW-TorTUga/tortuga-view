@@ -4,67 +4,72 @@
     </md-toolbar>
 
     <md-dialog-content class="md-dialog-content">
-        <form>
+        <form layout="column">
             <md-input-container>
                 <label>
                     Benutzername
                 </label>
                 <input type="text" ng-model="userModal.user.loginName">
             </md-input-container>
-            <md-input-container>
-                <label>
-                    Nachname
-                </label>
-                <input type="text" ng-model="userModal.user.lastName">
-            </md-input-container>
-            <md-input-container>
-                <label>
-                    Vorname
-                </label>
-                <input type="text" ng-model="userModal.user.firstName">
-            </md-input-container>
-            <md-radio-group ng-model="userModal.user.gender" layout="row">
-                <md-radio-button value="MALE">Männlich</md-radio-button>
-                <md-radio-button value="FEMALE">Weiblich</md-radio-button>
-                <md-radio-button value="NONE">k.A.</md-radio-button>
-            </md-radio-group>
-            <md-input-container>
-                <label>
-                    Matrikelnummer
-                </label>
-                <input type="text" ng-model="userModal.user.studentId">
-            </md-input-container>
-            <md-input-container>
-                <label>Studiengang</label>
-                <md-select ng-model="userModal.user.major">
-                    <md-option value="TEST1">test 1</md-option>
-                    <md-option value="TEST2">test 2</md-option>
-                </md-select>
-            </md-input-container>
-
-            <md-input-container>
-                <label>Rolle</label>
-                <md-select ng-model="userModal.user.role">
-                    <md-option ng-repeat="role in userModal.roles" ng-value="role">{{role.name}}</md-option>
-                </md-select>
-            </md-input-container>
+            <div layout="rows">
+                <md-input-container flex="50">
+                    <label>
+                        Vorname
+                    </label>
+                    <input type="text" ng-model="userModal.user.firstName">
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>
+                        Nachname
+                    </label>
+                    <input type="text" ng-model="userModal.user.lastName">
+                </md-input-container>
+            </div>
             <md-input-container>
                 <label>
                     E-Mail
                 </label>
                 <input type="email" ng-model="userModal.user.email">
             </md-input-container>
+            <div ng-if="!self.newUser" layout="rows">
+                <md-input-container flex="50">
+                    <label>
+                        Passwort
+                    </label>
+                    <input type="password" ng-model="userModal.password1">
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>
+                        Wiederholung
+                    </label>
+                    <input type="password" ng-model="userModal.password2">
+                </md-input-container>
+            </div>
+            <md-radio-group ng-model="userModal.user.gender" layout="row">
+                <md-radio-button flex="33" value="MALE">Männlich</md-radio-button>
+                <md-radio-button flex="33" value="FEMALE">Weiblich</md-radio-button>
+                <md-radio-button flex="33" value="NONE">k.A.</md-radio-button>
+            </md-radio-group>
+            <div layout="rows">
+                <md-input-container flex="50">
+                    <label>Studiengang</label>
+                    <md-select ng-model="userModal.user.major">
+                        <md-option value="TEST1">test 1</md-option>
+                        <md-option value="TEST2">test 2</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>
+                        Matrikelnummer
+                    </label>
+                    <input type="text" ng-model="userModal.user.studentId">
+                </md-input-container>
+            </div>
             <md-input-container>
-                <label>
-                    Passwort
-                </label>
-                <input type="password" ng-model="userModal.password1">
-            </md-input-container>
-            <md-input-container>
-                <label>
-                    Passwort wiederholen
-                </label>
-                <input type="password" ng-model="userModal.password2">
+                <label>Rolle</label>
+                <md-select ng-model="userModal.user.role">
+                    <md-option ng-repeat="role in userModal.roles" ng-value="role">{{role.name}}</md-option>
+                </md-select>
             </md-input-container>
         </form>
     </md-dialog-content>
