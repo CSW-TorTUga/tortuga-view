@@ -65,7 +65,7 @@
                     user: self.users[index]
                 }
             }).then(function (user) {
-                return UserService.save(user);
+                return User.save(user);
             }).then(function (user) {
                 self.users[index] = user;
             }).catch(function (reason) {

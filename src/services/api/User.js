@@ -4,10 +4,10 @@
         .factory('User', [
             '$resource',
             'apiAddress',
-            UserService
+            User
         ]);
 
-    function UserService($resource, apiAddress) {
+    function User($resource, apiAddress) {
         return $resource(apiAddress + 'users/:userId');
     }
     
