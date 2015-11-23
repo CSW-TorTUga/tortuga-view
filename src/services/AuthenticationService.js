@@ -20,15 +20,19 @@
     self.login = login;
     self.isLoggedIn = isLoggedIn;
 
+    //public
     function isLoggedIn() {
       return loggedIn;
     }
 
+    //public
     function login(username, password) {
-      $http.post(apiAddress + 'login', {
+      var httpPromise = $http.post(apiAddress + 'login', {
         loginName: username,
         password: password
-      }).then(function(response) {
+      });
+
+      httpPromise.then(function(response) {
         loggedIn = true;
       }).catch(function(response) {
         if(response.status == 401)
@@ -36,6 +40,8 @@
         else
           console.warn(response);
       });
+
+      return httpPromise;
     }
   }
 
