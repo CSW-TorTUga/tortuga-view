@@ -1,25 +1,43 @@
-(function() {
+(function () {
 
-  angular.module('rms')
-  .service('AuthenticationService', [
-    '$timeout',
-    AuthenticationService
-  ]);
+    angular.module('rms')
+        .service('AuthenticationService', [
+            '$timeout',
+            '$http',
+            'apiAddress',
+            UserService
+        ]);
 
-  function AuthenticationService($timeout) {
-    var self = this;
+    function UserService($timeout, $http, apiAddress) {
+        var self = this;
 
-    var loggedIn = false;
+        var loggedIn = false;
 
-    $timeout(function fakeLogin() {
-      loggedIn = true;
-    }, 3000)
+        $timeout(function () {
+            loggedIn = true;
+        }, 3000);
 
-    self.isLoggedIn = isLoggedIn;
+        self.login = login;
+        self.isLoggedIn = isLoggedIn;
 
-    function isLoggedIn() {
-      return loggedIn;
+        //public
+        function isLoggedIn() {
+            return loggedIn;
+        }
+
+        //public
+        function login(username, password) {
+            var httpPromise = $http.post(apiAddress + 'login', {
+                loginName: username,
+                password: password
+            });
+
+            httpPromise.then(function (response) {
+                loggedIn = true;
+            });
+
+            return httpPromise;
+        }
     }
-  }
 
 })();
