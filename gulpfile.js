@@ -79,9 +79,9 @@ gulp.task('set-host', ['scripts', 'styles'], function() {
 gulp.task('build', ['scripts', 'styles', 'set-host']);
 
 gulp.task('watch', function(){
-    gulp.watch('js/**/*.js',['scripts', 'set-host']);
+    gulp.watch('src/**/*.js',['scripts', 'set-host']);
     gulp.watch('index.dev.html', ['scripts', 'set-host']);
-    gulp.watch(['js/**/*.css', 'style.dev.css'], ['styles']);
+    gulp.watch(['src/**/*.css', 'style.dev.css'], ['styles']);
 });
 
 gulp.task('default', ['build', 'watch']);
