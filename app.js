@@ -1,52 +1,55 @@
-(function() {
+(function () {
 
-  var PRIMARY = 'blue-grey';
-  var ACCENT = 'orange';
+    var PRIMARY = 'blue-grey';
+    var ACCENT = 'orange';
 
-  function rgbToHex(r, g, b) {
-    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-  }
+    function rgbToHex(r, g, b) {
+        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
 
-  angular.module('rms', [
-    'ngMaterial',
-    'ui.router',
-    'ngRoute',
-    'home',
-    'management',
-    'devices',
-    'bookings'
-  ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function($mdThemingProvider, $stateProvider, $urlRouterProvider) {
-      $mdThemingProvider.theme('default')
-        .primaryPalette(PRIMARY)
-        .accentPalette(ACCENT, {
-          default: 'A100'
+    angular.module('rms', [
+        'ngMaterial',
+        'ui.router',
+        'ngRoute',
+        'home',
+        'management',
+        'errorToast',
+        'bookings'
+    ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function ($mdThemingProvider, $stateProvider, $urlRouterProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette(PRIMARY)
+            .accentPalette(ACCENT, {
+                default: 'A100'
+            });
+
+        $stateProvider.state('profile', {
+            url: '/profile',
+            templateUrl: 'src/profile/profile.html'
+        }).state('login', {
+            url: '/login',
+            templateUrl: 'src/login/login.html'
         });
 
-      $stateProvider.state('profile', {
-        url: '/profile',
-        templateUrl: 'src/profile/profile.html'
-      });
+        $urlRouterProvider.otherwise('/home');
 
-      $urlRouterProvider.otherwise('/home');
+    }]).run(['$rootScope', '$mdColorPalette', function ($rootScope, $mdColorPalette) {
+        var primaryPalette = $mdColorPalette[PRIMARY];
 
-  }]).run(['$rootScope', '$mdColorPalette', function($rootScope, $mdColorPalette) {
-      var primaryPalette = $mdColorPalette[PRIMARY];
+        var primaryColor = rgbToHex(
+            primaryPalette['500'].value[0],
+            primaryPalette['500'].value[1],
+            primaryPalette['500'].value[2]);
 
-      var primaryColor = rgbToHex(
-        primaryPalette['500'].value[0],
-        primaryPalette['500'].value[1],
-        primaryPalette['500'].value[2]);
+        $rootScope.primaryColor = primaryColor;
 
-      $rootScope.primaryColor = primaryColor;
+        var accentPalette = $mdColorPalette[ACCENT];
 
-      var accentPalette = $mdColorPalette[ACCENT];
+        var accentColor = rgbToHex(
+            accentPalette['A100'].value[0],
+            accentPalette['A100'].value[1],
+            accentPalette['A100'].value[2]);
 
-      var accentColor = rgbToHex(
-        accentPalette['A100'].value[0],
-        accentPalette['A100'].value[1],
-        accentPalette['A100'].value[2]);
-
-      $rootScope.accentColor = accentColor;
+        $rootScope.accentColor = accentColor;
     }]);
 
 })();
