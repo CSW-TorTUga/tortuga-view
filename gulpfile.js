@@ -29,6 +29,8 @@ var paths = {
         'src/home/home.js',
         'src/management/booking/booking.js',
 
+        'src/errortoast/errorToastModule.js',
+
         'src/**/*.js'
     ],
     styles: [
