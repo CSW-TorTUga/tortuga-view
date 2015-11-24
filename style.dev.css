@@ -61,7 +61,7 @@ form {
 
 @font-face {
   font-family: TechnoLogo;
-  src: url("/technologo.otf") format("opentype");
+  src: url("../technologo.otf") format("opentype");
 }
 
 table {
