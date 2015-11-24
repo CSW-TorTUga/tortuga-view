@@ -2,7 +2,6 @@
 
   angular.module('management.users', [
     'ui.router',
-    'management.roles'
   ]).config(['$stateProvider', function($stateProvider) {
     $stateProvider.state('management.users', {
         url: '/users',

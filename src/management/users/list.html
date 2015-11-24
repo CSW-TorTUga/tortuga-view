@@ -16,7 +16,7 @@
         </tr>
         <tr ng-repeat="user in userList.users">
             <td>{{user.firstName + " " + user.lastName}}</td>
-            <td>{{user.role.name}}</td>
+            <td>{{user.role}}</td>
             <td>{{user.loginName}}</td>
             <td>{{user.expires | date}}</td>
             <td>

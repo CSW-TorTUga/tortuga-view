@@ -38,6 +38,7 @@
                     </label>
                     <input type="password" ng-model="userModal.password1">
                 </md-input-container>
+                {{userModal.password1}}
                 <md-input-container flex="50">
                     <label>
                         Wiederholung
@@ -54,8 +55,7 @@
                 <md-input-container flex="50">
                     <label>Studiengang</label>
                     <md-select ng-model="userModal.user.major">
-                        <md-option value="TEST1">test 1</md-option>
-                        <md-option value="TEST2">test 2</md-option>
+                        <md-option ng-repeat="major in userModal.majors" ng-value="major">{{major.name}}</md-option>
                     </md-select>
                 </md-input-container>
                 <md-input-container flex="50">
@@ -68,7 +68,10 @@
             <md-input-container>
                 <label>Rolle</label>
                 <md-select ng-model="userModal.user.role">
-                    <md-option ng-repeat="role in userModal.roles" ng-value="role">{{role.name}}</md-option>
+                    <md-option value="STUDENT" selected >Student</md-option>
+                    <md-option value="LECTURER">Dozent</md-option>
+                    <md-option value="CSW_TEAM">CSW-Team</md-option>
+                    <md-option value="ADMIN">Admin</md-option>
                 </md-select>
             </md-input-container>
         </form>

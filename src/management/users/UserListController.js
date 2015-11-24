@@ -57,7 +57,7 @@
             $mdDialog.show({
                 clickOutsideToClose: true,
                 templateUrl: 'src/management/users/create.html',
-                controller: ['$mdDialog', 'RoleService', EditUserModalController],
+                controller: ['$mdDialog', 'Major',  EditUserModalController],
                 controllerAs: 'userModal',
                 targetEvent: event,
                 bindToController: true,
@@ -65,7 +65,8 @@
                     user: self.users[index]
                 }
             }).then(function (user) {
-                return User.save(user);
+                console.log(user);
+                return User.save(user).$promise;
             }).then(function (user) {
                 self.users[index] = user;
             }).catch(function (reason) {
@@ -74,18 +75,18 @@
             });
 
 
-            function EditUserModalController($mdDialog, RoleService) {
+            function EditUserModalController($mdDialog, Major) {
                 var self = this;
 
                 //self.user argument
                 self.newUser = createNewUser;
 
-                self.roles = RoleService.query();
-
                 self.submit = submit;
                 self.cancel = cancel;
 
                 self.header = "";
+
+                self.majors = Major.query();
 
                 init();
                 function init() {
