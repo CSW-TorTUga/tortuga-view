@@ -22,12 +22,12 @@
                 .then(function () {
                     $state.go('home');
                 }).catch(function (response) {
-                if (response.status == 401) {
-                    ErrorToasts.show("Passwort und/oder Benutername sind falsch.", 5000, false);
-                } else {
-                    console.warn(response);
-                }
-            });
+                    if (response.status == 401) {
+                        ErrorToasts.show("Passwort und/oder Benutername sind falsch.", 5000, false);
+                    } else {
+                        console.warn(response);
+                    }
+                });
         }
     }
 
