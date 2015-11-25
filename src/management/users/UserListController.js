@@ -31,7 +31,7 @@
             $mdDialog.show(dialog, event).then(function() {
                 return UserService.delete({userId: user.id}).$promise;
             }).then(function(response) {
-                delete self.users[index];
+                self.users.splice(index, 1);
             }).catch(function(fail) {
                 console.warn(fail);
             });
@@ -131,7 +131,7 @@
 
                 //public
                 function submit() {
-                    if(self.user.gender = "NONE") {
+                    if(self.user.gender == "NONE") {
                         self.user.gender = undefined;
                     }
                     self.user.password = self.password1;
