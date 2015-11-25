@@ -14,7 +14,8 @@
         'home',
         'management',
         'errorToast',
-        'bookings'
+        'bookings',
+        'login'
     ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function ($mdThemingProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette(PRIMARY)

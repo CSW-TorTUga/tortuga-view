@@ -5,10 +5,11 @@
             '$timeout',
             '$http',
             'apiAddress',
+            '$cookies',
             UserService
         ]);
 
-    function UserService($timeout, $http, apiAddress) {
+    function UserService($timeout, $http, $cookies, apiAddress) {
         var self = this;
 
         var loggedIn = false;
@@ -18,6 +19,7 @@
         }, 3000);
 
         self.login = login;
+        self.logout = logout;
         self.isLoggedIn = isLoggedIn;
 
         //public
@@ -37,6 +39,11 @@
             });
 
             return httpPromise;
+        }
+
+        //public
+        function logout() {
+            $cookies.remove('auth_token');
         }
     }
 

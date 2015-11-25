@@ -13,6 +13,7 @@
     self.isInState = isInState;
 
     self.isLoggedIn = AuthenticationService.isLoggedIn;
+    self.logout = AuthenticationService.logout;
 
     function isInState(state) {
       return $state.includes(state);

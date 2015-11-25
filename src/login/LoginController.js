@@ -1,6 +1,6 @@
 (function () {
 
-    angular.module('rms')
+    angular.module('login')
         .controller('LoginController', [
             'AuthenticationService',
             'ErrorToasts',
