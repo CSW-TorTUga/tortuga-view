@@ -15,12 +15,17 @@
         'management',
         'errorToast',
         'bookings'
-    ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', function ($mdThemingProvider, $stateProvider, $urlRouterProvider) {
+    ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function ($mdThemingProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette(PRIMARY)
             .accentPalette(ACCENT, {
                 default: 'A100'
             });
+
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
 
         $stateProvider.state('profile', {
             url: '/profile',
@@ -35,21 +40,17 @@
     }]).run(['$rootScope', '$mdColorPalette', function ($rootScope, $mdColorPalette) {
         var primaryPalette = $mdColorPalette[PRIMARY];
 
-        var primaryColor = rgbToHex(
+        $rootScope.primaryColor = rgbToHex(
             primaryPalette['500'].value[0],
             primaryPalette['500'].value[1],
             primaryPalette['500'].value[2]);
 
-        $rootScope.primaryColor = primaryColor;
-
         var accentPalette = $mdColorPalette[ACCENT];
 
-        var accentColor = rgbToHex(
+        $rootScope.accentColor = rgbToHex(
             accentPalette['A100'].value[0],
             accentPalette['A100'].value[1],
             accentPalette['A100'].value[2]);
-
-        $rootScope.accentColor = accentColor;
     }]);
 
 })();
