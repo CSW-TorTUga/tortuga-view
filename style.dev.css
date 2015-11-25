@@ -126,3 +126,7 @@ div.time-panel:first-child {
 [ui-view].ng-leave {
   display: none;
 }
+
+md-menu-content {
+  padding: 0;
+}

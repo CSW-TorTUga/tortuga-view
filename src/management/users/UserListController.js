@@ -27,17 +27,19 @@
                 .content("Den Benutzer " + user.loginname + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
                 .ok("löschen")
                 .cancel("abbrechen");
-            $mdDialog.show(dialog).then(function() {
+            dialog.targetEvent = event;
+            $mdDialog.show(dialog, event).then(function() {
                 return UserService.delete({userId: user.id}).$promise;
             }).then(function(response) {
                 delete self.users[index];
             }).catch(function(fail) {
-
+                console.warn(fail);
             });
         }
 
         //public
-        function showDetails(user, event) {
+        function showDetails(index, event) {
+            var user = self.users[index];
             $mdDialog.show({
                 clickOutsideToClose: true,
                 templateUrl: 'src/management/users/details.html',
@@ -133,6 +135,7 @@
             }
 
         }
+
     }
 
 })();

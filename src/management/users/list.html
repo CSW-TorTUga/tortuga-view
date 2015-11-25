@@ -26,12 +26,12 @@
                     </md-button>
                     <md-menu-content>
                         <md-menu-item>
-                            <md-button ng-click="userList.showDetails(user, $event)">
+                            <md-button ng-click="userList.showDetails($index, $event)">
                                 <md-icon>info</md-icon>
                                 Details
                             </md-button>
                         </md-menu-item><md-menu-item>
-                            <md-button>
+                            <md-button ng-click="userList.editUser($index, $event)">
                                 <md-icon>edit</md-icon>
                                 Bearbeiten
                             </md-button>
@@ -44,7 +44,7 @@
                         </md-menu-item>
                         <md-menu-divider></md-menu-divider>
                         <md-menu-item>
-                            <md-button ng-click="userList.deleteUser(user, $event)" class="md-warn">
+                            <md-button ng-click="userList.deleteUser($index, $event)" class="md-raised md-warn">
                                 <md-icon>delete</md-icon>
                                 Löschen
                             </md-button>
