@@ -7,17 +7,36 @@
             UserListController
         ]);
 
-    function UserListController(User, $mdDialog) {
+    function UserListController(UserService, $mdDialog) {
         var self = this;
 
-        self.users = User.query(function(usersres) {
+        self.users = UserService.query(function(usersres) {
             console.log(usersres);
         });
 
         self.showDetails = showDetails;
         self.editUser = editUser;
         self.createUser = createUser;
+        self.deleteUser = deleteUser;
 
+        //public
+        function deleteUser(index, event) {
+            var user = self.users[index];
+            var dialog = $mdDialog.confirm()
+                .title("Benutzer " + user.loginname + " löschen?")
+                .content("Den Benutzer " + user.loginname + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
+                .ok("löschen")
+                .cancel("abbrechen");
+            $mdDialog.show(dialog).then(function() {
+                return UserService.delete({userId: user.id}).$promise;
+            }).then(function(response) {
+                delete self.users[index];
+            }).catch(function(fail) {
+
+            });
+        }
+
+        //public
         function showDetails(user, event) {
             $mdDialog.show({
                 clickOutsideToClose: true,
@@ -66,7 +85,7 @@
                 }
             }).then(function (user) {
                 console.log(user);
-                return User.save(user).$promise;
+                return UserService.save(user).$promise;
             }).then(function (user) {
                 self.users[index] = user;
             }).catch(function (reason) {
