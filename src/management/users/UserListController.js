@@ -75,6 +75,7 @@
             if (createNewUser === undefined) {
                 createNewUser = false;
             }
+
             $mdDialog.show({
                 clickOutsideToClose: true,
                 templateUrl: 'src/management/users/create.html',
@@ -83,11 +84,16 @@
                 targetEvent: event,
                 bindToController: true,
                 locals: {
-                    user: self.users[index]
+                    user: angular.copy(self.users[index])
                 }
             }).then(function (user) {
                 console.log(user);
-                return UserService.save(user).$promise;
+                if(createNewUser) {
+                    return UserService.save(user).$promise;
+                } else {
+                    return UserService.update({userId: user.id}, user);
+                }
+
             }).then(function (user) {
                 self.users[index] = user;
             }).catch(function (reason) {
