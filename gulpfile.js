@@ -14,6 +14,7 @@ var isDevelopment = gutil.env.dev === true;
 var paths = {
     libraries: [
         'node_modules/angular/angular.min.js',
+        'node_modules/angular-cookies/angular-cookies.min.js',
         'node_modules/angular-animate/angular-animate.min.js',
         'node_modules/angular-aria/angular-aria.min.js',
         'angular-material.min.js',
@@ -28,6 +29,7 @@ var paths = {
         'src/management/users/users.js',
         'src/home/home.js',
         'src/management/booking/booking.js',
+        'src/login/login.js',
 
         'src/errortoast/errorToastModule.js',
 

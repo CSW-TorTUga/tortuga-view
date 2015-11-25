@@ -6,10 +6,10 @@
             '$http',
             'apiAddress',
             '$cookies',
-            UserService
+            AuthenticationService
         ]);
 
-    function UserService($timeout, $http, $cookies, apiAddress) {
+    function AuthenticationService($timeout, $http, $cookies, apiAddress) {
         var self = this;
 
         var loggedIn = false;

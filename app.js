@@ -28,9 +28,6 @@
         $stateProvider.state('profile', {
             url: '/profile',
             templateUrl: 'src/profile/profile.html'
-        }).state('login', {
-            url: '/login',
-            templateUrl: 'src/login/login.html'
         });
 
         $urlRouterProvider.otherwise('/home');
