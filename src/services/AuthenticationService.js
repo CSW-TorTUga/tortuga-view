@@ -9,7 +9,7 @@
             AuthenticationService
         ]);
 
-    function AuthenticationService($timeout, $http, $cookies, apiAddress) {
+    function AuthenticationService($timeout, $http, apiAddress, $cookies) {
         var self = this;
 
         var loggedIn = false;
