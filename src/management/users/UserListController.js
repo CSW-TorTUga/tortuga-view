@@ -18,6 +18,14 @@
         self.editUser = editUser;
         self.createUser = createUser;
         self.deleteUser = deleteUser;
+        self.validatePasswordRepeat = validatePasswordRepeat;
+
+        //public
+        function validatePasswordRepeat() {
+            return {
+                samePassword: self.password1 == self.password2
+            }
+        }
 
         //public
         function deleteUser(index, event) {
