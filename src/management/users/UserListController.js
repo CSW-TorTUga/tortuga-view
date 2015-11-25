@@ -19,6 +19,69 @@
         self.createUser = createUser;
         self.deleteUser = deleteUser;
         self.validatePasswordRepeat = validatePasswordRepeat;
+        self.extendValidTime = extendValidTime;
+        self.setInactive = setInactive;
+        self.userExpiresThisSemster = userExpiresThisSemster;
+
+
+        //public
+        function userExpiresThisSemster(index) {
+            var user = self.users[index];
+            var date = getNextSemsterEnd(new Date());
+            return user.expires - date.valueOf() < 60 * 60 * 10000;
+        }
+
+
+        function getNextSemsterEnd(date) {
+            if(date.getMonth() < 3) { //april
+                date.setYear(3);
+            } else if(date.getMonth() < 9) { //october
+                date.setMonth(9);
+            } else { // else it's after october so we set the date to october
+                date.setMonth(3);
+                date.setYear(date.getYear() + 1);
+            }
+            date.setDate(0);
+            date.setHours(0);
+            date.setMinutes(0);
+            date.setSeconds(0);
+            date.setMilliseconds(0);
+            return date;
+        }
+
+        //public
+        function extendValidTime(index, event) {
+            var user = self.users[index];
+            var date = new Date(user.expires);
+            console.log(date);
+
+            do {
+                date.setMonth(date.getMonth() + 6);
+            } while((new Date).valueOf() > date.valueOf());
+
+            console.log(date);
+            user.expires = date.valueOf();
+
+
+            self.users[index] = UserService.update({userId: user.id}, user);
+        }
+
+        //public
+        function setInactive(index, event) {
+            var user = self.users[index];
+            var date = new Date();
+            if(date.getMonth() < 3) { //april
+                date.setYear(date.getYear() - 1);
+                date.setMonth(9); //
+            } else if(date.getMonth() < 9) { //october
+                date.setMonth(3);
+            } else { // else it's after october so we set the date to october
+                date.setMonth(9);
+            }
+            user.expires = date.valueOf();
+
+            self.users[index] = UserService.update({userId: user.id}, user);
+        }
 
         //public
         function validatePasswordRepeat() {
