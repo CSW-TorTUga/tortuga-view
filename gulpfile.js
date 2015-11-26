@@ -33,6 +33,7 @@ var paths = {
         'src/home/home.js',
         'src/management/booking/booking.js',
         'src/login/login.js',
+        'src/profile/profile.js',
 
         'src/errortoast/errorToastModule.js',
 

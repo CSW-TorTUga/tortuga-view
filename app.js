@@ -16,7 +16,8 @@
         'errorToast',
         'bookings',
         'ngResource',
-        'login'
+        'login',
+        'profile'
     ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function ($mdThemingProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette(PRIMARY)
@@ -25,11 +26,6 @@
             });
 
         $locationProvider.html5Mode(true);
-
-        $stateProvider.state('profile', {
-            url: '/profile',
-            templateUrl: 'src/profile/profile.html'
-        });
 
         $urlRouterProvider.otherwise('/home');
 

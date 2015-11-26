@@ -14,6 +14,7 @@
         var self = this;
 
         var loggedIn = false;
+        var user = null;
 
         $rootScope.$on('$stateChangeStart', function onStateChange(event, to) {
             if(!loggedIn && to.name != 'login') {
@@ -25,10 +26,16 @@
         self.login = login;
         self.logout = logout;
         self.isLoggedIn = isLoggedIn;
+        self.getUser = getUser;
 
         //public
         function isLoggedIn() {
             return loggedIn;
+        }
+
+        //public
+        function getUser() {
+            return user;
         }
 
         //public
@@ -38,8 +45,9 @@
                 password: password
             });
 
-            httpPromise.then(function (response) {
+            httpPromise.then(function(response) {
                 loggedIn = true;
+                user = response.data;
             });
 
             return httpPromise;
@@ -50,6 +58,7 @@
             $cookies.remove('auth_token');
 
             loggedIn = false;
+            user = null;
 
             $state.go('login');
         }
