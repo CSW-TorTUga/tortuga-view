@@ -13,17 +13,17 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body ng-app="rms" class="md-body-1" layout="row">
+<body ng-app="rms" class="md-body-1" layout="row" ng-controller="NavController as nav">
 
   <md-sidenav
     layout="column"
     class="sidenav md-sidenav-left md-locked-open md-whiteframe-z3"
-    md-is-locked-open="$mdMedia('gt-md')"
+    md-is-locked-open="$mdMedia('gt-md') && nav.isLoggedIn()"
     style="background-color: {{primaryColor}};">
     <header>
       R M S
     </header>
-    <md-content flex ng-controller="NavController as nav">
+    <md-content flex>
       <ul>
         <li>
           <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('home')}" ui-sref="home">Home</md-button>

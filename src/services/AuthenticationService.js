@@ -2,21 +2,25 @@
 
     angular.module('rms')
         .service('AuthenticationService', [
-            '$timeout',
             '$http',
             'apiAddress',
             '$cookies',
+            '$state',
+            '$rootScope',
             AuthenticationService
         ]);
 
-    function AuthenticationService($timeout, $http, apiAddress, $cookies) {
+    function AuthenticationService($http, apiAddress, $cookies, $state, $rootScope) {
         var self = this;
 
         var loggedIn = false;
 
-        $timeout(function () {
-            loggedIn = true;
-        }, 3000);
+        $rootScope.$on('$stateChangeStart', function onStateChange(event, to) {
+            if(!loggedIn && to.name != 'login') {
+                event.preventDefault();
+                $state.go('login');
+            }
+        });
 
         self.login = login;
         self.logout = logout;
@@ -44,6 +48,10 @@
         //public
         function logout() {
             $cookies.remove('auth_token');
+
+            loggedIn = false;
+
+            $state.go('login');
         }
     }
 
