@@ -14,9 +14,10 @@ var isDevelopment = gutil.env.dev === true;
 var paths = {
     libraries: [
         'node_modules/angular/angular.min.js',
+        'node_modules/angular-cookies/angular-cookies.min.js',
         'node_modules/angular-animate/angular-animate.min.js',
         'node_modules/angular-aria/angular-aria.min.js',
-        'node_modules/angular-material/angular-material.min.js',
+        'angular-material.min.js',
         'node_modules/ui-router/release/angular-ui-router.min.js',
         'node_modules/angular-route/angular-route.min.js',
         'node_modules/angular-resource/angular-resource.js',
@@ -31,6 +32,7 @@ var paths = {
         'src/management/roles/roles.js',
         'src/home/home.js',
         'src/management/booking/booking.js',
+        'src/login/login.js',
 
         'src/errortoast/errorToastModule.js',
 
@@ -79,11 +81,11 @@ gulp.task('set-host', ['scripts', 'styles'], function() {
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('build', ['scripts', 'styles', 'set-host']);
+gulp.task('build', ['scripts', 'styles' /*, 'set-host'*/]);
 
 gulp.task('watch', function(){
-    gulp.watch('src/**/*.js',['scripts', 'set-host']);
-    gulp.watch('index.dev.html', ['scripts', 'set-host']);
+    gulp.watch('src/**/*.js',['scripts' /*, 'set-host'*/]);
+    gulp.watch('index.dev.html', ['scripts' /*, 'set-host'*/]);
     gulp.watch(['src/**/*.css', 'style.dev.css'], ['styles']);
 });
 
