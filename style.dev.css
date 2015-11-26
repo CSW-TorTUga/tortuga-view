@@ -55,10 +55,6 @@
   padding-bottom: 0;
 }
 
-form.common-form {
-  width: 330px;
-}
-
 @font-face {
   font-family: TechnoLogo;
   src: url("../technologo.otf") format("opentype");
@@ -125,4 +121,8 @@ div.time-panel:first-child {
 
 [ui-view].ng-leave {
   display: none;
+}
+
+md-menu-content {
+  padding: 0;
 }

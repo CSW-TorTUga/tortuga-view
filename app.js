@@ -15,6 +15,7 @@
         'management',
         'errorToast',
         'bookings',
+        'ngResource',
         'login'
     ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function ($mdThemingProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
         $mdThemingProvider.theme('default')

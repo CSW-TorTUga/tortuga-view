@@ -19,7 +19,9 @@ var paths = {
         'node_modules/angular-aria/angular-aria.min.js',
         'node_modules/angular-material/angular-material.min.js',
         'node_modules/ui-router/release/angular-ui-router.min.js',
-        'node_modules/angular-route/angular-route.min.js'
+        'node_modules/angular-route/angular-route.min.js',
+        'node_modules/angular-resource/angular-resource.js',
+        'lib/ngsweets.js'
 
     ],
     scripts: [
@@ -27,6 +29,7 @@ var paths = {
 
         'src/management/management.js',
         'src/management/users/users.js',
+        'src/management/roles/roles.js',
         'src/home/home.js',
         'src/management/booking/booking.js',
         'src/login/login.js',

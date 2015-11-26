@@ -1,53 +1,90 @@
-<h1 class="md-display-3" style="color: {{primaryColor}}; margin-top: 0;">Benutzer erstellen</h1>
-<form class="common-form">
-  <md-input-container>
-    <label>
-      Benutzername
-    </label>
-    <input type="text">
-  </md-input-container>
-  <md-input-container>
-    <label>
-      Nachname
-    </label>
-    <input type="text">
-  </md-input-container>
-  <md-input-container>
-    <label>
-      Vorname
-    </label>
-    <input type="text">
-  </md-input-container>
-  <md-radio-group ng-model="data.group1" layout="row">
-    <md-radio-button value="male">Männlich</md-radio-button>
-    <md-radio-button value="female">Weiblich</md-radio-button>
-    <md-radio-button value="none">k.A.</md-radio-button>
-  </md-radio-group>
-  <md-input-container>
-    <label>
-      Matrikelnummer
-    </label>
-    <input type="text">
-  </md-input-container>
-  <md-input-container>
-    <label>
-      E-Mail
-    </label>
-    <input type="email">
-  </md-input-container>
-  <md-input-container>
-    <label>
-      Passwort
-    </label>
-    <input type="password">
-  </md-input-container>
-  <md-input-container>
-    <label>
-      Passwort wiederholen
-    </label>
-    <input type="password">
-  </md-input-container>
-  <md-button class="full-width-button md-raised md-accent" style="margin-bottom: 20px;">
-    Erstellen
-  </md-button>
-</form>
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">{{userModal.header}}</div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content">
+        <form layout="column">
+            <md-input-container>
+                <label>
+                    Benutzername
+                </label>
+                <input type="text" ng-model="userModal.user.loginName">
+            </md-input-container>
+            <div layout="rows">
+                <md-input-container flex="50">
+                    <label>
+                        Vorname
+                    </label>
+                    <input type="text" ng-model="userModal.user.firstName">
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>
+                        Nachname
+                    </label>
+                    <input type="text" ng-model="userModal.user.lastName">
+                </md-input-container>
+            </div>
+            <md-input-container>
+                <label>
+                    Telefonnummer
+                </label>
+                <input type="tel" ng-model="userModal.user.phoneNumber">
+            </md-input-container>
+            <md-input-container>
+                <label>
+                    E-Mail
+                </label>
+                <input type="email" ng-model="userModal.user.email">
+            </md-input-container>
+            <div ng-if="userModal.newUser" layout="rows">
+                <md-input-container flex="50">
+                    <label>
+                        Passwort
+                    </label>
+                    <input type="password" ng-model="userModal.password1">
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>
+                        Wiederholung
+                    </label>
+                    <input type="password" ng-model="userModal.password2">
+                </md-input-container>
+            </div>
+            <md-radio-group ng-model="userModal.user.gender" layout="row">
+                <md-radio-button flex="33" value="MALE">Männlich</md-radio-button>
+                <md-radio-button flex="33" value="FEMALE">Weiblich</md-radio-button>
+                <md-radio-button flex="33" value="NONE">k.A.</md-radio-button>
+            </md-radio-group>
+            <div layout="rows">
+                <md-input-container flex="50">
+                    <label>Studiengang</label>
+                    <md-select ng-model="userModal.user.major">
+                        <md-option ng-repeat="major in userModal.majors" ng-value="major">{{major.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>
+                        Matrikelnummer
+                    </label>
+                    <input type="text" ng-model="userModal.user.studentId">
+                </md-input-container>
+            </div>
+            <md-input-container>
+                <label>Rolle</label>
+                <md-select ng-model="userModal.user.role">
+                    <md-option value="STUDENT" selected >Student</md-option>
+                    <md-option value="LECTURER">Dozent</md-option>
+                    <md-option value="CSW_TEAM">CSW-Team</md-option>
+                    <md-option value="ADMIN">Admin</md-option>
+                </md-select>
+            </md-input-container>
+        </form>
+    </md-dialog-content>
+
+    <div class="md-actions">
+        <md-button type="button" ng-click="userModal.cancel()">abbrechen</md-button>
+        <md-button type="submit" ng-click="userModal.submit()">erstelllen</md-button>
+    </div>
+
+</md-dialog>

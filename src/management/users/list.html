@@ -1,52 +1,76 @@
 <div>
-  <h2 class="md-display-1" style="color: {{primaryColor}}; margin-top: 0;">Benutzerverwaltung</h2>
-  <table style="width: 100%;">
-    <tr class="md-body-2">
-      <td>Name</td>
-      <td>Rolle</td>
-      <td>Benutzername</td>
-      <td>Gültig bis</td>
-      <td>Aktionen</td>
-    </tr>
-    <tr ng-repeat="user in userList.getUsers() track by $index">
-      <td>{{user.firstName + " " + user.lastName}}</td>
-      <td>{{user.role}}</td>
-      <td>{{user.userName}}</td>
-      <td>{{user.expires | date}}</td>
-      <td>
-        <md-menu md-position-mode="target-right target">
-          <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
-            <md-icon>more_horiz</md-icon>
-          </md-button>
-          <md-menu-content>
-            <md-menu-item>
-              <md-button>
-                <md-icon>info_outline</md-icon>
-                Details
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button>
-                <md-icon>edit</md-icon>
-                Bearbeiten
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button>
-                <md-icon>vpn_key</md-icon>
-                Passwort zurücksetzen
-              </md-button>
-            </md-menu-item>
-            <md-menu-divider></md-menu-divider>
-            <md-menu-item>
-              <md-button class="md-warn">
-                <md-icon>delete</md-icon>
-                Löschen
-              </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
-      </td>
-    </tr>
-  </table>
+    <h2 class="md-display-2" layout="row" style="color: {{primaryColor}}; margin-top: 0;">Benutzerliste
+
+        <div flex></div>
+        <div layout="column" layout-align="center center">
+            <md-button class="md-raised" ng-click="userList.createUser($event)">Benutzer anlegen</md-button>
+        </div>
+    </h2>
+    <table style="width: 100%;">
+        <tr class="md-body-2">
+            <td>Name</td>
+            <td>Rolle</td>
+            <td>Benutzername</td>
+            <td>Gültig bis</td>
+            <td>Aktionen</td>
+        </tr>
+        <tr ng-repeat="user in userList.users">
+            <td>{{user.firstName + " " + user.lastName}}</td>
+            <td>{{user.role}}</td>
+            <td>{{user.loginName}}</td>
+            <td>{{user.expires | date}}</td>
+            <td>
+                <md-menu md-position-mode="target-right target">
+                    <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                        <md-icon>more_horiz</md-icon>
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button ng-click="userList.showDetails($index, $event)">
+                                <md-icon>info</md-icon>
+                                Details
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="userList.editUser($index, $event)">
+                                <md-icon>edit</md-icon>
+                                Bearbeiten
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button>
+                                <md-icon>vpn_key</md-icon>
+                                Passwort zurücksetzen
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-if="user.expires && userList.userExpiresThisSemester($index)">
+                            <md-button ng-click="userList.extendValidTime($index, $event)">
+                                <md-icon>update</md-icon>
+                                Account verlängern
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-if="user.expires && userList.userIsInactive($index)">
+                            <md-button ng-click="userList.extendValidTime($index, $event)">
+                                <md-icon>play_arrow</md-icon>
+                                Account aktivieren
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-if="user.expires && !userList.userIsInactive($index)">
+                            <md-button class="md-warn" ng-click="userList.setInactive($index, $event)">
+                                <md-icon>block</md-icon>
+                                Account deaktivieren
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-divider></md-menu-divider>
+                        <md-menu-item>
+                            <md-button ng-click="userList.deleteUser($index, $event)" class="md-raised md-warn">
+                                <md-icon>delete</md-icon>
+                                Löschen
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </td>
+        </tr>
+    </table>
 </div>
