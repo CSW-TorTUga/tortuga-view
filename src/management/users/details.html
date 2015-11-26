@@ -27,15 +27,15 @@
             </tr>
             <tr>
                 <td class="md-body-2">Geschlecht</td>
-                <td>{{userDetails.user.gender}}</td>
+                <td><optional property="userDetails.user.gender"></optional></td>
             </tr>
             <tr>
                 <td class="md-body-2">Studiengang</td>
-                <td>{{userDetails.user.major.name}}</td>
+                <td><optional property="userDetails.user.major.name"></optional></td>
             </tr>
             <tr>
                 <td class="md-body-2">Matrikelnummer</td>
-                <td>{{userDetails.user.studentId}}</td>
+                <td><optional property="userDetails.user.studentId"></optional></td>
             </tr>
             <tr>
                 <td class="md-body-2">Telefonnummer</td>
@@ -47,7 +47,7 @@
             </tr>
             <tr>
                 <td class="md-body-2">Läuft aus</td>
-                <td>{{userDetails.user.expires | date}}</td>
+                <td><optional property="userDetails.user.expires | date"></optional></td>
             </tr>
         </table>
     </md-dialog-content>
