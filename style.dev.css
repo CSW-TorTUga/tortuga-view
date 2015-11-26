@@ -55,10 +55,6 @@
   padding-bottom: 0;
 }
 
-form {
-  width: 330px;
-}
-
 @font-face {
   font-family: TechnoLogo;
   src: url("../technologo.otf") format("opentype");
