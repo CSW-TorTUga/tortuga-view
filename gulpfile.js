@@ -22,7 +22,6 @@ var paths = {
         'node_modules/angular-route/angular-route.min.js',
         'node_modules/angular-resource/angular-resource.js',
         'lib/ngsweets.js'
-
     ],
     scripts: [
         'app.js',
@@ -38,7 +37,8 @@ var paths = {
         'src/**/*.js'
     ],
     styles: [
-        './style.dev.css'
+        'lib/animate.css',
+        'style.dev.css'
     ]
 };
 
