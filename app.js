@@ -13,14 +13,24 @@
         'ngRoute',
         'home',
         'management',
-        'errorToast',
         'bookings',
         'ngResource',
         'login',
         'profile'
-    ]).config(['$mdThemingProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider', function ($mdThemingProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
+    ]).config([
+        '$mdThemingProvider',
+        '$urlRouterProvider',
+        '$locationProvider',
+        '$httpProvider',
+        rmsConfig
+    ]).run([
+        '$rootScope',
+        '$mdColorPalette',
+        rmsRun
+    ]);
+
+    function rmsConfig($mdThemingProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $mdThemingProvider.theme('default')
-            .primaryPalette(PRIMARY)
             .accentPalette(ACCENT, {
                 default: 'A100'
             });
@@ -29,7 +39,10 @@
 
         $urlRouterProvider.otherwise('/home');
 
-    }]).run(['$rootScope', '$mdColorPalette', function ($rootScope, $mdColorPalette) {
+        $httpProvider.interceptors.push('sessionTimeoutInterceptor');
+    }
+
+    function rmsRun($rootScope, $mdColorPalette) {
         var primaryPalette = $mdColorPalette[PRIMARY];
 
         $rootScope.primaryColor = rgbToHex(
@@ -43,6 +56,6 @@
             accentPalette['A100'].value[0],
             accentPalette['A100'].value[1],
             accentPalette['A100'].value[2]);
-    }]);
+    }
 
 })();

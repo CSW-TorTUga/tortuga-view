@@ -1,7 +1,10 @@
 (function () {
 
-    angular.module('errorToast')
-        .service('ErrorToasts', ['$mdToast', ErrorToasts]);
+    angular.module('rms')
+        .service('ErrorToasts', [
+            '$mdToast',
+            ErrorToasts
+        ]);
 
     function ErrorToasts($mdToast) {
         var self = this;

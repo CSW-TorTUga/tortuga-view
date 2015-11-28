@@ -35,8 +35,6 @@ var paths = {
         'src/login/login.js',
         'src/profile/profile.js',
 
-        'src/errortoast/errorToastModule.js',
-
         'src/**/*.js'
     ],
     styles: [
