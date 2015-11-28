@@ -3,7 +3,7 @@
     angular.module('rms')
         .factory('sessionTimeoutInterceptor', [
             '$q',
-            'errorToasts',
+            'ErrorToasts',
             '$injector',
             sessionTimeoutInterceptor]
         );
