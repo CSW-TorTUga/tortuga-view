@@ -37,6 +37,7 @@ var paths = {
         'src/**/*.js'
     ],
     styles: [
+        'node_modules/angular-material/angular-material.min.css',
         'lib/animate.css',
         'style.dev.css'
     ]
