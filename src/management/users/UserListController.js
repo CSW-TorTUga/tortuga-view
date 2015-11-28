@@ -201,7 +201,7 @@
                     if(self.newUser) {
                         self.header = 'Neuen Benutzer anlegen';
                     } else {
-                        self.header = "Den Benutzer '" + self.user.loginName + "' bearbeiten";
+                        self.header = "Benutzer '" + self.user.loginName + "' bearbeiten";
                     }
                 }
 
