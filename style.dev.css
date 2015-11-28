@@ -127,15 +127,15 @@ md-menu-content {
     padding: 0;
 }
 
-.usertable tr td {
+.management-list tr td {
     transition: .3s background-color linear;
 }
 
-.usertable tr.ng-enter td {
+.management-list tr.ng-enter td {
     background-color: rgba(0,0,0,.6);
 }
 
-.usertable tr.ng-enter-active td {
+.management-list tr.ng-enter-active td {
     background-color: rgba(0,0,0,0);
 }
 
