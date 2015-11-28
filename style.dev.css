@@ -127,15 +127,20 @@ md-menu-content {
     padding: 0;
 }
 
-.management-list tr td {
-    transition: .3s background-color linear;
+.management-list tr.ng-enter {
+    animation: slideInRight .8s;
 }
 
-.management-list tr.ng-enter td {
-    background-color: rgba(0,0,0,.6);
+.management-list tr.ng-leave {
+    animation: slideOutRight .8s;
 }
 
-.management-list tr.ng-enter-active td {
-    background-color: rgba(0,0,0,0);
+table.management-list tr+tr.ng-enter td {
+    border-bottom-color: rgba(0, 0, 0, 0);
 }
+
+table.management-list tr+tr.ng-enter.ng-enter-active td {
+    border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
 
