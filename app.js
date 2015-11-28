@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     var PRIMARY = 'blue-grey';
     var ACCENT = 'orange';
@@ -31,6 +31,7 @@
 
     function rmsConfig($mdThemingProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $mdThemingProvider.theme('default')
+            .primaryPalette(PRIMARY)
             .accentPalette(ACCENT, {
                 default: 'A100'
             });
@@ -40,6 +41,7 @@
         $urlRouterProvider.otherwise('/home');
 
         $httpProvider.interceptors.push('sessionTimeoutInterceptor');
+        $httpProvider.interceptors.push('connectionTimeoutInterceptor');
     }
 
     function rmsRun($rootScope, $mdColorPalette) {
