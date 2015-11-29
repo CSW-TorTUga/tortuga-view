@@ -2,50 +2,74 @@
 <html>
 
 <head>
-  <title>RMS</title>
+    <title>RMS</title>
 
-  <base href="/">
+    <base href="/">
 
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <link href="dist/style.css" type="text/css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="dist/style.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body ng-app="rms" class="md-body-1" layout="row" ng-controller="NavController as nav">
 
-  <md-sidenav
-    layout="column"
-    class="sidenav md-sidenav-left md-locked-open md-whiteframe-z3"
-    md-is-locked-open="$mdMedia('gt-md') && nav.isLoggedIn()"
-    style="background-color: {{primaryColor}};">
+<style>
+    .primary-background {
+        background-color: {{primaryColor}};
+    }
+
+    .primary-color {
+        color: {{primaryColor}};
+    }
+
+    .accent-background {
+        background-color: {{accentColor}};
+    }
+
+    .accent-color {
+        color: {{accentColor}};
+    }
+</style>
+
+<md-sidenav
+        layout="column"
+        class="sidenav md-sidenav-left md-locked-open md-whiteframe-z3 primary-background"
+        md-is-locked-open="$mdMedia('gt-md') && nav.isLoggedIn()">
     <header>
-      R M S
+        R M S
     </header>
     <md-content flex>
-      <ul>
-        <li>
-          <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('home')}" ui-sref="home">Home</md-button>
-        </li>
-        <li>
-          <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('bookings')}" ui-sref="bookings">Reservierungen</md-button>
-        </li>
-        <li>
-          <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('management')}" ui-sref="management.devices">Verwaltung</md-button>
-        </li>
-        <li>
-          <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('profile')}" ui-sref="profile">Profil</md-button>
-        </li>
-      </ul>
+        <ul>
+            <li>
+                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('home')}" ui-sref="home">Home
+                </md-button>
+            </li>
+            <li>
+                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('bookings')}" ui-sref="bookings">
+                    Reservierungen
+                </md-button>
+            </li>
+            <li>
+                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('management')}"
+                           ui-sref="management.devices">Verwaltung
+                </md-button>
+            </li>
+            <li>
+                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('profile')}" ui-sref="profile">
+                    Profil
+                </md-button>
+            </li>
+        </ul>
     </md-content>
     <md-button class="nav-link-side" ng-click="nav.logout()">Logout</md-button>
-  </md-sidenav>
+</md-sidenav>
 
-  <md-content ui-view role="main" flex layout="column"></md-content>
+<md-content ui-view role="main" flex layout="column"></md-content>
 
 
-  <!-- inject:js -->
-  <!-- endinject -->
+<!-- inject:js -->
+<!-- endinject -->
 
 </body>
 
