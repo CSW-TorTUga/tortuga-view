@@ -4,51 +4,51 @@
     </md-toolbar>
 
     <md-dialog-content class="md-dialog-content">
-        <form layout="column">
+        <form layout="column" name="userModal.editForm">
             <md-input-container>
                 <label>
                     Benutzername
                 </label>
-                <input type="text" ng-model="userModal.user.loginName">
+                <input type="text" name="loginName" ng-model="userModal.user.loginName" required>
             </md-input-container>
             <div layout="rows">
                 <md-input-container flex="50">
                     <label>
                         Vorname
                     </label>
-                    <input type="text" ng-model="userModal.user.firstName">
+                    <input type="text" name="firstName" ng-model="userModal.user.firstName" required>
                 </md-input-container>
                 <md-input-container flex="50">
                     <label>
                         Nachname
                     </label>
-                    <input type="text" ng-model="userModal.user.lastName">
+                    <input type="text" name="lastName" ng-model="userModal.user.lastName" required>
                 </md-input-container>
             </div>
             <md-input-container>
                 <label>
                     Telefonnummer
                 </label>
-                <input type="tel" ng-model="userModal.user.phoneNumber">
+                <input type="tel" name="phoneNumber" ng-model="userModal.user.phoneNumber" required>
             </md-input-container>
             <md-input-container>
                 <label>
                     E-Mail
                 </label>
-                <input type="email" ng-model="userModal.user.email">
+                <input type="email" name="email" ng-model="userModal.user.email" required>
             </md-input-container>
             <div ng-if="userModal.newUser" layout="rows">
                 <md-input-container flex="50">
                     <label>
                         Passwort
                     </label>
-                    <input type="password" ng-model="userModal.password1">
+                    <input type="password" name="password" ng-model="userModal.password1" required>
                 </md-input-container>
                 <md-input-container flex="50">
                     <label>
                         Wiederholung
                     </label>
-                    <input type="password" ng-model="userModal.password2">
+                    <input type="password" name="passwordRepeats" ng-model="userModal.password2" required>
                 </md-input-container>
             </div>
             <md-radio-group ng-model="userModal.user.gender" layout="row">
@@ -67,7 +67,7 @@
                     <label>
                         Matrikelnummer
                     </label>
-                    <input type="text" ng-model="userModal.user.studentId">
+                    <input type="text" name="studentId" ng-model="userModal.user.studentId">
                 </md-input-container>
             </div>
             <md-input-container>
