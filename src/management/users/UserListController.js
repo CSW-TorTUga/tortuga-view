@@ -200,6 +200,8 @@
                 function init() {
                     if(self.newUser) {
                         self.header = 'Neuen Benutzer anlegen';
+
+                        self.user.role = 'STUDENT';
                     } else {
                         self.header = "Benutzer '" + self.user.loginName + "' bearbeiten";
                     }
