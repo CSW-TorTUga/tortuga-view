@@ -8,7 +8,7 @@
         ]);
 
     function DeviceCategory($resource, apiAddress) {
-        return $resource(apiAddress + 'deviceCategories/:deviceCategoryId', null, {update: { method: 'PATCH'}});
+        return $resource(apiAddress + 'devicecategories/:deviceCategoryId', null, {update: { method: 'PATCH'}});
     }
 
 })();

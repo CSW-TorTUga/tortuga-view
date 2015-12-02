@@ -18,58 +18,59 @@
     function DeviceListController(Device, DeviceCategory, $mdDialog) {
         var self = this;
 
-        self.categories = [{id:'bla', name:'Laptop'}, {id:'bla2', name:'Beamer'}]; //DeviceCategory.query();
+        self.categories = DeviceCategory.query();
 
-        self.devices = [
-            {
-                inventoryNumber: 2341,
-                name: 'Acer A41',
-                category: self.categories[0],
-                storage: 5,
-                acquired: 1447340875206
-            },
-            {
-                inventoryNumber: 8475,
-                name: 'Asus Z12',
-                category: self.categories[0],
-                storage: 3,
-                acquired: 1447320875206
-            },
-            {
-                inventoryNumber: 1131,
-                name: 'Amilo Pi 3540',
-                category: self.categories[0],
-                storage: 2,
-                acquired: 1441340875206
-            },
-            {
-                inventoryNumber: 8364,
-                name: 'Wacom SuperBeam',
-                category: self.categories[1],
-                storage: 5,
-                acquired: 1447340875206
-            }
-        ];
+        self.devices = Device.query();
 
 
         self.editDevice = editDevice;
         self.createDevice = createDevice;
+        self.removeDevice = removeDevice;
+
+
+        //public
+        function removeDevice(event, device) {
+            var dialog = $mdDialog.confirm()
+                .title("Gerät " + device.name + " löschen?")
+                .textContent("Gerät " + device.name + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
+                .ok("löschen")
+                .cancel("abbrechen");
+            dialog.targetEvent = event;
+            $mdDialog.show(dialog, event).then(function() {
+                return Device.delete({deviceId: device.id}).$promise;
+            }).then(function(response) {
+                self.devices.splice(self.devices.indexOf(device), 1);
+            }).catch(function(fail) {
+                console.warn(fail);
+            });
+        }
 
 
         //public
         function createDevice(event) {
-            editDevice(event);
+            editDeviceIntern(event).then(function(device) {
+                self.devices.push(device);
+            });
         }
 
         //public
         function editDevice(event, device) {
+            editDeviceIntern(event, device).then(function(newDevice) {
+                self.devices[self.devices.indexOf(device)] = newDevice;
+            });
+        }
+
+        //public
+        function editDeviceIntern(event, device) {
             if (device === undefined) {
                 var createNewDevice = true;
                 device = new Device();
             } else {
                 var createNewDevice = false
             }
-            $mdDialog.show({
+
+
+            return $mdDialog.show({
                 templateUrl: 'src/management/devices/create.html',
                 controller: ['$mdDialog', 'DeviceCategory', EditDeviceModalController],
                 controllerAs: 'deviceModal',
@@ -92,7 +93,7 @@
 
                 self.header = "";
 
-                self.categories = [{id:'bla', name:'Laptop'}, {id:'bla2', name:'Beamer'}];//DeviceCategory.query();
+                self.categories = DeviceCategory.query();
 
 
                 init();
@@ -103,8 +104,8 @@
                     } else {
                         self.header = "Gerät '" + self.device.name + "' bearbeiten";
                     }
-                    if(self.device.acquired !== undefined) {
-                        self.dateAcquired = new Date(self.device.acquired);
+                    if(self.device.acquisitionDate !== undefined) {
+                        self.dateAcquired = new Date(self.device.acquisitionDate);
                     }
                 }
 
@@ -116,16 +117,16 @@
                 //public
                 function submit() {
 
-                    self.device.acquired = self.dateAcquired.valueOf();
+                    self.device.acquisitionDate = self.dateAcquired.valueOf();
+                    console.log(self.device);
                     var promise;
                     if (createNewDevice) {
-                        promise = Device.save(device).$promise;
+                        promise = Device.save(self.device).$promise;
                     } else {
-                        promise = Device.update({deviceId: device.id}, device).$promise;
+                        promise = Device.update({deviceId: self.device.id}, self.device).$promise;
                     }
 
                     promise.then(function (device) {
-                        self.devices.push(device);
                         $mdDialog.hide(device);
                     }).catch(function (reason) {
                         if (reason != undefined)

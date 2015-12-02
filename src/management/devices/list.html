@@ -12,15 +12,17 @@
             <tr class="md-body-2">
                 <td>Inventarnummer</td>
                 <td>Name</td>
+                <td>Beschreibung</td>
                 <td>Schrank</td>
                 <td>Beschaffungsdatum</td>
                 <td>Aktionen</td>
             </tr>
-            <tr ng-repeat="device in deviceList.devices | filter:{category: category}">
+            <tr ng-repeat="device in deviceList.devices | filter:{$: category.id}">
                 <td>{{device.inventoryNumber}}</td>
                 <td>{{device.name}}</td>
-                <td>{{device.storage}}</td>
-                <td>{{device.acquired | date}}</td>
+                <td>{{device.description}}</td>
+                <td>{{device.cabinet}}</td>
+                <td>{{device.acquisitionDate | date}}</td>
                 <td>
                     <md-menu md-position-mode="target-right target">
                         <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
@@ -35,7 +37,7 @@
                             </md-menu-item>
                             <md-menu-divider></md-menu-divider>
                             <md-menu-item>
-                                <md-button class="md-warn">
+                                <md-button ng-click="deviceList.removeDevice($event, device)" class="md-warn md-raised">
                                     <md-icon>delete</md-icon>
                                     Löschen
                                 </md-button>
