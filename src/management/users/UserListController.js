@@ -10,9 +10,7 @@
     function UserListController(UserService, $mdDialog) {
         var self = this;
 
-        self.users = UserService.query(function(usersres) {
-            console.log(usersres);
-        });
+        self.users = UserService.query();
 
         self.showDetails = showDetails;
         self.editUser = editUser;
@@ -198,6 +196,11 @@
 
                 init();
                 function init() {
+                    console.log(self.user);
+
+                    self.majors.$promise.then(function() {
+                        console.log(self.majors[0]);
+                    });
                     if(self.newUser) {
                         self.header = 'Neuen Benutzer anlegen';
                     } else {

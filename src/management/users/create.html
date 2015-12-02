@@ -60,7 +60,7 @@
                 <md-input-container flex="50">
                     <label>Studiengang</label>
                     <md-select ng-model="userModal.user.major">
-                        <md-option ng-repeat="major in userModal.majors" ng-value="major">{{major.name}}</md-option>
+                        <md-option ng-repeat="major in userModal.majors track by major.id" ng-value="major">{{major.name}}</md-option>
                     </md-select>
                 </md-input-container>
                 <md-input-container flex="50">

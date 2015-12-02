@@ -1,0 +1,44 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">{{deviceModal.header}}</div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content">
+        <form layout="column" name="deviceModal.editForm">
+            <md-input-container>
+                <label>
+                    Inventarnummer
+                </label>
+                <input type="text" name="loginName" ng-model="deviceModal.device.inventoryNumber" required>
+            </md-input-container>
+            <md-input-container>
+                <label>
+                    Name
+                </label>
+                <input type="text" name="firstName" ng-model="deviceModal.device.name" required>
+            </md-input-container>
+            <md-input-container>
+                <label>
+                    Art
+                </label>
+                <md-select ng-model="deviceModal.device.category">
+                    <md-option ng-repeat="category in deviceModal.categories" ng-value="category">{{category.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>
+                    Schrank
+                </label>
+                <input type="tel" name="phoneNumber" ng-model="deviceModal.device.storage" required>
+            </md-input-container>
+            <md-datepicker ng-model="deviceModal.dateAcquired" md-placeholder="Beschaffungdsdatum"></md-datepicker>
+        </form>
+    </md-dialog-content>
+
+    <div class="md-actions">
+        <md-button type="button" ng-click="deviceModal.cancel()">abbrechen</md-button>
+        <md-button class="md-accent" type="submit" ng-click="deviceModal.submit()">absenden</md-button>
+    </div>
+
+</md-dialog>
