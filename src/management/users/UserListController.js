@@ -105,7 +105,7 @@
             var user = self.users[index];
             var dialog = $mdDialog.confirm()
                 .title("Benutzer " + user.loginname + " löschen?")
-                .content("Den Benutzer " + user.loginname + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
+                .textContent("Den Benutzer " + user.loginname + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
                 .ok("löschen")
                 .cancel("abbrechen");
             dialog.targetEvent = event;
