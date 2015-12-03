@@ -10,12 +10,14 @@
             });
         }]).controller('AdminController', [
         'Major',
+        'DeviceCategory',
         AdminController
     ]);
 
-    function AdminController(Major,User) {
+    function AdminController(Major,DeviceCategory) {
         var self = this;
         self.majorService = Major;
+        self.deviceCategoryService = DeviceCategory
     }
 
 })();
