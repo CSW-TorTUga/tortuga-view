@@ -8,7 +8,7 @@
         ]);
 
     function Major($resource, apiAddress) {
-        return $resource(apiAddress + 'majors/:majorId');
+        return $resource(apiAddress + 'majors/:id', null, {update: { method: 'PATCH'}});
     }
 
 })();

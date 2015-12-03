@@ -1,0 +1,22 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">{{simpleCrudModal.header}}</div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content">
+        <form layout="column">
+            <md-input-container ng-repeat="head in simpleCrudModal.getHeaders()">
+                <label>
+                    {{head}}
+                </label>
+                <input ng-model="simpleCrudModal.prop(head).getSet" ng-model-options="{getterSetter: true}" required>
+            </md-input-container>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <md-button type="button" ng-click="simpleCrudModal.cancel()">abbrechen</md-button>
+        <md-button class="md-accent" type="submit" ng-click="simpleCrudModal.submit()">absenden</md-button>
+    </md-dialog-actions>
+
+</md-dialog>
