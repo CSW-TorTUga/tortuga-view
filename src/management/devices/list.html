@@ -1,21 +1,21 @@
 <div>
-    <h2 class="md-display-1 primary-color" layout="row" style="margin-top: 0;">Geräteverwaltung
+    <h2 class="md-display-2 primary-color" layout="row" style="margin-top: 0;">Geräteverwaltung
 
         <div flex></div>
         <div layout="column" layout-align="center center">
             <md-button class="md-raised" ng-click="deviceList.createDevice($event)">Gerät hinzufügen</md-button>
         </div>
     </h2>
-    <div ng-repeat="category in deviceList.categories">
-        <h4>{{category.name}}</h4>
+    <div ng-repeat="category in deviceList.getCategoryWithDevices()">
+        <h2 class="md-display-1 primary-color">{{category.name}}</h2>
         <table style="width: 100%;">
-            <tr class="md-body-2">
-                <td>Inventarnummer</td>
-                <td>Name</td>
-                <td>Beschreibung</td>
-                <td>Schrank</td>
-                <td>Beschaffungsdatum</td>
-                <td>Aktionen</td>
+            <tr>
+                <th>Inventarnummer</th>
+                <th>Name</th>
+                <th>Beschreibung</th>
+                <th>Schrank</th>
+                <th>Beschaffungsdatum</th>
+                <th>Aktionen</th>
             </tr>
             <tr ng-repeat="device in deviceList.devices | filter:{$: category.id}">
                 <td>{{device.inventoryNumber}}</td>

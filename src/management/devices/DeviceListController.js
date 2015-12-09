@@ -26,7 +26,19 @@
         self.editDevice = editDevice;
         self.createDevice = createDevice;
         self.removeDevice = removeDevice;
+        self.getCategoryWithDevices = getCategoryWithDevices;
 
+
+        //public
+        function getCategoryWithDevices() {
+
+            return self.categories.filter(function(cat) {
+                return self.devices.filter(function (accDev) {
+                        console.dir(accDev);
+                        return accDev.category.id == cat.id;
+                    }).length > 0;
+            });
+        }
 
         //public
         function removeDevice(event, device) {
@@ -36,11 +48,11 @@
                 .ok("löschen")
                 .cancel("abbrechen");
             dialog.targetEvent = event;
-            $mdDialog.show(dialog, event).then(function() {
+            $mdDialog.show(dialog, event).then(function () {
                 return Device.delete({deviceId: device.id}).$promise;
-            }).then(function(response) {
+            }).then(function (response) {
                 self.devices.splice(self.devices.indexOf(device), 1);
-            }).catch(function(fail) {
+            }).catch(function (fail) {
                 console.warn(fail);
             });
         }
@@ -48,14 +60,14 @@
 
         //public
         function createDevice(event) {
-            editDeviceIntern(event).then(function(device) {
+            editDeviceIntern(event).then(function (device) {
                 self.devices.push(device);
             });
         }
 
         //public
         function editDevice(event, device) {
-            editDeviceIntern(event, device).then(function(newDevice) {
+            editDeviceIntern(event, device).then(function (newDevice) {
                 self.devices[self.devices.indexOf(device)] = newDevice;
             });
         }
@@ -104,7 +116,7 @@
                     } else {
                         self.header = "Gerät '" + self.device.name + "' bearbeiten";
                     }
-                    if(self.device.acquisitionDate !== undefined) {
+                    if (self.device.acquisitionDate !== undefined) {
                         self.dateAcquired = new Date(self.device.acquisitionDate);
                     }
                 }
