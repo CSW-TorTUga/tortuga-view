@@ -8,7 +8,8 @@
             restrict: 'E',
             templateUrl: '',
             scope: {
-                reservation: '='
+                reservation: '=',
+                onDelete: '@'
             },
             controller: 'DeviceReservationController',
             controllerAs: 'deviceReservation'
