@@ -29,14 +29,14 @@
         function userExpiresThisSemester(index) {
             var user = self.users[index];
             var date = getNextSemesterEnd(new Date());
-            return Math.abs(user.expires - date.valueOf()) < 60 * 60 * 10000;
+            return Math.abs(user.expirationDate - date.valueOf()) < 60 * 60 * 10000;
         }
 
         //public
         function userIsInactive(index){
             var user = self.users[index];
 
-            return user.expires < (new Date).valueOf();
+            return user.expirationDate < (new Date).valueOf();
         }
 
 
@@ -57,14 +57,14 @@
         //public
         function extendValidTime(index, event) {
             var user = self.users[index];
-            var date = new Date(user.expires);
+            var date = new Date(user.expirationDate);
             console.log(date);
 
             do {
                 date.setMonth(date.getMonth() + 6);
             } while((new Date).valueOf() > date.valueOf());
 
-            user.expires = date.valueOf();
+            user.expirationDate = date.valueOf();
 
 
             self.users[index] = UserService.update({userId: user.id}, user);
@@ -88,7 +88,7 @@
 
 
             date = new Date(date.getFullYear(), date.getMonth());
-            user.expires = date.valueOf();
+            user.expirationDate = date.valueOf();
 
             self.users[index] = UserService.update({userId: user.id}, user);
         }

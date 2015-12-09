@@ -128,11 +128,11 @@ md-menu-content {
 }
 
 .management-list tr.ng-enter {
-    animation: slideInRight .8s;
+    animation: slideInRight .5s;
 }
 
 .management-list tr.ng-leave {
-    animation: slideOutRight .8s;
+    animation: slideOutRight .5s;
 }
 
 table.management-list tr+tr.ng-enter td {
