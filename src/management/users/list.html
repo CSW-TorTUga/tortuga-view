@@ -7,12 +7,12 @@
         </div>
     </h2>
     <table class="management-list" style="width: 100%;">
-        <tr class="md-body-2">
-            <td>Name</td>
-            <td>Rolle</td>
-            <td>Benutzername</td>
-            <td>Gültig bis</td>
-            <td>Aktionen</td>
+        <tr>
+            <th>Rolle</th>
+            <th>Name</th>
+            <th>Benutzername</th>
+            <th>Gültig bis</th>
+            <th>Aktionen</th>
         </tr>
         <tr ng-repeat="user in userList.users">
             <td>{{user.firstName + " " + user.lastName}}</td>

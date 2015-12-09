@@ -80,6 +80,23 @@ table tr td {
     padding: 16px 0px;
 }
 
+
+table tr:not(:last-child) th {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+table tr th:not(:last-child) {
+    padding-right: 36px;
+}
+
+table tr th:not(:first-child) {
+    padding-left: 36px;
+}
+
+table tr th {
+    padding: 16px 0px;
+}
+
 .full-width-button {
     width: 100%;
     margin: 0;
@@ -144,3 +161,7 @@ table.management-list tr+tr.ng-enter.ng-enter-active td {
 }
 
 
+th {
+    font-weight: bold;
+    text-align: left;
+}
