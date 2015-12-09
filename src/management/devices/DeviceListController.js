@@ -31,10 +31,11 @@
 
         //public
         function getCategoryWithDevices() {
+            //console.dir(self.devices);
+            //console.dir(self.categories);
 
             return self.categories.filter(function(cat) {
                 return self.devices.filter(function (accDev) {
-                        console.dir(accDev);
                         return accDev.category.id == cat.id;
                     }).length > 0;
             });

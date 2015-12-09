@@ -28,7 +28,7 @@
                 <label>
                     Art
                 </label>
-                <md-select ng-model="deviceModal.device.category">
+                <md-select ng-model="deviceModal.device.category" ng-model-options="{trackBy: '$value.id'}">
                     <md-option ng-repeat="category in deviceModal.categories" ng-value="category">{{category.name}}
                     </md-option>
                 </md-select>
