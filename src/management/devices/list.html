@@ -6,9 +6,10 @@
             <md-button class="md-raised" ng-click="deviceList.createDevice($event)">Gerät hinzufügen</md-button>
         </div>
     </h2>
+
     <div ng-repeat="category in deviceList.getCategoryWithDevices()">
         <h2 class="md-display-1 primary-color">{{category.name}}</h2>
-        <table style="width: 100%;">
+        <table class="management-list" style="width: 100%;">
             <tr>
                 <th>Inventarnummer</th>
                 <th>Name</th>

@@ -47,9 +47,9 @@
                 .title("Gerät " + device.name + " löschen?")
                 .textContent("Gerät " + device.name + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
                 .ok("löschen")
+                .targetEvent(event)
                 .cancel("abbrechen");
-            dialog.targetEvent = event;
-            $mdDialog.show(dialog, event).then(function () {
+            $mdDialog.show(dialog).then(function () {
                 return Device.delete({deviceId: device.id}).$promise;
             }).then(function (response) {
                 self.devices.splice(self.devices.indexOf(device), 1);
@@ -130,7 +130,11 @@
                 //public
                 function submit() {
 
-                    self.device.acquisitionDate = self.dateAcquired.valueOf();
+                    if(self.dateAcquired === undefined) {
+                        self.device.acquisitionDate = undefined;
+                    } else {
+                        self.device.acquisitionDate = self.dateAcquired.valueOf();
+                    }
                     console.log(self.device);
                     var promise;
                     if (createNewDevice) {

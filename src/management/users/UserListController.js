@@ -105,9 +105,9 @@
                 .title("Benutzer " + user.loginname + " löschen?")
                 .textContent("Den Benutzer " + user.loginname + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
                 .ok("löschen")
+                .targetEvent(event)
                 .cancel("abbrechen");
-            dialog.targetEvent = event;
-            $mdDialog.show(dialog, event).then(function() {
+            $mdDialog.show(dialog).then(function() {
                 return UserService.delete({userId: user.id}).$promise;
             }).then(function(response) {
                 self.users.splice(index, 1);
