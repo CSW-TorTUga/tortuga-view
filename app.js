@@ -16,6 +16,7 @@
         'bookings',
         'ngResource',
         'login',
+        'room',
         'profile'
     ]).config([
         '$mdThemingProvider',

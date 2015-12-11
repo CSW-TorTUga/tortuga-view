@@ -51,6 +51,11 @@
                 </md-button>
             </li>
             <li>
+                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('room')}" ui-sref="room">
+                    Raumbuchung
+                </md-button>
+            </li>
+            <li>
                 <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('management')}"
                            ui-sref="management.devices">Verwaltung
                 </md-button>
