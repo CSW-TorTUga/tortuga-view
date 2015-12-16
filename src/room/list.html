@@ -1,4 +1,4 @@
-<div class="main-content card-container">
+<div class="main-content card-container card-list">
     <div class="md-whiteframe-z2" ng-repeat="reservation in roomController.reservations">
         <md-toolbar class="md-hue-1">
             <div class="md-toolbar-tools">
@@ -7,7 +7,7 @@
                 <h2 ng-if="!reservation.approved">In Bearbeiten</h2>
 
                 <div flex></div>
-                <md-button class="md-icon-button">
+                <md-button class="md-icon-button" ng-click="roomController.removeReservation($event, reservation)">
                     <md-tooltip>
                         Löschen
                     </md-tooltip>
@@ -26,9 +26,14 @@
             </div>
 
         </div>
-        <md-button ng-if="roomController.canBeOpenedNow(roomController) && !reservation.open" class="md-raised md-accent md-hue-1 full-width-button" style="margin-bottom: 0;">
+        <md-button ng-if="roomController.canBeOpenedNow(reservation) && !reservation.open"
+                   class="md-raised md-accent md-hue-1 full-width-button" style="margin-bottom: 0;">
             Raum öffnen
         </md-button>
 
     </div>
+
+    <md-button class="md-fab md-raised md-primary" ng-click="roomController.addReservation($event)">
+        <md-icon>add</md-icon>
+    </md-button>
 </div>

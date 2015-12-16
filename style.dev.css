@@ -80,7 +80,6 @@ table tr td {
     padding: 16px 0px;
 }
 
-
 table tr:not(:last-child) th {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
@@ -152,12 +151,25 @@ md-menu-content {
     animation: slideOutRight .5s;
 }
 
-table.management-list tr+tr.ng-enter td {
+table.management-list tr + tr.ng-enter td {
     border-bottom-color: rgba(0, 0, 0, 0);
 }
 
-table.management-list tr+tr.ng-enter.ng-enter-active td {
+table.management-list tr + tr.ng-enter.ng-enter-active td {
     border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+md-whiteframe-z2.ng-enter {
+    animation: slideInRight .5s;
+}
+md-whiteframe-z2.ng-leave {
+    animation: slideOutRight .5s;
+}
+
+.card-list .md-fab.md-button {
+    position: fixed;
+    right: 5%;
+    bottom: 30px;
 }
 
 

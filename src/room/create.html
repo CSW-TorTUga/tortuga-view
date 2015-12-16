@@ -1,0 +1,28 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">{{reservationModal.header}}</div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content">
+        <form layout="column">
+            <md-input-container>
+                <label>
+                    Beschreibung
+                </label>
+                <textarea ng-model="reservationModal.reservation.description"></textarea>
+            </md-input-container>
+            <md-input-container>
+                <label>
+                   Startzeit
+                </label>
+                <input type="time">
+            </md-input-container>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <md-button type="button" ng-click="simpleCrudModal.cancel()">abbrechen</md-button>
+        <md-button class="md-accent" type="submit" ng-click="simpleCrudModal.submit()">absenden</md-button>
+    </md-dialog-actions>
+
+</md-dialog>
