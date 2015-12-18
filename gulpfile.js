@@ -17,7 +17,7 @@ var paths = {
         'node_modules/angular-cookies/angular-cookies.min.js',
         'node_modules/angular-animate/angular-animate.min.js',
         'node_modules/angular-aria/angular-aria.min.js',
-        'angular-material.min.js',
+        'node_modules/angular-material/angular-material.min.js',
         'node_modules/ui-router/release/angular-ui-router.min.js',
         'node_modules/angular-route/angular-route.min.js',
         'node_modules/angular-resource/angular-resource.js',
@@ -38,7 +38,7 @@ var paths = {
         'src/**/*.js'
     ],
     styles: [
-        'angular-material.min.css',
+        'node_modules/angular-material/angular-material.min.css',
         'lib/animate.css',
         'style.dev.css'
     ]
