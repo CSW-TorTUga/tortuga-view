@@ -1,5 +1,5 @@
 <div class="md-whiteframe-z2 reservation">
-    <md-toolbar class="md-hue-1">
+    <md-toolbar class="md-hue-1" ng-class="{'md-hue-2': roomReservation.reservation.open}">
         <div class="md-toolbar-tools">
             <h2>
                 {{roomReservation.reservation.description}} <small ng-if="!roomReservation.reservation.approved || roomReservation.reservation.open">&lt;{{roomReservation.getState()}}&gt;</small>
