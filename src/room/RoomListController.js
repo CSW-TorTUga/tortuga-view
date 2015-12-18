@@ -61,7 +61,6 @@
                 //public
                 function submit() {
 
-                    console.dir(self);
                     var timeStart = angular.copy(self.day);
                     var time = self.startTimeString.split(":");
 
@@ -82,7 +81,6 @@
 
 
                     self.reservation.user = AuthenticationService.getUser();
-                    console.dir(self.reservation);
 
                     RoomReservation.save(self.reservation).$promise
                         .then(function (device) {

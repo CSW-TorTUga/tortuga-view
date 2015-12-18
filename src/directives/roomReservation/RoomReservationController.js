@@ -36,12 +36,14 @@
 
         //public
         function openRoom() {
-            //TODO
+            self.reservation.open = true;
+            self.reservation = RoomReservation.update({id: self.reservation.id}, self.reservation);
         }
 
         //public
         function returnRoom() {
-            alert(self.reservation.room.name + ' zurückgegeben');
+            self.reservation.open = false;
+            self.reservation = RoomReservation.update({id: self.reservation.id}, self.reservation);
         }
 
         //public
@@ -64,7 +66,6 @@
         //public
         function canBeOpenedNow() {
 
-            console.dir(self.reservation);
             var now = new Date().valueOf();
             return self.reservation.approved && self.reservation.openedTimeSpan.beginning < now && now < self.reservation.openedTimeSpan.end;
         }

@@ -1,4 +1,4 @@
-<div class="md-whiteframe-z2">
+<div class="md-whiteframe-z2 reservation">
     <md-toolbar class="md-hue-1">
         <div class="md-toolbar-tools">
             <h2>
@@ -18,21 +18,21 @@
     <div class="card-content" layout="row">
         <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
              style="height: 50px;">
-            von {{roomReservation.reservation.timeSpan.beginning | date}}
+            von {{roomReservation.reservation.timeSpan.beginning | date:'EEE d. MMM HH:mm'}}
         </div>
         <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
              style="height: 50px;">
-            bis {{roomReservation.reservation.timeSpan.end | date}}
+            bis {{roomReservation.reservation.timeSpan.end | date:'EEE d. MMM H:m'}}
         </div>
     </div>
     <md-button ng-if="roomReservation.canBeOpenedNow() && !roomReservation.reservation.open"
                class="md-raised md-accent md-hue-1 full-width-button"
-               style="margin-bottom: 0;" ng-click="roomReservation.borrow()">
+               style="margin-bottom: 0;" ng-click="roomReservation.openRoom()">
         Raum öffnen
     </md-button>
     <md-button ng-if="roomReservation.canBeOpenedNow() && roomReservation.reservation.open"
                class="md-raised md-accent md-hue-1 full-width-button"
-               style="margin-bottom: 0;" ng-click="roomReservation.returnreservation()">
+               style="margin-bottom: 0;" ng-click="roomReservation.returnRoom()">
         Raum schließen
     </md-button>
 </div>

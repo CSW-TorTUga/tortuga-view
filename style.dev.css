@@ -161,10 +161,10 @@ table.management-list tr + tr.ng-enter.ng-enter-active td {
     border-bottom-color: rgba(0, 0, 0, 0.12);
 }
 
-md-whiteframe-z2.ng-enter {
+.reservation.ng-enter {
     animation: slideInRight .5s;
 }
-md-whiteframe-z2.ng-leave {
+.reservation.ng-leave {
     animation: slideOutRight .5s;
 }
 
