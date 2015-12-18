@@ -65,7 +65,7 @@
     margin: 0;
 }
 
-.card-container > div {
+.card-container > div, .card-container > room-reservation > div{
     margin: 20px;
     min-width: 400px;
     background-color: white;
@@ -170,12 +170,21 @@ md-whiteframe-z2.ng-leave {
 
 .card-list .md-fab.md-button {
     position: fixed;
-    right: 5%;
+    right: 2%;
     bottom: 30px;
 }
 
 
+.roomReservationModal md-datepicker .md-datepicker-input-container {
+    width: 78%;
+}
+
+.time-picker > md-input-container {
+    width:40px;
+}
+
 table.management-list th {
+
     font-weight: bold;
     text-align: left;
 }

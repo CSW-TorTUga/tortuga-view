@@ -1,39 +1,9 @@
 <div class="main-content card-container card-list">
-    <div class="md-whiteframe-z2" ng-repeat="reservation in roomController.reservations">
-        <md-toolbar class="md-hue-1">
-            <div class="md-toolbar-tools">
-                <h2 ng-if="reservation.approved">Bestätigt</h2>
-
-                <h2 ng-if="!reservation.approved">In Bearbeiten</h2>
-
-                <div flex></div>
-                <md-button class="md-icon-button" ng-click="roomController.removeReservation($event, reservation)">
-                    <md-tooltip>
-                        Löschen
-                    </md-tooltip>
-                    <md-icon>delete</md-icon>
-                </md-button>
-            </div>
-        </md-toolbar>
-        <div class="card-content" layout="row">
-            <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
-                 style="height: 50px;">
-                {{reservation.timeSpan.beginning | date:'medium'}}
-            </div>
-            <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
-                 style="height: 50px;">
-                {{reservation.timeSpan.end | date:'medium'}}
-            </div>
-
-        </div>
-        <md-button ng-if="roomController.canBeOpenedNow(reservation) && !reservation.open"
-                   class="md-raised md-accent md-hue-1 full-width-button" style="margin-bottom: 0;">
-            Raum öffnen
-        </md-button>
-
-    </div>
-
-    <md-button class="md-fab md-raised md-primary" ng-click="roomController.addReservation($event)">
+    <room-reservation
+            ng-repeat="reservation in roomController.reservations"
+            reservation="reservation"
+            on-delete="roomController.reservationDeleted"></room-reservation>
+    <md-button class="md-fab md-raised md-accent md-hue-2 md-whiteframe-z4" ng-click="roomController.addReservation($event)">
         <md-icon>add</md-icon>
     </md-button>
 </div>
