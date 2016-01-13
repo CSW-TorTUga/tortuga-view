@@ -30,9 +30,9 @@ var paths = {
         'src/management/users/users.js',
         'src/management/roles/roles.js',
         'src/home/home.js',
-        'src/management/booking/booking.js',
         'src/login/login.js',
         'src/profile/profile.js',
+        'src/deviceReservations/deviceReservations.js',
 
         'src/**/*.js'
     ],

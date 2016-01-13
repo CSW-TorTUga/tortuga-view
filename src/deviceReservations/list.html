@@ -1,0 +1,11 @@
+<div class="main-content card-container">
+
+  <device-reservation
+          ng-repeat="reservation in deviceReservationController.reservations | orderBy:'timeSpan.beginning'"
+          reservation="reservation"
+          onDelete="deviceReservationController.deviceReservationDeleted(reservation)">
+
+
+  </device-reservation>
+
+</div>

@@ -60,9 +60,9 @@
                 .title(self.name + " " + itemName + " löschen?")
                 .textContent(self.name + " '" + itemName + "' wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
                 .ok("löschen")
+                .targetEvent(event)
                 .cancel("abbrechen");
-            dialog.targetEvent = event;
-            $mdDialog.show(dialog, event).then(function() {
+            $mdDialog.show(dialog).then(function() {
                 return self.service.delete({id: item.id}).$promise;
             }).then(function(response) {
                 self.items.splice(self.items.indexOf(item), 1);
