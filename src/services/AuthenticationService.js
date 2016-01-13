@@ -13,7 +13,7 @@
     function AuthenticationService($http, apiAddress, $cookies, $state, $rootScope) {
         var self = this;
 
-        var loggedIn = false; //todo $cookies.get('auth_token') != undefined;
+        var loggedIn = $cookies.get('auth_token') != undefined;
         var user = null;
 
         $rootScope.$on('$stateChangeStart', function onStateChange(event, to) {
