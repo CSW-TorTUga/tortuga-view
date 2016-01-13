@@ -80,6 +80,23 @@ table tr td {
     padding: 16px 0px;
 }
 
+
+table tr:not(:last-child) th {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+table tr th:not(:last-child) {
+    padding-right: 36px;
+}
+
+table tr th:not(:first-child) {
+    padding-left: 36px;
+}
+
+table tr th {
+    padding: 16px 0px;
+}
+
 .full-width-button {
     width: 100%;
     margin: 0;
@@ -128,11 +145,11 @@ md-menu-content {
 }
 
 .management-list tr.ng-enter {
-    animation: slideInRight .8s;
+    animation: slideInRight .5s;
 }
 
 .management-list tr.ng-leave {
-    animation: slideOutRight .8s;
+    animation: slideOutRight .5s;
 }
 
 table.management-list tr+tr.ng-enter td {
@@ -144,3 +161,7 @@ table.management-list tr+tr.ng-enter.ng-enter-active td {
 }
 
 
+th {
+    font-weight: bold;
+    text-align: left;
+}
