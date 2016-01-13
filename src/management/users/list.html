@@ -7,18 +7,18 @@
         </div>
     </h2>
     <table class="management-list" style="width: 100%;">
-        <tr class="md-body-2">
-            <td>Name</td>
-            <td>Rolle</td>
-            <td>Benutzername</td>
-            <td>Gültig bis</td>
-            <td>Aktionen</td>
+        <tr>
+            <th>Rolle</th>
+            <th>Name</th>
+            <th>Benutzername</th>
+            <th>Gültig bis</th>
+            <th>Aktionen</th>
         </tr>
         <tr ng-repeat="user in userList.users">
             <td>{{user.firstName + " " + user.lastName}}</td>
             <td>{{user.role}}</td>
             <td>{{user.loginName}}</td>
-            <td>{{user.expires | date}}</td>
+            <td>{{user.expirationDate | date}}</td>
             <td>
                 <md-menu md-position-mode="target-right target">
                     <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
@@ -43,7 +43,7 @@
                                 Passwort zurücksetzen
                             </md-button>
                         </md-menu-item>
-                        <md-menu-item ng-if="user.expires && userList.userExpiresThisSemester($index)">
+                        <md-menu-item ng-if="user.expirationDate && userList.userExpiresThisSemester($index)">
                             <md-button ng-click="userList.extendValidTime($index, $event)">
                                 <md-icon>update</md-icon>
                                 Account verlängern

@@ -10,9 +10,7 @@
     function UserListController(UserService, $mdDialog) {
         var self = this;
 
-        self.users = UserService.query(function(usersres) {
-            console.log(usersres);
-        });
+        self.users = UserService.query();
 
         self.showDetails = showDetails;
         self.editUser = editUser;
@@ -29,14 +27,14 @@
         function userExpiresThisSemester(index) {
             var user = self.users[index];
             var date = getNextSemesterEnd(new Date());
-            return Math.abs(user.expires - date.valueOf()) < 60 * 60 * 10000;
+            return Math.abs(user.expirationDate - date.valueOf()) < 60 * 60 * 10000;
         }
 
         //public
         function userIsInactive(index){
             var user = self.users[index];
 
-            return user.expires < (new Date).valueOf();
+            return user.expirationDate < (new Date).valueOf();
         }
 
 
@@ -57,14 +55,14 @@
         //public
         function extendValidTime(index, event) {
             var user = self.users[index];
-            var date = new Date(user.expires);
+            var date = new Date(user.expirationDate);
             console.log(date);
 
             do {
                 date.setMonth(date.getMonth() + 6);
             } while((new Date).valueOf() > date.valueOf());
 
-            user.expires = date.valueOf();
+            user.expirationDate = date.valueOf();
 
 
             self.users[index] = UserService.update({userId: user.id}, user);
@@ -88,7 +86,7 @@
 
 
             date = new Date(date.getFullYear(), date.getMonth());
-            user.expires = date.valueOf();
+            user.expirationDate = date.valueOf();
 
             self.users[index] = UserService.update({userId: user.id}, user);
         }
@@ -107,9 +105,9 @@
                 .title("Benutzer " + user.loginname + " löschen?")
                 .textContent("Den Benutzer " + user.loginname + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
                 .ok("löschen")
+                .targetEvent(event)
                 .cancel("abbrechen");
-            dialog.targetEvent = event;
-            $mdDialog.show(dialog, event).then(function() {
+            $mdDialog.show(dialog).then(function() {
                 return UserService.delete({userId: user.id}).$promise;
             }).then(function(response) {
                 self.users.splice(index, 1);
@@ -198,6 +196,11 @@
 
                 init();
                 function init() {
+                    console.log(self.user);
+
+                    self.majors.$promise.then(function() {
+                        console.log(self.majors[0]);
+                    });
                     if(self.newUser) {
                         self.header = 'Neuen Benutzer anlegen';
                     } else {

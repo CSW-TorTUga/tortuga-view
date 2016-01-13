@@ -1,0 +1,52 @@
+<div>
+    <h2 class="md-display-2 primary-color" layout="row" style="margin-top: 0;">Geräteverwaltung
+
+        <div flex></div>
+        <div layout="column" layout-align="center center">
+            <md-button class="md-raised" ng-click="deviceList.createDevice($event)">Gerät hinzufügen</md-button>
+        </div>
+    </h2>
+
+    <div ng-repeat="category in deviceList.getCategoryWithDevices()">
+        <h2 class="md-display-1 primary-color">{{category.name}}</h2>
+        <table class="management-list" style="width: 100%;">
+            <tr>
+                <th>Inventarnummer</th>
+                <th>Name</th>
+                <th>Beschreibung</th>
+                <th>Schrank</th>
+                <th>Beschaffungsdatum</th>
+                <th>Aktionen</th>
+            </tr>
+            <tr ng-repeat="device in deviceList.devices | filter:{$: category.id}">
+                <td>{{device.inventoryNumber}}</td>
+                <td>{{device.name}}</td>
+                <td>{{device.description}}</td>
+                <td>{{device.cabinet}}</td>
+                <td>{{device.acquisitionDate | date}}</td>
+                <td>
+                    <md-menu md-position-mode="target-right target">
+                        <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                            <md-icon>more_horiz</md-icon>
+                        </md-button>
+                        <md-menu-content>
+                            <md-menu-item>
+                                <md-button ng-click="deviceList.editDevice($event, device)">
+                                    <md-icon>edit</md-icon>
+                                    Bearbeiten
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-divider></md-menu-divider>
+                            <md-menu-item>
+                                <md-button ng-click="deviceList.removeDevice($event, device)" class="md-warn md-raised">
+                                    <md-icon>delete</md-icon>
+                                    Löschen
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
