@@ -5,10 +5,11 @@
             '$scope',
             'DeviceReservation',
             '$mdDialog',
+            '$filter',
             DeviceReservationController
         ]);
 
-    function DeviceReservationController($scope, DeviceReservation, $mdDialog) {
+    function DeviceReservationController($scope, DeviceReservation, $mdDialog, $filter) {
         var self = this;
 
         //self.reservation
@@ -39,24 +40,22 @@
         function deleteReservation() {
 
             var dialog = $mdDialog.confirm()
-                .title("Reservierung für  " + self.reservation.device.name + " am " +self.reservation.timeSpan.beginning
-                    + " löschen?")
-                .textContent("Den Benutzer " + user.loginname + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
+                .title("Diese Reservierung löschen?")
+                .textContent("Reservierung für  " + self.reservation.device.name + " am " +
+                    $filter('date')(self.reservation.timeSpan.beginning,  'MMM d, HH:mm') +
+                    " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
                 .ok("löschen")
                 .targetEvent(event)
                 .cancel("abbrechen");
             $mdDialog.show(dialog).then(function() {
-                return UserService.delete({userId: user.id}).$promise;
+                return DeviceReservation.delete({id: self.reservation.id}).$promise;
             }).then(function(response) {
-                self.users.splice(index, 1);
+                $scope.$eval(self.onDelete);
+
             }).catch(function(fail) {
                 console.warn(fail);
             });
 
-            DeviceReservation.delete({id: self.reservation.id}).$promise
-                .then(function() {
-                    $scope.$eval(self.onDelete);
-                });
         }
 
         //public
