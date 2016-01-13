@@ -9,7 +9,7 @@
             templateUrl: 'src/directives/roomReservation/roomReservation.html',
             scope: {
                 reservation: '=',
-                onDelete: '='
+                onDelete: '@'
             },
             bindToController: true,
             controller: 'RoomReservationController',
