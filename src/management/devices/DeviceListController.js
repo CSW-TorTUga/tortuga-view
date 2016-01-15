@@ -111,7 +111,6 @@
 
                 init();
                 function init() {
-                    console.log(self.device);
                     if (self.newDevice) {
                         self.header = 'Neues Gerät anlegen';
                     } else {
@@ -135,7 +134,6 @@
                     } else {
                         self.device.acquisitionDate = self.dateAcquired.valueOf();
                     }
-                    console.log(self.device);
                     var promise;
                     if (createNewDevice) {
                         promise = Device.save(self.device).$promise;

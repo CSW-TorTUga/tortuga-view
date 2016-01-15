@@ -120,7 +120,6 @@
 
                 init();
                 function init() {
-                    console.log(self);
                     if (self.newItem) {
                         self.header = 'Neues ' + uber.name + ' anlegen';
                     } else {
@@ -150,10 +149,6 @@
 
                 //public
                 function submit() {
-
-                    console.log("submit");
-                    console.log(self.item);
-
                     var promise;
                     if (self.newItem) {
                         promise = uber.service.save(self.item).$promise;
