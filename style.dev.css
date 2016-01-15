@@ -65,7 +65,7 @@
     margin: 0;
 }
 
-.card-container > div, .card-container > room-reservation > div{
+.card-container > * {
     margin: 20px;
     min-width: 400px;
     background-color: white;

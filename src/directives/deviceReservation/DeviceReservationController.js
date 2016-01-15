@@ -5,10 +5,11 @@
             '$scope',
             'DeviceReservation',
             '$mdDialog',
+            '$filter',
             DeviceReservationController
         ]);
 
-    function DeviceReservationController($scope, DeviceReservation, $mdDialog) {
+    function DeviceReservationController($scope, DeviceReservation, $mdDialog, $filter) {
         var self = this;
 
         //self.reservation
@@ -23,20 +24,38 @@
 
         //public
         function borrow() {
-            alert(self.reservation.device.name + ' ausgeliehent');
+            self.reservation.borrowed = true;
+            self.reservation = DeviceReservation.update({id: self.reservation.id},self.reservation);
         }
 
         //public
         function returnDevice() {
-            alert(self.reservation.device.name + ' zurückgegeben');
+            self.reservation.borrowed = false;
+            self.reservation = DeviceReservation.update({id: self.reservation.id},self.reservation);
         }
+
+
 
         //public
         function deleteReservation() {
-            DeviceReservation.delete({id: self.reservation.id}).$promise
-                .then(function() {
-                    $scope.$eval(self.onDelete);
-                });
+
+            var dialog = $mdDialog.confirm()
+                .title("Diese Reservierung löschen?")
+                .textContent("Reservierung für  " + self.reservation.device.name + " am " +
+                    $filter('date')(self.reservation.timeSpan.beginning,  'MMM d, HH:mm') +
+                    " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
+                .ok("löschen")
+                .targetEvent(event)
+                .cancel("abbrechen");
+            $mdDialog.show(dialog).then(function() {
+                return DeviceReservation.delete({id: self.reservation.id}).$promise;
+            }).then(function(response) {
+                $scope.$eval(self.onDelete);
+
+            }).catch(function(fail) {
+                console.warn(fail);
+            });
+
         }
 
         //public
@@ -59,8 +78,9 @@
         //public
         function isActive() {
             var now = (new Date()).getTime();
+            console.dir(self.reservation);
 
-            return now >= self.reservation.timestamp.beginning && now <= self.reservation.timestamp.end;
+            return now >= self.reservation.timeSpan.beginning && now <= self.reservation.timeSpan.end;
         }
 
         //public
