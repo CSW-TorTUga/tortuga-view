@@ -22,7 +22,7 @@
         </div>
         <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
              style="height: 50px;">
-            bis {{roomReservation.reservation.timeSpan.end | date:'EEE d. MMM H:m'}}
+            bis {{roomReservation.reservation.timeSpan.end | date:'EEE d. MMM H:mm'}}
         </div>
     </div>
     <md-button ng-if="roomReservation.canBeOpenedNow() && !roomReservation.reservation.open"

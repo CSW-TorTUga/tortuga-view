@@ -13,7 +13,7 @@
         'ngRoute',
         'home',
         'management',
-        'bookings',
+        'deviceReservations',
         'ngResource',
         'login',
         'room',
