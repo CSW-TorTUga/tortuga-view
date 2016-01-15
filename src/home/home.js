@@ -8,7 +8,7 @@
                 url: '/home',
                 templateUrl: 'src/home/home.html',
                 controller: 'HomeController',
-                contollerAs: 'homeController'
+                controllerAs: 'homeController'
             });
     }]);
 

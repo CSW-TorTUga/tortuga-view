@@ -1,13 +1,13 @@
 <div class="main-content card-container">
     <room-reservation
-            ng-repeat="roomReservation in homeController.getRoomReservations() | orderBy:'timeSpan.beginning'"
+            ng-repeat="roomReservation in homeController.getRoomReservations()"
             reservation="roomReservation"
             on-delete="homeController.onDeleteRoomReservation(roomReservation)"></room-reservation>
 
     <md-divider ng-if="homeController.reservations.length != 0 && homeController.reservations.length != 0"></md-divider>
 
     <device-reservation
-            ng-repeat="deviceReservation in homeController.getDeviceReservations() | orderBy:'timeSpan.beginning'"
+            ng-repeat="deviceReservation in homeController.getDeviceReservations()"
             reservation="deviceReservation"
             on-delete="homeController.onDeleteDeviceReservation(deviceReservation)"></device-reservation>
 </div>
