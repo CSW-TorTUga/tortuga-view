@@ -31,6 +31,7 @@ var paths = {
         'src/management/management.js',
         'src/management/users/users.js',
         'src/management/roles/roles.js',
+        'src/management/admin/admin.js',
         'src/home/home.js',
         'src/management/booking/booking.js',
         'src/login/login.js',
