@@ -4,13 +4,15 @@
             <h2>{{deviceReservation.reservation.device.name}}</h2>
 
             <div flex></div>
-            <md-button ng-if="deviceReservation.isActive()" class="md-icon-button">
+            <md-button ng-if="deviceReservation.isActive()" class="md-icon-button"
+                       ng-click="deviceReservation.editReservation($event, true)">
                 <md-tooltip>
                     Verlängern
                 </md-tooltip>
                 <md-icon>update</md-icon>
             </md-button>
-            <md-button ng-if="!deviceReservation.isActive()" class="md-icon-button">
+            <md-button ng-if="!deviceReservation.isActive()" class="md-icon-button"
+                       ng-click="deviceReservation.editReservation($event, false)">
                 <md-tooltip>
                     Bearbeiten
                 </md-tooltip>
