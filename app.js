@@ -17,7 +17,9 @@
         'ngResource',
         'login',
         'room',
-        'profile'
+        'profile',
+        'ngSweets',
+        'ngMessages'
     ]).config([
         '$mdThemingProvider',
         '$urlRouterProvider',
