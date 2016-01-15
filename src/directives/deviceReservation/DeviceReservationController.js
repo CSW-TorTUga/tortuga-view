@@ -6,10 +6,11 @@
             'DeviceReservation',
             '$mdDialog',
             '$filter',
+            'AuthenticationService',
             DeviceReservationController
         ]);
 
-    function DeviceReservationController($scope, DeviceReservation, $mdDialog, $filter) {
+    function DeviceReservationController($scope, DeviceReservation, $mdDialog, $filter, AuthenticationService) {
         var self = this;
 
         //self.reservation
@@ -21,7 +22,7 @@
         self.isActive = isActive;
         self.isBorrowed = isBorrowed;
         self.canBeBorrowed = canBeBorrowed;
-        self.extendReservation = extendReservation;
+        self.editReservation = editReservation;
 
         //public
         function borrow() {
@@ -36,7 +37,72 @@
         }
 
         //public
-        function extendReservation() {
+        function editReservation(event, extend) {
+            return $mdDialog.show({
+                templateUrl: 'src/directives/deviceReservation/edit.html',
+                controller: ['$mdDialog', 'ErrorToasts', EditDeviceReservationController],
+                controllerAs: 'editModal',
+                targetEvent: event,
+                bindToController: true,
+                locals: {
+                    reservation: angular.copy(self.reservation),
+                    extend: angular.copy(extend)
+                }
+            }).then(function(reservation){
+                self.reservation=reservation
+            });
+
+            function EditDeviceReservationController($mdDialog, ErrorToasts) {
+                var self = this;
+
+                self.cancel = cancel;
+                self.submit = submit;
+                self.beginningDate = new Date(self.reservation.timeSpan.beginning);
+                self.endDate = new Date(self.reservation.timeSpan.end);
+                self.beginningTime = self.beginningDate.getHours() + ":" + self.beginningDate.getMinutes();
+                self.endTime = self.endDate.getHours() + ":" + self.endDate.getMinutes();
+
+                //public
+                function cancel(){
+                    $mdDialog.cancel();
+                }
+
+                //public
+                function submit(){
+                    var timeStart = angular.copy(self.beginningDate);
+                    var time = self.beginningTime.split(":");
+
+                    timeStart.setHours(time[0]);
+                    timeStart.setMinutes(time[1]);
+
+                    self.reservation.timeSpan = {};
+                    self.reservation.timeSpan.beginning = timeStart.valueOf();
+
+
+                    timeStart = angular.copy(self.endDate);
+                    time = self.endTime.split(":");
+
+                    timeStart.setHours(time[0]);
+                    timeStart.setMinutes(time[1]);
+
+                    self.reservation.timeSpan.end = timeStart.valueOf();
+
+                    self.reservation.user = AuthenticationService.getUser();
+
+                    DeviceReservation.update({id:self.reservation.id}, self.reservation).$promise
+                        .then(function (deviceReservation) {
+                            $mdDialog.hide(deviceReservation);
+                        }).catch(function (reason) {
+                        ErrorToasts.show(reason);
+                        if (reason != undefined) {
+                            console.warn(reason);
+                        }
+                    });
+
+                }
+
+            }
+
 
         }
 

@@ -3,9 +3,7 @@
   <device-reservation
           ng-repeat="reservation in deviceListController.reservations | orderBy:'timeSpan.beginning'"
           reservation="reservation"
-          onDelete="deviceListController.deviceReservationDeleted(reservation)">
-
-
+          on-delete="deviceListController.deviceReservationDeleted(reservation)">
   </device-reservation>
 
 </div>
