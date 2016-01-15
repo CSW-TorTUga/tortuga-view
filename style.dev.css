@@ -188,3 +188,7 @@ table.management-list th {
     font-weight: bold;
     text-align: left;
 }
+
+md-dialog {
+    width: 400px;
+}
