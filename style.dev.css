@@ -161,10 +161,11 @@ table.management-list tr + tr.ng-enter.ng-enter-active td {
     border-bottom-color: rgba(0, 0, 0, 0.12);
 }
 
-.reservation.ng-enter {
+room-reservation.ng-enter {
     animation: slideInRight .5s;
 }
-.reservation.ng-leave {
+
+room-reservation.ng-leave {
     animation: slideOutRight .5s;
 }
 
@@ -173,7 +174,6 @@ table.management-list tr + tr.ng-enter.ng-enter-active td {
     right: 2%;
     bottom: 30px;
 }
-
 
 .roomReservationModal md-datepicker .md-datepicker-input-container {
     width: 78%;
