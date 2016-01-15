@@ -4,7 +4,8 @@
             <h2>{{deviceReservation.reservation.device.name}}</h2>
 
             <div flex></div>
-            <md-button ng-if="deviceReservation.isActive()" class="md-icon-button">
+            <md-button ng-if="deviceReservation.isActive()" class="md-icon-button"
+                       ng-click="deviceReservation.extendReservation()">
                 <md-tooltip>
                     Verlängern
                 </md-tooltip>

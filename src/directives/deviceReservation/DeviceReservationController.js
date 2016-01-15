@@ -21,6 +21,7 @@
         self.isActive = isActive;
         self.isBorrowed = isBorrowed;
         self.canBeBorrowed = canBeBorrowed;
+        self.extendReservation = extendReservation;
 
         //public
         function borrow() {
@@ -34,7 +35,10 @@
             self.reservation = DeviceReservation.update({id: self.reservation.id},self.reservation);
         }
 
+        //public
+        function extendReservation() {
 
+        }
 
         //public
         function deleteReservation() {

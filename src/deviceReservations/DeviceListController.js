@@ -19,13 +19,12 @@
             console.dir(data);
         });
 
+
+        self.deviceReservationDeleted = deviceReservationDeleted;
+
+        //public
         function deviceReservationDeleted(reservation){
-            for(var i = 0; i <= self.reservations.length; i++){
-                if(self.reservations[i] === reservation){
-                    self.reservations.splice(i, 1);
-                    break;
-                }
-            }
+            self.reservations.splice(self.reservations.indexOf(reservation), 1);
         }
     }
 
