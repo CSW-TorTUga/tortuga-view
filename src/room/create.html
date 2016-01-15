@@ -1,0 +1,66 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">Neue Raumbuchung beantragen</div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content roomReservationModal">
+        <form layout="column" name="roomModal.bookingForm">
+            <md-input-container>
+                <label>
+                    Beschreibung
+                </label>
+                <textarea name="description" ng-model="roomModal.reservation.description" required></textarea>
+                <div ng-messages="roomModal.bookingForm.description.$error">
+                    <div ng-message="required">
+                        Bitte gib eine kurze Beschreibung an
+                    </div>
+                </div>
+            </md-input-container>
+            <md-datepicker flex name="day" ng-model="roomModal.day" md-placeholder="Datum" required></md-datepicker>
+            <div layout="row" style="margin-top: 20px;">
+                <md-input-container flex="50">
+                    <label>
+                        Startzeit
+                    </label>
+                    <input ng-model="roomModal.startTime" name="startTime" placeholder="12:00" validate="roomModal.validateTimeInput" required>
+                    <div ng-messages="roomModal.bookingForm.startTime.$error">
+                        <div ng-message="validTime">
+                            Bitte gib eine mögliche Zeit an (Format hh:mm)
+                        </div>
+                        <div ng-message="required">
+                            Bitte gib eine Startzeit an
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>
+                        Endzeit
+                    </label>
+                    <input ng-model="roomModal.endTime" name="endTime" placeholder="13:00" validate="roomModal.validateTimeInput" required>
+                    <div ng-messages="roomModal.bookingForm.endTime.$error">
+                        <div ng-message="validTime">
+                            Bitte gib eine mögliche Zeit an (Format hh:mm)
+                        </div>
+                        <div ng-message="required">
+                            Bitte gib eine Endzeit an
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div style="color:red;">
+                <div ng-if="!roomModal.timespanIsValid()">
+                    Die Startzeit muss vor der Endzeit liegen
+                </div>
+                <div ng-if="!roomModal.startTimeIsInFuture()">
+                    Der Startzeitpunkt muss in der Zukunft liegen
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <md-button type="button" ng-click="roomModal.cancel()">abbrechen</md-button>
+        <md-button ng-disabled="!roomModal.bookingForm.$valid || !roomModal.timespanIsValid() || !roomModal.timespanIsValid()" class="md-accent" type="submit" ng-click="roomModal.submit()">absenden</md-button>
+    </md-dialog-actions>
+
+</md-dialog>
