@@ -7,7 +7,7 @@
       url: '/deviceReservations',
       templateUrl: 'src/deviceReservations/list.html',
       controller: 'DeviceListController',
-      controllerAs: 'deviceReservationController'
+      controllerAs: 'deviceListController'
     });
   }]);
 
