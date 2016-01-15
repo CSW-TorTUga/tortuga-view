@@ -1,0 +1,37 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">Neue Raumbuchung beantragen</div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content roomReservationModal">
+        <form layout="column">
+            <md-input-container>
+                <label>
+                    Beschreibung
+                </label>
+                <textarea ng-model="roomModal.reservation.description"></textarea>
+            </md-input-container>
+            <md-datepicker flex ng-model="roomModal.day" md-placeholder="Datum"></md-datepicker>
+            <div layout="row">
+                <md-input-container>
+                    <label>
+                        Startzeit
+                    </label>
+                    <input ng-model="roomModal.startTimeString"> <!-- TODO: validation -->
+                </md-input-container>
+                <md-input-container>
+                    <label>
+                        Endzeit
+                    </label>
+                    <input ng-model="roomModal.endTimeString"> <!-- TODO: validation -->
+                </md-input-container>
+            </div>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <md-button type="button" ng-click="roomModal.cancel()">abbrechen</md-button>
+        <md-button class="md-accent" type="submit" ng-click="roomModal.submit()">absenden</md-button>
+    </md-dialog-actions>
+
+</md-dialog>

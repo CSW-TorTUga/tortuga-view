@@ -65,7 +65,7 @@
     margin: 0;
 }
 
-.card-container > div {
+.card-container > div, .card-container > room-reservation > div{
     margin: 20px;
     min-width: 400px;
     background-color: white;
@@ -157,12 +157,34 @@ table.management-list tr+tr.ng-enter td {
     border-bottom-color: rgba(0, 0, 0, 0);
 }
 
-table.management-list tr+tr.ng-enter.ng-enter-active td {
+table.management-list tr + tr.ng-enter.ng-enter-active td {
     border-bottom-color: rgba(0, 0, 0, 0.12);
 }
 
+.reservation.ng-enter {
+    animation: slideInRight .5s;
+}
+.reservation.ng-leave {
+    animation: slideOutRight .5s;
+}
+
+.card-list .md-fab.md-button {
+    position: fixed;
+    right: 2%;
+    bottom: 30px;
+}
+
+
+.roomReservationModal md-datepicker .md-datepicker-input-container {
+    width: 78%;
+}
+
+.time-picker > md-input-container {
+    width:40px;
+}
 
 table.management-list th {
+
     font-weight: bold;
     text-align: left;
 }
