@@ -1,13 +1,23 @@
-<div class="main-content card-container">
-    <room-reservation
-            ng-repeat="roomReservation in homeController.getRoomReservations()"
-            reservation="roomReservation"
-            on-delete="homeController.onDeleteRoomReservation(roomReservation)"></room-reservation>
+<div class="main-content">
+    <div ng-if="homeController.getRoomReservations().length != 0 ">
+        <h2>Raumbuchungen</h2>
+        <div class="card-container">
+            <room-reservation
+                    ng-repeat="roomReservation in homeController.getRoomReservations()"
+                    reservation="roomReservation"
+                    on-delete="homeController.onDeleteRoomReservation(roomReservation)"></room-reservation>
+        </div>
+    </div>
 
-    <md-divider ng-if="homeController.reservations.length != 0 && homeController.reservations.length != 0"></md-divider>
+    <div ng-if="homeController.getDeviceReservations().length != 0 ">
+        <h2>Geräte</h2>
+        <div class="card-container">
 
-    <device-reservation
-            ng-repeat="deviceReservation in homeController.getDeviceReservations()"
-            reservation="deviceReservation"
-            on-delete="homeController.onDeleteDeviceReservation(deviceReservation)"></device-reservation>
+            <device-reservation
+                    ng-repeat="deviceReservation in homeController.getDeviceReservations()"
+                    reservation="deviceReservation"
+                    on-delete="homeController.onDeleteDeviceReservation(deviceReservation)"></device-reservation>
+
+        </div>
+    </div>
 </div>
