@@ -110,7 +110,7 @@
                         return ret;
 
                     var minutes = parseInt(split[1]);
-                    if(isNaN(minutes) || minutes > 24 || minutes < 0)
+                    if(isNaN(minutes) || minutes > 60 || minutes < 0)
                         return ret;
 
                     return {
