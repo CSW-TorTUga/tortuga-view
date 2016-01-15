@@ -11,7 +11,7 @@
     function RoomListController(RoomReservation, $mdDialog, AuthenticationService) {
         var self = this;
 
-        self.reservations = RoomReservation.query(function(a) { console.dir(a)});
+        self.reservations = RoomReservation.query();
 
         self.addReservation = addReservation;
         self.reservationDeleted = reservationDeleted;
