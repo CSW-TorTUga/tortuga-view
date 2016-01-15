@@ -13,8 +13,8 @@
     function AuthenticationService($http, apiAddress, $cookies, $state, $rootScope) {
         var self = this;
 
-        var loggedIn = false; //todo $cookies.get('auth_token') != undefined;
-        var user = null;
+        var loggedIn = $cookies.get('auth_token') != undefined;
+        var user = loggedIn ? decodeUser($cookies.get('auth_token')) : null;
 
         $rootScope.$on('$stateChangeStart', function onStateChange(event, to) {
             if(!loggedIn && to.name != 'login') {
@@ -27,6 +27,12 @@
         self.logout = logout;
         self.isLoggedIn = isLoggedIn;
         self.getUser = getUser;
+
+        function decodeUser(encodedUser) {
+            var split = encodedUser.split('.');
+
+            return JSON.parse(atob(decodeURIComponent(split[0]))).user;
+        }
 
         //public
         function isLoggedIn() {

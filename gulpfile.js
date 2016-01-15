@@ -14,6 +14,7 @@ var isDevelopment = gutil.env.dev === true;
 var paths = {
     libraries: [
         'node_modules/angular/angular.min.js',
+        'node_modules/angular-messages/angular-messages.min.js',
         'node_modules/angular-cookies/angular-cookies.min.js',
         'node_modules/angular-animate/angular-animate.min.js',
         'node_modules/angular-aria/angular-aria.min.js',

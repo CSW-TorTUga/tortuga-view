@@ -42,27 +42,86 @@
                 self.cancel = cancel;
 
                 self.validateTimeInput = validateTimeInput;
+                self.startTimeIsInFuture = startTimeIsInFuture;
+                self.timespanIsValid = timespanIsValid;
 
+                self.startTime = '';
+                self.endTime = '';
 
                 //public
                 function cancel() {
                     $mdDialog.cancel();
                 }
 
+                function timesAreValid() {
+                    return self.bookingForm.startTime.$valid && self.bookingForm.endTime.$valid;
+                }
+
+                //public
+                function startTimeIsInFuture() {
+                    if(!timesAreValid())
+                        return true;
+
+                    var date = angular.copy(self.day);
+                    var split = self.startTime.split(':');
+
+                    date.setHours(split[0]);
+                    date.setMinutes(split[1]);
+
+                    return date.getTime() > (new Date()).getTime();
+                }
+
+                //public
+                function timespanIsValid() {
+                    if(!timesAreValid())
+                        return true;
+
+                    var startSplit = self.startTime.split(':');
+                    var endSplit = self.endTime.split(':');
+
+                    return parseInt(startSplit[0]) * 60 + parseInt(startSplit[1]) <
+                        parseInt(endSplit[0]) * 60 + parseInt(endSplit[1]);
+                }
+
                 //public
                 function validateTimeInput(input) {
+                    if(input == undefined || input == '')
+                        return {
+                            validTime: true
+                        };
+
+                    var ret = {
+                        validTime: false
+                    };
+
+                    var split = input.split(':');
+
+                    if(split.length != 2)
+                        return ret;
+
+                    if(split[0].length > 2)
+                        return ret;
+
+                    var hours = parseInt(split[0]);
+                    if(isNaN(hours) || hours > 24 || hours < 0)
+                        return ret;
+
+                    if(split[1].length != 2)
+                        return ret;
+
+                    var minutes = parseInt(split[1]);
+                    if(isNaN(minutes) || minutes > 24 || minutes < 0)
+                        return ret;
+
                     return {
-                        validFormat: /\d\d:\d\d/.test(input),
-                        validHour: /[0-1][0-9]+2[0-3].*/.test(input),
-                        validMinute: /.*[0-1][0-9]+2[0-3]$/.test(input)
-                    }
+                        validTime: true
+                    };
                 }
 
                 //public
                 function submit() {
-
                     var timeStart = angular.copy(self.day);
-                    var time = self.startTimeString.split(":");
+                    var time = self.startTime.split(":");
 
                     timeStart.setHours(time[0]);
                     timeStart.setMinutes(time[1]);
@@ -72,7 +131,7 @@
 
 
                     timeStart = angular.copy(self.day);
-                    time = self.endTimeString.split(":");
+                    time = self.endTime.split(":");
 
                     timeStart.setHours(time[0]);
                     timeStart.setMinutes(time[1]);
