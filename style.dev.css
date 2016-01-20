@@ -175,7 +175,8 @@ room-reservation.ng-leave {
     bottom: 30px;
 }
 
-.roomReservationModal md-datepicker .md-datepicker-input-container {
+.roomReservationModal md-datepicker .md-datepicker-input-container,
+.deviceReservationModal md-datepicker .md-datepicker-input-container {
     width: 78%;
 }
 

@@ -3,7 +3,7 @@
         <div class="md-toolbar-tools">Reservierung bearbeiten</div>
     </md-toolbar>
 
-    <md-dialog-content class="md-dialog-content roomReservationModal">
+    <md-dialog-content class="md-dialog-content deviceReservationModal">
         <form layout="column" name="editModal.editForm">
             <md-datepicker flex ng-model="editModal.beginningDate" md-placeholder="Datum" ng-disabled="editModal.extend"
             required>
@@ -20,7 +20,7 @@
                     </label>
                     <input ng-model="editModal.beginningTime" ng-disabled="editModal.extend"
                            name="beginningTime" validate="editModal.validateTimeInput" required>
-                    <div ng-message="editModal.editForm.beginningTime.$error">
+                    <div ng-messages="editModal.editForm.beginningTime.$error">
                         <div ng-message="validTime">
                             Bitte gib eine mögliche Zeit an (Format hh:mm)
                         </div>
@@ -33,14 +33,34 @@
                     <label>
                         Endzeit
                     </label>
-                    <input ng-model="editModal.endTime">
+                    <input ng-model="editModal.endTime" name="endTime"
+                           validate="editModal.validateTimeInput" required>
+                    <div ng-messages="editModal.editForm.endTime.$error">
+                        <div ng-message="validTime">
+                            Bitte gib eine mögliche Zeit an (Format hh:mm)
+                        </div>
+                        <div ng-message="required">
+                            Bitte gib eine Startzeit an
+                        </div>
+                    </div>
                 </md-input-container>
+            </div>
+            <div style="color:red;">
+                <div ng-if="!editModal.timespanIsValid()">
+                    Die Startzeit muss vor der Endzeit liegen
+                </div>
+                <div ng-if="!editModal.startTimeIsInFuture()">
+                    Der Startzeitpunkt muss in der Zukunft liegen
+                </div>
+
             </div>
         </form>
     </md-dialog-content>
 
     <md-dialog-actions>
        <md-button type="button" ng-click="editModal.cancel()">abbrechen</md-button>
-        <md-button class="md-accent" type="submit" ng-click="editModal.submit()">absenden</md-button>
+        <md-button class="md-accent" type="submit" ng-click="editModal.submit()"
+                   ng-disabled="!editModal.editForm.$valid || !editModal.timespanIsValid()
+                    || !editModal.timespanIsValid()">absenden</md-button>
     </md-dialog-actions>
 </md-dialog>

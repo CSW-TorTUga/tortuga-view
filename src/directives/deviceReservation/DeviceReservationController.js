@@ -57,8 +57,10 @@
 
                 self.cancel = cancel;
                 self.submit = submit;
-                self.validateTimeInput = validateTimeInput;
 
+                self.validateTimeInput = validateTimeInput;
+                self.startTimeIsInFuture = startTimeIsInFuture;
+                self.timespanIsValid = timespanIsValid;
 
                 self.beginningDate = new Date(self.reservation.timeSpan.beginning);
                 self.endDate = new Date(self.reservation.timeSpan.end);
@@ -68,6 +70,36 @@
                 //public
                 function cancel(){
                     $mdDialog.cancel();
+                }
+
+                function timesAreValid() {
+                    return self.editForm.beginningTime.$valid && self.editForm.endTime.$valid;
+                }
+
+                //public
+                function startTimeIsInFuture() {
+                    if(!timesAreValid())
+                        return true;
+
+                    var date = angular.copy(self.beginningDate);
+                    var split = self.beginningTime.split(':');
+
+                    date.setHours(split[0]);
+                    date.setMinutes(split[1]);
+
+                    return date.getTime() > (new Date()).getTime();
+                }
+
+                //public
+                function timespanIsValid() {
+                    if(!timesAreValid())
+                        return true;
+
+                    var startSplit = self.beginningTime.split(':');
+                    var endSplit = self.endTime.split(':');
+
+                    return parseInt(startSplit[0]) * 60 + parseInt(startSplit[1]) <
+                        parseInt(endSplit[0]) * 60 + parseInt(endSplit[1]);
                 }
 
                 //public
