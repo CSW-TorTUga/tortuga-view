@@ -57,6 +57,9 @@
 
                 self.cancel = cancel;
                 self.submit = submit;
+                self.validateTimeInput = validateTimeInput;
+
+
                 self.beginningDate = new Date(self.reservation.timeSpan.beginning);
                 self.endDate = new Date(self.reservation.timeSpan.end);
                 self.beginningTime = self.beginningDate.getHours() + ":" + self.beginningDate.getMinutes();
@@ -65,6 +68,41 @@
                 //public
                 function cancel(){
                     $mdDialog.cancel();
+                }
+
+                //public
+                function validateTimeInput(input) {
+                    if(input == undefined || input == '')
+                        return {
+                            validTime: true
+                        };
+
+                    var ret = {
+                        validTime: false
+                    };
+
+                    var split = input.split(':');
+
+                    if(split.length != 2)
+                        return ret;
+
+                    if(split[0].length > 2)
+                        return ret;
+
+                    var hours = parseInt(split[0]);
+                    if(isNaN(hours) || hours > 24 || hours < 0)
+                        return ret;
+
+                    if(split[1].length != 2)
+                        return ret;
+
+                    var minutes = parseInt(split[1]);
+                    if(isNaN(minutes) || minutes > 60 || minutes < 0)
+                        return ret;
+
+                    return {
+                        validTime: true
+                    };
                 }
 
                 //public

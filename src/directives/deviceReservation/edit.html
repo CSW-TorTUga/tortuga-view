@@ -5,14 +5,27 @@
 
     <md-dialog-content class="md-dialog-content roomReservationModal">
         <form layout="column">
-            <md-datepicker flex ng-model="editModal.beginningDate" md-placeholder="Datum" ng-disabled="editModal.extend">
+            <md-datepicker flex ng-model="editModal.beginningDate" md-placeholder="Datum" ng-disabled="editModal.extend"
+            required>
+                <div ng-message="required">
+                    Bitte gib ein Datrum für die Reservierung an
+                </div>
             </md-datepicker>
             <div layout="row">
                 <md-input-container>
                     <label>
                         Startzeit
                     </label>
-                    <input ng-model="editModal.beginningTime" ng-disabled="editModal.extend">
+                    <input ng-model="editModal.beginningTime" ng-disabled="editModal.extend"
+                           validate="editModal.validateTimeInput" required>
+                    <div ng-message="editModal.editForm.beginningTime.$error">
+                        <div ng-message="required">
+                            Bitte gib ein Datrum für die Reservierung an
+                        </div>
+                        <div ng-message="required">
+                            Bitte gib ein Datrum für die Reservierung an
+                        </div>
+                    </div>
                 </md-input-container>
                 <md-input-container>
                     <label>
