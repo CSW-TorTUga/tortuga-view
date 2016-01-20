@@ -23,6 +23,8 @@
         self.userIsInactive = userIsInactive;
 
 
+        self.isCreatingUser = false;
+
         //public
         function userExpiresThisSemester(index) {
             var user = self.users[index];
@@ -151,12 +153,12 @@
 
         //public
         function editUser(index, event, createNewUser) {
+            self.isCreatingUser = true;
             if (createNewUser === undefined) {
                 createNewUser = false;
             }
 
             $mdDialog.show({
-                clickOutsideToClose: true,
                 templateUrl: 'src/management/users/create.html',
                 controller: ['$mdDialog', 'Major',  EditUserModalController],
                 controllerAs: 'userModal',
@@ -174,8 +176,10 @@
                 }
 
             }).then(function (user) {
+                self.isCreatingUser = false;
                 self.users[index] = user;
             }).catch(function (reason) {
+                self.isCreatingUser = false;
                 if (reason != undefined)
                     console.warn(reason);
             });
