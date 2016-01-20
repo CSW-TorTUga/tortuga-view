@@ -57,7 +57,7 @@
             $mdDialog.show(dialog, event).then(function () {
                 return RoomReservation.delete({id: self.reservation.id}).$promise;
             }).then(function () {
-                $scope.$eval(self.onDelete);
+                $scope.$parent.$eval(self.onDelete);
             }).catch(function (fail) {
                 console.warn(fail);
             });
