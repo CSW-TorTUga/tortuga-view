@@ -1,5 +1,5 @@
 <div class="md-whiteframe-z2">
-    <md-toolbar class="md-hue-1">
+    <md-toolbar class="md-hue-1" ng-class="{'md-hue-2': deviceReservation.isBorrowed()}">
         <div class="md-toolbar-tools">
             <h2>{{deviceReservation.reservation.device.name}}</h2>
 
