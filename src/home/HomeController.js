@@ -22,7 +22,6 @@
 
         //public
         function getRoomReservations() {
-            console.log(roomReservations);
             var now = new Date().valueOf();
             return roomReservations.filter(function(reservation) {
                 return reservation.openedTimeSpan.beginning <= now && now <= reservation.openedTimeSpan.end;
