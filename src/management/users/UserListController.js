@@ -56,7 +56,6 @@
         function extendValidTime(index, event) {
             var user = self.users[index];
             var date = new Date(user.expirationDate);
-            console.log(date);
 
             do {
                 date.setMonth(date.getMonth() + 6);
@@ -166,7 +165,6 @@
                     user: angular.copy(self.users[index])
                 }
             }).then(function (user) {
-                console.log(user);
                 if(createNewUser) {
                     return UserService.save(user).$promise;
                 } else {
@@ -196,11 +194,6 @@
 
                 init();
                 function init() {
-                    console.log(self.user);
-
-                    self.majors.$promise.then(function() {
-                        console.log(self.majors[0]);
-                    });
                     if(self.newUser) {
                         self.header = 'Neuen Benutzer anlegen';
                     } else {
