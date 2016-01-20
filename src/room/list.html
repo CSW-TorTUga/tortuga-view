@@ -1,0 +1,9 @@
+<div class="main-content card-container card-list">
+    <room-reservation
+            ng-repeat="reservation in roomController.reservations | orderBy:'timeSpan.beginning'"
+            reservation="reservation"
+            on-delete="roomController.reservationDeleted(reservation)"></room-reservation>
+    <md-button class="md-fab md-raised md-accent md-hue-2 md-whiteframe-z4" ng-click="roomController.addReservation($event)">
+        <md-icon>add</md-icon>
+    </md-button>
+</div>

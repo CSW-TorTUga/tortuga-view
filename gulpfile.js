@@ -14,10 +14,12 @@ var isDevelopment = gutil.env.dev === true;
 var paths = {
     libraries: [
         'node_modules/angular/angular.min.js',
+        'node_modules/angular-messages/angular-messages.min.js',
         'node_modules/angular-cookies/angular-cookies.min.js',
         'node_modules/angular-animate/angular-animate.min.js',
         'node_modules/angular-aria/angular-aria.min.js',
-        'angular-material.min.js',
+        'node_modules/base-64/base64.js',
+        'node_modules/angular-material/angular-material.min.js',
         'node_modules/ui-router/release/angular-ui-router.min.js',
         'node_modules/angular-route/angular-route.min.js',
         'node_modules/angular-resource/angular-resource.js',
@@ -29,15 +31,17 @@ var paths = {
         'src/management/management.js',
         'src/management/users/users.js',
         'src/management/roles/roles.js',
+        'src/management/admin/admin.js',
         'src/home/home.js',
         'src/login/login.js',
+        'src/room/room.js',
         'src/profile/profile.js',
         'src/deviceReservations/deviceReservations.js',
 
         'src/**/*.js'
     ],
     styles: [
-        'angular-material.min.css',
+        'node_modules/angular-material/angular-material.min.css',
         'lib/animate.css',
         'style.dev.css'
     ]

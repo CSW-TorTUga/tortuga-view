@@ -16,7 +16,7 @@
         var self = this;
 
         self.reservations = DeviceReservation.query(function(data){
-            console.dir(data);
+
         });
 
 

@@ -23,6 +23,8 @@
         self.userIsInactive = userIsInactive;
 
 
+        self.isCreatingUser = false;
+
         //public
         function userExpiresThisSemester(index) {
             var user = self.users[index];
@@ -56,7 +58,6 @@
         function extendValidTime(index, event) {
             var user = self.users[index];
             var date = new Date(user.expirationDate);
-            console.log(date);
 
             do {
                 date.setMonth(date.getMonth() + 6);
@@ -102,8 +103,8 @@
         function deleteUser(index, event) {
             var user = self.users[index];
             var dialog = $mdDialog.confirm()
-                .title("Benutzer " + user.loginname + " löschen?")
-                .textContent("Den Benutzer " + user.loginname + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
+                .title("Benutzer " + user.loginName + " löschen?")
+                .textContent("Den Benutzer " + user.loginName + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
                 .ok("löschen")
                 .targetEvent(event)
                 .cancel("abbrechen");
@@ -151,12 +152,12 @@
 
         //public
         function editUser(index, event, createNewUser) {
+            self.isCreatingUser = true;
             if (createNewUser === undefined) {
                 createNewUser = false;
             }
 
             $mdDialog.show({
-                clickOutsideToClose: true,
                 templateUrl: 'src/management/users/create.html',
                 controller: ['$mdDialog', 'Major',  EditUserModalController],
                 controllerAs: 'userModal',
@@ -166,7 +167,6 @@
                     user: angular.copy(self.users[index])
                 }
             }).then(function (user) {
-                console.log(user);
                 if(createNewUser) {
                     return UserService.save(user).$promise;
                 } else {
@@ -174,8 +174,10 @@
                 }
 
             }).then(function (user) {
+                self.isCreatingUser = false;
                 self.users[index] = user;
             }).catch(function (reason) {
+                self.isCreatingUser = false;
                 if (reason != undefined)
                     console.warn(reason);
             });
@@ -196,11 +198,6 @@
 
                 init();
                 function init() {
-                    console.log(self.user);
-
-                    self.majors.$promise.then(function() {
-                        console.log(self.majors[0]);
-                    });
                     if(self.newUser) {
                         self.header = 'Neuen Benutzer anlegen';
                     } else {
