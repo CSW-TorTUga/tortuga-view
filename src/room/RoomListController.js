@@ -11,7 +11,9 @@
     function RoomListController(RoomReservation, $mdDialog, AuthenticationService) {
         var self = this;
 
-        self.reservations = RoomReservation.query();
+        self.reservations = RoomReservation.query({
+            "timeSpan.end": ">" + (new Date()).valueOf()
+        });
 
         self.addReservation = addReservation;
         self.reservationDeleted = reservationDeleted;
