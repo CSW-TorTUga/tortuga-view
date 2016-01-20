@@ -15,8 +15,8 @@
     function DeviceListController(DeviceReservation, $mdDialog, AuthenticationService){
         var self = this;
 
-        self.reservations = DeviceReservation.query(function(data){
-            console.dir(data);
+        self.reservations = DeviceReservation.query({
+            "timeSpan.end": ">" + (new Date()).valueOf()
         });
 
 
