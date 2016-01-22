@@ -1,28 +1,26 @@
 <div class="main-content card-container card-list">
-    <div class="md-whiteframe-z2 ticket">
-        <md-toolbar class="md-hue-1" ng-class="{'md-hue-2': roomReservation.reservation.open}">
+    <div class="md-whiteframe-z2 ticket" ng-repeat="message in supportController.messages">
+        <md-toolbar class="md-hue-1">
             <div class="md-toolbar-tools">
                 <h2>
-                    Supportanfrage von Paul Tester
+                    Supportanfrage von {{message.name}}
                 </h2>
                 <div flex></div>
-                <small>16.1.2016 20:30</small>
+                <small>{{message.openedAt | date:'EEE d. MMM HH:mm'}}</small>
             </div>
         </md-toolbar>
 
         <div class="card-content" layout="row">
-            <p>
-                Ich hatte ein Problem mir ein gerät auszuleihen.
-            </p>
+            {{message.body}}
         </div>
 
         <div layout="row">
             <md-button flex="50" class="md-raised md-accent md-hue-1 half-width-button md-warn"
-                       style="margin-bottom: 0;" ng-click="roomReservation.returnRoom()">
+                       style="margin-bottom: 0;" ng-click="supportController.ignore(message)">
                 Ignorieren
             </md-button>
             <md-button flex="50" class="md-raised md-accent md-hue-1 half-width-button"
-                       style="margin-bottom: 0;" ng-click="roomReservation.openRoom()">
+                       style="margin-bottom: 0;" ng-click="supportController.answer(message)">
                 Antworten
             </md-button>
         </div>

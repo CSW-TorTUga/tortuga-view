@@ -9,8 +9,8 @@
                 $stateProvider.state('tickets.support', {
                     url: '/support',
                     templateUrl: 'src/tickets/support/support.html',
-                    // controllerAs: 'roomController',
-                    // controller: 'RoomListController'
+                    controllerAs: 'supportController',
+                    controller: 'SupportListController'
                 });
             }]);
 

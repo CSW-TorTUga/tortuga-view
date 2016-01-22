@@ -1,0 +1,19 @@
+<md-dialog>
+
+    <form layout="column" name="answerModal.editForm">
+        <md-input-container>
+            <label>
+                Antwort
+            </label>
+            <input type="text" name="loginName" ng-model="answerModal.answer" required>
+        </md-input-container>
+    </form>
+
+    <md-dialog-actions>
+        <md-button type="button" ng-click="answerModal.cancel()">abbrechen</md-button>
+        <md-button
+                class="md-accent" type="submit" ng-click="answerModal.submit()">absenden
+        </md-button>
+    </md-dialog-actions>
+
+</md-dialog>

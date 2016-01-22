@@ -9,8 +9,8 @@
                 $stateProvider.state('tickets.roomReservation', {
                     url: '/roomReservation',
                     templateUrl: 'src/tickets/roomReservation/roomReservation.html',
-                    // controllerAs: 'roomController',
-                    // controller: 'RoomListController'
+                    controllerAs: 'reservationController',
+                    controller: 'RoomReservationApprovalListController'
                 });
             }]);
 
