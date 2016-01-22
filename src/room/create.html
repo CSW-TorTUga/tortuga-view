@@ -7,12 +7,12 @@
         <form layout="column" name="roomModal.bookingForm">
             <md-input-container>
                 <label>
-                    Beschreibung
+                    Titel
                 </label>
-                <textarea name="description" ng-model="roomModal.reservation.description" required></textarea>
-                <div ng-messages="roomModal.bookingForm.description.$error">
+                <textarea name="titel" ng-model="roomModal.reservation.titel" required></textarea>
+                <div ng-messages="roomModal.bookingForm.titel.$error">
                     <div ng-message="required">
-                        Bitte gib eine kurze Beschreibung an
+                        Bitte gib einen Titel an
                     </div>
                 </div>
             </md-input-container>
