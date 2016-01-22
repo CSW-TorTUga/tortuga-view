@@ -33,12 +33,12 @@
         //public
         function getHeaders() {
             if (self.items === undefined || self.items.length == 0) {
-                return [];
+                return JSON.parse(self.template);
             }
             var ret = [];
             for (head in self.items[0]) {
 
-                if (head.indexOf("$") == -1 & head.indexOf("toJSON") == -1 && typeof head !== "function") {
+                if (head.indexOf("$") == -1 && head.indexOf("toJSON") == -1 && typeof head !== "function") {
                     ret.push(head);
                 }
             }
@@ -179,7 +179,8 @@
             templateUrl: '/src/management/admin/base/simpleCRUD.html',
             scope: {
                 service: '=',
-                name: '@'
+                name: '@',
+                template: '@'
             }
         }
     }
