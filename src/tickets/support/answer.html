@@ -1,13 +1,18 @@
 <md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">Antworten</div>
+    </md-toolbar>
+    <md-dialog-content class="md-dialog-content">
 
-    <form layout="column" name="answerModal.editForm">
-        <md-input-container>
-            <label>
-                Antwort
-            </label>
-            <input type="text" name="loginName" ng-model="answerModal.answer" required>
-        </md-input-container>
-    </form>
+        <form layout="column" name="answerModal.editForm">
+            <md-input-container>
+                <label>
+                    Antwort
+                </label>
+                <input type="text" name="loginName" ng-model="answerModal.answer" required>
+            </md-input-container>
+        </form>
+    </md-dialog-content>fi
 
     <md-dialog-actions>
         <md-button type="button" ng-click="answerModal.cancel()">abbrechen</md-button>
