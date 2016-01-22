@@ -11,13 +11,15 @@
         }]).controller('AdminController', [
         'Major',
         'DeviceCategory',
+        'ComplaintTemplate',
         AdminController
     ]);
 
-    function AdminController(Major,DeviceCategory) {
+    function AdminController(Major, DeviceCategory, ComplaintTemplate) {
         var self = this;
         self.majorService = Major;
-        self.deviceCategoryService = DeviceCategory
+        self.deviceCategoryService = DeviceCategory;
+        self.complaintTemplateService = ComplaintTemplate;
     }
 
 })();
