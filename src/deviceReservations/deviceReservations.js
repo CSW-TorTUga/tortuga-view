@@ -12,7 +12,7 @@
       url: '/deviceReservationTest',
       templateUrl: 'src/deviceReservations/create.html',
       controller: 'DeviceReservationCreateController',
-      controllerAs: 'deviceReservationCreateController'
+      controllerAs: 'createController'
     });
   }]);
 

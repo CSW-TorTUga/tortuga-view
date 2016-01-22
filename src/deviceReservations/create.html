@@ -4,16 +4,26 @@
         Gerät reservieren
     </h2>
 
-    <form layout="column" style="width: 400px;" name="deviceReservationCreateController.createForm">
-        <md-datepicker flex ng-model="deviceReservationCreateController.startDate" md-placeholder="Datum"
-                       class="wide-datepicker" ng-disabled="deviceReservationCreateController.deviceSelection" required>
+    <form layout="column" style="width: 400px;" name="createController.createForm">
+        <md-datepicker flex ng-model="createController.startDate" md-placeholder="Datum"
+                       class="wide-datepicker" ng-disabled="createController.deviceSelection" name="datePicker" required>
         </md-datepicker>
         <div layout="row" style="margin-top: 20px;">
             <md-input-container flex="50">
                 <label>
                     Startzeit
                 </label>
-                <input name="starTime" md-placholder="12:00" ng-disabled="deviceReservationCreateController.deviceSelection" required>
+                <input name="startTime" ng-model="createController.startTime" md-placholder="12:00"
+                       ng-disabled="createController.deviceSelection" validate="createController.validateTimeInput"
+                       required>
+                <div ng-messages="createController.createForm.startTime.$error">
+                    <div ng-message="validTime">
+                        Bitte gib eine mögliche Zeit an (Format hh:mm)
+                    </div>
+                    <div ng-message="required">
+                        Bitte gib eine Startzeit an
+                    </div>
+                </div>
 
             </md-input-container>
 
@@ -21,41 +31,61 @@
                 <label>
                     Endzeit
                 </label>
-                <input name="endTime" md-placholder="12:00" ng-disabled="deviceReservationCreateController.deviceSelection" required>
+                <input name="endTime" ng-model="createController.endTime" md-placholder="12:00"
+                       ng-disabled="createController.deviceSelection" validate="createController.validateTimeInput"
+                       required>
+                <div ng-messages="createController.createForm.endTime.$error">
+                    <div ng-message="validTime">
+                        Bitte gib eine mögliche Zeit an (Format hh:mm)
+                    </div>
+                    <div ng-message="required">
+                        Bitte gib eine Endzeit an
+                    </div>
+                </div>
 
             </md-input-container>
+        </div>
+        <div style="color:red;">
+            <div ng-if="!createController.timespanIsValid()">
+                Die Startzeit muss vor der Endzeit liegen
+            </div>
+            <div ng-if="!createController.startTimeIsInFuture()">
+                Der Startzeitpunkt muss in der Zukunft liegen
+            </div>
+
         </div>
         <md-input-container flex="50">
             <label>
                 Gerätekategorien
             </label>
-            <md-select ng-model="deviceReservationCreateController.selectedDeviceCategory"
-                       ng-disabled="deviceReservationCreateController.deviceSelection" required>
-                <md-option ng-repeat="deviceCategory in deviceReservationCreateController.deviceCategories">
+            <md-select ng-model="createController.selectedDeviceCategory"
+                       ng-disabled="createController.deviceSelection" name="deviceCategorySelector"
+                       required>
+                <md-option ng-repeat="deviceCategory in createController.deviceCategories" >
                     {{deviceCategory}}</md-option>
             </md-select>
 
         </md-input-container>
 
-        <md-button ng-class="{'md-accent': !deviceReservationCreateController.deviceSelection}"
-                   ng-click="deviceReservationCreateController.activateDeviceSelection()" class="md-raised"
-                   ng-disabled="!deviceReservationCreateController.isFormOneValid()">
-            {{deviceReservationCreateController.deviceSelection ? "Zurück" : "Weiter" }}</md-button>
+        <md-button ng-class="{'md-accent': !createController.deviceSelection}"
+                   ng-click="createController.activateDeviceSelection()" class="md-raised"
+                   ng-disabled="!createController.isFormOneValid()">
+            {{createController.deviceSelection ? "Zurück" : "Weiter" }}</md-button>
 
         <md-input-container flex="50">
             <label>
                 Geräte
             </label>
-            <md-select ng-model="deviceReservationCreateController.selectedDevice"
-                       ng-disabled="!deviceReservationCreateController.deviceSelection" required>
-                <md-option>Laptop 1</md-option>
-                <md-option>Laptop 2</md-option>
-                <md-option>Laptop 3</md-option>
+            <md-select ng-model="createController.selectedDevice"
+                       ng-disabled="!createController.deviceSelection" name="deviceSelector" required>
+                <md-option ng-repeat="device in createController.devices">{{device}}</md-option>
+
             </md-select>
 
         </md-input-container>
 
-        <md-button class="md-accent md-raised" ng-disabled="!deviceReservationCreateController.deviceSelection">
+        <md-button class="md-accent md-raised" ng-disabled="!createController.deviceSelection ||
+          !createController.isFormTwoValid()">
             Reservieren</md-button>
     </form>
 
