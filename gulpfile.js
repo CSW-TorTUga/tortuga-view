@@ -35,6 +35,9 @@ var paths = {
         'src/home/home.js',
         'src/login/login.js',
         'src/room/room.js',
+        'src/tickets/tickets.js',
+        'src/tickets/roomReservation/roomReservation.js',
+        'src/tickets/support/support.js',
         'src/profile/profile.js',
         'src/deviceReservations/deviceReservations.js',
 

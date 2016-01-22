@@ -65,6 +65,11 @@
     margin: 0;
 }
 
+.half-width-button {
+    width: 50%;
+    margin: 0;
+}
+
 .card-container > * {
     margin: 20px;
     min-width: 400px;

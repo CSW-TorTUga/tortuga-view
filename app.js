@@ -17,6 +17,7 @@
         'ngResource',
         'login',
         'room',
+        'tickets',
         'profile',
         'ngSweets',
         'ngMessages'
