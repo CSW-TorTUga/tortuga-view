@@ -6,7 +6,7 @@
     $stateProvider.state('deviceReservations', {
       url: '/deviceReservations',
       templateUrl: 'src/deviceReservations/list.html',
-      controller: 'DeviceListController',
+      controller: 'DeviceReservationListController',
       controllerAs: 'deviceListController'
     });
   }]);

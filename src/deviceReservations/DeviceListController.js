@@ -4,15 +4,15 @@
 
 (function() {
     angular.module('deviceReservations')
-        .controller('DeviceListController', [
+        .controller('DeviceReservationListController', [
             'DeviceReservation',
             '$mdDialog',
             'AuthenticationService',
-            DeviceListController
+            DeviceReservationListController
         ]);
 
 
-    function DeviceListController(DeviceReservation, $mdDialog, AuthenticationService){
+    function DeviceReservationListController(DeviceReservation, $mdDialog, AuthenticationService){
         var self = this;
 
         self.reservations = DeviceReservation.query({
