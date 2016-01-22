@@ -1,0 +1,64 @@
+<div class="main-content">
+
+    <h2 class="md-display-2">
+        Gerät reservieren
+    </h2>
+
+    <form layout="column" style="width: 400px;" name="deviceReservationCreateController.createForm">
+        <md-datepicker flex ng-model="deviceReservationCreateController.startDate" md-placeholder="Datum"
+                       class="wide-datepicker" ng-disabled="deviceReservationCreateController.deviceSelection" required>
+        </md-datepicker>
+        <div layout="row" style="margin-top: 20px;">
+            <md-input-container flex="50">
+                <label>
+                    Startzeit
+                </label>
+                <input name="starTime" md-placholder="12:00" ng-disabled="deviceReservationCreateController.deviceSelection" required>
+
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>
+                    Endzeit
+                </label>
+                <input name="endTime" md-placholder="12:00" ng-disabled="deviceReservationCreateController.deviceSelection" required>
+
+            </md-input-container>
+        </div>
+        <md-input-container flex="50">
+            <label>
+                Gerätekategorien
+            </label>
+            <md-select ng-model="deviceReservationCreateController.selectedDeviceCategory"
+                       ng-disabled="deviceReservationCreateController.deviceSelection" required>
+                <md-option ng-repeat="deviceCategory in deviceReservationCreateController.deviceCategories">
+                    {{deviceCategory}}</md-option>
+            </md-select>
+
+        </md-input-container>
+
+        <md-button ng-class="{'md-accent': !deviceReservationCreateController.deviceSelection}"
+                   ng-click="deviceReservationCreateController.activateDeviceSelection()" class="md-raised"
+                   ng-disabled="!deviceReservationCreateController.isFormOneValid()">
+            {{deviceReservationCreateController.deviceSelection ? "Zurück" : "Weiter" }}</md-button>
+
+        <md-input-container flex="50">
+            <label>
+                Geräte
+            </label>
+            <md-select ng-model="deviceReservationCreateController.selectedDevice"
+                       ng-disabled="!deviceReservationCreateController.deviceSelection" required>
+                <md-option>Laptop 1</md-option>
+                <md-option>Laptop 2</md-option>
+                <md-option>Laptop 3</md-option>
+            </md-select>
+
+        </md-input-container>
+
+        <md-button class="md-accent md-raised" ng-disabled="!deviceReservationCreateController.deviceSelection">
+            Reservieren</md-button>
+    </form>
+
+
+
+</div>
