@@ -38,6 +38,7 @@ var paths = {
         'src/tickets/tickets.js',
         'src/tickets/roomReservation/roomReservation.js',
         'src/tickets/support/support.js',
+        'src/support/supportTicket.js',
         'src/profile/profile.js',
         'src/deviceReservations/deviceReservations.js',
 

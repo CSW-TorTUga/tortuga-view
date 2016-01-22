@@ -1,0 +1,40 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">{{deviceModal.header}}</div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content">
+        <form layout="column" name="supportModal.createForm">
+            <md-input-container>
+                <label>
+                    name
+                </label>
+                <input type="text" ng-model="supportModal.ticket.name" ng-disabled="supportModal.isLoggedIn" required>
+            </md-input-container>
+            <md-input-container>
+                <label>
+                    email
+                </label>
+                <input type="text" ng-model="supportModal.ticket.email" ng-disabled="supportModal.isLoggedIn" required>
+            </md-input-container>
+            <md-input-container>
+                <label>
+                    Betreff
+                </label>
+                <input type="text" ng-model="supportModal.ticket.subject" required>
+            </md-input-container>
+            <md-input-container>
+                <label>
+                    Text
+                </label>
+                <textarea type="text" ng-model="supportModal.ticket.body" required></textarea>
+            </md-input-container>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <md-button type="button" ng-click="supportModal.cancel()">abbrechen</md-button>
+        <md-button class="md-accent" type="submit" ng-click="supportModal.submit()">absenden</md-button>
+    </md-dialog-actions>
+
+</md-dialog>>

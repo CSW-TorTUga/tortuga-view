@@ -18,6 +18,7 @@
         'login',
         'room',
         'tickets',
+        'supportTicket',
         'profile',
         'ngSweets',
         'ngMessages'

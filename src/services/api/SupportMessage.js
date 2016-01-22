@@ -1,7 +1,7 @@
 (function() {
 
     angular.module('rms')
-        .factory('SuppportMessage', [
+        .factory('SupportMessage', [
             '$resource',
             'apiAddress',
             SuppportMessage

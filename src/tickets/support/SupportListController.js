@@ -2,7 +2,7 @@
 
     angular.module('tickets.support')
         .controller('SupportListController', [
-            'SuppportMessage',
+            'SupportMessage',
             '$mdDialog',
             'ErrorToasts',
             SupportListController
@@ -11,7 +11,7 @@
     function SupportListController(SupportMessage, $mdDialog, ErrorToasts) {
         var self = this;
 
-        self.messages = SuppportMessage.query({done: false});
+        self.messages = SupportMessage.query({done: false});
 
         self.ignore = ignore;
         self.answer = answer;
@@ -38,7 +38,7 @@
 
             $mdDialog.show({
                 clickOutsideToClose: true,
-                templateUrl: 'src/management/users/details.html',
+                templateUrl: 'src/tickets/support/answer.html',
                 controller: ['$mdDialog', AnswerController],
                 controllerAs: 'answerModal',
                 targetEvent: event,
