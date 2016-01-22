@@ -8,22 +8,27 @@
             '$mdDialog',
             'ErrorToasts',
             'DeviceCategory',
+            'Device',
+            'DeviceReservation',
+            'AuthenticationService',
             DeviceReservationCreateController
         ]);
 
 
-    function DeviceReservationCreateController($mdDialog, ErrorToasts, DeviceCategory){
+    function DeviceReservationCreateController($mdDialog, ErrorToasts, DeviceCategory, Device, DeviceReservation,
+                                               AuthenticationService){
         var self = this;
 
         self.deviceSelection = false;
         self.nextButtonText = "Weiter";
-        self.deviceCategories = ["Laptop", "Beamer", "Tasche"];
-        self.devices = ["Laptop 1", "Laptop 2", "Laptop 3"];
+        self.deviceCategories = DeviceCategory.query();
+        self.devices = undefined; //["Laptop 1", "Laptop 2", "Laptop 3"];
         self.selectedDeviceCategory = undefined;
         self.selectedDevice = undefined;
         self.endTime = undefined;
         self.startTime = undefined;
         self.startDate = undefined;
+        self.user = AuthenticationService.getUser();
 
         self.activateDeviceSelection = activateDeviceSelection;
         self.isFormOneValid = isFormOneValid;
@@ -32,6 +37,7 @@
         self.timespanIsValid = timespanIsValid;
         self.startTimeIsInFuture = startTimeIsInFuture;
         self.isFormTwoValid = isFormTwoValid;
+        self.submit = submit;
 
         //public
         function isFormTwoValid(){
@@ -47,6 +53,7 @@
         //public
         function activateDeviceSelection(){
             self.deviceSelection = !self.deviceSelection;
+            self.devices = Device.query({category: self.selectedDeviceCategory.id});
         }
 
         //public
@@ -114,6 +121,37 @@
             return {
                 validTime: true
             };
+        }
+
+        //public
+        function submit(){
+
+            var deviceReservation = {device: self.selectedDevice, user: self.user};
+
+            var timeStart = angular.copy(self.startDate);
+            var time = self.startTime.split(":");
+
+            timeStart.setHours(time[0]);
+            timeStart.setMinutes(time[1]);
+
+            deviceReservation.timeSpan = {};
+            deviceReservation.timeSpan.beginning = timeStart.valueOf();
+
+            time = self.endTime.split(":");
+
+            timeStart.setHours(time[0]);
+            timeStart.setMinutes(time[1]);
+
+            deviceReservation.timeSpan.end = timeStart.valueOf();
+
+            DeviceReservation.save(deviceReservation).$promise
+                .catch(function (reason) {
+                ErrorToasts.show(reason);
+                if (reason != undefined) {
+                    console.warn(reason);
+                }
+            });
+
         }
     }
 

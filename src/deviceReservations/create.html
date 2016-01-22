@@ -58,11 +58,11 @@
             <label>
                 Gerätekategorien
             </label>
-            <md-select ng-model="createController.selectedDeviceCategory"
+            <md-select ng-model="createController.selectedDeviceCategory" ng-model-options="{trackBy : '$value.id'}"
                        ng-disabled="createController.deviceSelection" name="deviceCategorySelector"
                        required>
-                <md-option ng-repeat="deviceCategory in createController.deviceCategories" >
-                    {{deviceCategory}}</md-option>
+                <md-option ng-repeat="deviceCategory in createController.deviceCategories" ng-value="deviceCategory">
+                    {{deviceCategory.name}}</md-option>
             </md-select>
 
         </md-input-container>
@@ -76,16 +76,16 @@
             <label>
                 Geräte
             </label>
-            <md-select ng-model="createController.selectedDevice"
+            <md-select ng-model="createController.selectedDevice" ng-model-options="{trackBy : '$value.id'}"
                        ng-disabled="!createController.deviceSelection" name="deviceSelector" required>
-                <md-option ng-repeat="device in createController.devices">{{device}}</md-option>
+                <md-option ng-repeat="device in createController.devices" ng-value="device">{{device.name}}</md-option>
 
             </md-select>
 
         </md-input-container>
 
         <md-button class="md-accent md-raised" ng-disabled="!createController.deviceSelection ||
-          !createController.isFormTwoValid()">
+          !createController.isFormTwoValid()" ng-click="createController.submit()">
             Reservieren</md-button>
     </form>
 
