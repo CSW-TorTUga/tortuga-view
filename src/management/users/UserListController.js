@@ -24,6 +24,7 @@
 
 
         self.isCreatingUser = false;
+        self.activeFilter = true;
 
         //public
         function userExpiresThisSemester(index) {
@@ -89,7 +90,7 @@
             date = new Date(date.getFullYear(), date.getMonth());
             user.expirationDate = date.valueOf();
 
-            self.users[index] = UserService.update({userId: user.id}, user);
+            self.users[index] = UserService.update({id: user.id}, user);
         }
 
         //public
@@ -109,7 +110,7 @@
                 .targetEvent(event)
                 .cancel("abbrechen");
             $mdDialog.show(dialog).then(function() {
-                return UserService.delete({userId: user.id}).$promise;
+                return UserService.delete({id: user.id}).$promise;
             }).then(function(response) {
                 self.users.splice(index, 1);
             }).catch(function(fail) {
@@ -170,7 +171,7 @@
                 if(createNewUser) {
                     return UserService.save(user).$promise;
                 } else {
-                    return UserService.update({userId: user.id}, user);
+                    return UserService.update({id: user.id}, user);
                 }
 
             }).then(function (user) {
