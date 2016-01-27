@@ -180,6 +180,10 @@ room-reservation.ng-leave {
     width: 78%;
 }
 
+md-datepicker.wide-datepicker .md-datepicker-input-container {
+    width: 78%;
+}
+
 .time-picker > md-input-container {
     width:40px;
 }
