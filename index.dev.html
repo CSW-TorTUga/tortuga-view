@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body ng-app="rms" class="md-body-1" layout="row" ng-controller="NavController as nav">
+<body ng-app="rms" class="md-body-1" layout="row" ng-controller="NavController as nav" ng-mousedown="nav.somethingHappened()" ng-keydown="nav.somethingHappened()">
 
 <style>
     .primary-background {
