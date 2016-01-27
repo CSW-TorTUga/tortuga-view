@@ -190,7 +190,7 @@
             $mdDialog.show(dialog).then(function() {
                 return DeviceReservation.delete({id: self.reservation.id}).$promise;
             }).then(function(response) {
-                $scope.$eval(self.onDelete);
+                $scope.$parent.$eval(self.onDelete);
 
             }).catch(function(fail) {
                 console.warn(fail);
