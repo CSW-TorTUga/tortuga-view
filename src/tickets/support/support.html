@@ -1,0 +1,28 @@
+<div class="main-content card-container card-list">
+    <div class="md-whiteframe-z2 ticket" ng-repeat="message in supportController.messages">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <h2>
+                    {{message.name}}: {{message.subject}}
+                </h2>
+                <div flex></div>
+                <small>{{message.openedAt | date:'EEE d. MMM HH:mm'}}</small>
+            </div>
+        </md-toolbar>
+
+        <div class="card-content" layout="row">
+            {{message.body}}
+        </div>
+
+        <div layout="row">
+            <md-button flex="50" class="md-raised md-accent md-hue-1 half-width-button md-warn"
+                       style="margin-bottom: 0;" ng-click="supportController.ignore(message)">
+                Ignorieren
+            </md-button>
+            <md-button flex="50" class="md-raised md-accent md-hue-1 half-width-button"
+                       style="margin-bottom: 0;" ng-click="supportController.answer(message)">
+                Antworten
+            </md-button>
+        </div>
+    </div>
+</div>

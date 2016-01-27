@@ -1,14 +1,7 @@
 (function () {
 
     angular.module('management')
-        .config(['$stateProvider', function ($stateProvider) {
-            $stateProvider.state('management.devices', {
-                url: '/devices',
-                templateUrl: 'src/management/devices/list.html',
-                controller: 'DeviceListController',
-                controllerAs: 'deviceList'
-            });
-        }]).controller('DeviceListController', [
+        .controller('DeviceListController', [
         'Device',
         'DeviceCategory',
         '$mdDialog',
@@ -21,6 +14,8 @@
         self.categories = DeviceCategory.query();
 
         self.devices = Device.query();
+
+        console.log("doch ich werde geladden!")
 
 
         self.editDevice = editDevice;

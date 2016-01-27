@@ -1,0 +1,31 @@
+<div class="main-content card-container card-list">
+    <div class="md-whiteframe-z2 ticket" ng-repeat="reservation in reservationController.reservations">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <h2>
+                    {{reservation.title}} von {{reservation.user.firstName}} {{reservation.user.lastName}}
+                </h2>
+            </div>
+        </md-toolbar>
+        <div class="card-content" layout="row">
+            <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
+                 style="height: 50px;">
+                von {{reservation.timeSpan.beginning | date:'EEE d. MMM HH:mm'}}
+            </div>
+            <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
+                 style="height: 50px;">
+                bis {{reservation.timeSpan.end | date:'EEE d. MMM H:mm'}}
+            </div>
+        </div>
+        <div layout="row">
+            <md-button flex="50" class="md-raised md-accent md-hue-1 half-width-button md-warn"
+                       style="margin-bottom: 0;" ng-click="reservationController.ignore(reservation)">
+                Ablehnen
+            </md-button>
+            <md-button flex="50" class="md-raised md-accent md-hue-1 half-width-button"
+                       style="margin-bottom: 0;" ng-click="reservationController.accept(reservation)">
+                Genemigen
+            </md-button>
+        </div>
+    </div>
+</div>
