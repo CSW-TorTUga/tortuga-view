@@ -16,7 +16,7 @@
     self.logout = AuthenticationService.logout;
 
     function isInState(state) {
-      return $state.includes(state);
+      return $state.$current.name.indexOf(state) != -1;
     }
   }
 
