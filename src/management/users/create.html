@@ -42,13 +42,23 @@
                     <label>
                         Passwort
                     </label>
-                    <input type="password" name="password" ng-model="userModal.password1" required>
+                    <input ng-minlength="6" type="password" name="password" ng-model="userModal.password1" required>
+                    <div ng-messages="userModal.editForm.password.$error">
+                        <div ng-message="minlength">
+                            Das Passwort muss mindestens 6 Zeichen lang sein
+                        </div>
+                    </div>
                 </md-input-container>
                 <md-input-container flex="50">
                     <label>
                         Wiederholung
                     </label>
-                    <input type="password" name="passwordRepeats" ng-model="userModal.password2" required>
+                    <input type="password" name="passwordRepeat" ng-model="userModal.password2" validate="userModal.validatePasswordRepeat" revalidate-on-change="userModal.password1" required>
+                    <div ng-messages="userModal.editForm.passwordRepeat.$error">
+                        <div ng-message="passwordMatch">
+                            Die Passwortwiederholung muss mit dem Passwort übereinstimmen
+                        </div>
+                    </div>
                 </md-input-container>
             </div>
             <md-radio-group ng-model="userModal.user.gender" layout="row">
@@ -59,32 +69,47 @@
             <div layout="rows">
                 <md-input-container flex="50">
                     <label>Studiengang</label>
-                    <md-select ng-model="userModal.user.major">
+                    <md-select name="major" ng-model="userModal.user.major" ng-required="userModal.user.role == 'STUDENT'">
                         <md-option ng-repeat="major in userModal.majors track by major.id" ng-value="major">{{major.name}}</md-option>
                     </md-select>
+                    <div ng-messages="userModal.editForm.major.$error">
+                        <div ng-message="required">
+                            Bitte gib einen Studiengang an
+                        </div>
+                    </div>
                 </md-input-container>
                 <md-input-container flex="50">
                     <label>
                         Matrikelnummer
                     </label>
-                    <input type="text" name="studentId" ng-model="userModal.user.studentId">
+                    <input type="text" name="studentId" ng-model="userModal.user.studentId" ng-required="userModal.user.role == 'STUDENT'">
+                    <div ng-messages="userModal.editForm.studentId.$error">
+                        <div ng-message="required">
+                            Bitte gib eine Matrikelnummer an
+                        </div>
+                    </div>
                 </md-input-container>
             </div>
             <md-input-container>
                 <label>Rolle</label>
-                <md-select ng-model="userModal.user.role">
+                <md-select name="role" ng-model="userModal.user.role" required>
                     <md-option value="STUDENT">Student</md-option>
                     <md-option value="LECTURER">Dozent</md-option>
                     <md-option value="CSW_TEAM">CSW-Team</md-option>
                     <md-option value="ADMIN">Admin</md-option>
                 </md-select>
+                <div ng-messages="userModal.editForm.role.$error">
+                    <div ng-message="required">
+                        Bitte gib eine Rolle an
+                    </div>
+                </div>
             </md-input-container>
         </form>
     </md-dialog-content>
 
     <md-dialog-actions>
         <md-button type="button" ng-click="userModal.cancel()">abbrechen</md-button>
-        <md-button class="md-accent" type="submit" ng-click="userModal.submit()">absenden</md-button>
+        <md-button ng-disabled="!userModal.editForm.$valid" class="md-accent" type="submit" ng-click="userModal.submit()">absenden</md-button>
     </md-dialog-actions>
 
 </md-dialog>
