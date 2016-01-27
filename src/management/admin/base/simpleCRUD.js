@@ -133,7 +133,7 @@
                 function prop(prop) {
                     return {
                         getSet: function(value) {
-                            if(value === undefined) {
+                            if(arguments.length == 0) {
                                 return self.item[prop];
                             } else {
                                 self.item[prop] = value

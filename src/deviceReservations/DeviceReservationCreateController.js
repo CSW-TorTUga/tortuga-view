@@ -22,7 +22,7 @@
 
         self.deviceSelection = false;
         self.nextButtonText = "Weiter";
-        self.deviceCategories = DeviceCategory.query();
+        self.deviceCategories = DeviceCategory.query({active: true});
         self.devices = undefined; //["Laptop 1", "Laptop 2", "Laptop 3"];
         self.selectedDeviceCategory = undefined;
         self.selectedDevice = undefined;
@@ -68,7 +68,14 @@
             timeEnd.setMinutes(time[1]);
 
             self.devices = Device.query({category: self.selectedDeviceCategory.id, beginningTime: timeStart.valueOf(),
-                endTime: timeEnd.valueOf()});
+                endTime: timeEnd.valueOf()}).$promise.then(function (devices){
+
+                self.devices = devices;
+                if(devices.length != 0){
+                    self.selectedDevice = devices[0];
+                }
+            });
+
         }
 
         //public

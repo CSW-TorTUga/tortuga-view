@@ -169,11 +169,13 @@ room-reservation.ng-leave {
     animation: slideOutRight .5s;
 }
 
-.card-container .md-fab.md-button {
+.main-fab.md-fab.md-button {
     position: fixed;
     right: 2%;
     bottom: 30px;
 }
+
+
 
 .roomReservationModal md-datepicker .md-datepicker-input-container,
 .deviceReservationModal md-datepicker .md-datepicker-input-container {
