@@ -66,7 +66,7 @@
             user.expirationDate = date.valueOf();
 
 
-            self.users[index] = UserService.update({userId: user.id}, user);
+            self.users[index] = UserService.update({id: user.id}, user);
         }
 
         //public
