@@ -11,12 +11,13 @@
             'Device',
             'DeviceReservation',
             'AuthenticationService',
+            '$state',
             DeviceReservationCreateController
         ]);
 
 
     function DeviceReservationCreateController($mdDialog, ErrorToasts, DeviceCategory, Device, DeviceReservation,
-                                               AuthenticationService){
+                                               AuthenticationService, $state){
         var self = this;
 
         self.deviceSelection = false;
@@ -159,6 +160,9 @@
             deviceReservation.timeSpan.end = timeStart.valueOf();
 
             DeviceReservation.save(deviceReservation).$promise
+                .then(function (){
+                        $state.go('deviceReservations');
+                })
                 .catch(function (reason) {
                 ErrorToasts.show(reason);
                 if (reason != undefined) {
