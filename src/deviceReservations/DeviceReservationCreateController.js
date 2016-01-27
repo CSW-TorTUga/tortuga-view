@@ -53,7 +53,21 @@
         //public
         function activateDeviceSelection(){
             self.deviceSelection = !self.deviceSelection;
-            self.devices = Device.query({category: self.selectedDeviceCategory.id});
+
+            var timeStart = angular.copy(self.startDate);
+            var time = self.startTime.split(":");
+
+            timeStart.setHours(time[0]);
+            timeStart.setMinutes(time[1]);
+
+            var timeEnd = angular.copy(self.startDate);
+            time = self.endTime.split(":");
+
+            timeEnd.setHours(time[0]);
+            timeEnd.setMinutes(time[1]);
+
+            self.devices = Device.query({category: self.selectedDeviceCategory.id, beginningTime: timeStart.valueOf(),
+                endTime: timeEnd.valueOf()});
         }
 
         //public
