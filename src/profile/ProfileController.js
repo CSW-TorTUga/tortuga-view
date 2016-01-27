@@ -3,16 +3,28 @@
     angular.module('profile')
         .controller('ProfileController', [
             'AuthenticationService',
+            '$mdDialog',
             ProfileController
         ]);
 
-    function ProfileController(AuthenticationService) {
+    function ProfileController(AuthenticationService, $mdDialog) {
         var self = this;
 
         self.getUser = AuthenticationService.getUser;
 
         self.getGender = getGender;
         self.getRole = getRole;
+        self.changePassword = changePassword;
+
+        //public
+        function changePassword(event) {
+            $mdDialog.show({
+                templateUrl: 'src/profile/changePasswordModal.html',
+                controller: 'ChangePasswordModalController',
+                controllerAs: 'passwordModal',
+                targetEvent: event
+            });
+        }
 
         function getGender() {
             switch(self.getUser().gender) {
