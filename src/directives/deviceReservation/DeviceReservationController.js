@@ -64,8 +64,20 @@
 
                 self.beginningDate = new Date(self.reservation.timeSpan.beginning);
                 self.endDate = new Date(self.reservation.timeSpan.end);
-                self.beginningTime = self.beginningDate.getHours() + ":" + self.beginningDate.getMinutes();
-                self.endTime = self.endDate.getHours() + ":" + self.endDate.getMinutes();
+
+
+                self.beginningTime = intToTwoDigitString(self.beginningDate.getHours()) + ":" +
+                    intToTwoDigitString(self.beginningDate.getMinutes());
+                self.endTime = intToTwoDigitString(self.endDate.getHours()) + ":" +
+                    intToTwoDigitString(self.endDate.getMinutes());
+
+                function intToTwoDigitString(int){
+                    var twoDigitString = int.toString();
+                    if(twoDigitString.length < 2){
+                        twoDigitString = "0" + twoDigitString;
+                    }
+                    return twoDigitString;
+                }
 
                 //public
                 function cancel(){
