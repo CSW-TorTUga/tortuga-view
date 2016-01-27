@@ -192,6 +192,8 @@
                 self.submit = submit;
                 self.cancel = cancel;
 
+                self.validatePasswordRepeat = validatePasswordRepeat;
+
                 self.header = "";
 
                 self.majors = Major.query();
@@ -203,6 +205,18 @@
                     } else {
                         self.header = "Benutzer '" + self.user.loginName + "' bearbeiten";
                     }
+                }
+
+                //public
+                function validatePasswordRepeat(repeatedPassword) {
+                    if(self.password1 == repeatedPassword)
+                        return {
+                            passwordMatch: true
+                        };
+
+                    return {
+                        passwordMatch: false
+                    };
                 }
 
                 //public
