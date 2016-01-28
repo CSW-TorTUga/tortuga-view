@@ -8,38 +8,45 @@
     }
 
     angular.module('rms-terminal', [
-        'sc.twemoji'
+        'ngResource'
     ]);
 
 
     angular.module('rms-terminal')
-        .constant('apiAddress', '/api/v1/terminal/');
+        .constant('apiAddress', '/api/v1/');
 
     angular.module('rms-terminal')
         .controller('LoginController', [
-            'twemoji',
             '$http',
             'apiAddress',
             '$timeout',
             '$interval',
+            'ComplaintTemplate',
+            '$rootScope',
+            '$window',
             LoginController
         ]);
 
-    function LoginController(twemoji, $http, apiAddress, $timeout, $interval) {
+    function LoginController($http, apiAddress, $timeout, $interval, ComplaintTemplate, $scope, $window) {
         var self = this;
         self.twemoji = twemoji;
 
         var password = ["", "", "", "", ""];
         var passwordIndex = 0;
 
-        var emojisArray = ["😈", "😃", "🎩", "👽", "💩", "❤️", "💧", "💎", "🖖", "👍", "🐋", "🐶", "🐸", "🌜", "❄", "🎉", "💿",
+        var emojisArray = ["😈", "😃", "🎩", "👽", "💩", "❤️", "💧", "💎", "👂", "👍", "🐋", "🐶", "🐸", "🌜", "❄", "🎉", "💿",
             "🍉", "🍆", "☎", "🎥", "🚽", "✂", "⚽", "🚀", "😍", "💄", "🌂", "🍄", "🍀", "🚗", "🍕", "🍔", "🍨", "💣",
-            "🎸", "🐧", "💼", "🌍", "🐝", "🏠", "🤖"];
+            "🎸", "🐧", "💼", "🌍", "🐝", "🏠", "⏰"];
+
 
         var emojis = [];
 
+        var passwordShow = [0,0,0,0,0];
+        var backButton = "🔙";
+
         var success = false;
         var error = false;
+        var successStartTime = 0;
 
         self.getEmojis = getEmojis;
         self.getPassword = getPassword;
@@ -47,7 +54,9 @@
         self.inNormalState = inNormalState;
         self.inSuccesState = inSuccesState;
         self.inErrorState = inErrorState;
-        self.getPinState = getPinState;
+        self.getPasswordShow = getPasswordShow;
+        self.deletePin = deletePin;
+        self.getBackButtonStatus = getBackButtonStatus;
 
         resetPin();
         generatePasswordField();
@@ -64,31 +73,62 @@
                 return;
             }
             password[passwordIndex] = emoji;
+            passwordShow[passwordIndex] = 1;
             passwordIndex++;
             if(passwordIndex == 5) {
                 login();
             }
+        }
 
+
+        //public
+        function getPasswordShow() {
+            return passwordShow;
         }
 
         //public
-        function getPinState(pin, index) {
-            if(inNormalState()) {
-                if(pin == "") {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            } else if(inSuccesState()) {
-                if(index < 4) {
-                    return 2;
-                } else {
-                    return 4;
-                }
-            } else {
-                return 3;
-            }
+        function deletePin() {
+            passwordIndex--;
+            password[passwordIndex] = "";
+            passwordShow[passwordIndex] = 0;
         }
+
+        //public
+        function getBackButtonStatus() {
+            return backButton;
+        }
+
+
+        function updatePinState() {
+            if(inErrorState()) {
+                passwordShow = [4,4,4,4,4];
+            } else if(inSuccesState()) {
+                var timeBetweenAnim = 150;
+
+                function updatePin(pin, number) {
+                    return function() {
+                        passwordShow[pin] = number;
+                    }
+                }
+
+                for(var i = 0; i <= 4; i++ ) {
+                    $timeout(updatePin(i,2), (i + 1) * timeBetweenAnim);
+                }
+
+                $timeout(function() {
+                    backButton = "🔓";
+                }, 6 * timeBetweenAnim);
+
+                $timeout(function() {
+                    resetPin();
+                    generatePasswordField();
+                    $scope.$apply();
+
+                }, 9 * timeBetweenAnim);
+            }
+
+        }
+
 
         function shufle(array) {
             for(var i = 0; i < array.length; i++) {
@@ -114,16 +154,17 @@
 
         //public
         function getEmojis() {
-            window.twemoji.parse(window.document.body);
             return emojis;
         }
 
         //public
         function resetPin() {
             password = ["", "", "", "", ""];
+            passwordShow = [0,0,0,0,0];
             success = false;
             error = false;
             passwordIndex = 0;
+            backButton = "🔙";
         }
 
         //public
@@ -137,24 +178,58 @@
         }
 
         //public
-        function inSuccesState(){
+        function inSuccesState() {
             return success;
         }
 
         function login() {
             var passwordString = password.join("");
-            $http.post(apiAddress + "authenticate", {passcode: passwordString})
+            $http.post(apiAddress + "terminal/authenticate", {passcode: passwordString})
                 .then(function() {
                     success = true;
-                    $timeout(resetPin, 1000);
-                    $timeout(function() {
-                        generatePasswordField()}, 1000);
+                    successStartTime = (new Date()).valueOf();
+                    updatePinState();
                 }).catch(function() {
-                    error = true;
-                     $timeout(resetPin, 700);
-                });
-
+                error = true;
+                updatePinState();
+                $timeout(resetPin, 700);
+            });
         }
     }
 
-})();
+
+    angular.module('rms-terminal')
+        .factory('ComplaintTemplate', [
+            '$resource',
+            'apiAddress',
+            ComplaintTemplate
+        ]);
+
+    function ComplaintTemplate($resource, apiAddress) {
+        return $resource(apiAddress + 'complainttemplates/:id', null, {update: {method: 'PATCH'}});
+    }
+
+    angular.module('rms-terminal')
+        .directive('twemoji', ['$window', function($window) {
+            return {
+                restrict: 'E',
+                scope: {
+                    emoji: "="
+                },
+                link: function(scope, elem, attr) {
+                    //console.dir(elem);
+
+                    var img = elem.append($window.twemoji.parse(scope.emoji));
+
+                    scope.$watch(attr.emoji, function(newVal) {
+                        img.children().remove();
+                        elem.html("");
+                        img = elem.append($window.twemoji.parse(newVal));
+                    })
+                }
+            };
+        }]);
+
+
+})
+();

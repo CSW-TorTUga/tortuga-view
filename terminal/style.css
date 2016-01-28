@@ -39,17 +39,24 @@
 .emoji-password {
     margin-left: 50px;
     width: 700px;
-    height: 700px
+    height: 700px;
 }
 
 .emoji-button {
     outline: none;
-    border: 0px solid #aeaeae;
+    border: 1px solid white;
+    transition: linear border-color 0.2s;
+    border-radius: 15px;
     background-color: white;
     height: 100px;
     font-size: xx-large;
     flex-grow: 1;
     text-align: center;
+    cursor: pointer;
+}
+
+.emoji-button:active {
+    border: 1px solid darkgrey;
 }
 
 .flex-row {
