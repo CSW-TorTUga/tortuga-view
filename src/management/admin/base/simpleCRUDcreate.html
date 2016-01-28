@@ -4,19 +4,24 @@
     </md-toolbar>
 
     <md-dialog-content class="md-dialog-content">
-        <form layout="column">
+        <form layout="column" name="simpleCrudModal.form">
             <md-input-container ng-repeat="head in simpleCrudModal.getHeaders()">
                 <label>
                     {{head}}
                 </label>
-                <input ng-model="simpleCrudModal.prop(head).getSet" ng-model-options="{getterSetter: true}" required>
+                <input name="inputField" ng-model="simpleCrudModal.prop(head).getSet" ng-model-options="{getterSetter: true}" required>
+                <div ng-messages="simpleCrudModal.form.inputField.$error">
+                    <div ng-message="required">
+                        Bitte Feld ausfüllen
+                    </div>
+                </div>
             </md-input-container>
         </form>
     </md-dialog-content>
 
     <md-dialog-actions>
         <md-button type="button" ng-click="simpleCrudModal.cancel()">abbrechen</md-button>
-        <md-button class="md-accent" type="submit" ng-click="simpleCrudModal.submit()">absenden</md-button>
+        <md-button ng-disabled="!simpleCrudModal.form.inputField.$valid" class="md-accent" type="submit" ng-click="simpleCrudModal.submit()">absenden</md-button>
     </md-dialog-actions>
 
 </md-dialog>
