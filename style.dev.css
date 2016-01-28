@@ -113,11 +113,11 @@ md-menu-content {
 }
 
 .management-list tr.ng-enter {
-    animation: slideInRight .5s;
+    animation: fadeIn .3s;
 }
 
 .management-list tr.ng-leave {
-    animation: slideOutRight .5s;
+    animation: fadeOut .3s;
 }
 
 
