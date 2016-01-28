@@ -21,10 +21,25 @@
         self.setInactive = setInactive;
         self.userExpiresThisSemester = userExpiresThisSemester;
         self.userIsInactive = userIsInactive;
-
+        self.activeFilter = activeFilter;
 
         self.isCreatingUser = false;
-        self.activeFilter = true;
+        self.showActive = true;
+
+        self.userFilter = '';
+
+        //public
+        function activeFilter(user) {
+            var now = (new Date()).getTime();
+
+            if(user.role != 'STUDENT')
+                return self.showActive;
+
+            if(self.showActive)
+                return user.expirationDate >= now;
+
+            return user.expirationDate < now;
+        }
 
         //public
         function userExpiresThisSemester(index) {
