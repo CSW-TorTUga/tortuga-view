@@ -41,13 +41,13 @@
 
         //public
         function onDeleteRoomReservation(reservation) {
-            self.roomReservations.splice(self.roomReservations.indexOf(reservation), 1);
+            roomReservations.splice(roomReservations.indexOf(reservation), 1);
         }
 
 
         //public
         function onDeleteDeviceReservation(reservation) {
-            self.deviceReservations.splice(self.deviceReservations.indexOf(reservation), 1);
+            deviceReservations.splice(deviceReservations.indexOf(reservation), 1);
         }
     }
 
