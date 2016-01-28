@@ -44,7 +44,7 @@
                 <div ng-if="!editModal.timespanIsValid()">
                     Die Startzeit muss vor der Endzeit liegen
                 </div>
-                <div ng-if="!editModal.startTimeIsInFuture()">
+                <div ng-if="!editModal.startTimeIsInFuture() && !editModal.extend">
                     Der Startzeitpunkt muss in der Zukunft liegen
                 </div>
 
