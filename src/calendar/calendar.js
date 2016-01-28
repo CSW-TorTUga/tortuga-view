@@ -2,7 +2,7 @@
 
     angular.module('calendar', [
         'ui.router',
-        'materialCalendar',
+        'materialCalendar'
     ]).config([
         '$stateProvider',
         config
