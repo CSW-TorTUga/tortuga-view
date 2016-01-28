@@ -55,10 +55,10 @@
 
         //public
         function deleteItem(event, item) {
-            var itemName = item.name === undefined? item.id: item.name;
+            var itemName = item.name || '';
             var dialog = $mdDialog.confirm()
                 .title(self.name + " " + itemName + " löschen?")
-                .textContent(self.name + " '" + itemName + "' wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
+                .textContent(self.name + " " + itemName + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
                 .ok("löschen")
                 .targetEvent(event)
                 .cancel("abbrechen");
@@ -85,7 +85,6 @@
             } else {
                 var createNewItem = false
             }
-
 
             return $mdDialog.show({
                 templateUrl: 'src/management/admin/base/simpleCRUDcreate.html',
@@ -123,8 +122,8 @@
                     if (self.newItem) {
                         self.header = 'Neues ' + uber.name + ' anlegen';
                     } else {
-                        var itemName = self.item.name === undefined? self.item.id: self.item.name;
-                        self.header = uber.name + " '" + itemName + "' bearbeiten";
+                        var itemName = item.name || '';
+                        self.header = uber.name + " " + itemName + " bearbeiten";
                     }
                 }
 
