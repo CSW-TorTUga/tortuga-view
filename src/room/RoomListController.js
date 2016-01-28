@@ -29,7 +29,7 @@
         function addReservation(event) {
             return $mdDialog.show({
                 templateUrl: 'src/room/create.html',
-                controller: ['$mdDialog', 'ErrorToasts', AddReservationController],
+                controller: ['$mdDialog', AddReservationController],
                 controllerAs: 'roomModal',
                 targetEvent: event
             }).then(function(reservation) {
@@ -37,7 +37,7 @@
             });
 
 
-            function AddReservationController($mdDialog, ErrorToasts) {
+            function AddReservationController($mdDialog) {
                 var self = this;
 
                 self.submit = submit;
@@ -146,11 +146,6 @@
                     RoomReservation.save(self.reservation).$promise
                         .then(function (device) {
                             $mdDialog.hide(device);
-                        }).catch(function (reason) {
-                            ErrorToasts.show(reason);
-                            if (reason != undefined) {
-                                console.warn(reason);
-                            }
                         });
                 }
 

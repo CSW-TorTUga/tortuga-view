@@ -21,7 +21,7 @@
             }
             var cfg =
                 $mdToast.simple()
-                    .content(error.errorMessage)
+                    .content(error)
                     .action(action)
                     .position('bottom right')
                     .theme(theme)

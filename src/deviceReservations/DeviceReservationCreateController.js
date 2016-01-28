@@ -5,8 +5,6 @@
 (function() {
     angular.module('deviceReservations')
         .controller('DeviceReservationCreateController', [
-            '$mdDialog',
-            'ErrorToasts',
             'DeviceCategory',
             'Device',
             'DeviceReservation',
@@ -16,7 +14,7 @@
         ]);
 
 
-    function DeviceReservationCreateController($mdDialog, ErrorToasts, DeviceCategory, Device, DeviceReservation,
+    function DeviceReservationCreateController(DeviceCategory, Device, DeviceReservation,
                                                AuthenticationService, $state){
         var self = this;
 
@@ -169,14 +167,7 @@
             DeviceReservation.save(deviceReservation).$promise
                 .then(function (){
                         $state.go('deviceReservationList');
-                })
-                .catch(function (reason) {
-                ErrorToasts.show(reason);
-                if (reason != undefined) {
-                    console.warn(reason);
-                }
-            });
-
+                });
         }
     }
 
