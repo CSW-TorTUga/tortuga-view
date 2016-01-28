@@ -191,6 +191,11 @@ md-datepicker.wide-datepicker .md-datepicker-input-container {
     width: 78%;
 }
 
+header a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .time-picker > md-input-container {
     width:40px;
 }

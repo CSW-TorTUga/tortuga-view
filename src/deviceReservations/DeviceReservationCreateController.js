@@ -168,7 +168,7 @@
 
             DeviceReservation.save(deviceReservation).$promise
                 .then(function (){
-                        $state.go('deviceReservations');
+                        $state.go('deviceReservationList');
                 })
                 .catch(function (reason) {
                 ErrorToasts.show(reason);
