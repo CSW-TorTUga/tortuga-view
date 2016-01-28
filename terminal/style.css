@@ -1,0 +1,86 @@
+
+
+
+.fullscreen {
+    width: 1024px;
+    height: 768px;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0px;
+    background-color: #aeaeae;
+}
+
+.right {
+    right: 0px;
+}
+
+.bottom{
+    bottom: 0px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.problem-button{
+    background-color: #ff999e;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 50px;
+    width: 250px;
+    border: 0;
+    font-size: larger;
+}
+
+.emoji-password {
+    margin-left: 50px;
+    width: 700px;
+    height: 700px
+}
+
+.emoji-button {
+    outline: none;
+    border: 0px solid #aeaeae;
+    background-color: white;
+    height: 100px;
+    font-size: xx-large;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.flex-row {
+    flex-direction: row;
+    display: flex;
+}
+
+.password-bubble {
+    font-size: xx-large;
+    height: 37px;
+    border: 0px solid #aeaeae;
+    margin: 10px;
+    padding: 20px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.password-field {
+    margin: 20px 20px 20px 20px;
+    flex-direction: row;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.response {
+    font-size: 45rem;
+}
+
+.error {
+    color: red;
+}
+.success {
+    color: green;
+}

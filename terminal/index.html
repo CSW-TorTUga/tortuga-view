@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>RMS terminal</title>
+
+    <base href="/terminal">
+
+    <meta charset="utf-8">
+
+    <link href="terminal/style.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="terminal/twemoji.min.js"></script>
+    <script src="terminal/angular-twemoji.js"></script>
+    <script src="terminal/app.js"></script>
+</head>
+
+<body ng-app="rms-terminal" class="md-body-1" layout="row">
+
+<twemoji>
+    <div class="fullscreen" ng-controller="LoginController as loginController">
+        <div class="emoji-password">
+            <div class="password-field">
+                <div ng-switch="loginController.getPinState(pin, $index)" class="password-bubble"
+                     ng-repeat="pin in loginController.getPassword() track by $index" twemoji>
+                    <span ng-switch-when="0" class="password-bubble">🐵</span>
+                    <span ng-switch-when="1" class="password-bubble">🙈</span>
+                    <span ng-switch-when="2" class="password-bubble">➡️</span>
+                    <span ng-switch-when="3" class="password-bubble">❌</span>
+                    <span ng-switch-when="4" class="password-bubble">🔓</span>
+                </div>
+            </div>
+            <div class="flex-row" ng-repeat="row in loginController.getEmojis() track by $index">
+                <button class="emoji-button" ng-click="loginController.addKey(emoji)"
+                        ng-repeat="emoji in row track by $index">
+                    {{emoji}}
+                </button>
+            </div>
+        </div>
+        <div class="qr-code"></div>
+    </div>
+    <button class="problem-button">Problem melden</button>
+    </div>
+</twemoji>
+
+</body>
+
+</html>
