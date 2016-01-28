@@ -42,7 +42,7 @@
         var emojis = [];
 
         var passwordShow = [0,0,0,0,0];
-        var backButton = "🔙";
+        var backButtonStatus = 0;
 
         var success = false;
         var error = false;
@@ -88,6 +88,9 @@
 
         //public
         function deletePin() {
+            if(passwordIndex <= 0) {
+                return;
+            }
             passwordIndex--;
             password[passwordIndex] = "";
             passwordShow[passwordIndex] = 0;
@@ -95,15 +98,17 @@
 
         //public
         function getBackButtonStatus() {
-            return backButton;
+            return backButtonStatus;
         }
 
 
         function updatePinState() {
             if(inErrorState()) {
                 passwordShow = [4,4,4,4,4];
+                backButtonStatus = 2;
+                $timeout(resetPin, 700);
             } else if(inSuccesState()) {
-                var timeBetweenAnim = 150;
+                var timeBetweenAnim = 100;
 
                 function updatePin(pin, number) {
                     return function() {
@@ -116,7 +121,7 @@
                 }
 
                 $timeout(function() {
-                    backButton = "🔓";
+                    backButtonStatus = 1;
                 }, 6 * timeBetweenAnim);
 
                 $timeout(function() {
@@ -124,7 +129,7 @@
                     generatePasswordField();
                     $scope.$apply();
 
-                }, 9 * timeBetweenAnim);
+                }, 10 * timeBetweenAnim);
             }
 
         }
@@ -164,7 +169,7 @@
             success = false;
             error = false;
             passwordIndex = 0;
-            backButton = "🔙";
+            backButtonStatus = 0;
         }
 
         //public
@@ -192,7 +197,6 @@
                 }).catch(function() {
                 error = true;
                 updatePinState();
-                $timeout(resetPin, 700);
             });
         }
     }

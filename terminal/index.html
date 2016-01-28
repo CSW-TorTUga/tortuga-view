@@ -37,7 +37,11 @@
                 <span ng-switch-when="3" ><twemoji emoji="'🔓'"></twemoji></span>
                 <span ng-switch-when="4" ><twemoji emoji="'❌'"></twemoji></span>
             </div>
-            <div class="password-bubble"><twemoji emoji="loginController.getBackButtonStatus()"></twemoji></div>
+            <div class="password-bubble clickable" ng-switch="loginController.getBackButtonStatus()" ng-click="loginController.deletePin()">
+                <twemoji ng-switch-when="0" emoji="'🔙'"></twemoji>
+                <twemoji ng-switch-when="1" emoji="'🔓'"></twemoji>
+                <twemoji ng-switch-when="2" emoji="'❌'"></twemoji>
+            </div>
         </div>
         <div class="flex-row" ng-repeat="row in loginController.getEmojis() track by $index">
             <button class="emoji-button" ng-click="loginController.addKey(emoji)"

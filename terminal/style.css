@@ -91,3 +91,15 @@
 .success {
     color: green;
 }
+
+.clickable {
+    cursor: pointer;
+    border: 1px solid white;
+    transition: linear border-color 0.2s;
+    border-radius: 15px;
+}
+
+.clickable:active {
+    border: 1px solid darkgrey;
+}
+
