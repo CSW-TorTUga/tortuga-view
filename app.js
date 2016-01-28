@@ -20,6 +20,7 @@
         'tickets',
         'supportTicket',
         'profile',
+        'calendar',
         'ngSweets',
         'ngMessages'
     ]).config([

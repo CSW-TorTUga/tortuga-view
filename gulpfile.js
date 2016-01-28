@@ -23,6 +23,8 @@ var paths = {
         'node_modules/ui-router/release/angular-ui-router.min.js',
         'node_modules/angular-route/angular-route.min.js',
         'node_modules/angular-resource/angular-resource.js',
+        'node_modules/angular-material-calendar/angular-material-calendar.min.js',
+        'node_modules/angular-sanitize/angular-sanitize.min.js',
         'lib/ngsweets.js'
     ],
     scripts: [
@@ -41,6 +43,7 @@ var paths = {
         'src/support/supportTicket.js',
         'src/profile/profile.js',
         'src/deviceReservations/deviceReservations.js',
+        'src/calendar/calendar.js',
 
         'src/**/*.js'
     ],
