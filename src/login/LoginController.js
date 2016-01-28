@@ -23,11 +23,8 @@
                 .then(function () {
                     $state.go('home');
                 }).catch(function (response) {
-                    if (response.status == 401) {
+                    if (response.status == 401)
                         ErrorToasts.show("Benutzername und/oder Passwort sind falsch.", 3500, false);
-                    } else {
-                        console.warn(response);
-                    }
                 });
         }
     }

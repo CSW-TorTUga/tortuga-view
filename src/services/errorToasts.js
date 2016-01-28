@@ -11,8 +11,7 @@
 
         self.show = show;
 
-
-        function show(message, delay, action, theme) {
+        function show(error, delay, action, theme) {
             if(action === undefined) {
                 action = 'OK';
             }
@@ -22,7 +21,7 @@
             }
             var cfg =
                 $mdToast.simple()
-                    .content(message)
+                    .content(error)
                     .action(action)
                     .position('bottom right')
                     .theme(theme)

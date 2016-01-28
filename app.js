@@ -48,6 +48,7 @@
         $httpProvider.interceptors.push('sessionTimeoutInterceptor');
         $httpProvider.interceptors.push('connectionTimeoutInterceptor');
         $httpProvider.interceptors.push('loadingStateInterceptor');
+        $httpProvider.interceptors.push('errorInterceptor');
     }
 
     function rmsRun($rootScope, $mdColorPalette) {

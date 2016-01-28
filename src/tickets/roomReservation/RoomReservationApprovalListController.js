@@ -3,11 +3,10 @@
     angular.module('tickets.support')
         .controller('RoomReservationApprovalListController', [
             'RoomReservation',
-            'ErrorToasts',
             RoomReservationApprovalListController
         ]);
 
-    function RoomReservationApprovalListController(RoomReservation,ErrorToasts) {
+    function RoomReservationApprovalListController(RoomReservation) {
         var self = this;
 
         self.reservations = RoomReservation.query({approved: false});
@@ -20,12 +19,6 @@
             RoomReservation.delete({id:reservation.id}).$promise
                 .then(function() {
                     self.reservations.splice(self.reservations.indexOf(reservation), 1);
-                })
-                .catch(function(reason) {
-                    ErrorToasts.show(reason);
-                    if(reason != undefined) {
-                        console.warn(reason);
-                    }
                 });
         }
 
@@ -36,12 +29,6 @@
             RoomReservation.update({id:reservation.id}, reservation).$promise
                 .then(function() {
                     self.reservations.splice(self.reservations.indexOf(reservation), 1);
-                })
-                .catch(function(reason) {
-                    ErrorToasts.show(reason);
-                    if(reason != undefined) {
-                        console.warn(reason);
-                    }
                 });
 
         }

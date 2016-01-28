@@ -40,7 +40,7 @@
         function editReservation(event, extend) {
             return $mdDialog.show({
                 templateUrl: 'src/directives/deviceReservation/edit.html',
-                controller: ['$mdDialog', 'ErrorToasts', EditDeviceReservationController],
+                controller: ['$mdDialog', EditDeviceReservationController],
                 controllerAs: 'editModal',
                 targetEvent: event,
                 bindToController: true,
@@ -52,7 +52,7 @@
                 self.reservation=reservation
             });
 
-            function EditDeviceReservationController($mdDialog, ErrorToasts) {
+            function EditDeviceReservationController($mdDialog) {
                 var self = this;
 
                 self.cancel = cancel;
@@ -151,6 +151,9 @@
 
                 //public
                 function submit(){
+                    var res = {};
+                    res.timeSpan = {};
+
                     var timeStart = angular.copy(self.beginningDate);
                     var time = self.beginningTime.split(":");
 
@@ -171,16 +174,12 @@
 
                     self.reservation.user = AuthenticationService.getUser();
 
+                    res.timeSpan = this.reservation.timeSpan
+
                     DeviceReservation.update({id:self.reservation.id}, self.reservation).$promise
                         .then(function (deviceReservation) {
                             $mdDialog.hide(deviceReservation);
-                        }).catch(function (reason) {
-                        ErrorToasts.show(reason);
-                        if (reason != undefined) {
-                            console.warn(reason);
-                        }
-                    });
-
+                        });
                 }
 
             }

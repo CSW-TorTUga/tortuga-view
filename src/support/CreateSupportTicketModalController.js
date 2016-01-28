@@ -4,11 +4,10 @@
         .controller('CreateSupportTicketModalController',[
             '$mdDialog',
             'AuthenticationService',
-            'ErrorToasts',
             'SupportMessage',
             CreateSupportTicketModalController
         ]);
-    function CreateSupportTicketModalController($mdDialog, AuthenticationService, ErrorToast, SupportMessage) {
+    function CreateSupportTicketModalController($mdDialog, AuthenticationService, SupportMessage) {
         var self = this;
 
         self.ticket = {};
@@ -41,12 +40,6 @@
             SupportMessage.save(self.ticket).$promise
                 .then(function() {
                    $mdDialog.hide();
-                })
-                .catch(function(reason) {
-                    ErrorToast.show(reason);
-                    if(reason != undefined) {
-                        console.warn(reason);
-                    }
                 });
         }
 

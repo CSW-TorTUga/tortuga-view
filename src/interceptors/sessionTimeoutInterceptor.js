@@ -11,7 +11,7 @@
         function onResponseError(rejection) {
             var $state = $injector.get('$state');
 
-            if(rejection.status == 401 && $state.name == 'login') {
+            if(rejection.status == 401 && $state.name != 'login') {
                 $state.go('login');
             }
 

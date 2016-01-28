@@ -6,10 +6,11 @@
             'AuthenticationService',
             'TimeoutService',
             '$mdDialog',
+            '$rootScope',
             NavController
         ]);
 
-    function NavController($state, AuthenticationService, TimeoutService, $mdDialog) {
+    function NavController($state, AuthenticationService, TimeoutService, $mdDialog, $rootScope) {
         var self = this;
 
         self.isInState = isInState;
@@ -18,6 +19,10 @@
         self.logout = AuthenticationService.logout;
 
         self.somethingHappened = TimeoutService.somethingHappened;
+
+        $rootScope.$on('$stateChangeStart', function onStateChange() {
+            $mdDialog.cancel();
+        });
 
         //public
         function isInState(state) {

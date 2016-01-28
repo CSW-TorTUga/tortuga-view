@@ -1,10 +1,22 @@
 <div ng-hide="userList.isCreatingUser">
-    <h2 class="md-display-1 primary-color" layout="row" style="margin-top: 0;">Benutzerliste
+    <div layout="row" style="margin-top: 0;">
+        <span class="md-display-1 primary-color">Benutzerliste</span>
         <div flex></div>
+        <div layout="row" layout-margin>
+            <div layout="row" layout-align="center center">
+                <md-checkbox ng-model="userList.showActive">Aktiv</md-checkbox>
+            </div>
+            <md-input-container>
+                <label>
+                    Suche
+                </label>
+                <input type="text" ng-model="userList.userFilter">
+            </md-input-container>
+        </div>
         <div layout="column" layout-align="center center">
             <md-button class="md-raised" ng-click="userList.createUser($event)">Benutzer anlegen</md-button>
         </div>
-    </h2>
+    </div>
     <table class="management-list" style="width: 100%;">
         <tr>
             <th>Name</th>
@@ -13,7 +25,7 @@
             <th>Gültig bis</th>
             <th>Aktionen</th>
         </tr>
-        <tr ng-repeat="user in userList.users">
+        <tr ng-repeat="user in userList.users | filter:userList.activeFilter | filter:{$:userList.userFilter}">
             <td>{{user.firstName + " " + user.lastName}}</td>
             <td>{{user.role}}</td>
             <td>{{user.loginName}}</td>

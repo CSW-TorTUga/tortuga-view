@@ -4,11 +4,10 @@
         .controller('SupportListController', [
             'SupportMessage',
             '$mdDialog',
-            'ErrorToasts',
             SupportListController
         ]);
 
-    function SupportListController(SupportMessage, $mdDialog, ErrorToasts) {
+    function SupportListController(SupportMessage, $mdDialog) {
         var self = this;
 
         self.messages = SupportMessage.query({done: false});
@@ -22,12 +21,6 @@
             SupportMessage.update({id: message.id}, message).$promise
                 .then(function() {
                     self.messages.splice(self.messages.indexOf(message), 1);
-                })
-                .catch(function(reason) {
-                    ErrorToasts.show(reason);
-                    if(reason != undefined) {
-                        console.warn(reason);
-                    }
                 });
         }
 
@@ -43,6 +36,8 @@
                 controllerAs: 'answerModal',
                 targetEvent: event,
                 bindToController: true
+            }).then(function() {
+                self.messages.splice(self.messages.indexOf(message), 1);
             });
 
             function AnswerController($mdDialog) {
@@ -59,17 +54,9 @@
 
                 //public
                 function submit() {
-
                     SupportMessage.update({id: message.id}, message).$promise
                         .then(function() {
-                            self.messages.splice(self.messages.indexOf(message), 1);
-                            $mdDialog.submit();
-                        })
-                        .catch(function(reason) {
-                            ErrorToasts.show(reason);
-                            if(reason != undefined) {
-                                console.warn(reason);
-                            }
+                            $mdDialog.hide();
                         });
                 }
             }

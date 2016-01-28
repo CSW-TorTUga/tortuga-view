@@ -16,7 +16,8 @@
         var self = this;
 
         self.reservations = DeviceReservation.query({
-            "timeSpan.end": ">" + (new Date()).valueOf()
+            "timeSpan.end": ">" + (new Date()).valueOf(),
+            "user": AuthenticationService.getUser().id
         });
 
 
