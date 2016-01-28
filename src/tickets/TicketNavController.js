@@ -16,9 +16,10 @@
 
         self.getReservationCount = getReservationCount;
         self.getTicketCount = getTicketCount;
+        self.getAllCount = getAllCount;
 
 
-        // $interval(refresh, 10 * 1000);
+        $interval(refresh, 10 * 1000);
 
         refresh();
         function refresh(){
@@ -41,6 +42,10 @@
         //public
         function getTicketCount() {
             return tickets.length;
+        }
+        //public
+        function getAllCount() {
+            return tickets.length + reservations.length;
         }
 
     }

@@ -62,9 +62,9 @@
                            ui-sref="management.users.list">Verwaltung
                 </md-button>
             </li>
-            <li>
+            <li ng-controller="TicketNavController as tickets">
                 <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('tickets')}" ui-sref="tickets.roomReservation">
-                    Tickets
+                    Tickets <span ng-if="tickets.getAllCount() > 0">({{tickets.getAllCount()}})</span>
                 </md-button>
             </li>
             <li>
