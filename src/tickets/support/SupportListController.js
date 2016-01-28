@@ -36,6 +36,8 @@
                 controllerAs: 'answerModal',
                 targetEvent: event,
                 bindToController: true
+            }).then(function() {
+                self.messages.splice(self.messages.indexOf(message), 1);
             });
 
             function AnswerController($mdDialog) {
@@ -52,11 +54,9 @@
 
                 //public
                 function submit() {
-
                     SupportMessage.update({id: message.id}, message).$promise
                         .then(function() {
-                            self.messages.splice(self.messages.indexOf(message), 1);
-                            $mdDialog.submit();
+                            $mdDialog.hide();
                         });
                 }
             }
