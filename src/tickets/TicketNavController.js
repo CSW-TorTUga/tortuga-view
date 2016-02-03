@@ -4,10 +4,11 @@
             'RoomReservation',
             'SupportMessage',
             '$interval',
+            'AuthenticationService',
             TicketNavController
         ]);
 
-    function TicketNavController(RoomReservation, SupportMessage, $interval) {
+    function TicketNavController(RoomReservation, SupportMessage, $interval, AuthenticationService) {
         var self = this;
 
         var reservations = [];
@@ -23,6 +24,9 @@
 
         refresh();
         function refresh(){
+            if(!AuthenticationService.isLoggedIn())
+                return;
+
             RoomReservation.query({approved: false}).$promise
                 .then(function(res) {
                     reservations = res;
