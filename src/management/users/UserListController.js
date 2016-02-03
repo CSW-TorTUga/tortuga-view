@@ -28,17 +28,18 @@
 
         self.userFilter = '';
 
-        //public
-        function activeFilter(user) {
+        function userIsActive(user) {
+            if(user.role != 'STUDENT')
+                return user.enabled;
+
             var now = (new Date()).getTime();
 
-            if(user.role != 'STUDENT')
-                return self.showActive;
+            return user.expirationDate >= now && user.enabled;
+        }
 
-            if(self.showActive)
-                return user.expirationDate >= now;
-
-            return user.expirationDate < now;
+        //public
+        function activeFilter(user) {
+            return self.showActive ? userIsActive(user) : !userIsActive(user);
         }
 
         //public
