@@ -49,6 +49,15 @@
                 <td class="md-body-2">Läuft aus</td>
                 <td><optional property="userDetails.user.expirationDate | date"></optional></td>
             </tr>
+            <tr>
+                <td class="md-body-2">Ist deaktiviert</td>
+                <td ng-if="userDetails.user.enabled">
+                    Nein
+                </td>
+                <td ng-if="!userDetails.user.enabled">
+                    Ja
+                </td>
+            </tr>
         </table>
     </md-dialog-content>
 
