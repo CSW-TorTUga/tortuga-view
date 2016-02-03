@@ -55,11 +55,6 @@
     padding-bottom: 0;
 }
 
-@font-face {
-    font-family: TechnoLogo;
-    src: url("../technologo.otf") format("opentype");
-}
-
 .full-width-button {
     width: 100%;
     margin: 0;
