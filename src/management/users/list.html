@@ -37,13 +37,13 @@
                     </md-button>
                     <md-menu-content>
                         <md-menu-item>
-                            <md-button ng-click="userList.showDetails($index, $event)">
+                            <md-button ng-click="userList.showDetails(user, $event)">
                                 <md-icon>info</md-icon>
                                 Details
                             </md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button ng-click="userList.editUser($index, $event)">
+                            <md-button ng-click="userList.editUser(user, $event)">
                                 <md-icon>edit</md-icon>
                                 Bearbeiten
                             </md-button>
@@ -54,27 +54,27 @@
                                 Passwort zurücksetzen
                             </md-button>
                         </md-menu-item>
-                        <md-menu-item ng-if="user.expirationDate && userList.userExpiresThisSemester($index)">
-                            <md-button ng-click="userList.extendValidTime($index, $event)">
+                        <md-menu-item ng-if="user.expirationDate && userList.userExpiresThisSemester(user)">
+                            <md-button ng-click="userList.extendValidTime(user, $event)">
                                 <md-icon>update</md-icon>
                                 Account verlängern
                             </md-button>
                         </md-menu-item>
-                        <md-menu-item ng-if="user.expirationDate && userList.userIsInactive($index)">
-                            <md-button ng-click="userList.extendValidTime($index, $event)">
+                        <md-menu-item ng-if="user.expirationDate && userList.userIsInactive(user)">
+                            <md-button ng-click="userList.extendValidTime(user, $event)">
                                 <md-icon>play_arrow</md-icon>
                                 Account aktivieren
                             </md-button>
                         </md-menu-item>
-                        <md-menu-item ng-if="user.expirationDate && !userList.userIsInactive($index)">
-                            <md-button class="md-warn" ng-click="userList.setInactive($index, $event)">
+                        <md-menu-item ng-if="user.expirationDate && !userList.userIsInactive(user)">
+                            <md-button class="md-warn" ng-click="userList.setInactive(user, $event)">
                                 <md-icon>block</md-icon>
                                 Account deaktivieren
                             </md-button>
                         </md-menu-item>
                         <md-menu-divider></md-menu-divider>
                         <md-menu-item>
-                            <md-button ng-click="userList.deleteUser($index, $event)" class="md-raised md-warn">
+                            <md-button ng-click="userList.deleteUser(user, $event)" class="md-raised md-warn">
                                 <md-icon>delete</md-icon>
                                 Löschen
                             </md-button>
