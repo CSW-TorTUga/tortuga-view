@@ -120,6 +120,13 @@ md-menu-content {
     animation: fadeOut .3s;
 }
 
+.management-list tr.inactive td, .management-list td.inactive {
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.management-list tr.warn td, .management-list td.warn {
+    color: red;
+}
 
 table.management-list {
     border-collapse: collapse;
@@ -140,7 +147,6 @@ table.management-list tr td:not(:first-child) {
 table.management-list tr td {
     padding: 16px 0px;
 }
-
 
 table.management-list tr:not(:last-child) th {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
