@@ -26,14 +26,40 @@
 
         //public
         function borrow() {
-            self.reservation.borrowed = true;
-            self.reservation = DeviceReservation.update({id: self.reservation.id},self.reservation);
+            var patch = {
+                borrowed: true
+            };
+
+            self.reservation = DeviceReservation.update({id: self.reservation.id}, patch);
+
+            self.reservation.$promise.then(function() {
+                var cabinet = self.reservation.device.cabinet;
+
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .title('Schrank ' + cabinet + ' öfffnet')
+                        .content('Schrank Nummer ' + cabinet + ' öffnet, bitte das Gerät herausnehmen.')
+                );
+            });
         }
 
         //public
         function returnDevice() {
-            self.reservation.borrowed = false;
-            self.reservation = DeviceReservation.update({id: self.reservation.id},self.reservation);
+            var patch = {
+                borrowed: false
+            };
+
+            self.reservation = DeviceReservation.update({id: self.reservation.id}, patch);
+
+            self.reservation.$promise.then(function() {
+                var cabinet = self.reservation.device.cabinet;
+
+                $mdDialog.show(
+                    $mdDialog.alert()
+                        .title('Schrank ' + cabinet + ' öfffnet')
+                        .content('Schrank Nummer ' + cabinet + ' öffnet, bitte das Gerät hineinlegen.')
+                );
+            });
         }
 
         //public
