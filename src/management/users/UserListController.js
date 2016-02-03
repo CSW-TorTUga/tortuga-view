@@ -42,18 +42,17 @@
         }
 
         //public
-        function userExpiresThisSemester(index) {
-            var user = self.users[index];
+        function userExpiresThisSemester(user) {
             var date = getNextSemesterEnd(new Date());
             return Math.abs(user.expirationDate - date.valueOf()) < 60 * 60 * 10000;
         }
 
         //public
-        function userIsInactive(index){
-            var user = self.users[index];
-
+        function userIsInactive(user){
             return user.expirationDate < (new Date).valueOf();
         }
+
+
 
 
         function getNextSemesterEnd(date) {
@@ -71,8 +70,7 @@
         }
 
         //public
-        function extendValidTime(index, event) {
-            var user = self.users[index];
+        function extendValidTime(user, event) {
             var date = new Date(user.expirationDate);
 
             do {
@@ -82,12 +80,11 @@
             user.expirationDate = date.valueOf();
 
 
-            self.users[index] = UserService.update({id: user.id}, user);
+            user = UserService.update({id: user.id}, user);
         }
 
         //public
-        function setInactive(index, event) {
-            var user = self.users[index];
+        function setInactive(user, event) {
             var date = new Date();
 
 
@@ -105,7 +102,8 @@
             date = new Date(date.getFullYear(), date.getMonth());
             user.expirationDate = date.valueOf();
 
-            self.users[index] = UserService.update({id: user.id}, user);
+            //funktioniert das?
+            user = UserService.update({id: user.id}, user);
         }
 
         //public
@@ -116,8 +114,7 @@
         }
 
         //public
-        function deleteUser(index, event) {
-            var user = self.users[index];
+        function deleteUser(user, event) {
             var dialog = $mdDialog.confirm()
                 .title("Benutzer " + user.loginName + " löschen?")
                 .textContent("Den Benutzer " + user.loginName + " wirklich löschen? Dies kann nicht rückgängig gemacht werden!")
@@ -127,6 +124,7 @@
             $mdDialog.show(dialog).then(function() {
                 return UserService.delete({id: user.id}).$promise;
             }).then(function(response) {
+                var index = self.users.indexOf(user);
                 self.users.splice(index, 1);
             }).catch(function(fail) {
                 console.warn(fail);
@@ -134,8 +132,7 @@
         }
 
         //public
-        function showDetails(index, event) {
-            var user = self.users[index];
+        function showDetails(user, event) {
             $mdDialog.show({
                 clickOutsideToClose: true,
                 templateUrl: 'src/management/users/details.html',
@@ -167,14 +164,17 @@
         }
 
         //public
-        function editUser(index, event, createNewUser) {
+        function editUser(userToEdit, event, createNewUser) {
             self.isCreatingUser = true;
             if (createNewUser === undefined) {
                 createNewUser = false;
             }
 
-            var newUser = {};
-            newUser.gender = "NONE";
+            if(createNewUser){
+                var userToEdit = {};
+                userToEdit.gender = "NONE";
+                userToEdit.enabled = true;
+            }
             $mdDialog.show({
                 templateUrl: 'src/management/users/create.html',
                 controller: ['$mdDialog', 'Major',  EditUserModalController],
@@ -182,7 +182,7 @@
                 targetEvent: event,
                 bindToController: true,
                 locals: {
-                    user: angular.copy(newUser)
+                    user: angular.copy(userToEdit)
                 }
             }).then(function (user) {
                 if(createNewUser) {
@@ -193,7 +193,7 @@
 
             }).then(function (user) {
                 self.isCreatingUser = false;
-                self.users[index] = user;
+                userToEdit = user;
             }).catch(function (reason) {
                 self.isCreatingUser = false;
                 if (reason != undefined)
