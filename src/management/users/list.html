@@ -60,13 +60,13 @@
                                 Account verlängern
                             </md-button>
                         </md-menu-item>
-                        <md-menu-item ng-if="user.expires && userList.userIsInactive($index)">
+                        <md-menu-item ng-if="user.expirationDate && userList.userIsInactive($index)">
                             <md-button ng-click="userList.extendValidTime($index, $event)">
                                 <md-icon>play_arrow</md-icon>
                                 Account aktivieren
                             </md-button>
                         </md-menu-item>
-                        <md-menu-item ng-if="user.expires && !userList.userIsInactive($index)">
+                        <md-menu-item ng-if="user.expirationDate && !userList.userIsInactive($index)">
                             <md-button class="md-warn" ng-click="userList.setInactive($index, $event)">
                                 <md-icon>block</md-icon>
                                 Account deaktivieren

@@ -173,6 +173,8 @@
                 createNewUser = false;
             }
 
+            var newUser = {};
+            newUser.gender = "NONE";
             $mdDialog.show({
                 templateUrl: 'src/management/users/create.html',
                 controller: ['$mdDialog', 'Major',  EditUserModalController],
@@ -180,7 +182,7 @@
                 targetEvent: event,
                 bindToController: true,
                 locals: {
-                    user: angular.copy(self.users[index])
+                    user: angular.copy(newUser)
                 }
             }).then(function (user) {
                 if(createNewUser) {
