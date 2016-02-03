@@ -25,39 +25,43 @@
         self.editReservation = editReservation;
 
         //public
-        function borrow() {
+        function borrow(event) {
             var patch = {
                 borrowed: true
             };
 
-            self.reservation = DeviceReservation.update({id: self.reservation.id}, patch);
+            DeviceReservation.update({id: self.reservation.id}, patch).$promise.then(function(reservation) {
+                self.reservation = reservation;
 
-            self.reservation.$promise.then(function() {
                 var cabinet = self.reservation.device.cabinet;
 
                 $mdDialog.show(
                     $mdDialog.alert()
-                        .title('Schrank ' + cabinet + ' öfffnet')
-                        .content('Schrank Nummer ' + cabinet + ' öffnet, bitte das Gerät herausnehmen.')
+                        .title(cabinet + ' öfffnet')
+                        .content(cabinet + ' öffnet, bitte das Gerät herausnehmen.')
+                        .targetEvent(event)
+                        .ok('OK')
                 );
             });
         }
 
         //public
-        function returnDevice() {
+        function returnDevice(event) {
             var patch = {
                 borrowed: false
             };
 
-            self.reservation = DeviceReservation.update({id: self.reservation.id}, patch);
+            self.reservation = DeviceReservation.update({id: self.reservation.id}, patch).$promise.then(function(reservation) {
+                self.reservation = reservation;
 
-            self.reservation.$promise.then(function() {
                 var cabinet = self.reservation.device.cabinet;
 
                 $mdDialog.show(
                     $mdDialog.alert()
-                        .title('Schrank ' + cabinet + ' öfffnet')
-                        .content('Schrank Nummer ' + cabinet + ' öffnet, bitte das Gerät hineinlegen.')
+                        .title(cabinet + ' öfffnet')
+                        .content(cabinet + ' öffnet, bitte das Gerät hineinlegen.')
+                        .targetEvent(event)
+                        .ok('OK')
                 );
             });
         }
@@ -255,7 +259,6 @@
         //public
         function isActive() {
             var now = (new Date()).getTime();
-            console.dir(self.reservation);
 
             return now >= self.reservation.timeSpan.beginning && now <= self.reservation.timeSpan.end;
         }
