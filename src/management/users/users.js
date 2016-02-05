@@ -18,6 +18,12 @@
             templateUrl: 'src/management/users/create.html',
             controller: 'UserCreateController',
             controllerAs: 'userCreateController'
+        }).state('management.users.finish', {
+            url: '/finish',
+            templateUrl: 'src/management/users/createFinish.html',
+            controller: 'UserFinishController',
+            controllerAs: 'userController',
+            params: {'user': null}
         });
     }]);
 

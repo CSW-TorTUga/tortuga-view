@@ -4,15 +4,14 @@
             'User',
             'Major',
             '$state',
-            '$http',
-            'apiAddress',
+            'PinService',
+            '$window',
             UserCreateController
         ]);
 
-    function UserCreateController(User, Major, $state, $http, apiAddress) {
+    function UserCreateController(User, Major, $state, PinService, $window) {
         var self = this;
         var state = 0;
-
 
         self.majors = Major.query();
 
@@ -32,6 +31,7 @@
         }
 
         function back() {
+            $window.scrollTo(0,0);
             state--;
         }
 
@@ -56,10 +56,13 @@
             if(self.user.gender == "NONE") {
                 self.user.gender = undefined;
             }
+            self.user.enabled = true;
             self.user.password = self.password1;
             User.save(self.user).$promise
                 .then(function(user) {
-                    $state.go("profile.newpin",{userId: user.id, goWhenFinished: "add"});
+                    PinService.createNewPin(user).then(function() {
+                        $state.go('management.users.finish' ,{user: user});
+                    });
                 })
         }
 

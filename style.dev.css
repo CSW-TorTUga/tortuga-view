@@ -255,7 +255,6 @@ md-dialog {
 }
 
 .emoji-password {
-    margin-left: 50px;
     width: 700px;
     height: 700px;
 }
@@ -315,16 +314,43 @@ md-dialog {
 
 
 .pin-display {
-    max-width: 30%;
-    margin: 20px 20px 20px 20px;
+    margin: 20px 20px 20px 0px;
     flex-direction: row;
     display: flex;
 }
 
-.password-hint {
-    max-width: 30%;
+.pin-display>.password-bubble {
+    padding: 2px;
 }
 
-.pin-display>.password-bubble {
+.password-hint {
+    text-align: center;
+    max-width: 30%;
+    border-left: 1px solid #aeaeae;
     padding: 10px;
+    pading-left: 20px;
+    margin-left: 20px;
+    min-height: 500px;
+
+}
+
+.slide-out-left.ng-leave {
+    animation: slideOutLeft 0.5s;
+}
+
+.slide-out-right.ng-leave {
+    animation:slideOutRight 0.5s;
+}
+
+.slide-in-left.ng-enter {
+    animation: slideInLeft 0.5s;
+}
+
+.slide-in-right.ng-enter {
+    animation: slideInRight 0.5s;
+}
+
+.create-state {
+    position:absolute;
+    width:100%;
 }

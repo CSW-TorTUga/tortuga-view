@@ -1,7 +1,7 @@
-<div ng-switch="userCreateController.getState()">
+<div ng-switch="userCreateController.getState()" layout="row">
 
 
-    <div ng-switch-when="0">
+    <div ng-switch-when="0" class="create-state slide-out-left slide-in-left">
 
         <h2 class="md-display-2">
             Rolle auswählen
@@ -21,6 +21,7 @@
                         Bitte gib eine Rolle an
                     </div>
                 </div>
+
             </md-input-container>
         </form>
 
@@ -32,12 +33,12 @@
         </div>
     </div>
 
-    <div ng-switch-when="1">
+    <div ng-switch-when="1" class="create-state slide-in-right slide-out-right">
         <h2 class="md-display-2">
             Daten eingeben
         </h2>
 
-        <form layout="column" name="userCreateController.editForm">
+        <form layout="column" name="userCreateController.editForm" class="md-inline-form medium-form">
             <md-input-container>
                 <label>
                     Benutzername

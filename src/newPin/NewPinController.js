@@ -6,10 +6,11 @@
             '$stateParams',
             'apiAddress',
             '$timeout',
+            'PinService',
             NewPinController
         ]);
 
-    function NewPinController($http, $state, $stateParams, apiAddress, $timeout) {
+    function NewPinController($http, $state, $stateParams, apiAddress, $timeout, PinService) {
         var self = this;
 
         // configuiration
@@ -169,9 +170,7 @@
                     successCount = tmp + 1;
                     if(successCount == successNecessary) {
                         $timeout(function() {
-                            if($stateParams.goWhenFinished !== undefined) {
-                                $state.go($stateParams.goWhenFinished);
-                            }
+                            PinService.finished();
                         },1000)
                     }
 

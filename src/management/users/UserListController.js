@@ -210,7 +210,7 @@
                 var id = self.users.indexOf(userToEdit);
             }
             $mdDialog.show({
-                templateUrl: 'src/management/users/create.html',
+                templateUrl: 'src/management/users/edit.html',
                 controller: ['$mdDialog', 'Major',  EditUserModalController],
                 controllerAs: 'userModal',
                 targetEvent: event,
