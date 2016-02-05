@@ -54,6 +54,8 @@
                 self.startTime = '';
                 self.endTime = '';
 
+                self.isRepeated = false;
+
                 //public
                 function cancel() {
                     $mdDialog.cancel();
@@ -144,12 +146,14 @@
 
                     self.reservation.timeSpan.end = timeStart.valueOf();
 
-
-                    self.reservation.user = AuthenticationService.getUser();
+                    if(self.isRepeated) {
+                        self.reservation.repeatOption = self.frequency;
+                        self.reservation.repeatUntil = self.repetitionEndDate.getTime();
+                    }
 
                     RoomReservation.save(self.reservation).$promise
-                        .then(function (device) {
-                            $mdDialog.hide(device);
+                        .then(function (reservation) {
+                            $mdDialog.hide(reservation);
                         });
                 }
 
