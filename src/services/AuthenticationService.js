@@ -51,22 +51,22 @@
 
         //public
         function isStudent() {
-            return user.role == 'STUDENT' || isLecturer();
+            return user != null && (user.role == 'STUDENT' || isLecturer());
         }
 
         //public
         function isLecturer() {
-            return user.role == 'LECTURER' || isCswTeam();
+            return user != null && (user.role == 'LECTURER' || isCswTeam());
         }
 
         //public
         function isCswTeam() {
-            return user.role == 'CSW_TEAM' || isAdmin();
+            return user != null && (user.role == 'CSW_TEAM' || isAdmin());
         }
 
         //public
         function isAdmin() {
-            return user.role == 'ADMIN';
+            return user != null && user.role == 'ADMIN';
         }
 
         //public
