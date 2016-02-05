@@ -1,5 +1,6 @@
-<div class="main-content card-container card-list">
-    <div class="md-whiteframe-z2 ticket" ng-repeat="reservation in reservationController.reservations">
+<div class="card-container card-list">
+    <h2 style="margin-top: 0;" class="md-display-1" ng-if="(reservationController.reservations | filter : {approved: false}).length > 0">Beantragt</h2>
+    <div class="md-whiteframe-z2 ticket" ng-repeat="reservation in reservationController.reservations | filter : {approved: false} | orderBy : '+timeSpan.beginning'">
         <md-toolbar class="md-hue-1">
             <div class="md-toolbar-tools">
                 <h2>
@@ -27,5 +28,29 @@
                 Genemigen
             </md-button>
         </div>
+    </div>
+    <h2 class="md-display-1" ng-if="(reservationController.reservations | filter : {approved: true}).length > 0">Genehmigt</h2>
+    <div class="md-whiteframe-z2 ticket" ng-repeat="reservation in reservationController.reservations | filter : {approved: true}  | orderBy : '+timeSpan.beginning'">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <h2>
+                    {{reservation.title}} von {{reservation.user.firstName}} {{reservation.user.lastName}}
+                </h2>
+            </div>
+        </md-toolbar>
+        <div class="card-content" layout="row">
+            <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
+                 style="height: 50px;">
+                von {{reservation.timeSpan.beginning | date:'EEE d. MMM HH:mm'}}
+            </div>
+            <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
+                 style="height: 50px;">
+                bis {{reservation.timeSpan.end | date:'EEE d. MMM H:mm'}}
+            </div>
+        </div>
+        <md-button class="md-raised md-accent md-hue-1 full-width-button md-warn"
+                   style="margin-bottom: 0;" ng-click="reservationController.declineAfterConfirm(reservation, $event)">
+            Absagen
+        </md-button>
     </div>
 </div>
