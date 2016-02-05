@@ -23,6 +23,7 @@
         self.userExpiresThisSemester = userExpiresThisSemester;
         self.activeFilter = activeFilter;
         self.isUserExpired = isUserExpired;
+        self.resetPassword = resetPassword;
 
         self.isCreatingUser = false;
         self.showActive = true;
@@ -160,6 +161,46 @@
         }
 
         //public
+        function resetPassword(userToReset, event){
+            $mdDialog.show({
+                templateUrl: 'src/management/users/resetPassword.html',
+                controller: ['$mdDialog', resetPasswordController],
+                controllerAs: 'passwordResetModal',
+                targetEvent: event,
+                bindToController: true,
+                locals: {
+                    user: angular.copy(userToReset)
+                }
+            }).then(function (user){
+                return UserService.update({id: user.id}, {password: user.password});
+            }).catch(function (reason) {
+                if (reason != undefined)
+                    console.warn(reason);
+            });
+
+            function resetPasswordController($mdDialog){
+                var self = this;
+
+                self.submit = submit;
+                self.cancel = cancel;
+
+                self.header = "Passwort von '" + self.user.loginName + "' zurücksetzen";
+
+                //public
+                function cancel() {
+                    $mdDialog.cancel();
+                }
+
+                //public
+                function submit() {
+                    $mdDialog.hide(self.user);
+                }
+
+
+            }
+        }
+
+        //public
         function editUser(userToEdit, event, createNewUser) {
             self.isCreatingUser = true;
             if (createNewUser === undefined) {
@@ -184,7 +225,6 @@
                 }
             }).then(function (user) {
                 if(createNewUser) {
-                    //users.push(user);
                     return UserService.save(user).$promise;
                 } else {
 
