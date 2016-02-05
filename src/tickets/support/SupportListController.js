@@ -27,8 +27,6 @@
 
         //public
         function answer(message) {
-            message.done = true;
-
             $mdDialog.show({
                 clickOutsideToClose: true,
                 templateUrl: 'src/tickets/support/answer.html',
@@ -54,7 +52,10 @@
 
                 //public
                 function submit() {
-                    SupportMessage.update({id: message.id}, message).$promise
+                    SupportMessage.update({id: message.id}, {
+                        done: true,
+                        answer: self.answer
+                    }).$promise
                         .then(function() {
                             $mdDialog.hide();
                         });
