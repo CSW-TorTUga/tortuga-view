@@ -51,7 +51,7 @@
 
         //public
         function isStudent() {
-            return user != null && (user.role == 'STUDENT' || isLecturer());
+            return user != null && user.role == 'STUDENT';
         }
 
         //public

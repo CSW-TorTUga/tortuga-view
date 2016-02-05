@@ -5,10 +5,11 @@
             'RoomReservation',
             '$mdDialog',
             'AuthenticationService',
+            '$stateParams',
             RoomListController
         ]);
 
-    function RoomListController(RoomReservation, $mdDialog, AuthenticationService) {
+    function RoomListController(RoomReservation, $mdDialog, AuthenticationService, $stateParams) {
         var self = this;
 
         self.reservations = RoomReservation.query({
@@ -18,6 +19,9 @@
         self.addReservation = addReservation;
         self.reservationDeleted = reservationDeleted;
 
+        if($stateParams.create == 'true') {
+            addReservation();
+        }
 
         //public
         function reservationDeleted(reservation) {

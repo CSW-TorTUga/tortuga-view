@@ -4,10 +4,11 @@
             'RoomReservation',
             'DeviceReservation',
             'AuthenticationService',
+            '$state',
             HomeController
         ]);
 
-    function HomeController(RoomReservation, DeviceReservation, AuthenticationService) {
+    function HomeController(RoomReservation, DeviceReservation, AuthenticationService, $state) {
         var self = this;
 
         var roomReservations = AuthenticationService.isLecturer() ? RoomReservation.query({user: AuthenticationService.getUser().id}) : [];
@@ -20,6 +21,16 @@
         self.getRoomReservations = getRoomReservations;
         self.getDeviceReservations = getDeviceReservations;
 
+        self.bookRoom = bookRoom;
+        self.createUser = createUser;
+
+        function bookRoom() {
+            $state.go('room', {create: true});
+        }
+
+        function createUser() {
+            $state.go('management.users.create');
+        }
 
         //public
         function getRoomReservations() {

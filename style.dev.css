@@ -210,3 +210,9 @@ table.management-list th {
 md-dialog {
     width: 400px;
 }
+
+/* Fixes the Speed Dial Problem */
+.md-scale:not(.md-is-open) .md-fab-action-item {
+    opacity: 0;
+    transform: scale(0);
+}
