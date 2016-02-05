@@ -22,6 +22,7 @@
         'profile',
         'calendar',
         'ngSweets',
+        'newPin',
         'ngMessages'
     ]).config([
         '$mdThemingProvider',
@@ -37,7 +38,9 @@
 
     function rmsConfig($mdThemingProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $mdThemingProvider.theme('default')
-            .primaryPalette(PRIMARY)
+            .primaryPalette(PRIMARY, {
+                'default' : '400'
+            })
             .accentPalette(ACCENT, {
                 default: 'A100'
             });
@@ -68,4 +71,5 @@
             accentPalette['A100'].value[2]);
     }
 
-})();
+})
+();

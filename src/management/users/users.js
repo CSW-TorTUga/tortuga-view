@@ -15,7 +15,9 @@
             controllerAs: 'userList'
         }).state('management.users.create', {
             url: '/create',
-            templateUrl: 'src/management/users/create.html'
+            templateUrl: 'src/management/users/create.html',
+            controller: 'UserCreateController',
+            controllerAs: 'userCreateController'
         });
     }]);
 

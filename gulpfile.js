@@ -25,7 +25,8 @@ var paths = {
         'node_modules/angular-resource/angular-resource.js',
         'node_modules/angular-material-calendar/angular-material-calendar.min.js',
         'node_modules/angular-sanitize/angular-sanitize.min.js',
-        'lib/ngsweets.js'
+        'lib/ngsweets.js',
+        'lib/twemoji.min.js'
     ],
     scripts: [
         'app.js',
@@ -37,6 +38,7 @@ var paths = {
         'src/home/home.js',
         'src/login/login.js',
         'src/room/room.js',
+        'stc/newPin/newPin.js',
         'src/tickets/tickets.js',
         'src/tickets/roomReservation/roomReservation.js',
         'src/tickets/support/support.js',

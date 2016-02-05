@@ -15,8 +15,6 @@
 
         self.devices = Device.query();
 
-        console.log("doch ich werde geladden!")
-
 
         self.editDevice = editDevice;
         self.createDevice = createDevice;

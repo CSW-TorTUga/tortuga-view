@@ -1,49 +1,82 @@
-<md-dialog>
-    <md-toolbar>
-        <div class="md-toolbar-tools">{{userModal.header}}</div>
-    </md-toolbar>
+<div ng-switch="userCreateController.getState()">
 
-    <md-dialog-content class="md-dialog-content">
-        <form layout="column" name="userModal.editForm">
+
+    <div ng-switch-when="0">
+
+        <h2 class="md-display-2">
+            Rolle auswählen
+        </h2>
+
+        <form name="userCreateController.roleForm" layout="column" class="md-inline-form medium-form">
+            <md-input-container>
+                <label>Rolle</label>
+                <md-select name="role" ng-model="userCreateController.user.role" required>
+                    <md-option value="STUDENT">Student</md-option>
+                    <md-option value="LECTURER">Dozent</md-option>
+                    <md-option value="CSW_TEAM">CSW-Team</md-option>
+                    <md-option value="ADMIN">Admin</md-option>
+                </md-select>
+                <div ng-messages="userCreateController.roleForm.role.$error">
+                    <div ng-message="required">
+                        Bitte gib eine Rolle an
+                    </div>
+                </div>
+            </md-input-container>
+        </form>
+
+        <div class="actions" layout="row">
+            <md-button ng-disabled="!userCreateController.roleForm.$valid" class="md-accent md-raised" type="submit"
+                       ng-click="userCreateController.advance()">
+                weiter
+            </md-button>
+        </div>
+    </div>
+
+    <div ng-switch-when="1">
+        <h2 class="md-display-2">
+            Daten eingeben
+        </h2>
+
+        <form layout="column" name="userCreateController.editForm">
             <md-input-container>
                 <label>
                     Benutzername
                 </label>
-                <input type="text" name="loginName" ng-model="userModal.user.loginName" required>
+                <input type="text" name="loginName" ng-model="userCreateController.user.loginName" required>
             </md-input-container>
             <div layout="rows">
                 <md-input-container flex="50">
                     <label>
                         Vorname
                     </label>
-                    <input type="text" name="firstName" ng-model="userModal.user.firstName" required>
+                    <input type="text" name="firstName" ng-model="userCreateController.user.firstName" required>
                 </md-input-container>
                 <md-input-container flex="50">
                     <label>
                         Nachname
                     </label>
-                    <input type="text" name="lastName" ng-model="userModal.user.lastName" required>
+                    <input type="text" name="lastName" ng-model="userCreateController.user.lastName" required>
                 </md-input-container>
             </div>
             <md-input-container>
                 <label>
                     Telefonnummer
                 </label>
-                <input type="tel" name="phoneNumber" ng-model="userModal.user.phoneNumber" required>
+                <input type="tel" name="phoneNumber" ng-model="userCreateController.user.phoneNumber" required>
             </md-input-container>
             <md-input-container>
                 <label>
                     E-Mail
                 </label>
-                <input type="email" name="email" ng-model="userModal.user.email" required>
+                <input type="email" name="email" ng-model="userCreateController.user.email" required>
             </md-input-container>
-            <div ng-if="userModal.newUser" layout="rows">
+            <div ng-if="userCreateController.newUser" layout="rows">
                 <md-input-container flex="50">
                     <label>
                         Passwort
                     </label>
-                    <input ng-minlength="6" type="password" name="password" ng-model="userModal.password1" required>
-                    <div ng-messages="userModal.editForm.password.$error">
+                    <input ng-minlength="6" type="password" name="password" ng-model="userCreateController.password1" required>
+                    <div ng-messages="userCreateController.editForm.password.$error">
                         <div ng-message="minlength">
                             Das Passwort muss mindestens 6 Zeichen lang sein
                         </div>
@@ -53,15 +86,17 @@
                     <label>
                         Wiederholung
                     </label>
-                    <input type="password" name="passwordRepeat" ng-model="userModal.password2" validate="userModal.validatePasswordRepeat" revalidate-on-change="userModal.password1" required>
-                    <div ng-messages="userModal.editForm.passwordRepeat.$error">
+                    <input type="password" name="passwordRepeat" ng-model="userCreateController.password2"
+                           validate="userCreateController.validatePasswordRepeat" revalidate-on-change="userCreateController.password1"
+                           required>
+                    <div ng-messages="userCreateController.editForm.passwordRepeat.$error">
                         <div ng-message="passwordMatch">
                             Die Passwortwiederholung muss mit dem Passwort übereinstimmen
                         </div>
                     </div>
                 </md-input-container>
             </div>
-            <md-radio-group ng-model="userModal.user.gender" layout="row">
+            <md-radio-group ng-model="userCreateController.user.gender" layout="row">
                 <md-radio-button value="MALE">Männlich</md-radio-button>
                 <md-radio-button value="FEMALE">Weiblich</md-radio-button>
                 <md-radio-button value="NONE">k.A.</md-radio-button>
@@ -69,10 +104,13 @@
             <div layout="rows">
                 <md-input-container flex="50">
                     <label>Studiengang</label>
-                    <md-select name="major" ng-model="userModal.user.major" ng-required="userModal.user.role == 'STUDENT'">
-                        <md-option ng-repeat="major in userModal.majors track by major.id" ng-value="major">{{major.name}}</md-option>
+                    <md-select name="major" ng-model="userCreateController.user.major"
+                               ng-required="userCreateController.user.role == 'STUDENT'">
+                        <md-option ng-repeat="major in userCreateController.majors track by major.id" ng-value="major">
+                            {{major.name}}
+                        </md-option>
                     </md-select>
-                    <div ng-messages="userModal.editForm.major.$error">
+                    <div ng-messages="userCreateController.editForm.major.$error">
                         <div ng-message="required">
                             Bitte gib einen Studiengang an
                         </div>
@@ -82,34 +120,23 @@
                     <label>
                         Matrikelnummer
                     </label>
-                    <input type="text" name="studentId" ng-model="userModal.user.studentId" ng-required="userModal.user.role == 'STUDENT'">
-                    <div ng-messages="userModal.editForm.studentId.$error">
+                    <input type="text" name="studentId" ng-model="userCreateController.user.studentId"
+                           ng-required="userCreateController.user.role == 'STUDENT'">
+                    <div ng-messages="userCreateController.editForm.studentId.$error">
                         <div ng-message="required">
                             Bitte gib eine Matrikelnummer an
                         </div>
                     </div>
                 </md-input-container>
             </div>
-            <md-input-container>
-                <label>Rolle</label>
-                <md-select name="role" ng-model="userModal.user.role" required>
-                    <md-option value="STUDENT">Student</md-option>
-                    <md-option value="LECTURER">Dozent</md-option>
-                    <md-option value="CSW_TEAM">CSW-Team</md-option>
-                    <md-option value="ADMIN">Admin</md-option>
-                </md-select>
-                <div ng-messages="userModal.editForm.role.$error">
-                    <div ng-message="required">
-                        Bitte gib eine Rolle an
-                    </div>
-                </div>
-            </md-input-container>
         </form>
-    </md-dialog-content>
 
-    <md-dialog-actions>
-        <md-button type="button" ng-click="userModal.cancel()">abbrechen</md-button>
-        <md-button ng-disabled="!userModal.editForm.$valid" class="md-accent" type="submit" ng-click="userModal.submit()">absenden</md-button>
-    </md-dialog-actions>
-
-</md-dialog>
+        <div class="actions" layout="row">
+            <md-button type="button" class="md-raised" ng-click="userCreateController.back()">zurück</md-button>
+            <md-button ng-disabled="!userCreateController.editForm.$valid" class="md-accent md-raised" type="submit"
+                       ng-click="userCreateController.save()">
+                erstellen
+            </md-button>
+        </div>
+    </div>
+</div>

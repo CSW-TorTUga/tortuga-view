@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="node_modules/angular/angular.js"></script>
     <script src='node_modules/angular-resource/angular-resource.js'></script>
-    <script src="//twemoji.maxcdn.com/twemoji.min.js"></script>
+    <script src="terminal/twemoji.min.js"></script>
     <script src="terminal/app.js"></script>
 </head>
 
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="flex-row" ng-repeat="row in loginController.getEmojis() track by $index">
-            <button class="emoji-button" ng-click="loginController.addKey(emoji)"
+            <button class="emoji-button clickable" ng-click="loginController.addKey(emoji)"
                     ng-repeat="emoji in row track by $index" twemoji>
                 <twemoji emoji="emoji"></twemoji>
             </button>

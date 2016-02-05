@@ -14,7 +14,6 @@
 
         self.showDetails = showDetails;
         self.editUser = editUser;
-        self.createUser = createUser;
         self.deleteUser = deleteUser;
         self.validatePasswordRepeat = validatePasswordRepeat;
         self.extendValidTime = extendValidTime;
@@ -158,10 +157,6 @@
             }
         }
 
-        //public
-        function createUser(event) {
-            editUser(self.users.length, event, true);
-        }
 
         //public
         function editUser(userToEdit, event, createNewUser) {

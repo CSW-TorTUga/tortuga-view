@@ -209,3 +209,115 @@ table.management-list th {
 md-dialog {
     width: 400px;
 }
+
+.medium-form{
+    width: 400px;
+}
+
+
+
+
+
+.fullscreen {
+    width: 1024px;
+    height: 768px;
+}
+
+
+.right {
+    right: 0px;
+}
+
+.bottom{
+    bottom: 0px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.problem-button{
+    background-color: #ff999e;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 50px;
+    width: 250px;
+    border: 0;
+    font-size: larger;
+}
+
+.emoji-password {
+    margin-left: 50px;
+    width: 700px;
+    height: 700px;
+}
+
+.emoji-button {
+    outline: none;
+    border: 1px solid white;
+    transition: linear border-color 0.2s;
+    border-radius: 15px;
+    background-color: white;
+    height: 100px;
+    font-size: xx-large;
+    flex-grow: 1;
+    text-align: center;
+    cursor: pointer;
+}
+
+.emoji-button:active {
+    border: 1px solid darkgrey;
+}
+
+.flex-row {
+    flex-direction: row;
+    display: flex;
+}
+
+.password-bubble {
+    font-size: xx-large;
+    height: 37px;
+    border: 0px solid #aeaeae;
+    margin: 10px;
+    padding: 20px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.password-field {
+    margin: 20px 20px 20px 20px;
+    flex-direction: row;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.clickable {
+    cursor: pointer;
+    border: 1px solid white;
+    transition: linear border-color 0.4s;
+    transition: linear background-color 0.2s;
+    border-radius: 15px;
+}
+
+.clickable:active {
+    border: 1px solid darkgrey;
+    background-color: darkgrey;
+
+}
+
+
+.pin-display {
+    max-width: 30%;
+    margin: 20px 20px 20px 20px;
+    flex-direction: row;
+    display: flex;
+}
+
+.password-hint {
+    max-width: 30%;
+}
+
+.pin-display>.password-bubble {
+    padding: 10px;
+}
