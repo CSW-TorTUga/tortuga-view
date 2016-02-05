@@ -4,7 +4,7 @@
         'ui.router'
     ]).config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('room', {
-            url: '/room',
+            url: '/room?create',
             templateUrl: 'src/room/list.html',
             controllerAs: 'roomController',
             controller: 'RoomListController'

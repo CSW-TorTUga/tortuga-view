@@ -45,7 +45,8 @@
     <md-content flex>
         <ul>
             <li>
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('home')}" ui-sref="home">Home
+                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('home')}" ui-sref="home">
+                    Home
                 </md-button>
             </li>
             <li>
@@ -53,17 +54,18 @@
                     Reservierungen
                 </md-button>
             </li>
-            <li>
+            <li ng-if="nav.isLecturer()">
                 <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('room')}" ui-sref="room">
                     Raumbuchung
                 </md-button>
             </li>
-            <li>
+            <li ng-if="nav.isCswTeam()">
                 <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('management')}"
-                           ui-sref="management.users.list">Verwaltung
+                           ui-sref="management.users.list">
+                    Verwaltung
                 </md-button>
             </li>
-            <li ng-controller="TicketNavController as tickets">
+            <li ng-controller="TicketNavController as tickets" ng-if="nav.isCswTeam()">
                 <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('tickets')}" ui-sref="tickets.roomReservation">
                     Tickets <span ng-if="tickets.getAllCount() > 0">({{tickets.getAllCount()}})</span>
                 </md-button>

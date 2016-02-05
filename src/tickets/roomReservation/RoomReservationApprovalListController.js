@@ -3,23 +3,39 @@
     angular.module('tickets.support')
         .controller('RoomReservationApprovalListController', [
             'RoomReservation',
+            '$mdDialog',
             RoomReservationApprovalListController
         ]);
 
-    function RoomReservationApprovalListController(RoomReservation) {
+    function RoomReservationApprovalListController(RoomReservation, $mdDialog) {
         var self = this;
 
-        self.reservations = RoomReservation.query({approved: false});
+        self.reservations = RoomReservation.query();
 
-        self.ignore = ignore;
+        self.decline = decline;
+        self.declineAfterConfirm = declineAfterConfirm;
         self.accept = accept;
 
         //public
-        function ignore(reservation) {
+        function decline(reservation) {
             RoomReservation.delete({id:reservation.id}).$promise
                 .then(function() {
                     self.reservations.splice(self.reservations.indexOf(reservation), 1);
                 });
+        }
+
+        //public
+        function declineAfterConfirm(reservation, event) {
+            $mdDialog.show(
+                $mdDialog.confirm()
+                    .title('Raumbuchung "' + reservation.title + '" wirklich absagen?')
+                    .ok('Ja')
+                    .cancel('Abbrechen')
+                    .targetEvent(event)
+                    .content('Die bereits bestätigte Raumbuchung wird ohne Benachrichtigung des Buchenden gelöscht. Wirklich löschen?')
+            ).then(function() {
+                decline(reservation);
+            });
         }
 
 
@@ -27,10 +43,9 @@
         function accept(reservation) {
             reservation.approved = true;
             RoomReservation.update({id:reservation.id}, reservation).$promise
-                .then(function() {
-                    self.reservations.splice(self.reservations.indexOf(reservation), 1);
+                .then(function(updatedReservation) {
+                    self.reservations[self.reservations.indexOf(reservation)] = updatedReservation;
                 });
-
         }
 
 

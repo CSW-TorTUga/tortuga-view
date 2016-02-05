@@ -6,10 +6,6 @@
     <md-dialog-content class="md-dialog-content">
         <table style="width: 100%;">
             <tr>
-                <td class="md-body-2">ID</td>
-                <td>{{userDetails.user.id}}</td>
-            </tr>
-            <tr>
                 <td class="md-body-2">Benutzername</td>
                 <td>{{userDetails.user.loginName}}</td>
             </tr>
@@ -48,6 +44,15 @@
             <tr>
                 <td class="md-body-2">Läuft aus</td>
                 <td><optional property="userDetails.user.expirationDate | date"></optional></td>
+            </tr>
+            <tr>
+                <td class="md-body-2">Ist deaktiviert</td>
+                <td ng-if="userDetails.user.enabled">
+                    Nein
+                </td>
+                <td ng-if="!userDetails.user.enabled">
+                    Ja
+                </td>
             </tr>
         </table>
     </md-dialog-content>

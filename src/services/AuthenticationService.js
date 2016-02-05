@@ -28,6 +28,11 @@
         self.isLoggedIn = isLoggedIn;
         self.getUser = getUser;
 
+        self.isStudent = isStudent;
+        self.isLecturer = isLecturer;
+        self.isCswTeam = isCswTeam;
+        self.isAdmin = isAdmin;
+
         function decodeUser(encodedUser) {
             var split = encodedUser.split('.');
 
@@ -42,6 +47,26 @@
         //public
         function getUser() {
             return user;
+        }
+
+        //public
+        function isStudent() {
+            return user != null && user.role == 'STUDENT';
+        }
+
+        //public
+        function isLecturer() {
+            return user != null && (user.role == 'LECTURER' || isCswTeam());
+        }
+
+        //public
+        function isCswTeam() {
+            return user != null && (user.role == 'CSW_TEAM' || isAdmin());
+        }
+
+        //public
+        function isAdmin() {
+            return user != null && user.role == 'ADMIN';
         }
 
         //public

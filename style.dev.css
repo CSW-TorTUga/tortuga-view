@@ -55,11 +55,6 @@
     padding-bottom: 0;
 }
 
-@font-face {
-    font-family: TechnoLogo;
-    src: url("../technologo.otf") format("opentype");
-}
-
 .full-width-button {
     width: 100%;
     margin: 0;
@@ -120,6 +115,13 @@ md-menu-content {
     animation: fadeOut .3s;
 }
 
+.management-list tr.inactive td, .management-list td.inactive {
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.management-list tr.warn td, .management-list td.warn {
+    color: red;
+}
 
 table.management-list {
     border-collapse: collapse;
@@ -140,7 +142,6 @@ table.management-list tr td:not(:first-child) {
 table.management-list tr td {
     padding: 16px 0px;
 }
-
 
 table.management-list tr:not(:last-child) th {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -208,6 +209,12 @@ table.management-list th {
 
 md-dialog {
     width: 400px;
+}
+
+/* Fixes the Speed Dial Problem */
+.md-scale:not(.md-is-open) .md-fab-action-item {
+    opacity: 0;
+    transform: scale(0);
 }
 
 .medium-form{
