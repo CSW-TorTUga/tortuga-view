@@ -47,6 +47,33 @@
                     </div>
                 </md-input-container>
             </div>
+            <div>
+                <md-checkbox ng-model="roomModal.isRepeated">
+                    Ist regelmäßig
+                </md-checkbox>
+            </div>
+            <div ng-if="roomModal.isRepeated" layout="column">
+                <md-input-container>
+                    <label>
+                        Frequenz
+                    </label>
+                    <md-select ng-model="roomModal.frequency">
+                        <md-option value="WEEKLY">
+                            Wöchentlich
+                        </md-option>
+                        <md-option value="BIWEEKLY">
+                            Alle 2 Wochen
+                        </md-option>
+                        <md-option value="TRIWEEKLY">
+                            Alle 3 Wochen
+                        </md-option>
+                        <md-option value="QUADWEEKLY">
+                            Alle 4 Wochen
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <md-datepicker md-placeholder="Bis (inklusive)" ng-model="roomModal.repetitionEndDate"></md-datepicker>
+            </div>
             <div style="color:red;">
                 <div ng-if="!roomModal.timespanIsValid()">
                     Die Startzeit muss vor der Endzeit liegen
