@@ -20,6 +20,11 @@
 
         self.somethingHappened = TimeoutService.somethingHappened;
 
+        self.isStudent = AuthenticationService.isStudent;
+        self.isLecturer = AuthenticationService.isLecturer;
+        self.isCswTeam = AuthenticationService.isCswTeam;
+        self.isAdmin = AuthenticationService.isAdmin;
+
         $rootScope.$on('$stateChangeStart', function onStateChange() {
             $mdDialog.cancel();
         });

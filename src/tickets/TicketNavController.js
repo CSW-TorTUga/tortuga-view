@@ -24,7 +24,7 @@
 
         refresh();
         function refresh(){
-            if(!AuthenticationService.isLoggedIn())
+            if(!AuthenticationService.isLoggedIn() || !AuthenticationService.isCswTeam())
                 return;
 
             RoomReservation.query({approved: false}).$promise
