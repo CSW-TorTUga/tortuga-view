@@ -41,8 +41,7 @@
 
         //public
         function accept(reservation) {
-            reservation.approved = true;
-            RoomReservation.update({id:reservation.id}, reservation).$promise
+            RoomReservation.update({id:reservation.id}, {approved: true}).$promise
                 .then(function(updatedReservation) {
                     self.reservations[self.reservations.indexOf(reservation)] = updatedReservation;
                 });
