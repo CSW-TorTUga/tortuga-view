@@ -19,14 +19,20 @@
         self.validatePasswordRepeat = validatePasswordRepeat;
         self.extendValidTime = extendValidTime;
         self.setInactive = setInactive;
+        self.setActive = setActive;
         self.userExpiresThisSemester = userExpiresThisSemester;
-        self.userIsInactive = userIsInactive;
         self.activeFilter = activeFilter;
+        self.isUserExpired = isUserExpired;
 
         self.isCreatingUser = false;
         self.showActive = true;
 
         self.userFilter = '';
+
+        //public
+        function isUserExpired(user){
+            return user.expirationDate < (new Date()).getTime();
+        }
 
         function userIsActive(user) {
             if(user.role != 'STUDENT')
@@ -44,21 +50,13 @@
 
         //public
         function userExpiresThisSemester(user) {
-            var date = getNextSemesterEnd(new Date());
-            return Math.abs(user.expirationDate - date.valueOf()) < 60 * 60 * 10000;
+            var date = getNextSemesterBeginning(new Date());
+            return Math.abs(user.expirationDate - date.getTime()) < 60 * 60 * 10000;
         }
 
-        //public
-        function userIsInactive(user){
-            return user.expirationDate < (new Date).valueOf();
-        }
-
-
-
-
-        function getNextSemesterEnd(date) {
+        function getNextSemesterBeginning(date) {
             if(date.getMonth() < 3) { //april
-                date.setYear(3);
+                date.setMonth(3);
             } else if(date.getMonth() < 9) { //october
                 date.setMonth(9);
             } else { // else it's after october so we set the date to october
@@ -86,25 +84,22 @@
 
         //public
         function setInactive(user, event) {
-            var date = new Date();
+            user.enabled = false;
 
+            //das kopieren kann weg wenn man expirationDate mitsenden kann
+            var newUser = angular.copy(user);
+            newUser.expirationDate = undefined;
+            user = UserService.update({id: newUser.id}, newUser);
+        }
 
+        //public
+        function setActive(user){
+            user.enabled = true;
 
-            if(date.getMonth() < 3) { //april
-                date.setYear(date.getYear() - 1);
-                date.setMonth(9); //
-            } else if(date.getMonth() < 9) { //october
-                date.setMonth(3);
-            } else { // else it's after october so we set the date to october
-                date.setMonth(9);
-            }
-
-
-            date = new Date(date.getFullYear(), date.getMonth());
-            user.expirationDate = date.valueOf();
-
-            //funktioniert das?
-            user = UserService.update({id: user.id}, user);
+            //das kopieren kann weg wenn man expirationDate mitsenden kann
+            var newUser = angular.copy(user);
+            newUser.expirationDate = undefined;
+            user = UserService.update({id: newUser.id}, newUser);
         }
 
         //public
@@ -172,9 +167,11 @@
             }
 
             if(createNewUser){
-                var userToEdit = {};
+                userToEdit = {};
                 userToEdit.gender = "NONE";
                 userToEdit.enabled = true;
+            } else {
+                var id = self.users.indexOf(userToEdit);
             }
             $mdDialog.show({
                 templateUrl: 'src/management/users/create.html',
@@ -187,14 +184,21 @@
                 }
             }).then(function (user) {
                 if(createNewUser) {
+                    //users.push(user);
                     return UserService.save(user).$promise;
                 } else {
+
                     return UserService.update({id: user.id}, user);
                 }
 
             }).then(function (user) {
                 self.isCreatingUser = false;
                 userToEdit = user;
+                if(createNewUser){
+                    self.users.push(user);
+                } else {
+                    self.users[id] = user;
+                }
             }).catch(function (reason) {
                 self.isCreatingUser = false;
                 if (reason != undefined)
