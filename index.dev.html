@@ -75,6 +75,11 @@
                     Profil
                 </md-button>
             </li>
+            <li>
+                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('calendar')}" ui-sref="calendar">
+                    Kalender
+                </md-button>
+            </li>
         </ul>
     </md-content>
     <md-button class="nav-link-side" ng-click="nav.supportTicket()">Problem melden</md-button>
@@ -82,6 +87,14 @@
         Logout
     </md-button>
 </md-sidenav>
+
+<div hide-gt-sm>
+    <md-button class="md-fab md-fab-top-left">
+        <md-icon>
+            menu
+        </md-icon>
+    </md-button>
+</div>
 
 <md-content ui-view role="main" flex layout="column"></md-content>
 
