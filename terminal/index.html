@@ -28,9 +28,9 @@
 
 <div class="fullscreen" ng-controller="LoginController as loginController">
 
-    <div ng-if="loginController.roomReservation != undefined" class="big-button-container">
-        <h2>{{loginController.roomReservation.title}}</h2>
-        <button class="clickable room-open-button" ng-click="loginController.openDoor()">
+    <div ng-if="loginController.roomReservation != undefined" class="fullscreen">
+        <button class="big-button clickable" ng-click="loginController.openConsole()">
+            <h2>{{loginController.roomReservation.title}}</h2>
             <img class="lock-image" src="terminal/lock.svg">
         </button>
     </div>
@@ -61,8 +61,8 @@
             </div>
         </div>
         <div class="qr-code"></div>
-        <button class="problem-button">Problem melden</button>
     </div>
+    <button class="problem-button">Problem melden</button>
 </div>
 
 </body>
