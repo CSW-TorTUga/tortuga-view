@@ -1,12 +1,5 @@
 (function() {
 
-    var PRIMARY = 'blue-grey';
-    var ACCENT = 'orange';
-
-    function rgbToHex(r, g, b) {
-        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-    }
-
     angular.module('rms-terminal', [
         'ngResource'
     ]);
@@ -14,6 +7,58 @@
 
     angular.module('rms-terminal')
         .constant('apiAddress', '/api/v1/');
+
+    angular.module('rms-terminal')
+        .service('ProblemService', [
+            '$timeout',
+            'SupportMessage',
+            'ComplaintTemplate',
+            ProblemService
+        ]);
+
+    function ProblemService($timeout, SupportMessage, ComplaintTemplate) {
+        var self = this;
+
+        self.submitProblem = submitProblem;
+        self.chooseProblem = chooseProblem;
+        self.isChoosingProblem = isChoosingProblem;
+        self.getPossibleProblems = getPossibleProblems;
+
+        var choosingProblem = false;
+        var possibleProblems = ComplaintTemplate.query();
+
+        //public
+        function isChoosingProblem() {
+            return choosingProblem;
+        }
+
+        //public
+        function submitProblem(problem) {
+            SupportMessage.save({
+                name: 'Terminal',
+                email: '-',
+                subject: problem,
+                body: '-'
+            }).$promise.then(function() {
+                choosingProblem = false;
+            });
+        }
+
+        //public
+        function chooseProblem() {
+            choosingProblem = true;
+
+            $timeout(function() {
+                if(choosingProblem)
+                    choosingProblem = false;
+            }, 12000);
+        }
+
+        //public
+        function getPossibleProblems() {
+            return possibleProblems;
+        }
+    }
 
     angular.module('rms-terminal')
         .controller('LoginController', [
@@ -24,10 +69,11 @@
             'ComplaintTemplate',
             '$rootScope',
             '$window',
+            'ProblemService',
             LoginController
         ]);
 
-    function LoginController($http, apiAddress, $timeout, $interval, ComplaintTemplate, $scope, $window) {
+    function LoginController($http, apiAddress, $timeout, $interval, ComplaintTemplate, $scope, $window, ProblemService) {
         var self = this;
         self.twemoji = twemoji;
 
@@ -48,6 +94,8 @@
         var error = false;
         var successStartTime = 0;
 
+        self.roomReservation = undefined;
+
         self.getEmojis = getEmojis;
         self.getPassword = getPassword;
         self.addKey = addKey;
@@ -57,6 +105,12 @@
         self.getPasswordShow = getPasswordShow;
         self.deletePin = deletePin;
         self.getBackButtonStatus = getBackButtonStatus;
+        self.openDoor = openDoor;
+
+        self.isChoosingProblem = ProblemService.isChoosingProblem;
+        self.chooseProblem = ProblemService.chooseProblem;
+        self.getPossibleProblems = ProblemService.getPossibleProblems;
+        self.submitProblem = ProblemService.submitProblem;
 
         resetPin();
         generatePasswordField();
@@ -131,7 +185,30 @@
 
                 }, 10 * timeBetweenAnim);
             }
+        }
 
+
+        pollForOpenedRoom();
+        $interval(pollForOpenedRoom, 15 * 1000);
+        function pollForOpenedRoom() {
+            $http.get(apiAddress + "roomreservations?open=true").then(function(response) {
+                var now = (new Date()).valueOf();
+                if(response.data.length > 0) {
+                    for(var i = 0; i < response.data.length; i++) {
+                        var reservation = response.data[i];
+                        if(reservation.openedTimeSpan.end >= now && reservation.openedTimeSpan.beginning <= now) {
+                            self.roomReservation = reservation;
+                        }
+                    }
+                } else {
+                    self.roomReservation = undefined;
+                }
+            });
+        }
+
+        //public
+        function openDoor() {
+            $http.patch(apiAddress + "terminal/door",{open: true});
         }
 
 
@@ -214,6 +291,18 @@
     }
 
     angular.module('rms-terminal')
+        .factory('SupportMessage', [
+            '$resource',
+            'apiAddress',
+            SuppportMessage
+        ]);
+
+    function SuppportMessage($resource, apiAddress) {
+        return $resource(apiAddress + 'supportmessages/:id', null, {update: { method: 'PATCH'}});
+    }
+
+
+    angular.module('rms-terminal')
         .directive('twemoji', ['$window', function($window) {
             return {
                 restrict: 'E',
@@ -233,7 +322,6 @@
                 }
             };
         }]);
-
 
 })
 ();

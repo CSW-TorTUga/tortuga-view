@@ -24,7 +24,6 @@
         self.isUserExpired = isUserExpired;
         self.resetPassword = resetPassword;
 
-        self.isCreatingUser = false;
         self.showActive = true;
 
         self.userFilter = '';
@@ -196,18 +195,10 @@
         }
 
         //public
-        function editUser(userToEdit, event, createNewUser) {
-            self.isCreatingUser = true;
-            if (createNewUser === undefined) {
-                createNewUser = false;
-            }
-
-            if(createNewUser){
-                userToEdit = {};
+        function editUser(userToEdit, event) {
+            var id = self.users.indexOf(userToEdit);
+            if(userToEdit.gender === undefined){
                 userToEdit.gender = "NONE";
-                userToEdit.enabled = true;
-            } else {
-                var id = self.users.indexOf(userToEdit);
             }
             $mdDialog.show({
                 templateUrl: 'src/management/users/edit.html',
@@ -219,23 +210,11 @@
                     user: angular.copy(userToEdit)
                 }
             }).then(function (user) {
-                if(createNewUser) {
-                    return UserService.save(user).$promise;
-                } else {
-
                     return UserService.update({id: user.id}, user);
-                }
-
             }).then(function (user) {
-                self.isCreatingUser = false;
                 userToEdit = user;
-                if(createNewUser){
-                    self.users.push(user);
-                } else {
-                    self.users[id] = user;
-                }
+                self.users[id] = user;
             }).catch(function (reason) {
-                self.isCreatingUser = false;
                 if (reason != undefined)
                     console.warn(reason);
             });
@@ -243,9 +222,6 @@
 
             function EditUserModalController($mdDialog, Major) {
                 var self = this;
-
-                //self.user argument
-                self.newUser = createNewUser;
 
                 self.submit = submit;
                 self.cancel = cancel;
@@ -256,14 +232,8 @@
 
                 self.majors = Major.query();
 
-                init();
-                function init() {
-                    if(self.newUser) {
-                        self.header = 'Neuen Benutzer anlegen';
-                    } else {
-                        self.header = "Benutzer '" + self.user.loginName + "' bearbeiten";
-                    }
-                }
+                self.header = "Benutzer '" + self.user.loginName + "' bearbeiten";
+
 
                 //public
                 function validatePasswordRepeat(repeatedPassword) {
