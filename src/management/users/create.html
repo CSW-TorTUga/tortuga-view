@@ -1,9 +1,8 @@
 <div ng-switch="userCreateController.getState()" layout="row">
 
-
     <div ng-switch-when="0" class="create-state slide-out-left slide-in-left">
 
-        <h2 class="md-display-2">
+        <h2 style="margin-top: 0" class="md-display-2">
             Rolle auswählen
         </h2>
 
@@ -34,7 +33,7 @@
     </div>
 
     <div ng-switch-when="1" class="create-state slide-in-right slide-out-right">
-        <h2 class="md-display-2">
+        <h2 style="margin-top: 0" class="md-display-2">
             Daten eingeben
         </h2>
 
@@ -44,6 +43,11 @@
                     Benutzername
                 </label>
                 <input type="text" name="loginName" ng-model="userCreateController.user.loginName" required>
+                <div ng-messages="userCreateController.editForm.loginName.$error">
+                    <div ng-message="required">
+                        Bitte gib einen Benutzername ein
+                    </div>
+                </div>
             </md-input-container>
             <div layout="rows">
                 <md-input-container flex="50">
@@ -51,12 +55,22 @@
                         Vorname
                     </label>
                     <input type="text" name="firstName" ng-model="userCreateController.user.firstName" required>
+                    <div ng-messages="userCreateController.editForm.firstName.$error">
+                        <div ng-message="required">
+                            Bitte gib deinen Vorname ein
+                        </div>
+                    </div>
                 </md-input-container>
                 <md-input-container flex="50">
                     <label>
                         Nachname
                     </label>
                     <input type="text" name="lastName" ng-model="userCreateController.user.lastName" required>
+                    <div ng-messages="userCreateController.editForm.lastName.$error">
+                        <div ng-message="required">
+                            Bitte gib deinen Nachname ein
+                        </div>
+                    </div>
                 </md-input-container>
             </div>
             <md-input-container>
@@ -64,14 +78,24 @@
                     Telefonnummer
                 </label>
                 <input type="tel" name="phoneNumber" ng-model="userCreateController.user.phoneNumber" required>
+                <div ng-messages="userCreateController.editForm.phoneNumber.$error">
+                    <div ng-message="required">
+                        Bitte gib deine Telefonnummer ein
+                    </div>
+                </div>
             </md-input-container>
             <md-input-container>
                 <label>
                     E-Mail
                 </label>
                 <input type="email" name="email" ng-model="userCreateController.user.email" required>
+                <div ng-messages="userCreateController.editForm.email.$error">
+                    <div ng-message="required">
+                        Bitte gib deine Emailadresse ein
+                    </div>
+                </div>
             </md-input-container>
-            <div ng-if="userCreateController.newUser" layout="rows">
+            <div layout="rows">
                 <md-input-container flex="50">
                     <label>
                         Passwort
@@ -80,6 +104,9 @@
                     <div ng-messages="userCreateController.editForm.password.$error">
                         <div ng-message="minlength">
                             Das Passwort muss mindestens 6 Zeichen lang sein
+                        </div>
+                        <div ng-message="required">
+                            Bitte gib ein Passwort ein
                         </div>
                     </div>
                 </md-input-container>
@@ -94,14 +121,18 @@
                         <div ng-message="passwordMatch">
                             Die Passwortwiederholung muss mit dem Passwort übereinstimmen
                         </div>
+                        <div ng-message="required">
+                            Bitte gib dein Passwort erneut ein
+                        </div>
                     </div>
                 </md-input-container>
             </div>
-            <md-radio-group ng-model="userCreateController.user.gender" layout="row">
+            <md-radio-group ng-model="userCreateController.user.gender" layout="row" required name="genderSelect">
                 <md-radio-button value="MALE">Männlich</md-radio-button>
                 <md-radio-button value="FEMALE">Weiblich</md-radio-button>
                 <md-radio-button value="NONE">k.A.</md-radio-button>
             </md-radio-group>
+
             <div layout="rows">
                 <md-input-container flex="50">
                     <label>Studiengang</label>

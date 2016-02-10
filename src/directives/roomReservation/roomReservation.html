@@ -30,9 +30,9 @@
                style="margin-bottom: 0;" ng-click="roomReservation.openRoom()">
         Raum öffnen
     </md-button>
-    <md-button ng-if="roomReservation.canBeOpenedNow() && roomReservation.reservation.open"
+    <md-button ng-if="roomReservation.reservation.open"
                class="md-raised md-accent md-hue-1 full-width-button"
-               style="margin-bottom: 0;" ng-click="roomReservation.returnRoom()">
+               style="margin-bottom: 0;" ng-click="roomReservation.closeRoom()">
         Raum schließen
     </md-button>
 </div>

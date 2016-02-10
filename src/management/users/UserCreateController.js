@@ -23,6 +23,9 @@
 
         self.pin = [];
 
+        self.user = {};
+        self.user.gender = "NONE";
+
         //self.user is being build by the states
 
 
