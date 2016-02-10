@@ -1,4 +1,11 @@
-<div class="main-content">
+<div class="main-content" layout="column" flex>
+
+    <div ng-if="homeController.getRoomReservations().length == 0 && homeController.getDeviceReservations().length == 0"
+         class="greyed-out md-subhead" layout="column" layout-align="center center" flex >
+        {{ nav.isStudent() ? "Du hast für den aktuellen Zeitraum keine Geräte reserviert" :
+        "Du hast für den akutellen Zeitraum weder Geräte reserviert noch den Raum gebucht" }}
+    </div>
+
     <div ng-if="homeController.getRoomReservations().length != 0 ">
         <h2>Raumbuchungen</h2>
         <div class="card-container">
