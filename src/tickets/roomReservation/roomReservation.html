@@ -1,8 +1,8 @@
 <div class="card-container card-list">
 
-    <h2 style="margin-top: 0;" class="md-display-1" ng-if="(reservationController.reservations | filter : {approved: false}).length > 0">Beantragt</h2>
+    <h2 style="margin-top: 0;" class="md-display-1 animate-fade" ng-if="(reservationController.reservations | filter : {approved: false}).length > 0">Beantragt</h2>
 
-    <div class="md-whiteframe-z2 ticket" ng-repeat="reservation in reservationController.getRepeatedReservations()">
+    <div class="md-whiteframe-z2 ticket animate-fade" ng-repeat="reservation in reservationController.getRepeatedReservations()">
         <md-toolbar class="md-hue-1">
             <div class="md-toolbar-tools">
                 <h2>
@@ -21,9 +21,9 @@
             </div>
         </div>
         <div class="card-container" ng-init="showRepeated = false" ng-if="showRepeated">
-            <div layout="row" ng-repeat="dateInstance in reservationController.getDatesForRepeatedResevation(reservation)" class="md-whiteframe-z2">
+            <div layout="row" ng-repeat="dateInstance in reservationController.getDatesForRepeatedResevation(reservation)" class="md-whiteframe-z2 animate-fade">
                 <div flex="50" layout="column" layout-align="center center" class="card-content big-content">
-                    {{dateInstance.timeSpan.beginning | date:'EEE d, yyyy'}}
+                    {{dateInstance.timeSpan.beginning | date:'EEE d. MMM, yyyy'}}
                 </div>
                 <div flex="50" layout="row">
                     <md-button flex="50" class="md-accent md-hue-1 half-width-button md-warn"
@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <div class="md-whiteframe-z2 ticket" ng-repeat="reservation in reservationController.reservations | filter : {approved: false, sharedId: '!'} | orderBy : '+timeSpan.beginning'">
+    <div class="md-whiteframe-z2 ticket animate-fade" ng-repeat="reservation in reservationController.reservations | filter : {approved: false, sharedId: '!'} | orderBy : '+timeSpan.beginning'">
         <md-toolbar class="md-hue-1">
             <div class="md-toolbar-tools">
                 <h2>
@@ -82,9 +82,9 @@
         </div>
     </div>
 
-    <h2 class="md-display-1" ng-if="(reservationController.reservations | filter : {approved: true}).length > 0">Genehmigt</h2>
+    <h2 class="md-display-1 animate-fade" ng-if="(reservationController.reservations | filter : {approved: true}).length > 0">Genehmigt</h2>
 
-    <div class="md-whiteframe-z2 ticket" ng-repeat="reservation in reservationController.reservations | filter : {approved: true}  | orderBy : '+timeSpan.beginning'">
+    <div class="md-whiteframe-z2 ticket animate-fade" ng-repeat="reservation in reservationController.reservations | filter : {approved: true}  | orderBy : '+timeSpan.beginning'">
         <md-toolbar class="md-hue-1">
             <div class="md-toolbar-tools">
                 <h2>

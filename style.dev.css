@@ -65,6 +65,14 @@
     margin: 0;
 }
 
+.animate-fade.ng-enter {
+    animation: fadeIn .25s;
+}
+
+.animate-fade.ng-leave {
+    animation: fadeOut .25s;
+}
+
 .card-container > * {
     margin: 20px;
     min-width: 400px;
