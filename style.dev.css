@@ -219,6 +219,12 @@ md-dialog {
     width: 400px;
 }
 
+.greyed-out {
+    color: rgba(0, 0, 0, .3);
+    text-align: center;
+
+}
+
 /* Fixes the Speed Dial Problem */
 .md-scale:not(.md-is-open) .md-fab-action-item {
     opacity: 0;

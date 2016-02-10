@@ -1,4 +1,9 @@
-<div class="card-container card-list">
+<div class="card-container card-list" layout="column" flex>
+
+    <div ng-if="reservationController.getRepeatedReservations().length == 0" class="greyed-out md-subhead" layout="column"
+         layout-align="center center" flex>
+        Es liegen aktuell keine Raumbuchungen vor
+    </div>
 
     <h2 style="margin-top: 0;" class="md-display-1 animate-fade" ng-if="(reservationController.reservations | filter : {approved: false}).length > 0">Beantragt</h2>
 

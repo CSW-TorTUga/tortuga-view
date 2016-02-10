@@ -1,4 +1,10 @@
-<div class="main-content card-container card-list">
+<div class="card-container card-list" layout="column" flex>
+
+    <div ng-if="supportController.messages.length == 0" class="greyed-out md-subhead" layout="column"
+         layout-align="center center" flex>
+        Es liegen aktuell keine Supporttickets vor
+    </div>
+
     <div class="md-whiteframe-z2 ticket" ng-repeat="message in supportController.messages">
         <md-toolbar class="md-hue-1">
             <div class="md-toolbar-tools">
