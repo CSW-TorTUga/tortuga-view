@@ -15,6 +15,36 @@
         self.decline = decline;
         self.declineAfterConfirm = declineAfterConfirm;
         self.accept = accept;
+        self.acceptAllRepeated = acceptAllRepeated;
+        self.declineAllRepeated = declineAllRepeated;
+
+        self.getRepeatedReservations = getRepeatedReservations;
+        self.getDatesForRepeatedResevation = getDatesForRepeatedReservation;
+
+        //public
+        function getRepeatedReservations() {
+            return self.reservations.filter(function(reservation) {
+                return !reservation.approved && reservation.sharedId != undefined;
+            }).reduce(function(aggregator, current) {
+                var foundPartner = false;
+
+                for(var i = 0; i < aggregator.length; i++) {
+                    if(aggregator[i].sharedId == current.sharedId) {
+                        return aggregator;
+                    }
+                }
+
+                aggregator.push(current);
+                return aggregator;
+            }, []);
+        }
+
+        //public
+        function getDatesForRepeatedReservation(repeatedReservation) {
+            return self.reservations.filter(function(reservation) {
+                return !reservation.approved && reservation.sharedId == repeatedReservation.sharedId;
+            });
+        }
 
         //public
         function decline(reservation) {
@@ -22,6 +52,16 @@
                 .then(function() {
                     self.reservations.splice(self.reservations.indexOf(reservation), 1);
                 });
+        }
+
+        //public
+        function declineAllRepeated(reservation) {
+            getDatesForRepeatedReservation(reservation).forEach(decline);
+        }
+
+        //public
+        function acceptAllRepeated(reservation) {
+            getDatesForRepeatedReservation(reservation).forEach(accept);
         }
 
         //public
