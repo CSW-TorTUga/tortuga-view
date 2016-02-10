@@ -1,12 +1,5 @@
 (function() {
 
-    var PRIMARY = 'blue-grey';
-    var ACCENT = 'orange';
-
-    function rgbToHex(r, g, b) {
-        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-    }
-
     angular.module('rms-terminal', [
         'ngResource'
     ]);
@@ -48,6 +41,8 @@
         var error = false;
         var successStartTime = 0;
 
+        self.roomReservation = undefined;
+
         self.getEmojis = getEmojis;
         self.getPassword = getPassword;
         self.addKey = addKey;
@@ -57,6 +52,7 @@
         self.getPasswordShow = getPasswordShow;
         self.deletePin = deletePin;
         self.getBackButtonStatus = getBackButtonStatus;
+        self.openDoor = openDoor;
 
         resetPin();
         generatePasswordField();
@@ -131,7 +127,30 @@
 
                 }, 10 * timeBetweenAnim);
             }
+        }
 
+
+        pollForOpenedRoom();
+        $interval(pollForOpenedRoom, 15 * 1000);
+        function pollForOpenedRoom() {
+            $http.get(apiAddress + "roomreservations?open=true").then(function(response) {
+                var now = (new Date()).valueOf();
+                if(response.data.length > 0) {
+                    for(var i = 0; i < response.data.length; i++) {
+                        var reservation = response.data[i];
+                        if(reservation.openedTimeSpan.end >= now && reservation.openedTimeSpan.beginning <= now) {
+                            self.roomReservation = reservation;
+                        }
+                    }
+                } else {
+                    self.roomReservation = undefined;
+                }
+            });
+        }
+
+        //public
+        function openDoor() {
+            $http.patch(apiAddress + "terminal/door",{open: true});
         }
 
 

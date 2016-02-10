@@ -19,39 +19,50 @@
 <body ng-app="rms-terminal" class="md-body-1" layout="row">
 
 <div style="visibility: hidden">
-<span><twemoji emoji="'🐵'"></twemoji></span>
-<span><twemoji emoji="'🙈'"></twemoji></span>
-<span><twemoji emoji="'➡️'"> ️</twemoji></span>
-<span><twemoji emoji="'🔓'"></twemoji></span>
-<span><twemoji emoji="'❌'"></twemoji></span>
+    <span><twemoji emoji="'🐵'"></twemoji></span>
+    <span><twemoji emoji="'🙈'"></twemoji></span>
+    <span><twemoji emoji="'➡️'"> ️</twemoji></span>
+    <span><twemoji emoji="'🔓'"></twemoji></span>
+    <span><twemoji emoji="'❌'"></twemoji></span>
 </div>
 
 <div class="fullscreen" ng-controller="LoginController as loginController">
-    <div class="emoji-password">
-        <div class="password-field">
-            <div ng-switch="pin" class="password-bubble"
-                 ng-repeat="pin in loginController.getPasswordShow() track by $index">
-                <span ng-switch-when="0" ><twemoji emoji="'🐵'"></twemoji></span>
-                <span ng-switch-when="1" ><twemoji emoji="'🙈'"></twemoji></span>
-                <span ng-switch-when="2" ><twemoji emoji="'➡️'"> ️</twemoji></span>
-                <span ng-switch-when="3" ><twemoji emoji="'🔓'"></twemoji></span>
-                <span ng-switch-when="4" ><twemoji emoji="'❌'"></twemoji></span>
-            </div>
-            <div class="password-bubble clickable" ng-switch="loginController.getBackButtonStatus()" ng-click="loginController.deletePin()">
-                <twemoji ng-switch-when="0" emoji="'🔙'"></twemoji>
-                <twemoji ng-switch-when="1" emoji="'🔓'"></twemoji>
-                <twemoji ng-switch-when="2" emoji="'❌'"></twemoji>
-            </div>
-        </div>
-        <div class="flex-row" ng-repeat="row in loginController.getEmojis() track by $index">
-            <button class="emoji-button clickable" ng-click="loginController.addKey(emoji)"
-                    ng-repeat="emoji in row track by $index" twemoji>
-                <twemoji emoji="emoji"></twemoji>
-            </button>
-        </div>
+
+    <div ng-if="loginController.roomReservation != undefined" class="big-button-container">
+        <h2>{{loginController.roomReservation.title}}</h2>
+        <button class="clickable room-open-button" ng-click="loginController.openDoor()">
+            <img class="lock-image" src="terminal/lock.svg">
+        </button>
     </div>
-    <div class="qr-code"></div>
-    <button class="problem-button">Problem melden</button>
+
+    <div ng-if="loginController.roomReservation == undefined">
+        <div class="emoji-password">
+            <div class="password-field">
+                <div ng-switch="pin" class="password-bubble"
+                     ng-repeat="pin in loginController.getPasswordShow() track by $index">
+                    <span ng-switch-when="0"><twemoji emoji="'🐵'"></twemoji></span>
+                    <span ng-switch-when="1"><twemoji emoji="'🙈'"></twemoji></span>
+                    <span ng-switch-when="2"><twemoji emoji="'➡️'"> ️</twemoji></span>
+                    <span ng-switch-when="3"><twemoji emoji="'🔓'"></twemoji></span>
+                    <span ng-switch-when="4"><twemoji emoji="'❌'"></twemoji></span>
+                </div>
+                <div class="password-bubble clickable" ng-switch="loginController.getBackButtonStatus()"
+                     ng-click="loginController.deletePin()">
+                    <twemoji ng-switch-when="0" emoji="'🔙'"></twemoji>
+                    <twemoji ng-switch-when="1" emoji="'🔓'"></twemoji>
+                    <twemoji ng-switch-when="2" emoji="'❌'"></twemoji>
+                </div>
+            </div>
+            <div class="flex-row" ng-repeat="row in loginController.getEmojis() track by $index">
+                <button class="emoji-button clickable" ng-click="loginController.addKey(emoji)"
+                        ng-repeat="emoji in row track by $index" twemoji>
+                    <twemoji emoji="emoji"></twemoji>
+                </button>
+            </div>
+        </div>
+        <div class="qr-code"></div>
+        <button class="problem-button">Problem melden</button>
+    </div>
 </div>
 
 </body>
