@@ -10,13 +10,9 @@
 
     <link href="terminal/style.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="node_modules/angular/angular.js"></script>
-    <script src='node_modules/angular-resource/angular-resource.js'></script>
-    <script src="terminal/twemoji.min.js"></script>
-    <script src="terminal/app.js"></script>
 </head>
 
-<body ng-app="rms-terminal" class="md-body-1" layout="row">
+<body ng-app="rms-terminal" ng-controller="LoginController as loginController">
 
 <div style="visibility: hidden">
     <span><twemoji emoji="'🐵'"></twemoji></span>
@@ -26,7 +22,7 @@
     <span><twemoji emoji="'❌'"></twemoji></span>
 </div>
 
-<div class="fullscreen" ng-controller="LoginController as loginController">
+<div class="fullscreen">
 
     <div ng-if="loginController.roomReservation != undefined" class="fullscreen">
         <button class="big-button clickable" ng-click="loginController.openConsole()">
@@ -62,8 +58,19 @@
         </div>
         <div class="qr-code"></div>
     </div>
-    <button class="problem-button">Problem melden</button>
+    <button class="problem-button" ng-click="loginController.chooseProblem()">Problem melden</button>
 </div>
+
+<div class="problem-overlay" ng-hide="!loginController.isChoosingProblem()">
+    <button ng-repeat="actProblem in loginController.getPossibleProblems()" ng-click="loginController.submitProblem(actProblem.text)">
+        {{actProblem.text}}
+    </button>
+</div>
+
+<script src="node_modules/angular/angular.js"></script>
+<script src='node_modules/angular-resource/angular-resource.js'></script>
+<script src="terminal/twemoji.min.js"></script>
+<script src="terminal/app.js"></script>
 
 </body>
 

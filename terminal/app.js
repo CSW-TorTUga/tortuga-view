@@ -9,6 +9,58 @@
         .constant('apiAddress', '/api/v1/');
 
     angular.module('rms-terminal')
+        .service('ProblemService', [
+            '$timeout',
+            'SupportMessage',
+            'ComplaintTemplate',
+            ProblemService
+        ]);
+
+    function ProblemService($timeout, SupportMessage, ComplaintTemplate) {
+        var self = this;
+
+        self.submitProblem = submitProblem;
+        self.chooseProblem = chooseProblem;
+        self.isChoosingProblem = isChoosingProblem;
+        self.getPossibleProblems = getPossibleProblems;
+
+        var choosingProblem = false;
+        var possibleProblems = ComplaintTemplate.query();
+
+        //public
+        function isChoosingProblem() {
+            return choosingProblem;
+        }
+
+        //public
+        function submitProblem(problem) {
+            SupportMessage.save({
+                name: 'Terminal',
+                email: '-',
+                subject: problem,
+                body: '-'
+            }).$promise.then(function() {
+                choosingProblem = false;
+            });
+        }
+
+        //public
+        function chooseProblem() {
+            choosingProblem = true;
+
+            $timeout(function() {
+                if(choosingProblem)
+                    choosingProblem = false;
+            }, 12000);
+        }
+
+        //public
+        function getPossibleProblems() {
+            return possibleProblems;
+        }
+    }
+
+    angular.module('rms-terminal')
         .controller('LoginController', [
             '$http',
             'apiAddress',
@@ -17,10 +69,11 @@
             'ComplaintTemplate',
             '$rootScope',
             '$window',
+            'ProblemService',
             LoginController
         ]);
 
-    function LoginController($http, apiAddress, $timeout, $interval, ComplaintTemplate, $scope, $window) {
+    function LoginController($http, apiAddress, $timeout, $interval, ComplaintTemplate, $scope, $window, ProblemService) {
         var self = this;
         self.twemoji = twemoji;
 
@@ -53,6 +106,11 @@
         self.deletePin = deletePin;
         self.getBackButtonStatus = getBackButtonStatus;
         self.openDoor = openDoor;
+
+        self.isChoosingProblem = ProblemService.isChoosingProblem;
+        self.chooseProblem = ProblemService.chooseProblem;
+        self.getPossibleProblems = ProblemService.getPossibleProblems;
+        self.submitProblem = ProblemService.submitProblem;
 
         resetPin();
         generatePasswordField();
@@ -233,6 +291,18 @@
     }
 
     angular.module('rms-terminal')
+        .factory('SupportMessage', [
+            '$resource',
+            'apiAddress',
+            SuppportMessage
+        ]);
+
+    function SuppportMessage($resource, apiAddress) {
+        return $resource(apiAddress + 'supportmessages/:id', null, {update: { method: 'PATCH'}});
+    }
+
+
+    angular.module('rms-terminal')
         .directive('twemoji', ['$window', function($window) {
             return {
                 restrict: 'E',
@@ -252,7 +322,6 @@
                 }
             };
         }]);
-
 
 })
 ();
