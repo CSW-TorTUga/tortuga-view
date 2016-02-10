@@ -31,7 +31,7 @@
 
         //public
         function isInState(state) {
-            return $state.$current.name.indexOf(state) != -1;
+            return $state.$current.name.indexOf(state) == 0;
         }
 
         //public
