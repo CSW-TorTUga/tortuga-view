@@ -4,7 +4,7 @@
         'ui.router'
     ]).config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('newPin', {
-            url: '/newPin/:userId/:goWhenFinished',
+            url: '/newPin?userId',
             templateUrl: 'src/newPin/newPin.html',
             controller: 'NewPinController',
             controllerAs: 'pinController'

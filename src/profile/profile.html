@@ -51,7 +51,8 @@
             </tr>
         </table>
         <md-button class="md-raised full-with-button" ng-click="profile.changePassword($event)">Passwort ändern</md-button>
-        <md-button class="md-raised full-with-button" ui-sref="newPin({userId: profile.getUser().id, goWhenFinished: 'profile'})">Pin neu vergeben</md-button>
+        <md-button class="md-raised full-with-button" ng-click="profile.newPin()">Pin neu vergeben</md-button>
+        <md-button class="md-raised full-with-button" ng-click="profile.test()">test</md-button>
 
 
     </div>

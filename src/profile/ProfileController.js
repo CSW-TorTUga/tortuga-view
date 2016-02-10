@@ -4,10 +4,12 @@
         .controller('ProfileController', [
             'AuthenticationService',
             '$mdDialog',
+            'PinService',
+            '$state',
             ProfileController
         ]);
 
-    function ProfileController(AuthenticationService, $mdDialog) {
+    function ProfileController(AuthenticationService, $mdDialog, PinService,$state) {
         var self = this;
 
         self.getUser = AuthenticationService.getUser;
@@ -15,6 +17,21 @@
         self.getGender = getGender;
         self.getRole = getRole;
         self.changePassword = changePassword;
+        self.newPin = newPin;
+
+        //public
+        function newPin() {
+            PinService.createNewPin(self.getUser()).then(function() {
+                $state.go('profile');
+            });
+        }
+
+
+
+        self.test = function() {
+            $state.go('management.users.finish' ,{user: self.getUser()});
+        };
+
 
         //public
         function changePassword(event) {
