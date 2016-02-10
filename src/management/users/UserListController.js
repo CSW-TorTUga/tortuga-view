@@ -197,6 +197,9 @@
         //public
         function editUser(userToEdit, event) {
             var id = self.users.indexOf(userToEdit);
+            if(userToEdit.gender === undefined){
+                userToEdit.gender = "NONE";
+            }
             $mdDialog.show({
                 templateUrl: 'src/management/users/edit.html',
                 controller: ['$mdDialog', 'Major',  EditUserModalController],
