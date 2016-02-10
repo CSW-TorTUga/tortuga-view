@@ -15,7 +15,7 @@
         //self.onDelete
 
         self.openRoom = openRoom;
-        self.returnRoom = returnRoom;
+        self.closeRoom = closeRoom;
         self.deleteReservation = deleteReservation;
         self.canBeOpenedNow = canBeOpenedNow;
         self.getState = getState;
@@ -36,14 +36,20 @@
 
         //public
         function openRoom() {
-            self.reservation.open = true;
-            self.reservation = RoomReservation.update({id: self.reservation.id}, self.reservation);
+            var updatedReservation = RoomReservation.update({id: self.reservation.id}, {open: true});
+
+            updatedReservation.$promise.then(function() {
+                self.reservation = updatedReservation;
+            });
         }
 
         //public
-        function returnRoom() {
-            self.reservation.open = false;
-            self.reservation = RoomReservation.update({id: self.reservation.id}, self.reservation);
+        function closeRoom() {
+            var updatedReservation = RoomReservation.update({id: self.reservation.id}, {open: false});
+
+            updatedReservation.$promise.then(function() {
+                self.reservation = updatedReservation;
+            });
         }
 
         //public
