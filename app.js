@@ -23,6 +23,7 @@
         'calendar',
         'ngSweets',
         'newPin',
+        'import',
         'ngMessages'
     ]).config([
         '$mdThemingProvider',

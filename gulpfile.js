@@ -46,6 +46,7 @@ var paths = {
         'src/profile/profile.js',
         'src/deviceReservations/deviceReservations.js',
         'src/calendar/calendar.js',
+        'src/import/import.js',
 
         'src/**/*.js'
     ],
