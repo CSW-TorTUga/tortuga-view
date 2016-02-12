@@ -11,10 +11,15 @@
                 <label>Benutzername</label>
                 <input name="username" ng-model="loginCtrl.username" type="text" required autofocus>
             </md-input-container>
-            <md-input-container  class="md-block">
+            <md-input-container style="margin-bottom: 0px;" class="md-block">
                 <label>Passwort</label>
                 <input name="password" ng-model="loginCtrl.password" type="password" required>
             </md-input-container>
+            <div style="padding-left: 2px;" ng-if="!loginCtrl.isTerminal()">
+                <md-checkbox ng-model="loginCtrl.longToken">
+                    Angemeldet bleiben
+                </md-checkbox>
+            </div>
             <md-button ng-disabled="loginCtrl.loginForm.$invalid" type="submit"
                        class="full-width-button md-accent md-raised">Login
             </md-button>

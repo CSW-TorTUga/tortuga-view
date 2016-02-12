@@ -13,10 +13,11 @@
             '$timeout',
             'SupportMessage',
             'ComplaintTemplate',
+            '$interval',
             ProblemService
         ]);
 
-    function ProblemService($timeout, SupportMessage, ComplaintTemplate) {
+    function ProblemService($timeout, SupportMessage, ComplaintTemplate, $interval) {
         var self = this;
 
         self.submitProblem = submitProblem;
@@ -26,6 +27,10 @@
 
         var choosingProblem = false;
         var possibleProblems = ComplaintTemplate.query();
+
+        $interval(function() {
+            possibleProblems = ComplaintTemplate.query();
+        }, 600000);
 
         //public
         function isChoosingProblem() {
