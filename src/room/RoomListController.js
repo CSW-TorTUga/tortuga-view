@@ -13,7 +13,8 @@
         var self = this;
 
         self.reservations = RoomReservation.query({
-            "timeSpan.end": ">" + (new Date()).valueOf()
+            "timeSpan.end": ">" + (new Date()).valueOf(),
+            "user": AuthenticationService.getUser().id
         });
 
         self.addReservation = addReservation;
