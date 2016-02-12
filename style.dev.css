@@ -368,3 +368,12 @@ md-dialog {
     position:absolute;
     width:80%;
 }
+
+/* Fix for md-fab-bottom-right */
+.md-button.md-fab.md-fab-bottom-right, md-fab-speed-dial.md-fab-bottom-right {
+    top: auto;
+    right: 20px;
+    bottom: 20px;
+    left: auto;
+    position: fixed;
+}
