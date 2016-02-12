@@ -3,7 +3,7 @@
     <div class="md-whiteframe-z2">
         <md-toolbar class="md-primary">
             <div class="md-toolbar-tools">
-                Login
+                CSW Anmeldung
             </div>
         </md-toolbar>
         <form name="loginCtrl.loginForm" class="card-content" ng-submit="loginCtrl.login()">
@@ -11,7 +11,7 @@
                 <label>Benutzername</label>
                 <input name="username" ng-model="loginCtrl.username" type="text" required autofocus>
             </md-input-container>
-            <md-input-container style="margin-bottom: 0px;" class="md-block">
+            <md-input-container style="margin-bottom: 0;" class="md-block">
                 <label>Passwort</label>
                 <input name="password" ng-model="loginCtrl.password" type="password" required>
             </md-input-container>
@@ -21,7 +21,7 @@
                 </md-checkbox>
             </div>
             <md-button ng-disabled="loginCtrl.loginForm.$invalid" type="submit"
-                       class="full-width-button md-accent md-raised">Login
+                       class="full-width-button md-accent md-raised">{{loginCtrl.loginButtonText}}
             </md-button>
         </form>
     </div>
