@@ -1,6 +1,6 @@
 <div class="card-container card-list" layout="column" flex>
 
-    <div ng-if="reservationController.getRepeatedReservations().length == 0" class="greyed-out md-subhead" layout="column"
+    <div ng-if="reservationController.reservations.length == 0" class="greyed-out md-subhead" layout="column"
          layout-align="center center" flex>
         Es liegen aktuell keine Raumbuchungen vor
     </div>
@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <h2 class="md-display-1 animate-fade" ng-if="(reservationController.reservations | filter : {approved: true}).length > 0">Genehmigt</h2>
+    <h2 class="md-display-1 animate-fade" style="margin-top: 0" ng-if="(reservationController.reservations | filter : {approved: true}).length > 0">Genehmigt</h2>
 
     <div class="md-whiteframe-z2 ticket animate-fade" ng-repeat="reservation in reservationController.reservations | filter : {approved: true}  | orderBy : '+timeSpan.beginning'">
         <md-toolbar class="md-hue-1">

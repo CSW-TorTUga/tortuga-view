@@ -17,7 +17,7 @@
         var user = loggedIn ? decodeUser($cookies.get('auth_token')) : null;
 
         $rootScope.$on('$stateChangeStart', function onStateChange(event, to) {
-            if(!loggedIn && to.name != 'login') {
+            if(!loggedIn && to.name != 'login' && to.name != 'calendar') {
                 event.preventDefault();
                 $state.go('login');
             }

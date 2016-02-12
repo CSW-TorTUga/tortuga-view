@@ -22,12 +22,22 @@
                     Betreff
                 </label>
                 <input type="text" name="subject" ng-model="supportModal.ticket.subject" required>
+                <div ng-messages="supportModal.createForm.subject.$error">
+                    <div ng-message="required">
+                        Bitte gib einen Betreff an
+                    </div>
+                </div>
             </md-input-container>
             <md-input-container>
                 <label>
-                    Text
+                    Beschreibung
                 </label>
                 <textarea type="text" name="description" ng-model="supportModal.ticket.body" required></textarea>
+                <div ng-messages="supportModal.createForm.description.$error">
+                    <div ng-message="required">
+                        Bitte gib eine Beschreibung an
+                    </div>
+                </div>
             </md-input-container>
         </form>
     </md-dialog-content>

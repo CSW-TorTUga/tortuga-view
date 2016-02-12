@@ -42,7 +42,7 @@
                                 Details
                             </md-button>
                         </md-menu-item>
-                        <md-menu-item>
+                        <md-menu-item ng-if-start="userList.canTouchUser(user)">
                             <md-button ng-click="userList.editUser(user, $event)">
                                 <md-icon>edit</md-icon>
                                 Bearbeiten
@@ -74,7 +74,7 @@
                             </md-button>
                         </md-menu-item>
                         <md-menu-divider></md-menu-divider>
-                        <md-menu-item>
+                        <md-menu-item ng-if-end>
                             <md-button ng-click="userList.deleteUser(user, $event)" class="md-raised md-warn">
                                 <md-icon>delete</md-icon>
                                 Löschen

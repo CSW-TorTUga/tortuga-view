@@ -4,10 +4,11 @@
         .controller('UserListController', [
             'User',
             '$mdDialog',
+            'AuthenticationService',
             UserListController
         ]);
 
-    function UserListController(UserService, $mdDialog) {
+    function UserListController(UserService, $mdDialog, AuthenticationService) {
         var self = this;
 
         self.users = UserService.query();
@@ -23,6 +24,7 @@
         self.activeFilter = activeFilter;
         self.isUserExpired = isUserExpired;
         self.resetPassword = resetPassword;
+        self.canTouchUser = canTouchUser;
 
         self.showActive = true;
 
@@ -45,6 +47,17 @@
         //public
         function activeFilter(user) {
             return self.showActive ? userIsActive(user) : !userIsActive(user);
+        }
+
+        //public
+        function canTouchUser(user) {
+            if(AuthenticationService.isAdmin())
+                return true;
+
+            if(AuthenticationService.isCswTeam())
+                return user.role == 'STUDENT' || user.role == 'LECTURER';
+
+            return false;
         }
 
         //public
