@@ -290,7 +290,7 @@
 
         function login() {
             var passwordString = password.join("");
-            $http.post(apiAddress + "terminal/door?passcode=" + encodeURIComponent(passwordString), {open:true})
+            $http.patch(apiAddress + "terminal/door?passcode=" + encodeURIComponent(passwordString), {open:true})
                 .then(function() {
                     success = true;
                     successStartTime = (new Date()).valueOf();
