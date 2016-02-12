@@ -21,8 +21,6 @@
         x.open('PATCH', '/api/v1/terminal/door?token=' + params.t);
         x.setRequestHeader("Content-Type", "application/json");
         x.send('{"open":true}');
-
-
     }
 
 
@@ -47,7 +45,7 @@
         self.isTerminal = isTerminal;
 
         if(AuthenticationService.isLoggedIn()) {
-            $state.go('home');
+            //$state.go('home');
         }
 
         //public
