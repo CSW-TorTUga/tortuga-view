@@ -11,7 +11,7 @@
 
                     var img = elem.append($window.twemoji.parse(scope.emoji));
 
-                    scope.$watch(attr.emoji, function(newVal) {
+                    scope.$parent.$watch(attr.emoji, function(newVal) {
                         img.children().remove();
                         elem.html("");
                         img = elem.append($window.twemoji.parse(newVal));
