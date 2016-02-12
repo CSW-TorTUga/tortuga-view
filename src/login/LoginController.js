@@ -1,5 +1,31 @@
 (function () {
 
+    function getSearchParameters() {
+        var prmstr = window.location.search.substr(1);
+        return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+    }
+
+    function transformToAssocArray( prmstr ) {
+        var params = {};
+        var prmarr = prmstr.split("&");
+        for ( var i = 0; i < prmarr.length; i++) {
+            var tmparr = prmarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+        }
+        return params;
+    }
+
+    var params = getSearchParameters();
+    if(params.t != undefined) {
+        var x = new XMLHttpRequest();
+        x.open('PATCH', '/api/v1/terminal/door?token=' + params.t);
+        x.setRequestHeader("Content-Type", "application/json");
+        x.send('{"open":true}');
+
+
+    }
+
+
     angular.module('login')
         .controller('LoginController', [
             'AuthenticationService',
@@ -19,6 +45,10 @@
 
         self.login = login;
         self.isTerminal = isTerminal;
+
+        if(AuthenticationService.isLoggedIn()) {
+            $state.go('home');
+        }
 
         //public
         function login() {
