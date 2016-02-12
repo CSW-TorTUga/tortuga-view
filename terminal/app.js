@@ -362,8 +362,8 @@
 
                     var qrcode = new QRCode(domElem, {
                         text: scope.code,
-                        width: 250,
-                        height: 250,
+                        width: 280,
+                        height: 280,
                         colorDark : "#000000",
                         colorLight : "#ffffff",
                         correctLevel : QRCode.CorrectLevel.L

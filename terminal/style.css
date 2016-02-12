@@ -54,19 +54,18 @@ div.problem-overlay {
     right: 0;
     bottom: 0;
     height: 50px;
-    width: 250px;
+    width: 300px;
     font-size: larger;
     color: white;
 }
 
 .emoji-password {
-    margin-left: 50px;
     width: 700px;
     height: 700px;
 }
 
 .main-content {
-    left: 250px;
+    left: 300px;
 }
 
 .emoji-button {
@@ -156,7 +155,7 @@ div.problem-overlay {
     top: 0;
     left: 0;
     height: 768px;
-    width: 250px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     color: white;
@@ -194,7 +193,7 @@ body {
 }
 
 qrcode {
-    padding: 0;
+    padding: 10px;
 }
 
 .flex-container {
