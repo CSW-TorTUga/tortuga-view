@@ -80,13 +80,14 @@
             '$rootScope',
             '$window',
             'ProblemService',
+            'baseHost',
             LoginController
         ]);
 
-    function LoginController($http, apiAddress, $timeout, $interval, ComplaintTemplate, $scope, $window, ProblemService) {
+    function LoginController($http, apiAddress, $timeout, $interval, ComplaintTemplate, $scope, $window, ProblemService, baseHost) {
         var self = this;
         self.twemoji = twemoji;
-        self.loginUrl = "http://192.168.0.152/login?openDoor=271467826326432784";
+        self.loginUrl = "not initialized";
 
         var password = ["", "", "", "", ""];
         var passwordIndex = 0;
@@ -220,6 +221,15 @@
                 });
         }
 
+
+        pollForQRcode();
+        $interval(pollForQRcode, 15 * 1000);
+        function pollForQRcode() {
+            $http.get(apiAddress + "terminal/code").then(function(response) {
+                self.loginUrl = baseHost + "login?t=" + response.data;
+            })
+        }
+
         //public
         function openDoor() {
             $http.patch(apiAddress + "terminal/door", {open: true});
@@ -328,7 +338,7 @@
 
                     var img = elem.append($window.twemoji.parse(scope.emoji));
 
-                    scope.$watch(attr.emoji, function(newVal) {
+                    scope.$parent.$watch(attr.emoji, function(newVal) {
                         img.children().remove();
                         elem.html("");
                         img = elem.append($window.twemoji.parse(newVal));
@@ -352,21 +362,26 @@
 
                     var qrcode = new QRCode(domElem, {
                         text: scope.code,
-                        width: 128,
-                        height: 128,
+                        width: 250,
+                        height: 250,
                         colorDark : "#000000",
                         colorLight : "#ffffff",
-                        correctLevel : QRCode.CorrectLevel.H
+                        correctLevel : QRCode.CorrectLevel.L
                     });
 
-                    elem.html(domElem.html);
+                    elem.append(domElem.childNodes);
 
-                    scope.$watch(attr.code, function(newVal) {
+
+                    scope.$parent.$watch(attr.code, function(newVal, oldVal, scope) {
+                        if(newVal == undefined) {
+                            newVal = scope.code;
+                        }
                         qrcode.clear();
                         qrcode.makeCode(newVal);
 
-                        elem.html(domElem.html);
-                    })
+                        elem.append(domElem.childNodes);
+                    });
+
                 }
             };
         }]);

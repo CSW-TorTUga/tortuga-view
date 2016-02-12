@@ -176,7 +176,7 @@ body {
 }
 
 .flex {
-    flex-grow: 500;
+    flex-grow: 1;
 }
 
 
@@ -191,4 +191,24 @@ body {
     font-size: 3.5em;
 
     /* border-bottom: 1px solid white; */
+}
+
+qrcode {
+    padding: 0;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-big {
+    flex-grow: 10;
+}
+
+.center-center {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
 }

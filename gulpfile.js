@@ -95,7 +95,7 @@ gulp.task('terminal', function() {
         .pipe(gulp.dest('./terminal/'));
 });
 
-gulp.task('build', ['scripts', 'styles']);
+gulp.task('build', ['scripts', 'terminal', 'styles']);
 
 gulp.task('watch', function(){
     gulp.watch('src/**/*.js',['scripts']);
@@ -104,4 +104,4 @@ gulp.task('watch', function(){
     gulp.watch('./terminal/index.dev.html', ['terminal']);
 });
 
-gulp.task('default', ['build', 'terminal', 'watch']);
+gulp.task('default', ['build', 'watch']);
