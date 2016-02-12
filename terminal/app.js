@@ -290,7 +290,7 @@
 
         function login() {
             var passwordString = password.join("");
-            $http.post(apiAddress + "terminal/authenticate", {passcode: passwordString})
+            $http.post(apiAddress + "terminal/authenticate?passcode=" + encodeURIComponent(passwordString), {open:true})
                 .then(function() {
                     success = true;
                     successStartTime = (new Date()).valueOf();
