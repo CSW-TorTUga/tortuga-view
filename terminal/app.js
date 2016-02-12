@@ -1,8 +1,13 @@
 (function() {
 
+
+    function rgbToHex(r, g, b) {
+        return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+
     angular.module('rms-terminal', [
         'ngResource'
-    ]);
+    ])
 
 
     angular.module('rms-terminal')
@@ -81,6 +86,7 @@
     function LoginController($http, apiAddress, $timeout, $interval, ComplaintTemplate, $scope, $window, ProblemService) {
         var self = this;
         self.twemoji = twemoji;
+        self.loginUrl = "http://192.168.0.152/login?openDoor=271467826326432784";
 
         var password = ["", "", "", "", ""];
         var passwordIndex = 0;
@@ -92,7 +98,7 @@
 
         var emojis = [];
 
-        var passwordShow = [0,0,0,0,0];
+        var passwordShow = [0, 0, 0, 0, 0];
         var backButtonStatus = 0;
 
         var success = false;
@@ -163,7 +169,7 @@
 
         function updatePinState() {
             if(inErrorState()) {
-                passwordShow = [4,4,4,4,4];
+                passwordShow = [4, 4, 4, 4, 4];
                 backButtonStatus = 2;
                 $timeout(resetPin, 700);
             } else if(inSuccesState()) {
@@ -175,8 +181,8 @@
                     }
                 }
 
-                for(var i = 0; i <= 4; i++ ) {
-                    $timeout(updatePin(i,2), (i + 1) * timeBetweenAnim);
+                for(var i = 0; i <= 4; i++) {
+                    $timeout(updatePin(i, 2), (i + 1) * timeBetweenAnim);
                 }
 
                 $timeout(function() {
@@ -196,24 +202,27 @@
         pollForOpenedRoom();
         $interval(pollForOpenedRoom, 15 * 1000);
         function pollForOpenedRoom() {
-            $http.get(apiAddress + "roomreservations?open=true").then(function(response) {
-                var now = (new Date()).valueOf();
-                if(response.data.length > 0) {
-                    for(var i = 0; i < response.data.length; i++) {
-                        var reservation = response.data[i];
-                        if(reservation.openedTimeSpan.end >= now && reservation.openedTimeSpan.beginning <= now) {
-                            self.roomReservation = reservation;
+            var now = (new Date()).valueOf();
+            $http.get(apiAddress + "roomreservations?open=true&timeSpan.end=>" + (now - 5 * 60 * 60 * 1000)).then(function(response) {
+                    var foundOpen = false;
+                    if(response.data.length > 0) {
+                        for(var i = 0; i < response.data.length; i++) {
+                            var reservation = response.data[i];
+                            if(reservation.openedTimeSpan.end >= now && reservation.openedTimeSpan.beginning <= now) {
+                                foundOpen = true;
+                                self.roomReservation = reservation;
+                            }
                         }
                     }
-                } else {
-                    self.roomReservation = undefined;
-                }
-            });
+                    if(!foundOpen) {
+                        self.roomReservation = undefined;
+                    }
+                });
         }
 
         //public
         function openDoor() {
-            $http.patch(apiAddress + "terminal/door",{open: true});
+            $http.patch(apiAddress + "terminal/door", {open: true});
         }
 
 
@@ -247,7 +256,7 @@
         //public
         function resetPin() {
             password = ["", "", "", "", ""];
-            passwordShow = [0,0,0,0,0];
+            passwordShow = [0, 0, 0, 0, 0];
             success = false;
             error = false;
             passwordIndex = 0;
@@ -303,7 +312,7 @@
         ]);
 
     function SuppportMessage($resource, apiAddress) {
-        return $resource(apiAddress + 'supportmessages/:id', null, {update: { method: 'PATCH'}});
+        return $resource(apiAddress + 'supportmessages/:id', null, {update: {method: 'PATCH'}});
     }
 
 
@@ -323,6 +332,40 @@
                         img.children().remove();
                         elem.html("");
                         img = elem.append($window.twemoji.parse(newVal));
+                    })
+                }
+            };
+        }]);
+
+
+    angular.module('rms-terminal')
+        .directive('qrcode', ['$window' , function($window) {
+            return {
+                restrict: 'E',
+                scope: {
+                    code: "="
+                },
+                link: function(scope, elem, attr) {
+                    //console.dir(elem);
+
+                    var domElem = document.createElement("div");
+
+                    var qrcode = new QRCode(domElem, {
+                        text: scope.code,
+                        width: 128,
+                        height: 128,
+                        colorDark : "#000000",
+                        colorLight : "#ffffff",
+                        correctLevel : QRCode.CorrectLevel.H
+                    });
+
+                    elem.html(domElem.html);
+
+                    scope.$watch(attr.code, function(newVal) {
+                        qrcode.clear();
+                        qrcode.makeCode(newVal);
+
+                        elem.html(domElem.html);
                     })
                 }
             };

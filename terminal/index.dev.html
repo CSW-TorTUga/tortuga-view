@@ -10,6 +10,8 @@
 
     <link href="terminal/style.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
 </head>
 
 <body ng-app="rms-terminal" ng-controller="LoginController as loginController">
@@ -22,16 +24,23 @@
     <span><twemoji emoji="'❌'"></twemoji></span>
 </div>
 
-<div class="fullscreen">
+<div class="fullscreen main-container">
+    <div class="sidebar primary-background">
+        <header>C S W</header>
+        <div class="flex"></div>
+        <qrcode code="loginController.loginUrl"></qrcode>
+        <div class="flex"></div>
+        <button class="problem-button" ng-click="loginController.chooseProblem()">PROBLEM MELDEN</button>
+    </div>
 
-    <div ng-if="loginController.roomReservation != undefined" class="fullscreen">
-        <button class="big-button clickable" ng-click="loginController.openDoor()">
-            <h2>{{loginController.roomReservation.title}}</h2>
-            <img class="lock-image" src="terminal/lock.svg">
+    <div ng-if="loginController.roomReservation != undefined" class="main-content">
+        <button class="big-button clickable full-height" ng-click="loginController.openDoor()">
+            <h1 class="title">{{loginController.roomReservation.title}}</h1>
+            <img class="lock-image" src="terminal/lock.svg" draggable="false">
         </button>
     </div>
 
-    <div ng-if="loginController.roomReservation == undefined">
+    <div ng-if="loginController.roomReservation == undefined" class="main-content">
         <div class="emoji-password">
             <div class="password-field">
                 <div ng-switch="pin" class="password-bubble"
@@ -58,11 +67,11 @@
         </div>
         <div class="qr-code"></div>
     </div>
-    <button class="problem-button" ng-click="loginController.chooseProblem()">Problem melden</button>
 </div>
 
 <div class="problem-overlay" ng-hide="!loginController.isChoosingProblem()">
-    <button ng-repeat="actProblem in loginController.getPossibleProblems()" ng-click="loginController.submitProblem(actProblem.text)">
+    <button ng-repeat="actProblem in loginController.getPossibleProblems()"
+            ng-click="loginController.submitProblem(actProblem.text)">
         {{actProblem.text}}
     </button>
 </div>
@@ -70,6 +79,7 @@
 <script src="node_modules/angular/angular.js"></script>
 <script src='node_modules/angular-resource/angular-resource.js'></script>
 <script src="terminal/twemoji.min.js"></script>
+<script src="terminal/qrcode.js"></script>
 <script src="terminal/app.js"></script>
 
 </body>
