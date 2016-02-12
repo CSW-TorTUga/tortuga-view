@@ -10,7 +10,7 @@
 
     function errorInterceptor($q, $injector, errorToastDelay) {
         function onResponseError(rejection) {
-            if(rejection.status != 502 && rejection.status != 401) {
+            if(rejection.status != 502 && rejection.status != 401 && rejection.status != 403) {
                 var ErrorToasts = $injector.get('ErrorToasts');
 
                 if(rejection.data.errors) {

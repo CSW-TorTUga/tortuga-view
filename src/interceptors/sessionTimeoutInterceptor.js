@@ -11,8 +11,8 @@
         function onResponseError(rejection) {
             var $state = $injector.get('$state');
 
-            if(rejection.status == 401 && $state.name != 'login') {
-                $state.go('login');
+            if(rejection.status == 403 || (rejection.status == 401 && $state.name != 'login')) {
+                $injector.get('AuthenticationService').logout();
             }
 
             return $q.reject(rejection);
