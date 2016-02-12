@@ -36,7 +36,11 @@
         function decodeUser(encodedUser) {
             var split = encodedUser.split('.');
 
-            return JSON.parse(atob(decodeURIComponent(split[0]))).user;
+            var ret = JSON.parse(atob(decodeURIComponent(split[0])));
+
+            console.dir(ret);
+
+            return ret.user;
         }
 
         //public
@@ -70,10 +74,11 @@
         }
 
         //public
-        function login(username, password) {
+        function login(username, password, longToken) {
             var httpPromise = $http.post(apiAddress + 'login', {
                 loginName: username,
-                password: password
+                password: password,
+                longToken: longToken
             });
 
             httpPromise.then(function(response) {

@@ -3,12 +3,13 @@
     width: 1024px;
     height: 768px;
     -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Chrome/Safari/Opera */
-    -khtml-user-select: none;    /* Konqueror */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* IE/Edge */
-    user-select: none;           /* non-prefixed version, currently
-                                  not supported by any browser */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    user-select: none;
+    /* non-prefixed version, currently
+                           not supported by any browser */
 
     position: absolute;
     top: 0;
@@ -35,7 +36,7 @@ div.problem-overlay {
     right: 0px;
 }
 
-.bottom{
+.bottom {
     bottom: 0px;
 }
 
@@ -43,21 +44,28 @@ div.problem-overlay {
     width: 100%;
 }
 
-.problem-button{
-    background-color: #ff999e;
-    position: fixed;
+.full-height {
+    height: 768px;
+}
+
+.problem-button {
+    background-color: inherit;
+    border: 0;
     right: 0;
     bottom: 0;
     height: 50px;
-    width: 250px;
-    border: 0;
+    width: 300px;
     font-size: larger;
+    color: white;
 }
 
 .emoji-password {
-    margin-left: 50px;
     width: 700px;
     height: 700px;
+}
+
+.main-content {
+    left: 300px;
 }
 
 .emoji-button {
@@ -120,15 +128,86 @@ div.problem-overlay {
 
 .lock-image {
     width: 300px;
+    box-shadow: 20px 20px 50px -10px grey;
     height: 300px;
+    border: 1px #aeaeae solid;
+    background-color: rgba(192,192,192,0.15);
+    border-radius: 50px;
+    padding: 22px;
+    margin-bottom: 70px;
 }
 
 .big-button {
     background-color: white;
-    height: 100%;
-    width: 100%;
-    display:flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding:0px;
+}
+
+.title {
+    font-size: 8em;
+    margin: 0;
+}
+
+.sidebar {
+    top: 0;
+    left: 0;
+    height: 768px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.primary-background {
+    background-color: rgb(120, 144, 156);
+}
+
+body {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex {
+    flex-grow: 1;
+}
+
+
+
+.sidebar header {
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    font-family: 'Source Sans Pro', sans-serif;;
+    text-align: center;
+    font-weight: 600;
+    font-size: 3.5em;
+
+    /* border-bottom: 1px solid white; */
+}
+
+qrcode {
+    padding: 10px;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-big {
+    flex-grow: 10;
+}
+
+.center-center {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+
 }

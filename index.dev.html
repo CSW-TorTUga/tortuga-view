@@ -7,6 +7,7 @@
     <base href="/">
 
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <link href="dist/style.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -36,7 +37,7 @@
 <md-sidenav
         layout="column"
         class="sidenav md-sidenav-left md-locked-open md-whiteframe-z3 primary-background"
-        md-is-locked-open="$mdMedia('gt-sm') && nav.isLoggedIn() && !nav.isInState('newPin')">
+        md-is-locked-open="$mdMedia('gt-sm') && nav.isLoggedIn() && !nav.isInState('newPin') && !nav.isInState('login')">
     <header>
         <a ui-sref="home">
             C S W
@@ -87,14 +88,6 @@
         Logout
     </md-button>
 </md-sidenav>
-
-<div hide-gt-sm>
-    <md-button class="md-fab md-fab-top-left">
-        <md-icon>
-            menu
-        </md-icon>
-    </md-button>
-</div>
 
 <md-content ui-view role="main" flex layout="column"></md-content>
 

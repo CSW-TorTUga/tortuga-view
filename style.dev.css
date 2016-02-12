@@ -377,3 +377,8 @@ md-dialog {
     left: auto;
     position: fixed;
 }
+
+.mobile-login {
+    width: 85%;
+    min-width: 0;
+}

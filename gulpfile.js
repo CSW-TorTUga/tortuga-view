@@ -80,26 +80,28 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('set-host', ['scripts', 'styles'], function() {
+gulp.task('terminal', function() {
     var host = process.env.BASE_HOST;
 
     if(host == undefined) {
-        host = 'http://localhost:7081/';
+        host = 'http://localhost:2222/';
     } else {
         console.log("Using " + host + " as the host");
     }
 
-    return gulp.src('./index.html')
+    return gulp.src('./terminal/index.dev.html')
         .pipe(replace('$$HOST', host))
-        .pipe(gulp.dest('./'));
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest('./terminal/'));
 });
 
-gulp.task('build', ['scripts', 'styles' /*, 'set-host'*/]);
+gulp.task('build', ['scripts', 'terminal', 'styles']);
 
 gulp.task('watch', function(){
-    gulp.watch('src/**/*.js',['scripts' /*, 'set-host'*/]);
-    gulp.watch('index.dev.html', ['scripts' /*, 'set-host'*/]);
+    gulp.watch('src/**/*.js',['scripts']);
+    gulp.watch('index.dev.html', ['scripts']);
     gulp.watch(['src/**/*.css', 'style.dev.css'], ['styles']);
+    gulp.watch('./terminal/index.dev.html', ['terminal']);
 });
 
 gulp.task('default', ['build', 'watch']);
