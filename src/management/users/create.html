@@ -12,8 +12,8 @@
                 <md-select name="role" ng-model="userCreateController.user.role" required>
                     <md-option value="STUDENT">Student</md-option>
                     <md-option value="LECTURER">Dozent</md-option>
-                    <md-option value="CSW_TEAM">CSW-Team</md-option>
-                    <md-option value="ADMIN">Admin</md-option>
+                    <md-option value="CSW_TEAM" ng-if-start="userCreateController.isAdmin()">CSW-Team</md-option>
+                    <md-option value="ADMIN" ng-if-end>Admin</md-option>
                 </md-select>
                 <div ng-messages="userCreateController.roleForm.role.$error">
                     <div ng-message="required">

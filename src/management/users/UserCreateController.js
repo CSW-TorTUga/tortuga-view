@@ -6,10 +6,11 @@
             '$state',
             'PinService',
             '$window',
+            'AuthenticationService',
             UserCreateController
         ]);
 
-    function UserCreateController(User, Major, $state, PinService, $window) {
+    function UserCreateController(User, Major, $state, PinService, $window, AuthenticationService) {
         var self = this;
         var state = 0;
 
@@ -20,6 +21,8 @@
         self.advance = advance;
         self.save = save;
         self.validatePasswordRepeat = validatePasswordRepeat;
+
+        self.isAdmin = AuthenticationService.isAdmin;
 
         self.pin = [];
 
