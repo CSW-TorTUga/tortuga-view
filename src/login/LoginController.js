@@ -10,10 +10,11 @@
             '$http',
             '$stateParams',
             '$q',
+            '$mdMedia',
             LoginController
         ]);
 
-    function LoginController(AuthenticationService, ErrorToasts, $state, $animate, $location, $http, $stateParams, $q) {
+    function LoginController(AuthenticationService, ErrorToasts, $state, $animate, $location, $http, $stateParams, $q, $mdMedia) {
         var self = this;
 
         self.username = '';
@@ -22,6 +23,7 @@
 
         self.login = login;
         self.isTerminal = isTerminal;
+        self.isMobile = isMobile;
 
         self.loginButtonText = 'Anmelden';
 
@@ -75,6 +77,11 @@
                     token: token
                 }
             });
+        }
+
+        //public
+        function isMobile() {
+            return $mdMedia('xs') || $mdMedia('sm');
         }
     }
 

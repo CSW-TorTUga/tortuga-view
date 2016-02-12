@@ -368,3 +368,7 @@ md-dialog {
     position:absolute;
     width:80%;
 }
+
+.mobile-login {
+    width: 85%;
+}
