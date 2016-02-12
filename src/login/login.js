@@ -13,7 +13,7 @@
             url: '/doorSuccess',
             template: [
                 '<div flex layout-align="center center" layout="column">',
-                'Tür öffnet sich in Kürze',
+                '<img src="/terminal/lock.svg" style="width: 40%">',
                 '</div>'
             ].join('')
         })
