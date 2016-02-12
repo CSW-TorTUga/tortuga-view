@@ -11,9 +11,6 @@
     <link href="terminal/style.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <script>
-        var baseHost = '$$HOST';
-    </script>
 
 </head>
 
@@ -30,9 +27,9 @@
 <div class="fullscreen main-container">
     <div class="sidebar primary-background">
         <header>C S W</header>
-        <div class="flex"></div>
-        <qrcode code="loginController.loginUrl"></qrcode>
-        <div class="flex"></div>
+        <div class="flex-container center-center flex-big">
+            <qrcode code="loginController.loginUrl"></qrcode>
+        </div>
         <button class="problem-button" ng-click="loginController.chooseProblem()">PROBLEM MELDEN</button>
     </div>
 
@@ -84,6 +81,11 @@
 <script src="terminal/twemoji.min.js"></script>
 <script src="terminal/qrcode.js"></script>
 <script src="terminal/app.js"></script>
+
+<script>
+    angular.module('rms-terminal')
+            .constant('baseHost', '$$HOST');
+</script>
 
 </body>
 
