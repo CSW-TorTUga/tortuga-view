@@ -55,7 +55,6 @@
     <md-dialog-actions>
        <md-button type="button" ng-click="editModal.cancel()">abbrechen</md-button>
         <md-button class="md-accent" type="submit" ng-click="editModal.submit()"
-                   ng-disabled="!editModal.editForm.$valid || !editModal.timespanIsValid()
-                    || !editModal.timespanIsValid()">absenden</md-button>
+                   ng-disabled="!editModal.editForm.$valid || !editModal.timespanIsValid() || !editModal.startTimeIsInFuture()">absenden</md-button>
     </md-dialog-actions>
 </md-dialog>
