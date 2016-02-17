@@ -28,6 +28,8 @@
         self.isLoggedIn = isLoggedIn;
         self.getUser = getUser;
 
+        self.getTokenValidityTime = getTokenValidityTime;
+
         self.isStudent = isStudent;
         self.isLecturer = isLecturer;
         self.isCswTeam = isCswTeam;
@@ -38,9 +40,16 @@
 
             var ret = JSON.parse(atob(decodeURIComponent(split[0])));
 
-            console.dir(ret);
-
             return ret.user;
+        }
+
+        //public
+        function getTokenValidityTime() {
+            var split = $cookies.get('auth_token').split('.');
+
+            var ret = JSON.parse(atob(decodeURIComponent(split[0])));
+
+            return ret.validFor;
         }
 
         //public
