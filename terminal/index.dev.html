@@ -28,14 +28,14 @@
     <div class="sidebar primary-background">
         <header>C S W</header>
         <div class="flex-container center-center flex-big">
-            <p  ng-if-start="loginController.roomReservation == undefined">Scannen um Tür zu öffnen</p>
+            <p  ng-if-start="loginController.roomReservation == undefined">Scannen zum Tür öffnen</p>
             <qrcode ng-if-end code="loginController.loginUrl"></qrcode>
         </div>
         <button class="problem-button" ng-click="loginController.chooseProblem()">PROBLEM MELDEN</button>
     </div>
 
     <div ng-if="loginController.roomReservation != undefined" class="main-content">
-        <button class="big-button clickable full-height" ng-click="loginController.openDoor()">
+        <button class="big-button clickable full-height full-width" ng-click="loginController.openDoor()">
             <h1 class="title">{{loginController.roomReservation.title}}</h1>
             <img class="lock-image" src="terminal/lock.svg" draggable="false">
         </button>
@@ -59,7 +59,7 @@
                     <twemoji ng-switch-when="2" emoji="'❌'"></twemoji>
                 </div>
             </div>
-            <div class="flex-row" ng-repeat="row in loginController.getEmojis() track by $index">
+            <div class="flex-row password-row" ng-repeat="row in loginController.getEmojis() track by $index">
                 <button class="emoji-button clickable" ng-click="loginController.addKey(emoji)"
                         ng-repeat="emoji in row track by $index" twemoji>
                     <twemoji emoji="emoji"></twemoji>

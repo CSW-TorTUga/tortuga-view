@@ -66,6 +66,7 @@ div.problem-overlay {
 
 .main-content {
     left: 300px;
+    width: 724px;
 }
 
 .emoji-button {
@@ -147,7 +148,7 @@ div.problem-overlay {
 }
 
 .title {
-    font-size: 8em;
+    font-size: 4rem;
     margin: 0;
 }
 
@@ -208,6 +209,8 @@ qrcode {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
 
-
+.password-row {
+    margin: 20px;
 }
