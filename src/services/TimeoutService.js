@@ -32,8 +32,6 @@
                 return;
             }
 
-            console.log(AuthenticationService.getTokenValidityTime() / CHECK_INTERVAL);
-
             if(++nothingHappenedCounter > (AuthenticationService.getTokenValidityTime() / CHECK_INTERVAL - 1)) {
                 AuthenticationService.logout();
             }
