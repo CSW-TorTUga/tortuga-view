@@ -10,7 +10,9 @@
     function RoomReservationApprovalListController(RoomReservation, $mdDialog) {
         var self = this;
 
-        self.reservations = RoomReservation.query();
+        self.reservations = RoomReservation.query({
+            "timeSpan.end": ">" + (new Date()).valueOf()
+        });
 
         self.decline = decline;
         self.declineAfterConfirm = declineAfterConfirm;
