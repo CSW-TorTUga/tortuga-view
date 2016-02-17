@@ -25,7 +25,7 @@
         }
 
         function checkIfSomethingHappened() {
-            if(happened) {
+            if(happened || !AuthenticationService.isLoggedIn()) {
                 happened = false;
                 nothingHappenedCounter = 0;
 
