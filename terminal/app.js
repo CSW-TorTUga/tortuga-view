@@ -235,7 +235,7 @@
         //public
         function openDoor() {
             var now = new Date().valueOf();
-            if(now - lastOpenedDoorAt > 30 * 1000) {
+            if(now - lastOpenedDoorAt > 10 * 1000) {
                 lastOpenedDoorAt = now;
                 $http.patch(apiAddress + "terminal/door", {open: true});
             }
