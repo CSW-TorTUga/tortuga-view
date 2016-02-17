@@ -69,7 +69,7 @@
             <div layout="rows">
                 <md-input-container flex="50">
                     <label>Studiengang</label>
-                    <md-select name="major" ng-model="userModal.user.major" ng-required="userModal.user.role == 'STUDENT'">
+                    <md-select name="major" ng-model="userModal.user.major" ng-model-options="{trackBy: '$value.id'}" ng-required="userModal.user.role == 'STUDENT'">
                         <md-option ng-repeat="major in userModal.majors track by major.id" ng-value="major">{{major.name}}</md-option>
                     </md-select>
                     <div ng-messages="userModal.editForm.major.$error">
