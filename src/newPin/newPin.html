@@ -26,7 +26,7 @@
                     <twemoji ng-switch-when="2" emoji="'❌'"></twemoji>
                 </div>
             </div>
-            <div class="flex-row" ng-repeat="row in pinController.getEmojis() track by $index">
+            <div class="flex-row password-row" ng-repeat="row in pinController.getEmojis() track by $index">
                 <button class="emoji-button clickable" ng-click="pinController.addKey(emoji)"
                         ng-repeat="emoji in row track by $index" twemoji>
                     <twemoji emoji="emoji"></twemoji>

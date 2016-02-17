@@ -382,3 +382,8 @@ md-dialog {
     width: 85%;
     min-width: 0;
 }
+
+
+.password-row {
+    margin: 20px;
+}
