@@ -97,6 +97,8 @@
             "🐧", "💼", "🌍", "🐝", "🏠", "⏰"];
 
 
+        var lastOpenedDoorAt = 0;
+
         var emojis = [];
 
         var passwordShow = [0, 0, 0, 0, 0];
@@ -232,7 +234,11 @@
 
         //public
         function openDoor() {
-            $http.patch(apiAddress + "terminal/door", {open: true});
+            var now = new Date().valueOf();
+            if(now - lastOpenedDoorAt > 30 * 1000) {
+                lastOpenedDoorAt = now;
+                $http.patch(apiAddress + "terminal/door", {open: true});
+            }
         }
 
 
