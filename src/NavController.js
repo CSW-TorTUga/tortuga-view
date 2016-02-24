@@ -52,7 +52,7 @@
 
         //public
         function isMobile() {
-            return $mdMedia('xs');
+            return !$mdMedia('gt-sm');
         }
 
         //public

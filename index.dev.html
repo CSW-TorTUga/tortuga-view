@@ -34,7 +34,11 @@
     }
 </style>
 
-<md-toolbar class="md-primary" hide-gt-xs ng-hide="!nav.isLoggedIn()">
+<div hide-gt-sm ng-hide="nav.isInState('login')" class="turn-device-notification">
+    Bitte drehe dein Gerät in die Porträtansicht
+</div>
+
+<md-toolbar class="md-primary" hide-gt-sm ng-hide="!nav.isLoggedIn()">
     <div class="md-toolbar-tools">
         <md-button class="md-icon-button" ng-click="nav.openSidenav()">
             <md-icon>
@@ -51,7 +55,7 @@
         layout="column"
         class="sidenav md-sidenav-left md-whiteframe-z3"
         ng-class="{ 'primary-background': !nav.isMobile() }"
-        md-is-locked-open="$mdMedia('gt-xs') && nav.isLoggedIn() && !nav.isInState('newPin') && !nav.isInState('login')"
+        md-is-locked-open="$mdMedia('gt-sm') && nav.isLoggedIn() && !nav.isInState('newPin') && !nav.isInState('login')"
         md-component-id="left">
     <header>
         <a ui-sref="home">
