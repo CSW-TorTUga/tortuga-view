@@ -34,7 +34,7 @@
     }
 </style>
 
-<md-toolbar class="md-primary" hide-gt-xs>
+<md-toolbar class="md-primary" hide-gt-xs ng-hide="!nav.isLoggedIn()">
     <div class="md-toolbar-tools">
         <md-button class="md-icon-button" ng-click="nav.openSidenav()">
             <md-icon>
