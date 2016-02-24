@@ -20,7 +20,6 @@
         self.canBeOpenedNow = canBeOpenedNow;
         self.getState = getState;
 
-        console.dir(self.reservation);
 
         //public
         function getState() {

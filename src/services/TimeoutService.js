@@ -24,7 +24,6 @@
         //public
         function somethingHappened() {
             if(AuthenticationService.isLoggedIn()) {
-                console.log(AuthenticationService.getTokenValidityTime());
                 $timeout.cancel(timeout);
                 timeout = $timeout(AuthenticationService.logout, AuthenticationService.getTokenValidityTime());
             }
