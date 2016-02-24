@@ -2,40 +2,34 @@
 
     angular.module('rms')
         .service('TimeoutService', [
-            '$interval',
+            '$timeout',
             'AuthenticationService',
+            '$rootScope',
             TimeoutService
         ]);
 
-    function TimeoutService($interval, AuthenticationService) {
+    function TimeoutService($timeout, AuthenticationService, $rootScope) {
         var self = this;
-
-        var CHECK_INTERVAL = 30000;
 
         self.somethingHappened = somethingHappened;
 
-        var happened = false;
-        var nothingHappenedCounter = 0;
+        var timeout = $timeout(AuthenticationService.logout, 0);
 
-        $interval(checkIfSomethingHappened, CHECK_INTERVAL);
+
+        $rootScope.$on('$stateChangeStart', function onStateChange() {
+            somethingHappened();
+        });
+
 
         //public
         function somethingHappened() {
-            happened = true;
-        }
-
-        function checkIfSomethingHappened() {
-            if(happened || !AuthenticationService.isLoggedIn()) {
-                happened = false;
-                nothingHappenedCounter = 0;
-
-                return;
-            }
-
-            if(++nothingHappenedCounter > (AuthenticationService.getTokenValidityTime() / CHECK_INTERVAL - 1)) {
-                AuthenticationService.logout();
+            if(AuthenticationService.isLoggedIn()) {
+                console.log(AuthenticationService.getTokenValidityTime());
+                $timeout.cancel(timeout);
+                timeout = $timeout(AuthenticationService.logout, AuthenticationService.getTokenValidityTime());
             }
         }
+
     }
 
 })();
