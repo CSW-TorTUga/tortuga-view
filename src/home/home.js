@@ -8,7 +8,10 @@
                 url: '/home',
                 templateUrl: 'src/home/home.html',
                 controller: 'HomeController',
-                controllerAs: 'homeController'
+                controllerAs: 'homeController',
+                data: {
+                    viewName: 'Home'
+                }
             });
     }]);
 

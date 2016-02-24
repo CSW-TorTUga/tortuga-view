@@ -61,45 +61,37 @@
     <md-content flex>
         <ul>
             <li>
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('home')}" ui-sref="home">
-                    Home
-                </md-button>
+                <navigation-link state="home"></navigation-link>
             </li>
             <li>
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('deviceReservation')}" ui-sref="deviceReservationList">
+                <md-button ng-class="{'md-accent': nav.isInState('deviceReservation')}" ui-sref="deviceReservationList">
                     Reservierungen
                 </md-button>
             </li>
             <li ng-if="nav.isLecturer()">
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('room')}" ui-sref="room">
-                    Raumbuchung
-                </md-button>
+                <navigation-link state="room"></navigation-link>
             </li>
             <li ng-if="nav.isCswTeam()">
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('management')}"
+                <md-button ng-class="{'md-accent': nav.isInState('management')}"
                            ui-sref="management.users.list">
                     Verwaltung
                 </md-button>
             </li>
             <li ng-controller="TicketNavController as tickets" ng-if="nav.isCswTeam()">
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('tickets')}" ui-sref="tickets.roomReservation">
+                <md-button ng-class="{'md-accent': nav.isInState('tickets')}" ui-sref="tickets.roomReservation">
                     Tickets <span ng-if="tickets.getAllCount() > 0">({{tickets.getAllCount()}})</span>
                 </md-button>
             </li>
             <li>
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('calendar')}" ui-sref="calendar">
-                    Kalender
-                </md-button>
+                <navigation-link state="calendar"></navigation-link>
             </li>
             <li>
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('profile')}" ui-sref="profile">
-                    Profil
-                </md-button>
+                <navigation-link state="profile"></navigation-link>
             </li>
         </ul>
     </md-content>
-    <md-button class="nav-link-side" ng-click="nav.supportTicket()">Problem melden</md-button>
-    <md-button class="nav-link-side" ng-click="nav.logout()">
+    <md-button ng-click="nav.supportTicket()">Problem melden</md-button>
+    <md-button ng-click="nav.logout()">
         Logout
     </md-button>
 </md-sidenav>

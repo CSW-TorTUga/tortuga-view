@@ -6,7 +6,10 @@
     ]).config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('login', {
             url: '/login?t',
-            templateUrl: 'src/login/login.html'
+            templateUrl: 'src/login/login.html',
+            data: {
+                viewName: 'Anmeldung'
+            }
         });
 
         $stateProvider.state('doorSuccess', {
@@ -15,7 +18,10 @@
                 '<div flex layout-align="center center" layout="column">',
                 '<img src="/terminal/lock.svg" style="width: 40%">',
                 '</div>'
-            ].join('')
+            ].join(''),
+            data: {
+                viewName: 'Tür öffnet'
+            }
         })
     }]);
 

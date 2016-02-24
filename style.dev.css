@@ -19,7 +19,7 @@
     width: 100%;
 }
 
-.nav-link-side {
+.sidenav md-button, .sidenav a, .sidenav button {
     padding: 9px;
     padding-left: 15px;
     width: 100%;

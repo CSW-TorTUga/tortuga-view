@@ -7,7 +7,10 @@
             url: '/newPin?userId',
             templateUrl: 'src/newPin/newPin.html',
             controller: 'NewPinController',
-            controllerAs: 'pinController'
+            controllerAs: 'pinController',
+            data: {
+                viewName: 'PIN erstellen'
+            }
         });
     }]);
 
