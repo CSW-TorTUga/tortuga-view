@@ -8,7 +8,11 @@
         $stateProvider
             .state('management', {
                 url: '/management',
-                templateUrl: 'src/management/management.html'
+                templateUrl: 'src/management/management.html',
+                redirectTo: 'management.users',
+                data: {
+                    viewName: 'Verwaltung'
+                }
             });
     }]);
 

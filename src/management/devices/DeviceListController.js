@@ -15,18 +15,41 @@
 
         self.devices = Device.query();
 
-
+        self.showDetails = showDetails;
         self.editDevice = editDevice;
         self.createDevice = createDevice;
         self.removeDevice = removeDevice;
         self.getCategoryWithDevices = getCategoryWithDevices;
 
+        //public
+        function showDetails(device, event) {
+            $mdDialog.show({
+                clickOutsideToClose: true,
+                templateUrl: 'src/management/devices/details.html',
+                controller: ['$mdDialog', DeviceDetailsModalController],
+                controllerAs: 'deviceDetails',
+                targetEvent: event,
+                bindToController: true,
+                locals: {
+                    device: device
+                }
+            });
+
+            function DeviceDetailsModalController($mdDialog) {
+                var self = this;
+
+                //self.device local
+
+                self.close = close;
+
+                function close() {
+                    $mdDialog.cancel();
+                }
+            }
+        }
 
         //public
         function getCategoryWithDevices() {
-            //console.dir(self.devices);
-            //console.dir(self.categories);
-
             return self.categories.filter(function(cat) {
                 return self.devices.filter(function (accDev) {
                         return accDev.category.id == cat.id;

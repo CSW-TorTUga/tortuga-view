@@ -1,7 +1,7 @@
 <div>
-    <div layout="row" style="margin-top: 0;">
+    <div layout-gt-sm="row" layout-xs="column" layout-sm="column" style="margin-top: 0;">
         <span class="md-display-1 primary-color">Benutzerliste</span>
-        <div flex></div>
+        <div hide-xs flex></div>
         <div layout="row" layout-margin>
             <div layout="row" layout-align="center center">
                 <md-checkbox ng-model="userList.showActive">Aktiv</md-checkbox>
@@ -13,23 +13,20 @@
                 <input type="text" ng-model="userList.userFilter">
             </md-input-container>
         </div>
-        <div layout="column" layout-align="center center">
-            <md-button class="md-raised" ui-sref="management.users.create">Benutzer anlegen</md-button>
-        </div>
     </div>
     <table class="management-list" style="width: 100%;">
         <tr>
-            <th>Name</th>
-            <th>Rolle</th>
             <th>Benutzername</th>
-            <th>Gültig bis</th>
+            <th ng-if-start="!nav.isMobile()">Name</th>
+            <th>Rolle</th>
+            <th ng-if-end>Gültig bis</th>
             <th>Aktionen</th>
         </tr>
         <tr ng-class="{'inactive': !user.enabled}" ng-repeat="user in userList.users | filter:userList.activeFilter | filter:{$:userList.userFilter}">
-            <td>{{user.firstName + " " + user.lastName}}</td>
-            <td>{{user.role}}</td>
             <td>{{user.loginName}}</td>
-            <td ng-class="{'warn': userList.isUserExpired(user)}">{{user.expirationDate | date}}</td>
+            <td ng-if-start="!nav.isMobile()">{{user.firstName + " " + user.lastName}}</td>
+            <td>{{user.role}}</td>
+            <td ng-if-end ng-class="{'warn': userList.isUserExpired(user)}">{{user.expirationDate | date}}</td>
             <td>
                 <md-menu md-position-mode="target-right target">
                     <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
@@ -86,3 +83,4 @@
         </tr>
     </table>
 </div>
+<md-button class="md-fab md-raised md-fab-bottom-right md-accent" ui-sref="management.users.create"><md-icon>add</md-icon></md-button>

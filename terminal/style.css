@@ -30,6 +30,10 @@ div.problem-overlay {
     margin-top: 20px;
     margin-bottom: 20px;
     flex-grow: 1;
+
+    font-size: 3rem;
+    background-color: lightcoral;
+    color: white;
 }
 
 .right {

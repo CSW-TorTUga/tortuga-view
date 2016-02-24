@@ -34,6 +34,7 @@
     ]).run([
         '$rootScope',
         '$mdColorPalette',
+        '$state',
         rmsRun
     ]);
 
@@ -56,7 +57,7 @@
         $httpProvider.interceptors.push('errorInterceptor');
     }
 
-    function rmsRun($rootScope, $mdColorPalette) {
+    function rmsRun($rootScope, $mdColorPalette, $state) {
         var primaryPalette = $mdColorPalette[PRIMARY];
 
         $rootScope.primaryColor = rgbToHex(
@@ -70,6 +71,13 @@
             accentPalette['A100'].value[0],
             accentPalette['A100'].value[1],
             accentPalette['A100'].value[2]);
+
+        $rootScope.$on('$stateChangeStart', function onStateChange(evt, to) {
+            if(to.redirectTo) {
+                evt.preventDefault();
+                $state.go(to.redirectTo);
+            }
+        });
     }
 
 })
