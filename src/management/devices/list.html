@@ -1,10 +1,6 @@
 <div>
-    <h2 class="md-display-1 primary-color" layout="row" style="margin-top: 0;">Geräteverwaltung
-
-        <div flex></div>
-        <div layout="column" layout-align="center center">
-            <md-button class="md-raised" ng-click="deviceList.createDevice($event)">Gerät hinzufügen</md-button>
-        </div>
+    <h2 class="md-display-1 primary-color" style="margin-top: 0;">
+        Geräteverwaltung
     </h2>
 
     <div ng-repeat="category in deviceList.getCategoryWithDevices()">
@@ -50,3 +46,4 @@
         </table>
     </div>
 </div>
+<md-button class="md-fab md-raised md-fab-bottom-right md-accent" ng-click="deviceList.createDevice($event)"><md-icon>add</md-icon></md-button>
