@@ -72,15 +72,12 @@
                 <navigation-link state="room"></navigation-link>
             </li>
             <li ng-if="nav.isCswTeam()">
-                <md-button ng-class="{'md-accent': nav.isInState('management')}"
-                           ui-sref="management.users.list">
-                    Verwaltung
-                </md-button>
+                <navigation-link state="management"></navigation-link>
             </li>
             <li ng-controller="TicketNavController as tickets" ng-if="nav.isCswTeam()">
-                <md-button ng-class="{'md-accent': nav.isInState('tickets')}" ui-sref="tickets.roomReservation">
-                    Tickets <span ng-if="tickets.getAllCount() > 0">({{tickets.getAllCount()}})</span>
-                </md-button>
+                <navigation-link state="tickets">
+                    <span ng-if="tickets.getAllCount() > 0">({{tickets.getAllCount()}})</span>
+                </navigation-link>
             </li>
             <li>
                 <navigation-link state="calendar"></navigation-link>

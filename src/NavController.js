@@ -37,7 +37,7 @@
 
         //public
         function getCurrentStateName() {
-            return $state.$current.name;
+            return $state.$current.data.viewName;
         }
 
         //public

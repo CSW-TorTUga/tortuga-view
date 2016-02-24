@@ -6,7 +6,7 @@
     ]).config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state('management.users', {
             url: '/users',
-            abstract: true,
+            redirectTo: 'management.users.list',
             template: '<ui-view></ui-view>'
         }).state('management.users.list', {
             url: '',

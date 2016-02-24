@@ -6,7 +6,8 @@
     function navigationLink() {
         return {
             restrict: 'E',
-            template: '<md-button ng-class="{ \'md-accent\': isInState() }" ui-sref="{{state}}">{{stateName}}</md-button>',
+            template: '<md-button ng-class="{ \'md-accent\': isInState() }" ui-sref="{{state}}">{{stateName}}<ng-transclude></ng-transclude></md-button>',
+            transclude: true,
             scope: {
                 state: '@'
             },
