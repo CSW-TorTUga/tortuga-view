@@ -14,7 +14,7 @@
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:900' rel='stylesheet' type='text/css'>
 </head>
 
-<body ng-app="rms" class="md-body-1" layout="row" ng-controller="NavController as nav" ng-mousedown="nav.somethingHappened()" ng-keydown="nav.somethingHappened()">
+<body ng-app="rms" class="md-body-1" layout-gt-xs="row" layout-xs="column" ng-controller="NavController as nav" ng-mousedown="nav.somethingHappened()" ng-keydown="nav.somethingHappened()">
 
 <style>
     .primary-background {
@@ -34,10 +34,25 @@
     }
 </style>
 
+<md-toolbar class="md-primary" hide-gt-xs>
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="nav.openSidenav()">
+            <md-icon>
+                menu
+            </md-icon>
+        </md-button>
+        <h2>
+            {{nav.getCurrentStateName()}}
+        </h2>
+    </div>
+</md-toolbar>
+
 <md-sidenav
         layout="column"
-        class="sidenav md-sidenav-left md-locked-open md-whiteframe-z3 primary-background"
-        md-is-locked-open="$mdMedia('gt-sm') && nav.isLoggedIn() && !nav.isInState('newPin') && !nav.isInState('login')">
+        class="sidenav md-sidenav-left md-whiteframe-z3"
+        ng-class="{ 'primary-background': !nav.isMobile() }"
+        md-is-locked-open="$mdMedia('gt-xs') && nav.isLoggedIn() && !nav.isInState('newPin') && !nav.isInState('login')"
+        md-component-id="left">
     <header>
         <a ui-sref="home">
             C S W

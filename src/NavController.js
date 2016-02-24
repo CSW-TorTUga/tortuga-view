@@ -7,12 +7,17 @@
             'TimeoutService',
             '$mdDialog',
             '$rootScope',
+            '$mdSidenav',
+            '$mdMedia',
             NavController
         ]);
 
-    function NavController($state, AuthenticationService, TimeoutService, $mdDialog, $rootScope) {
+    function NavController($state, AuthenticationService, TimeoutService, $mdDialog, $rootScope, $mdSidenav, $mdMedia) {
         var self = this;
 
+        self.isMobile = isMobile;
+        self.openSidenav = openSidenav;
+        self.getCurrentStateName = getCurrentStateName;
         self.isInState = isInState;
         self.supportTicket = supportTicket;
         self.isLoggedIn = AuthenticationService.isLoggedIn;
@@ -26,12 +31,28 @@
         self.isAdmin = AuthenticationService.isAdmin;
 
         $rootScope.$on('$stateChangeStart', function onStateChange() {
+            $mdSidenav('left').close();
             $mdDialog.cancel();
         });
 
         //public
+        function getCurrentStateName() {
+            return $state.$current.name;
+        }
+
+        //public
+        function openSidenav() {
+            $mdSidenav('left').open();
+        }
+
+        //public
         function isInState(state) {
             return $state.$current.name.indexOf(state) == 0;
+        }
+
+        //public
+        function isMobile() {
+            return $mdMedia('xs');
         }
 
         //public
