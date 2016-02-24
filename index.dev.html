@@ -34,11 +34,11 @@
     }
 </style>
 
-<div hide-gt-sm ng-hide="nav.isInState('login')" class="turn-device-notification">
+<div ng-if="nav.isMobile()" class="turn-device-notification">
     Bitte drehe dein Gerät in die Porträtansicht
 </div>
 
-<md-toolbar class="md-primary" hide-gt-sm ng-hide="!nav.isLoggedIn()">
+<md-toolbar class="md-primary" ng-if="nav.isMobile()" ng-hide="!nav.isLoggedIn()">
     <div class="md-toolbar-tools">
         <md-button class="md-icon-button" ng-click="nav.openSidenav()">
             <md-icon>
