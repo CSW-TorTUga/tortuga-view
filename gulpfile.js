@@ -61,7 +61,7 @@ gulp.task('scripts', function() {
     var scripts = gulp.src(paths.libraries.concat(paths.scripts))
         .pipe(gulpif(!isDevelopment,
             gulpif(function(file) {
-                return file.path.indexOf('js/lib/') == -1;
+                return file.path.indexOf('lib/') == -1;
             }, uglify())
         ))
         .pipe(concat('app.js'))
