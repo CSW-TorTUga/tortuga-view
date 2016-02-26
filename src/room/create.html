@@ -57,7 +57,7 @@
                     <label>
                         Frequenz
                     </label>
-                    <md-select ng-model="roomModal.frequency">
+                    <md-select ng-model="roomModal.frequency" required>
                         <md-option value="WEEKLY">
                             Wöchentlich
                         </md-option>
@@ -72,7 +72,7 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-datepicker md-placeholder="Bis (exklusive)" ng-model="roomModal.repetitionEndDate"></md-datepicker>
+                <md-datepicker md-placeholder="Bis (exklusive)" ng-model="roomModal.repetitionEndDate" required></md-datepicker>
             </div>
             <div style="color:red;">
                 <div ng-if="!roomModal.timeSpanIsValid()">
@@ -81,13 +81,16 @@
                 <div ng-if="!roomModal.startTimeIsInFuture()">
                     Der Startzeitpunkt muss in der Zukunft liegen
                 </div>
+                <div ng-if="!roomModal.durationIsValid()">
+                    Das Enddatum der Wiederholung muss nach dem Anfangsdatum liegen
+                </div>
             </div>
         </form>
     </md-dialog-content>
 
     <md-dialog-actions>
         <md-button type="button" ng-click="roomModal.cancel()">abbrechen</md-button>
-        <md-button ng-disabled="!roomModal.bookingForm.$valid || !roomModal.timeSpanIsValid() || !roomModal.timeSpanIsValid()" class="md-accent" type="submit" ng-click="roomModal.submit()">absenden</md-button>
+        <md-button ng-disabled="!roomModal.durationIsValid() || !roomModal.bookingForm.$valid || !roomModal.timeSpanIsValid() || !roomModal.timeSpanIsValid()" class="md-accent" type="submit" ng-click="roomModal.submit()">absenden</md-button>
     </md-dialog-actions>
 
 </md-dialog>

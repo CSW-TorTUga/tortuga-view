@@ -36,16 +36,13 @@
                     }
                 });
 
-                console.dir(data);
                 data.forEach(function(reservation) {
                     if(self.reservations.map(function(res) {
                             return res.id
                         }).indexOf(reservation.id) == -1) {
-                        console.dir(reservation);
                         self.reservations.push(reservation);
                     }
                 });
-                console.dir(self.reservations);
 
             })
         }
@@ -77,6 +74,7 @@
 
                 self.validateTimeInput = validateTimeInput;
                 self.startTimeIsInFuture = startTimeIsInFuture;
+                self.durationIsValid = durationIsValid;
                 self.timeSpanIsValid = timeSpanIsValid;
 
                 self.startTime = '';
@@ -117,6 +115,22 @@
 
                     return parseInt(startSplit[0]) * 60 + parseInt(startSplit[1]) <
                         parseInt(endSplit[0]) * 60 + parseInt(endSplit[1]);
+                }
+
+                //public
+                function durationIsValid(){
+                    if(!self.isRepeated){
+                        return true;
+                    }
+                    if(self.day == undefined || self.day == ''){
+                        return true;
+                    }
+                    if(self.repetitionEndDate == undefined || self.repetitionEndDate == ''){
+                        return true;
+                    }
+
+                    return self.day.getTime() <= self.repetitionEndDate.getTime();
+
                 }
 
                 //public
