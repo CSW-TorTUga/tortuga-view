@@ -2,11 +2,12 @@
     <h1 class="md-display-1 primary-color" layout="row" style="margin-top: 0;">{{simpleCrud.name}}
         <div flex></div>
         <div layout="column" layout-align="center center">
-            <md-button class="md-icon-button" ng-click="simpleCrud.createItem($event)">
+            <md-button hide-gt-sm class="md-icon-button" ng-click="simpleCrud.createItem($event)">
                 <md-icon>
                     add
                 </md-icon>
             </md-button>
+            <md-button hide show-gt-sm class="md-raised" ng-click="simpleCrud.createItem($event)">{{simpleCrud.name}} anlegen</md-button>
         </div>
     </h1>
     <table class="management-list" style="width: 100%;">
