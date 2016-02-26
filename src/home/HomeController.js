@@ -45,7 +45,7 @@
         function getDeviceReservations() {
             var now = new Date().valueOf();
             return deviceReservations.filter(function (reservation) {
-                return reservation.timeSpan.beginning <= now && now <= reservation.timeSpan.end;
+                return reservation.borrowed || (reservation.timeSpan.beginning <= now && now <= reservation.timeSpan.end);
             })
         }
 

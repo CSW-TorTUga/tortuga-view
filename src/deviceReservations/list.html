@@ -1,10 +1,10 @@
 <div class="main-content card-container" layout="column" flex>
 
-  <device-reservation
-          ng-repeat="reservation in deviceListController.reservations | orderBy:'timeSpan.beginning'"
+    <device-reservation
+          ng-repeat="reservation in deviceListController.reservations | filter: deviceListController.reservationFilter | orderBy:'timeSpan.beginning'"
           reservation="reservation"
           on-delete="deviceListController.deviceReservationDeleted(reservation)">
-  </device-reservation>
+    </device-reservation>
 
     <div ng-if="deviceListController.reservations.length == 0" class="greyed-out md-subhead" layout="column"
          layout-align="center center" flex>
@@ -14,8 +14,8 @@
 </div>
 
 <md-button class="md-fab md-fab-bottom-right md-raised md-accent" ui-sref="deviceReservationCreate">
-  <md-tooltip>
+    <md-tooltip>
     Gerät reservieren
-  </md-tooltip>
-  <md-icon>add</md-icon>
+    </md-tooltip>
+    <md-icon>add</md-icon>
 </md-button>

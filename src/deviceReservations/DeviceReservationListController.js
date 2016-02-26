@@ -16,16 +16,21 @@
         var self = this;
 
         self.reservations = DeviceReservation.query({
-            "timeSpan.end": ">" + (new Date()).valueOf(),
             "user": AuthenticationService.getUser().id
         });
 
 
         self.deviceReservationDeleted = deviceReservationDeleted;
+        self.reservationFilter = reservationFilter;
 
         //public
         function deviceReservationDeleted(reservation){
             self.reservations.splice(self.reservations.indexOf(reservation), 1);
+        }
+
+        //public
+        function reservationFilter(reservation) {
+            return reservation.borrowed || reservation.timeSpan.end > (new Date()).valueOf();
         }
     }
 
