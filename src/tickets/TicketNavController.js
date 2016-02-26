@@ -27,7 +27,7 @@
             if(!AuthenticationService.isLoggedIn() || !AuthenticationService.isCswTeam())
                 return;
 
-            RoomReservation.query({approved: false}).$promise
+            RoomReservation.query({approved: false, 'timeSpan.end': ">" + (new Date().valueOf())}).$promise
                 .then(function(res) {
                     reservations = res;
                 });
