@@ -36,16 +36,13 @@
                     }
                 });
 
-                console.dir(data);
                 data.forEach(function(reservation) {
                     if(self.reservations.map(function(res) {
                             return res.id
                         }).indexOf(reservation.id) == -1) {
-                        console.dir(reservation);
                         self.reservations.push(reservation);
                     }
                 });
-                console.dir(self.reservations);
 
             })
         }

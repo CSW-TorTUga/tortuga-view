@@ -57,7 +57,7 @@
                     <label>
                         Frequenz
                     </label>
-                    <md-select ng-model="roomModal.frequency">
+                    <md-select ng-model="roomModal.frequency" required>
                         <md-option value="WEEKLY">
                             Wöchentlich
                         </md-option>
@@ -72,7 +72,7 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <md-datepicker md-placeholder="Bis (exklusive)" ng-model="roomModal.repetitionEndDate"></md-datepicker>
+                <md-datepicker md-placeholder="Bis (exklusive)" ng-model="roomModal.repetitionEndDate" required></md-datepicker>
             </div>
             <div style="color:red;">
                 <div ng-if="!roomModal.timeSpanIsValid()">

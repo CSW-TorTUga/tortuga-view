@@ -23,7 +23,6 @@
         var pin = $http.post(apiAddress + "/users/" + $stateParams.userId + "/passcode").then(function(response) {
             isLoading = false;
             pin = response.data.passcode;
-            console.dir(response.data.passcode);
             return response.data.passcode;
         });
 
