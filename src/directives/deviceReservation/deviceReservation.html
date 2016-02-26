@@ -1,4 +1,5 @@
 <div class="md-whiteframe-z2">
+
     <md-toolbar class="md-hue-1" ng-class="{'md-hue-2': deviceReservation.isBorrowed()}">
         <div class="md-toolbar-tools">
             <h2>{{deviceReservation.reservation.device.name}}</h2>
@@ -27,6 +28,7 @@
             </md-button>
         </div>
     </md-toolbar>
+
     <div class="card-content" layout="row">
         <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
              style="height: 50px;">
@@ -37,6 +39,7 @@
             bis {{deviceReservation.reservation.timeSpan.end | date : 'MMM d, HH:mm'}}
         </div>
     </div>
+
     <md-button ng-if="deviceReservation.canBeBorrowed()" class="md-raised md-accent md-hue-1 full-width-button"
                style="margin-bottom: 0;" ng-click="deviceReservation.borrow($event)">
         Ausleihen
@@ -45,4 +48,5 @@
                style="margin-bottom: 0;" ng-click="deviceReservation.returnDevice($event)">
         Zurückgeben
     </md-button>
+
 </div>
