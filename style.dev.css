@@ -70,10 +70,6 @@
     display: none;
 }
 
-md-dialog {
-    width: 400px;
-}
-
 @media screen and (max-width: 959px) {
     .main-content {
         padding: 10px;
@@ -92,6 +88,20 @@ md-dialog {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .medium-form{
+        width: 400px;
+    }
+
+    .profile-data {
+        width: 330px;
+    }
+
+    md-dialog {
+        width: 400px;
     }
 }
 
@@ -120,7 +130,7 @@ md-dialog {
     background-color: white;
 }
 
-@media screen and (min-width: 959px) {
+@media screen and (min-width: 960px) {
     .card-container > * {
         min-width: 400px;
     }
@@ -277,11 +287,6 @@ table.management-list th {
     opacity: 0;
     transform: scale(0);
 }
-
-.medium-form{
-    width: 400px;
-}
-
 
 .fullscreen {
     width: 1024px;
