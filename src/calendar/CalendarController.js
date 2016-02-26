@@ -30,9 +30,9 @@
                 });
 
                 if(reservations.length == 0)
-                    return '<p></p>';
+                    return '<div></div>';
 
-                var ret = '';
+                var ret = '<div>';
 
                 for(var i = 0; i < reservations.length; i++) {
                     var startDate = new Date(reservations[i].timeSpan.beginning);
@@ -42,7 +42,7 @@
                         getShortTimeString(endDate) + '<br>' + reservations[i].title + '</p>';
                 }
 
-                return ret;
+                return ret + '</div>';
             });
         }
     }
