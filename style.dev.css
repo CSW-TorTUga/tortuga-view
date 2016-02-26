@@ -70,9 +70,20 @@
     display: none;
 }
 
+md-dialog {
+    width: 400px;
+}
+
 @media screen and (max-width: 959px) {
     .main-content {
         padding: 10px;
+    }
+
+    md-dialog {
+        max-height: calc(100% - 30px);
+        width: calc(100% - 30px);
+        max-width: none;
+        margin: auto;
     }
 }
 
@@ -109,7 +120,7 @@
     background-color: white;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 959px) {
     .card-container > * {
         min-width: 400px;
     }
@@ -255,10 +266,6 @@ table.management-list th {
     text-align: left;
 }
 
-md-dialog {
-    width: 400px;
-}
-
 .greyed-out {
     color: rgba(0, 0, 0, .3);
     text-align: center;
@@ -274,9 +281,6 @@ md-dialog {
 .medium-form{
     width: 400px;
 }
-
-
-
 
 
 .fullscreen {
