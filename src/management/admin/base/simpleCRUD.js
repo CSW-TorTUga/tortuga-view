@@ -17,6 +17,7 @@
 
 
         self.items = self.service.query();
+        var heads = [];
 
         self.getHeaders = getHeaders;
         self.getProperty = getProperty;
@@ -32,18 +33,21 @@
 
         //public
         function getHeaders() {
+            if(heads.length > 0) {
+                return heads;
+            }
             if (self.items === undefined || self.items.length == 0) {
                 return JSON.parse(self.template);
             }
-            var ret = [];
-            for (head in self.items[0]) {
-
-                if (head.indexOf("$") == -1 && head.indexOf("toJSON") == -1 && typeof head !== "function") {
-                    ret.push(head);
+            for (var head in self.items[0]) {
+                if (head != "id" && head.indexOf("$") == -1 && head.indexOf("toJSON") == -1 && typeof self.items[0][head] !== "function") {
+                    heads.push({
+                        name: head,
+                        type: typeof self.items[0][head]
+                    });
                 }
             }
-            ret.splice(ret.indexOf("id"),1);
-            return ret;
+            return heads;
         }
 
         //public
