@@ -81,13 +81,16 @@
                 <div ng-if="!roomModal.startTimeIsInFuture()">
                     Der Startzeitpunkt muss in der Zukunft liegen
                 </div>
+                <div ng-if="!roomModal.durationIsValid()">
+                    Das Enddatum der Wiederholung muss nach dem Anfangsdatum liegen
+                </div>
             </div>
         </form>
     </md-dialog-content>
 
     <md-dialog-actions>
         <md-button type="button" ng-click="roomModal.cancel()">abbrechen</md-button>
-        <md-button ng-disabled="!roomModal.bookingForm.$valid || !roomModal.timeSpanIsValid() || !roomModal.timeSpanIsValid()" class="md-accent" type="submit" ng-click="roomModal.submit()">absenden</md-button>
+        <md-button ng-disabled="!roomModal.durationIsValid() || !roomModal.bookingForm.$valid || !roomModal.timeSpanIsValid() || !roomModal.timeSpanIsValid()" class="md-accent" type="submit" ng-click="roomModal.submit()">absenden</md-button>
     </md-dialog-actions>
 
 </md-dialog>
