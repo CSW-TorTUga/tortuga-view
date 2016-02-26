@@ -51,7 +51,7 @@
 
         $urlRouterProvider.otherwise('/home');
 
-        $httpProvider.interceptors.push('sessionTimeoutInterceptor');
+        $httpProvider.interceptors.push('unauthorizedInterceptor');
         $httpProvider.interceptors.push('connectionTimeoutInterceptor');
         $httpProvider.interceptors.push('loadingStateInterceptor');
         $httpProvider.interceptors.push('errorInterceptor');

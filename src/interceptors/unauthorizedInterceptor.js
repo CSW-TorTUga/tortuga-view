@@ -1,17 +1,18 @@
 (function() {
 
     angular.module('rms')
-        .factory('sessionTimeoutInterceptor', [
+        .factory('unauthorizedInterceptor', [
             '$q',
             '$injector',
-            sessionTimeoutInterceptor
+           unauthorizedInterceptor
         ]);
 
-    function sessionTimeoutInterceptor($q, $injector) {
+    function unauthorizedInterceptor($q, $injector) {
         function onResponseError(rejection) {
             var $state = $injector.get('$state');
+            console.dir(rejection);
 
-            if(rejection.status == 403 || (rejection.status == 401 && $state.name != 'login')) {
+            if((rejection.status == 401 && $state.name != 'login')) {
                 $injector.get('AuthenticationService').logout();
             }
 

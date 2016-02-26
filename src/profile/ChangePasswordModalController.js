@@ -5,16 +5,19 @@
             '$mdDialog',
             'AuthenticationService',
             'User',
+            '$http',
+            'apiAddress',
             ChangePasswordModalController
         ]);
 
-    function ChangePasswordModalController($mdDialog, AuthenticationService, User) {
+    function ChangePasswordModalController($mdDialog, AuthenticationService, User, $http, apiAddress) {
         var self = this;
 
         self.cancel = $mdDialog.cancel;
         self.submit = submit;
         self.validatePasswordRepeat = validatePasswordRepeat;
 
+        self.oldPassword = '';
         self.password = '';
         self.passwordRepeat = '';
 
@@ -32,11 +35,15 @@
 
         //public
         function submit() {
-            User.update({
-                id: AuthenticationService.getUser().id
-            }, {
-                password: self.password
-            }).$promise.then(function() {
+            $http.patch(apiAddress + "users/" + AuthenticationService.getUser().id, {
+
+                    "password": self.password
+                }, {
+                    headers: {
+                        "X-Old-Password": self.oldPassword
+                    }
+                }).
+            then(function() {
                 $mdDialog.hide();
             });
         }
