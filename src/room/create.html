@@ -75,7 +75,7 @@
                 <md-datepicker md-placeholder="Bis (exklusive)" ng-model="roomModal.repetitionEndDate"></md-datepicker>
             </div>
             <div style="color:red;">
-                <div ng-if="!roomModal.timespanIsValid()">
+                <div ng-if="!roomModal.timeSpanIsValid()">
                     Die Startzeit muss vor der Endzeit liegen
                 </div>
                 <div ng-if="!roomModal.startTimeIsInFuture()">
@@ -87,7 +87,7 @@
 
     <md-dialog-actions>
         <md-button type="button" ng-click="roomModal.cancel()">abbrechen</md-button>
-        <md-button ng-disabled="!roomModal.bookingForm.$valid || !roomModal.timespanIsValid() || !roomModal.timespanIsValid()" class="md-accent" type="submit" ng-click="roomModal.submit()">absenden</md-button>
+        <md-button ng-disabled="!roomModal.bookingForm.$valid || !roomModal.timeSpanIsValid() || !roomModal.timeSpanIsValid()" class="md-accent" type="submit" ng-click="roomModal.submit()">absenden</md-button>
     </md-dialog-actions>
 
 </md-dialog>
