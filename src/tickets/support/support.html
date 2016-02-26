@@ -7,7 +7,7 @@
 
     <div class="md-whiteframe-z2 ticket" ng-repeat="message in supportController.messages">
         <md-toolbar class="md-hue-1">
-            <div class="md-toolbar-tools">
+            <div class="md-toolbar-tools" layout="row">
                 <h2>
                     {{message.name}}: {{message.subject}}
                 </h2>
@@ -16,7 +16,7 @@
             </div>
         </md-toolbar>
 
-        <div style="white-space: pre-wrap;" class="card-content" layout="row">
+        <div style="white-space: pre-wrap;" class="card-content">
             {{message.body}}
         </div>
 
