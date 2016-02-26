@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     angular.module('management')
         .controller('RoomListController', [
@@ -12,10 +12,9 @@
     function RoomListController(RoomReservation, $mdDialog, AuthenticationService, $stateParams) {
         var self = this;
 
-        self.reservations = RoomReservation.query({
-            "timeSpan.end": ">" + (new Date()).valueOf(),
-            "user": AuthenticationService.getUser().id
-        });
+        self.reservations = [];
+        reloadReservations();
+
 
         self.addReservation = addReservation;
         self.reservationDeleted = reservationDeleted;
@@ -24,9 +23,36 @@
             addReservation();
         }
 
+        function reloadReservations() {
+            return RoomReservation.query({
+                "timeSpan.end": ">" + (new Date()).valueOf(),
+                "user": AuthenticationService.getUser().id
+            }).$promise.then(function(data) {
+                self.reservations.forEach(function (reservation) {
+                    if(data.map(function(res) {
+                            return res.id
+                        }).indexOf(reservation.id) == -1) {
+                        self.reservations.splice(index, 1);
+                    }
+                });
+
+                console.dir(data);
+                data.forEach(function(reservation) {
+                    if(self.reservations.map(function(res) {
+                            return res.id
+                        }).indexOf(reservation.id) == -1) {
+                        console.dir(reservation);
+                        self.reservations.push(reservation);
+                    }
+                });
+                console.dir(self.reservations);
+
+            })
+        }
+
         //public
         function reservationDeleted(reservation) {
-           self.reservations.splice(self.reservations.indexOf(reservation), 1);
+            self.reservations.splice(self.reservations.indexOf(reservation), 1);
         }
 
 
@@ -39,6 +65,7 @@
                 targetEvent: event
             }).then(function(reservation) {
                 self.reservations.push(reservation);
+                reloadReservations();
             });
 
 
@@ -50,7 +77,7 @@
 
                 self.validateTimeInput = validateTimeInput;
                 self.startTimeIsInFuture = startTimeIsInFuture;
-                self.timespanIsValid = timespanIsValid;
+                self.timeSpanIsValid = timeSpanIsValid;
 
                 self.startTime = '';
                 self.endTime = '';
@@ -81,7 +108,7 @@
                 }
 
                 //public
-                function timespanIsValid() {
+                function timeSpanIsValid() {
                     if(!timesAreValid())
                         return true;
 
@@ -153,7 +180,7 @@
                     }
 
                     RoomReservation.save(self.reservation).$promise
-                        .then(function (reservation) {
+                        .then(function(reservation) {
                             $mdDialog.hide(reservation);
                         });
                 }
