@@ -14,6 +14,9 @@
             "timeSpan.end": ">" + (new Date()).valueOf()
         });
 
+        self.repeatedReservations = [];
+
+
         self.decline = decline;
         self.declineAfterConfirm = declineAfterConfirm;
         self.accept = accept;
@@ -22,23 +25,32 @@
 
         self.getRepeatedReservations = getRepeatedReservations;
         self.getDatesForRepeatedResevation = getDatesForRepeatedReservation;
+        self.getReservationsBySharedId = getReservationsBySharedId;
+
+        //public
+        function getReservationsBySharedId(sharedId){
+            return self.reservations.filter(function (reservation) {
+                return reservation.sharedId == sharedId && !reservation.approved;
+            });
+        }
+
 
         //public
         function getRepeatedReservations() {
-            return self.reservations.filter(function(reservation) {
+            var sharedIds = self.reservations.filter(function(reservation) {
                 return !reservation.approved && reservation.sharedId != undefined;
             }).reduce(function(aggregator, current) {
-                var foundPartner = false;
 
                 for(var i = 0; i < aggregator.length; i++) {
-                    if(aggregator[i].sharedId == current.sharedId) {
+                    if(aggregator[i] == current.sharedId) {
                         return aggregator;
                     }
                 }
 
-                aggregator.push(current);
+                aggregator.push(current.sharedId);
                 return aggregator;
             }, []);
+            return sharedIds;
         }
 
         //public
@@ -58,12 +70,12 @@
 
         //public
         function declineAllRepeated(reservation) {
-            getDatesForRepeatedReservation(reservation).forEach(decline);
+            reservation.forEach(decline);
         }
 
         //public
         function acceptAllRepeated(reservation) {
-            getDatesForRepeatedReservation(reservation).forEach(accept);
+            reservation.forEach(accept);
         }
 
         //public

@@ -7,26 +7,31 @@
 
     <h2 style="margin-top: 0;" class="md-display-1 animate-fade" ng-if="(reservationController.reservations | filter : {approved: false}).length > 0">Beantragt</h2>
 
-    <div class="md-whiteframe-z2 ticket animate-fade" ng-repeat="reservation in reservationController.getRepeatedReservations()">
+    <div class="md-whiteframe-z2 ticket animate-fade" ng-repeat="sharedId in reservationController.getRepeatedReservations()">
         <md-toolbar class="md-hue-1">
             <div class="md-toolbar-tools">
                 <h2>
-                    {{reservation.title}} von {{reservation.user.firstName}} {{reservation.user.lastName}}
+                    <!-- {{reservation.title}} von {{reservation.user.firstName}} {{reservation.user.lastName}} -->
+                    {{reservationController.getReservationsBySharedId(sharedId)[0].title}} von
+                    {{reservationController.getReservationsBySharedId(sharedId)[0].user.firstName}}
+                    {{reservationController.getReservationsBySharedId(sharedId)[0].user.lastName}}
                 </h2>
             </div>
         </md-toolbar>
+
         <div class="card-content" layout="row">
             <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
                  style="height: 50px;">
-                von {{reservation.timeSpan.beginning | date:'HH:mm'}}
+                von {{reservationController.getReservationsBySharedId(sharedId)[0].timeSpan.beginning | date:'HH:mm'}}
             </div>
             <div class="big-content time-panel" layout="column" layout-align="center center" flex="50"
                  style="height: 50px;">
-                bis {{reservation.timeSpan.end | date:'HH:mm'}}
+                bis {{reservationController.getReservationsBySharedId(sharedId)[0].timeSpan.end | date:'HH:mm'}}
             </div>
         </div>
+
         <div class="card-container" ng-init="showRepeated = false" ng-if="showRepeated">
-            <div layout="row" ng-repeat="dateInstance in reservationController.getDatesForRepeatedResevation(reservation)" class="md-whiteframe-z2 animate-fade">
+            <div layout="row" ng-repeat="dateInstance in reservationController.getReservationsBySharedId(sharedId) | orderBy : '+timeSpan.beginning'" class="md-whiteframe-z2 animate-fade">
                 <div flex="50" layout="column" layout-align="center center" class="card-content big-content">
                     {{dateInstance.timeSpan.beginning | date:'EEE d. MMM, yyyy'}}
                 </div>
@@ -42,19 +47,24 @@
                 </div>
             </div>
         </div>
+
         <md-button class="full-width-button md-raised" ng-click="showRepeated = !showRepeated">
             {{showRepeated ? "Termine ausblenden" : "Termine anzeigen"}}
         </md-button>
         <div layout="row" ng-if="showRepeated">
             <md-button flex="50" class="md-raised md-accent md-hue-1 half-width-button md-warn"
-                       style="margin-bottom: 0;" ng-click="reservationController.declineAllRepeated(reservation)">
+                       style="margin-bottom: 0;" ng-click="reservationController.declineAllRepeated(reservationController.getReservationsBySharedId(sharedId))">
                 Alle ablehnen
             </md-button>
             <md-button flex="50" class="md-raised md-accent md-hue-1 half-width-button"
-                       style="margin-bottom: 0;" ng-click="reservationController.acceptAllRepeated(reservation)">
+                       style="margin-bottom: 0;" ng-click="reservationController.acceptAllRepeated(reservationController.getReservationsBySharedId(sharedId))">
                 Alle genehmigen
             </md-button>
         </div>
+
+
+
+
     </div>
 
     <div class="md-whiteframe-z2 ticket animate-fade" ng-repeat="reservation in reservationController.reservations | filter : {approved: false, sharedId: '!'} | orderBy : '+timeSpan.beginning'">
