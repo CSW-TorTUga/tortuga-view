@@ -14,7 +14,7 @@
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:900' rel='stylesheet' type='text/css'>
 </head>
 
-<body ng-app="rms" class="md-body-1" layout="row" ng-controller="NavController as nav" ng-mousedown="nav.somethingHappened()" ng-keydown="nav.somethingHappened()">
+<body ng-app="rms" class="md-body-1" layout-gt-xs="row" layout-xs="column" ng-controller="NavController as nav" ng-mousedown="nav.somethingHappened()" ng-keydown="nav.somethingHappened()">
 
 <style>
     .primary-background {
@@ -34,10 +34,29 @@
     }
 </style>
 
+<div ng-if="nav.isMobile()" class="turn-device-notification">
+    Bitte drehe dein Gerät in die Porträtansicht
+</div>
+
+<md-toolbar class="md-primary" ng-if="nav.isMobile()" ng-hide="!nav.isLoggedIn()">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="nav.openSidenav()">
+            <md-icon>
+                menu
+            </md-icon>
+        </md-button>
+        <h2>
+            {{nav.getCurrentStateName()}}
+        </h2>
+    </div>
+</md-toolbar>
+
 <md-sidenav
         layout="column"
-        class="sidenav md-sidenav-left md-locked-open md-whiteframe-z3 primary-background"
-        md-is-locked-open="$mdMedia('gt-sm') && nav.isLoggedIn() && !nav.isInState('newPin') && !nav.isInState('login')">
+        class="sidenav md-sidenav-left md-whiteframe-z3"
+        ng-class="{ 'primary-background': !nav.isMobile() }"
+        md-is-locked-open="$mdMedia('gt-sm') && nav.isLoggedIn() && !nav.isInState('newPin') && !nav.isInState('login')"
+        md-component-id="left">
     <header>
         <a ui-sref="home">
             C S W
@@ -46,45 +65,34 @@
     <md-content flex>
         <ul>
             <li>
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('home')}" ui-sref="home">
-                    Home
-                </md-button>
+                <navigation-link state="home"></navigation-link>
             </li>
             <li>
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('deviceReservation')}" ui-sref="deviceReservationList">
+                <md-button ng-class="{'md-accent': nav.isInState('deviceReservation')}" ui-sref="deviceReservationList">
                     Reservierungen
                 </md-button>
             </li>
             <li ng-if="nav.isLecturer()">
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('room')}" ui-sref="room">
-                    Raumbuchung
-                </md-button>
+                <navigation-link state="room"></navigation-link>
             </li>
             <li ng-if="nav.isCswTeam()">
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('management')}"
-                           ui-sref="management.users.list">
-                    Verwaltung
-                </md-button>
+                <navigation-link state="management"></navigation-link>
             </li>
             <li ng-controller="TicketNavController as tickets" ng-if="nav.isCswTeam()">
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('tickets')}" ui-sref="tickets.roomReservation">
-                    Tickets <span ng-if="tickets.getAllCount() > 0">({{tickets.getAllCount()}})</span>
-                </md-button>
+                <navigation-link state="tickets">
+                    <span ng-if="tickets.getAllCount() > 0">({{tickets.getAllCount()}})</span>
+                </navigation-link>
             </li>
             <li>
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('calendar')}" ui-sref="calendar">
-                    Kalender
-                </md-button>
+                <navigation-link state="calendar"></navigation-link>
             </li>
             <li>
-                <md-button class="nav-link-side" ng-class="{'md-accent': nav.isInState('profile')}" ui-sref="profile">
-                    Profil
-                </md-button>
+                <navigation-link state="profile"></navigation-link>
             </li>
         </ul>
     </md-content>
-    <md-button class="nav-link-side" ng-click="nav.supportTicket()">Problem melden</md-button>
-    <md-button class="nav-link-side" ng-click="nav.logout()">
+    <md-button ng-click="nav.supportTicket()">Problem melden</md-button>
+    <md-button ng-click="nav.logout()">
         Logout
     </md-button>
 </md-sidenav>

@@ -19,7 +19,7 @@
     width: 100%;
 }
 
-.nav-link-side {
+.sidenav md-button, .sidenav a, .sidenav button {
     padding: 9px;
     padding-left: 15px;
     width: 100%;
@@ -41,8 +41,6 @@
     text-align: center;
     font-weight: 600;
     font-size: 3.5em;
-
-    /* border-bottom: 1px solid white; */
 }
 
 .sidenav md-content {
@@ -50,10 +48,42 @@
     color: inherit;
 }
 
+
 .main-content {
     padding: 45px;
     padding-bottom: 0;
 }
+
+.turn-device-notification {
+    position:fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+
+    background-color: black;
+    color: white;
+
+    font-size: 1.6em;
+
+    display: none;
+}
+
+@media screen and (max-width: 959px) {
+    .main-content {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 959px) and (orientation: landscape) {
+    .turn-device-notification {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 
 .full-width-button {
     width: 100%;
@@ -75,20 +105,30 @@
 
 .card-container > * {
     margin: 20px;
-    min-width: 400px;
+
     background-color: white;
 }
 
-.card-content {
-    padding: 16px;
+@media screen and (min-width: 960px) {
+    .card-container > * {
+        min-width: 400px;
+    }
+
+    .big-content {
+        font-size: 1.8em;
+    }
 }
 
-.big-content {
-    font-size: 1.8em;
+div.time-panel {
+    text-align: center;
 }
 
 div.time-panel:first-child {
     border-right: 1px solid rgba(0, 0, 0, .2);
+}
+
+.card-content {
+    padding: 16px;
 }
 
 .card-container {

@@ -13,7 +13,10 @@
             url: '/calendar',
             templateUrl: 'src/calendar/calendar.html',
             controller: 'CalendarController',
-            controllerAs: 'calendar'
+            controllerAs: 'calendar',
+            data: {
+                viewName: 'Kalender'
+            }
         });
     }
 

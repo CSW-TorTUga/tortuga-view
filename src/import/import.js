@@ -7,7 +7,10 @@
     function config($stateProvider) {
         $stateProvider.state('import', {
             url: '/import',
-            templateUrl: 'src/import/import.html'
+            templateUrl: 'src/import/import.html',
+            data: {
+                viewName: 'Importer'
+            }
         });
     }
 

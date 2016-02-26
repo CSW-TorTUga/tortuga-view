@@ -5,7 +5,10 @@
     ]).config(['$stateProvider', function($stateProvider) {
         $stateProvider.state('profile', {
             url: '/profile',
-            templateUrl: 'src/profile/profile.html'
+            templateUrl: 'src/profile/profile.html',
+            data: {
+                viewName: 'Profil'
+            }
         });
     }]);
 

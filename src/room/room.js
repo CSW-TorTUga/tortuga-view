@@ -7,7 +7,10 @@
             url: '/room?create',
             templateUrl: 'src/room/list.html',
             controllerAs: 'roomController',
-            controller: 'RoomListController'
+            controller: 'RoomListController',
+            data: {
+                viewName: 'Raumbuchungen'
+            }
         });
     }]);
 

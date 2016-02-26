@@ -8,7 +8,11 @@
         $stateProvider
             .state('tickets', {
                 url: '/tickets',
-                templateUrl: 'src/tickets/tickets.html'
+                templateUrl: 'src/tickets/tickets.html',
+                redirectTo: 'tickets.roomReservation',
+                data: {
+                    viewName: 'Tickets'
+                }
             });
     }]);
 
