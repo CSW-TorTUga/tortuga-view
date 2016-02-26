@@ -37,7 +37,8 @@
                 return heads;
             }
             if (self.items === undefined || self.items.length == 0) {
-                return JSON.parse(self.template);
+                heads = JSON.parse(self.template);
+                return head;
             }
             for (var head in self.items[0]) {
                 if (head != "id" && head.indexOf("$") == -1 && head.indexOf("toJSON") == -1 && typeof self.items[0][head] !== "function") {
