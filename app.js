@@ -41,7 +41,7 @@
     function rmsConfig($mdThemingProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette(PRIMARY, {
-                'default' : '400'
+                'default' : '500'
             })
             .accentPalette(ACCENT, {
                 default: 'A100'
