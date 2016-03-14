@@ -19,3 +19,27 @@
     </md-tooltip>
     <md-icon>add</md-icon>
 </md-button>
+
+
+<!-- TODO Leon CSW stuff -->
+<md-fab-speed-dial md-direction="up" class="md-scale md-fab-bottom-right">
+    <md-fab-trigger>
+        <md-button aria-label="Hauptaktionen" class="md-fab md-accent">
+            <md-icon>add</md-icon>
+        </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+        <md-button ui-sref="deviceReservationCreate" aria-label="Gerät reservieren" class="md-fab md-raised md-mini">
+            <md-icon>devices</md-icon>
+            <md-tooltip>
+                Gerät reservieren
+            </md-tooltip>
+        </md-button>
+        <md-button ui-sref="deviceReservationAdHoc" aria-label="Gerät jetzt ausleihen" class="md-fab md-raised md-mini">
+            <md-icon>queue_play_next</md-icon>
+            <md-tooltip>
+                Gerät jetzt ausleihen
+            </md-tooltip>
+        </md-button>
+    </md-fab-actions>
+</md-fab-speed-dial>

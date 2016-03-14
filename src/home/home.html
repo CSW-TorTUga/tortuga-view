@@ -30,6 +30,7 @@
 
 </div>
 
+<!-- TODO Leon CSW stuff -->
 <md-fab-speed-dial ng-if="nav.isLecturer()" md-direction="up" class="md-scale md-fab-bottom-right">
     <md-fab-trigger>
         <md-button aria-label="Hauptaktionen" class="md-fab md-accent">
@@ -37,6 +38,12 @@
         </md-button>
     </md-fab-trigger>
     <md-fab-actions>
+        <md-button ui-sref="deviceReservationCreate" aria-label="Gerät reservieren" class="md-fab md-raised md-mini">
+            <md-icon>queue_play_next</md-icon>
+            <md-tooltip>
+                Gerät jetzt ausleihen
+            </md-tooltip>
+        </md-button>
         <md-button ui-sref="deviceReservationCreate" aria-label="Gerät reservieren" class="md-fab md-raised md-mini">
             <md-icon>devices</md-icon>
             <md-tooltip>
@@ -58,7 +65,9 @@
     </md-fab-actions>
 </md-fab-speed-dial>
 
-<md-button ng-if="nav.isStudent()" class="md-fab md-fab-bottom-right md-accent md-raised">
+
+<!-- TODO Leon CSW stuff -->
+<md-button ng-if="nav.isStudent()" ui-sref="deviceReservationCreate" class="md-fab md-fab-bottom-right md-accent md-raised">
     <md-icon>
         devices
     </md-icon>

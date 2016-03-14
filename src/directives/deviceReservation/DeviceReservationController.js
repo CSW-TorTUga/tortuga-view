@@ -37,7 +37,7 @@
 
                 $mdDialog.show(
                     $mdDialog.alert()
-                        .title(cabinet + ' öfffnet')
+                        .title(cabinet + ' öffnet')
                         .content(cabinet + ' öffnet, bitte das Gerät herausnehmen.')
                         .targetEvent(event)
                         .ok('OK')

@@ -11,6 +11,14 @@
       data: {
         viewName: 'Gerät reservieren'
       }
+    }).state('deviceReservationAdHoc', {
+      url: '/devicereservations/adhoc',
+      templateUrl: 'src/deviceReservations/adHoc.html',
+      controller: 'DeviceReservationAdHocController',
+      controllerAs: 'createController',
+      data: {
+        viewName: 'Gerät reservieren'
+      }
     }).state('deviceReservationList', {
       url: '/devicereservations/list',
       templateUrl: 'src/deviceReservations/list.html',
