@@ -9,7 +9,8 @@
             templateUrl: 'src/directives/deviceReservation/deviceReservation.html',
             scope: {
                 reservation: '=',
-                onDelete: '@'
+                onDelete: '@',
+                showUser: '='
             },
             bindToController: true,
             controller: 'DeviceReservationController',

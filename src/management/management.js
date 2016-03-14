@@ -3,7 +3,8 @@
     angular.module('management', [
         'ui.router',
         'management.users',
-        'management.device'
+        'management.device',
+        'management.reservations'
     ]).config(['$stateProvider', function($stateProvider) {
         $stateProvider
             .state('management', {

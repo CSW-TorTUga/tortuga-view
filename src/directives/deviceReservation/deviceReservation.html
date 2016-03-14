@@ -2,7 +2,7 @@
 
     <md-toolbar class="md-hue-1" ng-class="{'md-hue-2': deviceReservation.isBorrowed()}">
         <div class="md-toolbar-tools">
-            <h2>{{deviceReservation.reservation.device.name}}</h2>
+            <h2><span ng-if="deviceReservation.showUser">{{deviceReservation.reservation.user.firstName + " " + deviceReservation.reservation.user.lastName}}: </span>{{deviceReservation.reservation.device.name + " - " + deviceReservation.reservation.device.category.name }}</h2>
 
             <div flex></div>
             <md-button ng-if="deviceReservation.isActive()" class="md-icon-button"
