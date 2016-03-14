@@ -7,10 +7,11 @@
             '$mdDialog',
             '$filter',
             'AuthenticationService',
+            'LocalService',
             DeviceReservationController
         ]);
 
-    function DeviceReservationController($scope, DeviceReservation, $mdDialog, $filter, AuthenticationService) {
+    function DeviceReservationController($scope, DeviceReservation, $mdDialog, $filter, AuthenticationService, LocalService) {
         var self = this;
 
         //self.reservation
@@ -23,6 +24,8 @@
         self.isBorrowed = isBorrowed;
         self.canBeBorrowed = canBeBorrowed;
         self.editReservation = editReservation;
+
+        self.isLocal = LocalService.isLocal;
 
         //public
         function borrow(event) {

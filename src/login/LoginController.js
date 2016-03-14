@@ -11,10 +11,11 @@
             '$stateParams',
             '$q',
             '$mdMedia',
+            'LocalService',
             LoginController
         ]);
 
-    function LoginController(AuthenticationService, ErrorToasts, $state, $animate, $location, $http, $stateParams, $q, $mdMedia) {
+    function LoginController(AuthenticationService, ErrorToasts, $state, $animate, $location, $http, $stateParams, $q, $mdMedia, LocalService) {
         var self = this;
 
         self.username = '';
@@ -22,8 +23,9 @@
         self.longToken = false;
 
         self.login = login;
-        self.isTerminal = isTerminal;
         self.isMobile = isMobile;
+
+        self.isTerminal = LocalService.isLocal;
 
         self.loginButtonText = 'Anmelden';
 
@@ -58,11 +60,6 @@
                         ErrorToasts.show("Benutzername und/oder Passwort sind falsch.", 3500, false);
                     }
                 });
-        }
-
-        // public
-        function isTerminal() {
-            return $location.host().indexOf('192.168') != -1;
         }
 
         function openDoorWithToken(token) {

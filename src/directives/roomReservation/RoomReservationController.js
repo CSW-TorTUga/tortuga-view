@@ -5,10 +5,11 @@
             '$scope',
             'RoomReservation',
             '$mdDialog',
+            'LocalService',
             RoomReservationController
         ]);
 
-    function RoomReservationController($scope, RoomReservation, $mdDialog) {
+    function RoomReservationController($scope, RoomReservation, $mdDialog, LocalService) {
         var self = this;
 
         //self.reservation
@@ -19,6 +20,8 @@
         self.deleteReservation = deleteReservation;
         self.canBeOpenedNow = canBeOpenedNow;
         self.getState = getState;
+
+        self.isLocal = LocalService.isLocal;
 
 
         //public
