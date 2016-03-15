@@ -9,10 +9,11 @@
             '$rootScope',
             '$mdSidenav',
             '$mdMedia',
+            'LocalService',
             NavController
         ]);
 
-    function NavController($state, AuthenticationService, TimeoutService, $mdDialog, $rootScope, $mdSidenav, $mdMedia) {
+    function NavController($state, AuthenticationService, TimeoutService, $mdDialog, $rootScope, $mdSidenav, $mdMedia, LocalService) {
         var self = this;
 
         self.isMobile = isMobile;
@@ -29,6 +30,8 @@
         self.isLecturer = AuthenticationService.isLecturer;
         self.isCswTeam = AuthenticationService.isCswTeam;
         self.isAdmin = AuthenticationService.isAdmin;
+
+        self.isLocal = LocalService.isLocal;
 
         $rootScope.$on('$stateChangeStart', function onStateChange() {
             $mdSidenav('left').close();

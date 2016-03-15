@@ -20,9 +20,7 @@
     <md-icon>add</md-icon>
 </md-button>
 
-
-<!-- TODO Leon CSW stuff -->
-<md-fab-speed-dial md-direction="up" class="md-scale md-fab-bottom-right">
+<md-fab-speed-dial ng-if="nav.isLocal()" md-direction="up" class="md-scale md-fab-bottom-right">
     <md-fab-trigger>
         <md-button aria-label="Hauptaktionen" class="md-fab md-accent">
             <md-icon>add</md-icon>
@@ -43,3 +41,12 @@
         </md-button>
     </md-fab-actions>
 </md-fab-speed-dial>
+
+<md-button ng-if="!nav.isLocal()" ui-sref="deviceReservationCreate" class="md-fab md-fab-bottom-right md-accent md-raised">
+    <md-icon>
+        add
+    </md-icon>
+    <md-tooltip>
+        Gerät reservieren
+    </md-tooltip>
+</md-button>
