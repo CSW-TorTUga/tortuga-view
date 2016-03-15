@@ -13,14 +13,22 @@
 
         self.isLocal = isLocal;
 
+        var localPromise = null;
+
         function isLocal() {
             if($cookies.get('is_local') == 'true') {
                 return true;
+            } else if($cookies.get('is_local') == 'false') {
+                return false;
             } else {
-                $http.get(apiAddress + 'localnet').then(function() {
-                    $cookies.put('is_local', 'true');
-                }).catch(function() {
-                    $cookies.put('is_local', 'false');
+                if(localPromise != null)
+                    return false;
+
+                localPromise = $http.get(apiAddress + 'localnet').then(function(response) {
+                    if(!!response.data)
+                        $cookies.put('is_local', 'true');
+                    else
+                        $cookies.put('is_local', 'false');
                 });
 
                 return false;
