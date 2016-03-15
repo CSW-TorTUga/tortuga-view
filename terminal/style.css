@@ -31,6 +31,7 @@ div.problem-overlay {
     margin-bottom: 20px;
     flex-grow: 1;
 
+    border: 0;
     font-size: 3rem;
     background-color: lightcoral;
     color: white;
