@@ -436,3 +436,10 @@ table.management-list th {
 .password-row {
     margin: 20px;
 }
+
+
+.text-scrolling {
+    width: 45%;
+    margin-bottom: 5px;
+
+}
