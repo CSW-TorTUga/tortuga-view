@@ -7,23 +7,10 @@
     <form layout="column" name="createController.createForm" class="medium-form">
         <md-input-container>
             <label>
-                Länge
-            </label>
-            <md-select ng-model="createController.hoursToReservate"
-                       ng-change="createController.loadPossibleDevices()">
-                <md-option ng-repeat="hour in [1,2,3,4,5,6,7,8,9,10,11,12]"
-                           ng-if="createController.canBeBorrowedForHours(hour)" ng-value="hour">{{hour}} Stunde(n)
-                </md-option>
-            </md-select>
-
-        </md-input-container>
-
-        <md-input-container flex="50">
-            <label>
                 Gerätekategorien
             </label>
             <md-select ng-model="createController.selectedDeviceCategory" ng-model-options="{trackBy : '$value.id'}"
-                       ng-disabled="createController.hoursToReservate == undefined" name="deviceCategorySelector"
+                        name="deviceCategorySelector"
                        ng-change="createController.loadPossibleDevices()"
                        required>
                 <md-option ng-repeat="deviceCategory in createController.deviceCategories"
@@ -33,8 +20,22 @@
             </md-select>
 
         </md-input-container>
+        <md-input-container>
+            <label>
+                Länge
+            </label>
+            <md-select ng-model="createController.hoursToReservate"
+                       ng-disabled="createController.selectedDeviceCategory == undefined"
+                       ng-change="createController.loadPossibleDevices()">
+                <md-option ng-repeat="hour in [1,2,3,4,5,6,7,8,9,10,11,12]"
+                           ng-if="createController.canBeBorrowedForHours(hour)" ng-value="hour">{{hour}} Stunde(n)
+                </md-option>
+            </md-select>
 
-        <md-input-container flex="50">
+        </md-input-container>
+
+
+        <md-input-container>
             <label>
                 Geräte
             </label>
