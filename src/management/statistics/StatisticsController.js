@@ -34,6 +34,7 @@
         self.reservationCountPerDay = reservationCountPerDay;
         self.reservationCountPerDevicePerDay = reservationCountPerDevicePerDay;
         self.updateType = updateType;
+        self.reservationCountPie = reservationCountPie;
 
         self.graphs = [
             {
@@ -47,7 +48,7 @@
             {
                 name: 'Reservierungen nach Gerät (Kuchen)',
                 types: [{name: 'Kuchen', type:'Pie'}],
-                data: reservationCount,
+                data: reservationCountPie,
                 labels: getDeviceNames,
                 serie: wrapperFunction(['Devices']),
                 legend: false
@@ -71,8 +72,12 @@
         ];
 
 
+        //public
         function reservationCountPie() {
-            return reservationCount()[0];
+            var d = reservationCount();
+            console.dir(d);
+            console.dir(d[0]);
+            return d[0];
         }
 
         function wrapperFunction(value) {
