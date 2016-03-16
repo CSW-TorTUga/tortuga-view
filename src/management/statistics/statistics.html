@@ -1,0 +1,56 @@
+<div layout="row" class="statistic-container">
+    <md-input-container>
+        <label>
+            Statistik
+        </label>
+        <md-select ng-change="statistics.updateType()" ng-model="statistics.selectedGraph">
+            <md-option ng-repeat="graph in statistics.graphs" ng-value="graph">{{graph.name}}</md-option>
+        </md-select>
+    </md-input-container>
+    <md-input-container>
+        <label>
+            Type
+        </label>
+        <md-select ng-disabled="statistics.selectedGraph == undefined" ng-model="statistics.selectedType">
+            <md-option ng-repeat="type in statistics.selectedGraph.types">{{type}}</md-option>
+        </md-select>
+    </md-input-container>
+    <div class="statistic">
+        <h2>{{statistics.selectedGraph.name}}</h2>
+        <canvas class="chart chart-base"
+                chart-type="statistics.selectedType"
+                chart-data="statistics.selectedGraph.data()"
+                chart-labels="statistics.selectedGraph.labels()"
+                chart-series="statistics.selectedGraph.serie()"
+                chart-legend="statistics.selectedGraph.legend"></canvas>
+    </div>
+</div>
+
+<!--
+  <div class="statistic" flex="50">
+        <h2>Reservierungen nach Gerät</h2>
+        <canvas class="chart chart-bar"
+                chart-data="[statistics.reservationCount()]"
+                chart-labels="statistics.getDeviceNames()"
+                chart-series="'Geräte'"></canvas>
+    </div>
+
+    <div class="statistic" flex="50">
+        <h2>Reservierungen nach Wochentag</h2>
+        <canvas class="chart chart-line"
+                chart-data="[statistics.reservationCountPerDay()]"
+                chart-labels="statistics.weekDays"
+                chart-series="'Geräte'"></canvas>
+    </div>
+    <div class="statistic" flex="50">
+        <h2>Reservierungen nach Gerät und Wochenag</h2>
+        <canvas class="chart chart-line"
+                chart-data="statistics.reservationCountPerDevicePerDay()"
+                chart-labels="statistics.weekDays"
+                chart-series="statistics.getDeviceNames()"
+                chart-legend="true"></canvas>
+    </div>
+
+
+
+-->

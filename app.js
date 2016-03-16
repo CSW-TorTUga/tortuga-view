@@ -24,12 +24,14 @@
         'ngSweets',
         'newPin',
         'import',
-        'ngMessages'
+        'ngMessages',
+        'chart.js'
     ]).config([
         '$mdThemingProvider',
         '$urlRouterProvider',
         '$locationProvider',
         '$httpProvider',
+        'ChartJsProvider',
         rmsConfig
     ]).run([
         '$rootScope',
@@ -38,7 +40,7 @@
         rmsRun
     ]);
 
-    function rmsConfig($mdThemingProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    function rmsConfig($mdThemingProvider, $urlRouterProvider, $locationProvider, $httpProvider, ChartJsProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette(PRIMARY, {
                 'default' : '500'
@@ -55,6 +57,11 @@
         $httpProvider.interceptors.push('connectionTimeoutInterceptor');
         $httpProvider.interceptors.push('loadingStateInterceptor');
         $httpProvider.interceptors.push('errorInterceptor');
+
+        ChartJsProvider.setOptions({
+            colours: ['#97BBCD', '#DCDCDC', '#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+            responsive: true
+        });
     }
 
     function rmsRun($rootScope, $mdColorPalette, $state) {

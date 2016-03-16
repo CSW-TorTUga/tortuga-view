@@ -443,3 +443,12 @@ table.management-list th {
     margin-bottom: 5px;
 
 }
+
+.statistic {
+    width: 100%;
+    height: 80%;
+}
+
+.statistic-container {
+    flex-wrap: wrap;
+}

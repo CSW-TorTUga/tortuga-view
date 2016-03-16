@@ -25,6 +25,8 @@ var paths = {
         'node_modules/angular-resource/angular-resource.js',
         'node_modules/angular-material-calendar/angular-material-calendar.min.js',
         'node_modules/angular-sanitize/angular-sanitize.min.js',
+        'node_modules/chart.js/Chart.js',
+        'node_modules/angular-chart.js/dist/angular-chart.js',
         'lib/ngsweets.js',
         'lib/twemoji.min.js'
     ],
@@ -35,6 +37,8 @@ var paths = {
         'src/management/users/users.js',
         'src/management/devices/device.js',
         'src/management/admin/admin.js',
+        'src/management/reservations/reservations.js',
+        'src/management/statistics/statistics.js',
         'src/home/home.js',
         'src/login/login.js',
         'src/room/room.js',
@@ -52,7 +56,9 @@ var paths = {
     ],
     styles: [
         'node_modules/angular-material/angular-material.min.css',
+        'node_modules/angular-chart.js/dist/angular-chart.css',
         'lib/animate.css',
+        'lib/angular-chart.js/angular-chart.min.css',
         'style.dev.css'
     ]
 };

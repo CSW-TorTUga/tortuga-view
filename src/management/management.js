@@ -4,7 +4,8 @@
         'ui.router',
         'management.users',
         'management.device',
-        'management.reservations'
+        'management.reservations',
+        'management.statistics'
     ]).config(['$stateProvider', function($stateProvider) {
         $stateProvider
             .state('management', {
