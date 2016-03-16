@@ -25,7 +25,7 @@
                        style="margin-bottom: 0;" ng-click="supportController.ignore(message)">
                 Ignorieren
             </md-button>
-            <md-button flex="50" class="md-raised md-accent md-hue-1 half-width-button"
+            <md-button ng-if="!!message.email" flex="50" class="md-raised md-accent md-hue-1 half-width-button"
                        style="margin-bottom: 0;" ng-click="supportController.answer(message)">
                 Antworten
             </md-button>

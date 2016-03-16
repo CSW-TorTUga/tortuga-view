@@ -46,7 +46,6 @@
         function submitProblem(problem) {
             SupportMessage.save({
                 name: 'Terminal',
-                email: '-',
                 subject: problem,
                 body: '-'
             }).$promise.then(function() {
