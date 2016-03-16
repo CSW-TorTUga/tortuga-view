@@ -7,7 +7,7 @@
 
     <h2 style="margin-top: 0;" class="md-display-1 animate-fade" ng-if="(reservationController.reservations | filter : {approved: false}).length > 0">Beantragt</h2>
 
-    <md-card class="md-whiteframe-z2 ticket animate-fade" ng-repeat="sharedId in reservationController.getRepeatedReservations()">
+    <div class="md-whiteframe-z2 ticket animate-fade" ng-repeat="sharedId in reservationController.getRepeatedReservations()">
         <md-toolbar class="md-hue-1">
             <div class="md-toolbar-tools">
                 <h2>
@@ -62,10 +62,7 @@
             </md-button>
         </div>
 
-
-
-
-    </md-card>
+    </div>
 
     <div class="md-whiteframe-z2 ticket animate-fade" ng-repeat="reservation in reservationController.reservations | filter : {approved: false, sharedId: '!'} | orderBy : '+timeSpan.beginning'">
         <md-toolbar class="md-hue-1">
