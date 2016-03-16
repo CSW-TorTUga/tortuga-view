@@ -29,19 +29,33 @@
         self.user = {};
         self.user.gender = "NONE";
 
-        //self.user is being build by the states
+        self.next = true;
+        self.previous = false;
 
 
+        //public
         function getState() {
             return state;
         }
 
+        //public
         function back() {
+
+            if(state == 1){
+                console.log("back");
+                self.next = false;
+                self.previous = true;
+            }
             $window.scrollTo(0,0);
             state--;
         }
 
+        //public
         function advance() {
+            if(state == 1){
+                self.next = true;
+                self.previous = false;
+            }
             state++;
         }
 
