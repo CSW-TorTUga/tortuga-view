@@ -96,23 +96,13 @@
                             $mdDialog.alert()
                                 .title(cabinet + ' öffnet')
                                 .content(cabinet + ' öffnet, bitte das Gerät herausnehmen.')
-                                .targetEvent(event)
                                 .ok('OK')
                         );
                     }).then(function() {
                         $state.go('deviceReservationList');
-                    }).catch(function() {
-                        $mdDialog.show(
-                            $mdDialog.alert()
-                                .title("Gehe in die CSW")
-                                .content("Das Gerät kann nur in der CSW am Terminal entnommen werden")
-                                .targetEvent(event)
-                                .ok('OK')
-                        ).then(function() {
-                            $state.go('deviceReservationList');
-                        }).catch(function() {
-                            $state.go('deviceReservationList');
-                        });
+                    }).catch(function(reason) {
+                        ErrorToast.show(reason);
+                        console.error(reason);
                     })
                 });
 
