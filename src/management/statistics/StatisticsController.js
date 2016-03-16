@@ -82,10 +82,9 @@
         }
 
 
-
         //public
         function updateType() {
-            self.selectedType = self.selectedGraph.types[0];
+            self.selectedType = self.selectedGraph.types[0].type;
         }
 
 
