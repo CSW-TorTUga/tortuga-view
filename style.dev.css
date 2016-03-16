@@ -448,7 +448,3 @@ table.management-list th {
     width: 100%;
     height: 80%;
 }
-
-.statistic-container {
-    flex-wrap: wrap;
-}

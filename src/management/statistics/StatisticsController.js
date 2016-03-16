@@ -38,31 +38,42 @@
         self.graphs = [
             {
                 name: 'Reservierungen nach Gerät',
-                types: ['Bar'],
+                types: [{name: 'Balken', type:'Bar'}],
                 data: reservationCount,
                 labels: getDeviceNames,
-                series: wrapperFunction('Geräte'),
+                serie: wrapperFunction(['Devices']),
+                legend: false
+            },
+            {
+                name: 'Reservierungen nach Gerät (Kuchen)',
+                types: [{name: 'Kuchen', type:'Pie'}],
+                data: reservationCount,
+                labels: getDeviceNames,
+                serie: wrapperFunction(['Devices']),
                 legend: false
             },
             {
                 name: 'Reservierungen nach Wochentag',
-                types: ['Bar','Line'],
+                types: [{name: 'Balken', type:'Bar'},{name: 'Kurve', type:'Line'}],
                 data: reservationCountPerDay,
                 labels: wrapperFunction(self.weekDays),
-                series: wrapperFunction('Geräte'),
+                serie: wrapperFunction(['Devices']),
                 legend: false
             },
             {
                 name: 'Reservierungen nach Gerät und  Wochentag',
-                types: ['Line'],
+                types: [{name: 'Kurve', type:'Line'}],
                 data: reservationCountPerDevicePerDay,
                 labels: wrapperFunction(self.weekDays),
-                series: getDeviceNames,
+                serie: getDeviceNames,
                 legend: true
             }
         ];
 
 
+        function reservationCountPie() {
+            return reservationCount()[0];
+        }
 
         function wrapperFunction(value) {
             return function() {
