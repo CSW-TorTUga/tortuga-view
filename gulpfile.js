@@ -20,7 +20,7 @@ var paths = {
         'node_modules/angular-aria/angular-aria.min.js',
         'node_modules/base-64/base64.js',
         'node_modules/angular-material/angular-material.min.js',
-        'node_modules/ui-router/release/angular-ui-router.min.js',
+        'node_modules/angular-ui-router/release/angular-ui-router.min.js',
         'node_modules/angular-route/angular-route.min.js',
         'node_modules/angular-resource/angular-resource.js',
         'node_modules/angular-material-calendar/angular-material-calendar.min.js',
