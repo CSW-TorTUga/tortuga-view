@@ -45,6 +45,7 @@
         self.reservationsPerMajor = reservationsPerMajor;
         self.getMajorNames = getMajorNames;
         self.lengthLabels = lengthLabels;
+        self.reservationsPerLength = reservationsPerLength;
 
         self.graphs = [
             {
