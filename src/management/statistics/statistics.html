@@ -1,32 +1,29 @@
-<div>
-    <div layout="row">
-        <md-input-container>
-            <label>
-                Statistik
-            </label>
-            <md-select ng-change="statistics.updateType()" ng-model="statistics.selectedGraph">
-                <md-option ng-repeat="graph in statistics.graphs" ng-value="graph">{{graph.name}}</md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container>
-            <label>
-                Type
-            </label>
-            <md-select ng-disabled="statistics.selectedGraph == undefined" ng-model="statistics.selectedType">
-                <md-option ng-repeat="type in statistics.selectedGraph.types" ng-value="type.type">{{type.name}}
-                </md-option>
-            </md-select>
-        </md-input-container>
-    </div>
-    <div>
-        <div class="statistic">
-            <h2>{{statistics.selectedGraph.name}}</h2>
-            <canvas class="chart chart-base"
-                    chart-type="statistics.selectedType"
-                    chart-data="statistics.selectedGraph.data()"
-                    chart-labels="statistics.selectedGraph.labels()"
-                    chart-series="statistics.selectedGraph.serie()"
-                    chart-legend="statistics.selectedGraph.legend"></canvas>
-        </div>
+<div layout="column">
+    <md-input-container>
+        <label>
+            Daten
+        </label>
+        <md-select ng-change="statistics.updateType()" ng-model="statistics.selectedGraph">
+            <md-option ng-repeat="graph in statistics.graphs" ng-value="graph">{{graph.name}}</md-option>
+        </md-select>
+    </md-input-container>
+    <md-input-container>
+        <label>
+            Visualisierung
+        </label>
+        <md-select ng-disabled="statistics.selectedGraph == undefined" ng-model="statistics.selectedType">
+            <md-option ng-repeat="type in statistics.selectedGraph.types" ng-value="type.type">{{type.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+
+    <div flex class="statistic">
+        <canvas class="chart chart-base"
+                chart-type="statistics.selectedType"
+                chart-data="statistics.selectedGraph.data()"
+                chart-labels="statistics.selectedGraph.labels()"
+                chart-series="statistics.selectedGraph.serie()"
+                chart-legend="statistics.selectedGraph.legend"></canvas>
     </div>
 </div>
+
