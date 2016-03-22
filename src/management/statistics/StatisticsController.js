@@ -39,7 +39,6 @@
         self.getDeviceNames = getDeviceNames;
         self.reservationCountPerDay = reservationCountPerDay;
         self.reservationCountPerDevicePerDay = reservationCountPerDevicePerDay;
-        self.updateType = updateType;
         self.reservationCountPie = reservationCountPie;
         self.reservationsPerGender = reservationsPerGender;
         self.reservationsPerMajor = reservationsPerMajor;
@@ -50,7 +49,7 @@
         self.graphs = [
             {
                 name: 'Reservierungen nach Gerät',
-                types: [{name: 'Balken', type: 'Bar'}],
+                type: 'Bar',
                 data: reservationCount,
                 labels: getDeviceNames,
                 serie: wrapperFunction(['Devices']),
@@ -58,7 +57,7 @@
             },
             {
                 name: 'Reservierungen nach Gerät (Kuchen)',
-                types: [{name: 'Kuchen', type: 'Pie'}, {name: 'Donut', type: 'Doughnut'}],
+                type: 'Pie',
                 data: reservationCountPie,
                 labels: getDeviceNames,
                 serie: wrapperFunction(['Devices']),
@@ -66,7 +65,7 @@
             },
             {
                 name: 'Reservierungen nach Wochentag',
-                types: [{name: 'Balken', type: 'Bar'}, {name: 'Kurve', type: 'Line'}],
+                type: 'Bar',
                 data: reservationCountPerDay,
                 labels: wrapperFunction(self.weekDays),
                 serie: wrapperFunction(['Devices']),
@@ -74,7 +73,7 @@
             },
             {
                 name: 'Reservierungen nach Gerät und  Wochentag',
-                types: [{name: 'Kurve', type: 'Line'}],
+                type: 'Line',
                 data: reservationCountPerDevicePerDay,
                 labels: wrapperFunction(self.weekDays),
                 serie: wrapperFunction(['Reservierungen']),
@@ -82,7 +81,7 @@
             },
             {
                 name: 'Reservierungen nach Geschlecht',
-                types: [{name: 'Kuchen', type: 'Pie'}, {name: 'Donut', type: 'Doughnut'}],
+                type: 'Pie',
                 data: reservationsPerGender,
                 labels: wrapperFunction(['männlich', 'weiblich', 'K.A.']),
                 serie: wrapperFunction(['Reservierungen']),
@@ -90,7 +89,7 @@
             },
             {
                 name: 'Reservierungen nach Studiengang',
-                types: [{name: 'Kuchen', type: 'Pie'}, {name: 'Donut', type: 'Doughnut'}],
+                type: 'Pie',
                 data: reservationsPerMajor,
                 labels: getMajorNames,
                 serie: wrapperFunction(['Reservierungen']),
@@ -98,7 +97,7 @@
             },
             {
                 name: 'Reservierungen nach Länge',
-                types: [{name: 'Kurve', type: 'Line'}],
+                type: 'Bar',
                 data: reservationsPerLength,
                 labels: lengthLabels,
                 serie: wrapperFunction(['Reservierungen']),
@@ -111,8 +110,8 @@
         function lengthLabels() {
             if(self.lengthLabelsArray == undefined && self.reservationPerLengthArray != undefined) {
                 self.lengthLabelsArray = [];
-                for(var i in self.reservationPerLengthArray) {
-                    self.lengthLabelsArray.push(i * 15);
+                for(var i in self.reservationPerLengthArray[0]) {
+                    self.lengthLabelsArray.push(i * 1);
                 }
             }
             return self.lengthLabelsArray;
@@ -122,17 +121,22 @@
         function reservationsPerLength() {
             if(self.reservationPerLengthArray == undefined && self.allDeviceReservations.length != 0) {
                 self.reservationPerLengthArray = [];
-                for(var i = 0; i < 60; i++) {
-                    self.reservationPerLengthArray[i] = 0;
-                }
                 self.allDeviceReservations.forEach(function(reservation) {
                     var length = reservation.timeSpan.end - reservation.timeSpan.beginning;
-                    length = Math.floor(length / 1000 / 60 / 10); // so we have an int
-                    if(isNaN(self.reservationPerLengthArray)) {
+                    length = Math.floor(length / 1000 / 60 / 60); // so we have an int
+                    if(self.reservationPerLengthArray[length] == undefined) {
                         self.reservationPerLengthArray[length] = 0;
                     }
                     self.reservationPerLengthArray[length]++;
                 });
+
+                for(var i = 0; i < self.reservationPerLengthArray.length; i++) {
+                    if(!self.reservationPerLengthArray.hasOwnProperty(i)) {
+                        self.reservationPerLengthArray[i] = 0;
+                    }
+                }
+                self.reservationPerLengthArray = [self.reservationPerLengthArray];
+                console.dir(self.reservationPerLengthArray);
             }
             return self.reservationPerLengthArray;
         }
@@ -217,13 +221,6 @@
             }
         }
 
-
-        //public
-        function updateType() {
-            self.selectedType = self.selectedGraph.types[0].type;
-        }
-
-
         //public
         function getDeviceNames() {
             if(self.deviceNames == undefined && self.allDevices.length != 0) {
@@ -241,7 +238,7 @@
                 self.reservationsPerDay = [];
                 for(var i = 0; i < 7; i++) {
                     self.reservationsPerDay[i] = self.allDeviceReservations.filter(function(res) {
-                        return new Date(res.timeSpan.beginning).getDay() == i;
+                        return new Date(res.timeSpan.beginning).getUTCDay() == (i + 1) % 7; //  (i + 1) % 7 so monday is the start of the week
                     }).length;
                 }
                 self.reservationsPerDay = [self.reservationsPerDay];
@@ -258,7 +255,7 @@
                     for(var i = 0; i < 7; i++) {
                         ret[i] = self.allDeviceReservations.filter(function(res) {
                             return res.device.id == device.id &&
-                                (new Date(res.timeSpan.beginning)).getDay() == i;
+                                (new Date(res.timeSpan.beginning)).getDay() ==  (i + 1) % 7;//  (i + 1) % 7 so monday is the start of the week
                         }).length;
                     }
                     return ret;
