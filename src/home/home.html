@@ -39,25 +39,25 @@
     <md-fab-actions>
         <md-button ng-if="nav.isLocal()" ui-sref="deviceReservationAdHoc" aria-label="Gerät jetzt ausleihen" class="md-fab md-raised md-mini">
             <md-icon>queue_play_next</md-icon>
-            <md-tooltip>
+            <md-tooltip md-direction="left">
                 Gerät jetzt ausleihen
             </md-tooltip>
         </md-button>
         <md-button ui-sref="deviceReservationCreate" aria-label="Gerät reservieren" class="md-fab md-raised md-mini">
             <md-icon>devices</md-icon>
-            <md-tooltip>
+            <md-tooltip md-direction="left">
                 Gerät reservieren
             </md-tooltip>
         </md-button>
         <md-button ng-if="nav.isLecturer()" ng-click="homeController.bookRoom()" aria-label="Raumbuchung beantragen" class="md-fab md-raised md-mini">
             <md-icon>event</md-icon>
-            <md-tooltip>
+            <md-tooltip md-direction="left">
                 Raumbuchung beantragen
             </md-tooltip>
         </md-button>
         <md-button ui-sref="management.users.create" ng-if="nav.isCswTeam()" aria-label="Benutzer erstellen" class="md-fab md-raised md-mini">
             <md-icon>person_add</md-icon>
-            <md-tooltip>
+            <md-tooltip md-direction="left">
                 Benutzer erstellen
             </md-tooltip>
         </md-button>
@@ -68,7 +68,7 @@
     <md-icon>
         devices
     </md-icon>
-    <md-tooltip>
+    <md-tooltip md-direction="left">
         Gerät reservieren
     </md-tooltip>
 </md-button>
