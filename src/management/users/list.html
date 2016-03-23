@@ -22,7 +22,7 @@
             <th ng-if-end>Gültig bis</th>
             <th>Aktionen</th>
         </tr>
-        <tr ng-class="{'inactive': !user.enabled}" ng-repeat="user in userList.users | filter:userList.activeFilter | filter:{$:userList.userFilter}">
+        <tr ng-class="{'inactive': !user.enabled}" ng-repeat="user in userList.users | filter:userList.activeFilter | filter:{$:userList.userFilter} | orderBy:'loginName'">
             <td>{{user.loginName}}</td>
             <td ng-if-start="!nav.isMobile()">{{user.firstName + " " + user.lastName}}</td>
             <td>{{user.role}}</td>
