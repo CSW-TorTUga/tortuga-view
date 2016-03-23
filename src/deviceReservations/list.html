@@ -6,7 +6,7 @@
           on-delete="deviceListController.deviceReservationDeleted(reservation)">
     </device-reservation>
 
-    <div ng-if="deviceListController.reservations.length == 0" class="greyed-out md-subhead" layout="column"
+    <div ng-if="(deviceListController.reservations | filter: deviceListController.reservationFilter).length == 0" class="greyed-out md-subhead" layout="column"
          layout-align="center center" flex>
         Du hast aktuell keine Geräte reserviert
     </div>
