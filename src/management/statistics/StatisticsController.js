@@ -79,7 +79,7 @@
                 type: 'Bar',
                 data: reservationCount,
                 labels: getDeviceNames,
-                serie: wrapperFunction(['Devices']),
+                serie: wrapperFunction(['Reservierungen']),
                 legend: false
             },
             {
@@ -95,7 +95,7 @@
                 type: 'Bar',
                 data: reservationCountPerDay,
                 labels: wrapperFunction(self.weekDays),
-                serie: wrapperFunction(['Devices']),
+                serie: wrapperFunction(['Reservierungen']),
                 legend: false
             },
             {
@@ -406,7 +406,7 @@
             if(self.lengthLabelsArray == undefined && self.reservationPerLengthArray != undefined) {
                 self.lengthLabelsArray = [];
                 for(var i in self.reservationPerLengthArray[0]) {
-                    self.lengthLabelsArray.push(i * 1);
+                    self.lengthLabelsArray.push(i * 1 + "h");
                 }
             }
             return self.lengthLabelsArray;
