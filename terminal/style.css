@@ -1,7 +1,7 @@
 
 .fullscreen, div.problem-overlay {
     width: 1920px;
-    height: 1080px;
+    height: 800px;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Chrome/Safari/Opera */
     -khtml-user-select: none; /* Konqueror */
@@ -13,7 +13,7 @@
 
     position: absolute;
     top: 0;
-    left: 0;
+    left: 20em;
 }
 
 div.problem-overlay {
@@ -160,7 +160,7 @@ div.problem-overlay {
 .sidebar {
     top: 0;
     left: 0;
-    height: 768px;
+    height: 890px;
     width: 300px;
     display: flex;
     flex-direction: column;
