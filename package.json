@@ -41,5 +41,8 @@
   "bugs": {
     "url": "https://github.com/LionC/rms4csw/issues"
   },
+  "engines": {
+  "node": "6.9.4"
+  },
   "homepage": "https://github.com/LionC/rms4csw#readme"
 }
