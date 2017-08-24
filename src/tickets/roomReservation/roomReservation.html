@@ -114,9 +114,23 @@
                 bis {{reservation.timeSpan.end | date:'EEE d. MMM H:mm'}}
             </div>
         </div>
-        <md-button class="md-raised md-accent md-hue-1 full-width-button md-warn"
+        <md-button class="md-raised md-accent md-hue-1 half-width-button md-warn"
                    style="margin-bottom: 0;" ng-click="reservationController.declineAfterConfirm(reservation, $event)">
             Absagen
+        </md-button>
+        <md-button class="md-raised md-accent md-hue-1 half-width-button md-warn"
+                   style="margin-bottom: 0;" ng-click="reservationController.assignToMyself(reservation, $event)">
+            Event Übernehmen
+        </md-button>
+        <md-button ng-if="reservationController.canBeOpenedNow(reservation) && !reservation.open && reservationController.isLocal()"
+                   class="md-raised md-accent md-hue-1 full-width-button"
+                   style="margin-bottom: 0;" ng-click="reservationController.openRoom(reservation)">
+            Raum öffnen
+        </md-button>
+        <md-button ng-if="reservation.open && reservationController.isLocal()"
+                   class="md-raised md-accent md-hue-1 full-width-button"
+                   style="margin-bottom: 0;" ng-click="reservationController.closeRoom(reservation)">
+            Raum schließen
         </md-button>
     </div>
 

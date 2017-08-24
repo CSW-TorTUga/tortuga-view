@@ -3,11 +3,13 @@
     angular.module('tickets.support')
         .controller('RoomReservationApprovalListController', [
             'RoomReservation',
+            'AuthenticationService',
             '$mdDialog',
+            'LocalService',
             RoomReservationApprovalListController
         ]);
 
-    function RoomReservationApprovalListController(RoomReservation, $mdDialog) {
+    function RoomReservationApprovalListController(RoomReservation, AuthenticationService,  $mdDialog, LocalService) {
         var self = this;
 
         self.reservations = RoomReservation.query({
@@ -26,6 +28,12 @@
         self.getRepeatedReservations = getRepeatedReservations;
         self.getDatesForRepeatedResevation = getDatesForRepeatedReservation;
         self.getReservationsBySharedId = getReservationsBySharedId;
+
+        self.assignToMyself = assignToMyself;
+        self.canBeOpenedNow = canBeOpenedNow;
+        self.openRoom = openRoom;
+        self.closeRoom = closeRoom;
+        self.isLocal = LocalService.isLocal;
 
         //public
         function getReservationsBySharedId(sharedId){
@@ -101,6 +109,43 @@
                 });
         }
 
+        function assignToMyself(reservation, event){
+            $mdDialog.show(
+                $mdDialog.confirm()
+                    .title('Raumbuchung "' + reservation.title + '" wirklich Übernehmen?')
+                    .ok('Ja')
+                    .cancel('Abbrechen')
+                    .targetEvent(event)
+                    .content('Eigentum über das Event wird übertragen ohne den Ursprünglichen Eigentümer zu benachrichten.')
+            ).then(function() {
+                return RoomReservation.update({id: reservation.id}, {user: AuthenticationService.getUser()});
+            });
+        }
+
+        //public
+        function openRoom(reservation) {
+            var updatedReservation = RoomReservation.update({id: reservation.id}, {open: true});
+
+            updatedReservation.$promise.then(function() {
+                reservation = updatedReservation;
+            });
+        }
+
+        //public
+        function closeRoom(reservation) {
+            var updatedReservation = RoomReservation.update({id: reservation.id}, {open: false});
+
+            updatedReservation.$promise.then(function() {
+                reservation = updatedReservation;
+            });
+        }
+
+        //public
+        function canBeOpenedNow(reservation) {
+
+            var now = new Date().valueOf();
+            return reservation.approved && reservation.openedTimeSpan.beginning < now && now < reservation.openedTimeSpan.end;
+        }
 
     }
 
