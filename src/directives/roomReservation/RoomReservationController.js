@@ -76,6 +76,7 @@
 
             var now = new Date().valueOf();
             return self.reservation.approved && self.reservation.openedTimeSpan.beginning < now && now < self.reservation.openedTimeSpan.end;
+
         }
 
     }
