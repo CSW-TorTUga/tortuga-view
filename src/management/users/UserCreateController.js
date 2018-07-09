@@ -32,6 +32,8 @@
         self.next = true;
         self.previous = false;
 
+        self.privacyTxt = false;
+
 
         //public
         function getState() {

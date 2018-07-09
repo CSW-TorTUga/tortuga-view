@@ -439,9 +439,19 @@ table.management-list th {
 
 
 .text-scrolling {
-    width: 45%;
+    width: 70%;
     margin-bottom: 5px;
+}
+.text-scrolling-privacy {
+    width: 100%;
+}
 
+.privacy-link {
+    font-size: 25px;
+}
+
+.privacy-link:hover {
+    color: #1573ef;
 }
 
 
