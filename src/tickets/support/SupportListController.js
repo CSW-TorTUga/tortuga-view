@@ -26,7 +26,7 @@
 
 
         //public
-        function answer(message) {
+        function answer(message, event) {
             $mdDialog.show({
                 clickOutsideToClose: true,
                 templateUrl: 'src/tickets/support/answer.html',
