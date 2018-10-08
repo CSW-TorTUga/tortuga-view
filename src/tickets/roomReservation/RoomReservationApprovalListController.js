@@ -30,6 +30,7 @@
         self.getReservationsBySharedId = getReservationsBySharedId;
 
         self.assignToMyself = assignToMyself;
+        self.assignToLeader = assignToLeader;
         self.canBeOpenedNow = canBeOpenedNow;
         self.openRoom = openRoom;
         self.closeRoom = closeRoom;
@@ -120,6 +121,41 @@
             ).then(function() {
                 return RoomReservation.update({id: reservation.id}, {user: AuthenticationService.getUser()});
             });
+        }
+
+        function assignToLeader(reservation, event){
+            $mdDialog.show({
+                templateUrl: 'src/tickets/roomReservation/assignLeader.html',
+                controller: ['$mdDialog', assignLeaderController],
+                controllerAs: 'assignLeaderModal',
+                targetEvent: event,
+                bindToController: true
+            }).then(function (userAssign){
+                return RoomReservation.update({id: reservation.id}, {user: userAssign});
+            }).catch(function (reason) {
+                if (reason != undefined)
+                    console.warn(reason);
+            });
+
+            function assignLeaderController($mdDialog){
+                var self = this;
+
+                self.submit = submit;
+                self.cancel = cancel;
+                self.userAssign = null;
+
+                self.leaderFilter = (userAssign != null && (userAssign.role == 'LECTURER' || userAssign.role == 'CSW_TEAM' || userAssign.role == 'ADMIN'));
+
+                //public
+                function cancel() {
+                    $mdDialog.cancel();
+                }
+
+                //public
+                function submit() {
+                    $mdDialog.hide(self.userAssign);
+                }
+            }
         }
 
         //public

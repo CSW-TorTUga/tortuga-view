@@ -1,0 +1,29 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools"></div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-dialog-content">
+        <p>
+            Leiter des Events wird übertragen ohne den ursprünglichen Eigentümer zu benachrichten.
+        </p>
+        <form layout="column" name="assignLeaderModal.editForm">
+            <md-input-container>
+                <label>
+                    Leiter
+                </label>
+                <select name="user" ng-model="assignLeaderModal.userAssign" required>
+                    <option value="" selected>Bitte wählen...</option>
+                    <option value="user" ng-repeat="user in UserListController.users | filter:assignLeaderModal.leaderFilter">{{user.loginName}}</option>
+                </select>
+            </md-input-container>
+        </form>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <md-button type="button" ng-click="assignLeaderModal.cancel()">Abbrechen</md-button>
+        <md-button ng-disabled="!assignLeaderModal.editForm.$valid" class="md-accent" type="submit"
+                   ng-click="assignLeaderModal.submit()">Ja</md-button>
+    </md-dialog-actions>
+
+</md-dialog>
