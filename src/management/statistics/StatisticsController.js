@@ -319,7 +319,7 @@
 
             var userSet = new Set();
             self.allUsages.forEach(function(usage) {
-                if(usage.successful && (type == undefined || usage.authType == type) && startTime < usage.time && usage.time < endTime)  {
+                if(usage.successful && usage.user != undefined && (type == undefined || usage.authType == type) && startTime < usage.time && usage.time < endTime)  {
                     userSet.add(usage.user.id);
                 }
             });
@@ -356,7 +356,7 @@
 
             var userSet = new Set();
             self.allUsages.forEach(function(usage) {
-                if(usage.successful && (type == undefined || usage.authType == type) && startTime < usage.time && usage.time < endTime)  {
+                if(usage.successful && usage.user != undefined && (type == undefined || usage.authType == type) && startTime < usage.time && usage.time < endTime)  {
                     userSet.add(usage.user.id);
                 }
             });
