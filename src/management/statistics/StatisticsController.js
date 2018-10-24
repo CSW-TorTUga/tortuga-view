@@ -29,6 +29,7 @@
         self.allDevices = Device.query();
 
         self.selectedDate = new Date();
+        self.selectedDate2 = new Date();
 
 
         self.deviceResCount = undefined;
@@ -155,6 +156,16 @@
                 serie: wrapperFunction(['emoji', 'qr code', 'Daueröffnungen', 'Alle']),
                 legend: true,
                 needsDate: true
+            },
+            {
+                name: 'Benutzung nach Zeitraum',
+                type: 'Line',
+                data: usagePerMonth,
+                labels: getMonth,
+                serie: wrapperFunction(['emoji', 'qr code', 'Daueröffnungen', 'Alle']),
+                legend: true,
+                needsDate: true,
+                needsDate2: true
             },
             {
                 name: 'Benutzung nach Studiengang und Woche',
@@ -318,9 +329,16 @@
             var endTime = dayInMonth.valueOf();
 
             var userSet = new Set();
+            var counter = -1;
             self.allUsages.forEach(function(usage) {
-                if(usage.successful && usage.user != undefined && (type == undefined || usage.authType == type) && startTime < usage.time && usage.time < endTime)  {
-                    userSet.add(usage.user.id);
+                if(usage.successful && (type == undefined || usage.authType == type) && startTime < usage.time && usage.time < endTime) {
+                    if(usage.user != undefined) {
+                        userSet.add(usage.user.id);
+                    }
+                    else {
+                        userSet.add(counter);
+                        counter--;
+                    }
                 }
             });
             return userSet;
@@ -355,9 +373,16 @@
             var endTime = startDay.valueOf() + 7 * 24 * 60 * 60 * 1000;
 
             var userSet = new Set();
+            var counter = -1;
             self.allUsages.forEach(function(usage) {
-                if(usage.successful && usage.user != undefined && (type == undefined || usage.authType == type) && startTime < usage.time && usage.time < endTime)  {
-                    userSet.add(usage.user.id);
+                if(usage.successful && (type == undefined || usage.authType == type) && startTime < usage.time && usage.time < endTime)  {
+                    if(usage.user != undefined) {
+                        userSet.add(usage.user.id);
+                    }
+                    else {
+                        userSet.add(counter);
+                        counter--;
+                    }
                 }
             });
             return userSet;
