@@ -131,6 +131,7 @@
                 targetEvent: event,
                 bindToController: true
             }).then(function (userAssign){
+                console.log(userAssign);
                 return RoomReservation.update({id: reservation.id}, {user: userAssign});
             }).catch(function (reason) {
                 if (reason != undefined)
@@ -143,8 +144,11 @@
                 self.submit = submit;
                 self.cancel = cancel;
                 self.userAssign = null;
+                console.log($mdDialog);
+                console.log(userAssign);
 
                 self.leaderFilter = (userAssign != null && (userAssign.role == 'LECTURER' || userAssign.role == 'CSW_TEAM' || userAssign.role == 'ADMIN'));
+                console.log(self.leaderFilter);
 
                 //public
                 function cancel() {
