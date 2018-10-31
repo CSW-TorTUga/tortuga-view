@@ -12,10 +12,9 @@
                 <label>
                     Leiter
                 </label>
-                <select name="user" ng-model="assignLeaderModal.userAssign" required>
-                    <option value="" selected>Bitte wählen...</option>
-                    <option value="user" ng-repeat="user in UserListController.users | filter:assignLeaderModal.leaderFilter">{{user.loginName}}</option>
-                </select>
+                <md-select ng-model="assignLeaderModal.userAssign" required>
+                    <md-option ng-repeat="user in UserListController.users | filter:(user != null && (user.role == 'LECTURER' || user.role == 'CSW_TEAM' || user.role == 'ADMIN'))" ng-value="user">{{user.loginName}}</md-option>
+                </md-select>
             </md-input-container>
         </form>
     </md-dialog-content>

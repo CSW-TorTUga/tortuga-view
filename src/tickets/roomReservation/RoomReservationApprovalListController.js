@@ -19,6 +19,8 @@
         self.repeatedReservations = [];
 
 
+        self.users = UserService.query();
+
         self.decline = decline;
         self.declineAfterConfirm = declineAfterConfirm;
         self.accept = accept;
@@ -144,19 +146,23 @@
                 self.submit = submit;
                 self.cancel = cancel;
                 self.userAssign = null;
-                console.log($mdDialog);
-                console.log(userAssign);
+                //console.log($mdDialog);
+                //console.log(userAssign);
 
-                self.leaderFilter = (userAssign != null && (userAssign.role == 'LECTURER' || userAssign.role == 'CSW_TEAM' || userAssign.role == 'ADMIN'));
-                console.log(self.leaderFilter);
+                console.log(self.userAssign);
+
+                //self.leaderFilter = (userAssign != null && (userAssign.role == 'LECTURER' || userAssign.role == 'CSW_TEAM' || userAssign.role == 'ADMIN'));
+                //console.log(self.leaderFilter);
 
                 //public
                 function cancel() {
+                    console.log(self.userAssign);
                     $mdDialog.cancel();
                 }
 
                 //public
                 function submit() {
+                    console.log(self.userAssign);
                     $mdDialog.hide(self.userAssign);
                 }
             }
