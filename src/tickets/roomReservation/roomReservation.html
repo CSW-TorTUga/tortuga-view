@@ -119,8 +119,8 @@
             Absagen
         </md-button>
         <md-button flex="50" class="md-raised md-accent md-hue-1 half-width-button md-warn"
-                   style="margin-bottom: 0;" ng-click="reservationController.assignToMyself(reservation, $event)">
-            Event Übernehmen
+                   style="margin-bottom: 0;" ng-click="reservationController.assignToLeader(reservation, $event)">
+            Event übertragen
         </md-button>
         <md-button flex="50" ng-if="reservationController.canBeOpenedNow(reservation) && !reservation.open && reservationController.isLocal()"
                    class="md-raised md-accent md-hue-1 full-width-button"
