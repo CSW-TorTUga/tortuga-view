@@ -2,6 +2,7 @@
 
     angular.module('tickets.support')
         .controller('RoomReservationApprovalListController', [
+            'User',
             'RoomReservation',
             'AuthenticationService',
             '$mdDialog',
@@ -9,7 +10,7 @@
             RoomReservationApprovalListController
         ]);
 
-    function RoomReservationApprovalListController(RoomReservation, AuthenticationService,  $mdDialog, LocalService) {
+    function RoomReservationApprovalListController(UserService, RoomReservation, AuthenticationService,  $mdDialog, LocalService) {
         var self = this;
 
         self.reservations = RoomReservation.query({
